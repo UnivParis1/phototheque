@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Tento element umožní vložit slideshow.</p>
+
+<b>Volby:</b> (musíte nastavit <code>album</code> NEBO <code>list</code>)
+<ul>
+  <li><code>album</code> (nepovinný) zdrojové album</li>
+  <li><code>nb_images</code> (nepovinný) max. počet obrázků, které se mají zobrazit ve slideshow</li>
+  <li><code>random</code> (nepovinný) náhodný výběr obrázků z alba</li>
+  <li><code>list</code> (nepovinný) seznam id (identifikátorů) obrázků oddělený čárkami</li>
+  <li><code>size</code> (nepovinný) velikost obrázků, (<i>SQ, TH, XXS, XS, S, M, L, XL, XXL</i>)</li>
+  <li><code>speed</code> (nepovinný) rychlost slideshow (v sekundách)</li>
+  <li><code>title</code> (nepovinný) zobrazovat název obrázku</li>
+  <li><code>effect</code> (nepovinný) přechodový efekt (viz <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider dokument</a>)</li>
+  <li><code>arrows</code> (nepovinný) zobrazovat navigační šipky</li>
+  <li><code>elastic</code> (nepovinný) přizpůsobit velikost slideshow velikosti jednotlivých obrázkůo</li>
+  <li><code>control</code> (nepovinný) zobrazovat ovládání navigace <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) thumbnails size in pixel if <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

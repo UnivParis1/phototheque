@@ -1,0 +1,33 @@
+<p>Mehrsprachige Beschreibungen werden zwischen <code>[lang=xx]</code> und <code>[/lang]</code> gesetzt, dabei ist xx der Sprachcode (Zum Beispiel de, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Spezialsprache <i>default</i></h4>
+<p>Sollte die Beschreibung in der vom Benutzer benützten Sprache nicht vorhanden sein, so wird automatische die standardmässige Beschreibung benützt.<br>
+Sollte  <code>[lang=default]</code> auch nicht vorhanden sein, so wird alles was ausserhalb des <code>[lang]</code> Tags ist als standardmässige Beschreibung benützt.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Spezialsprache <i>all</i></h4>
+<p>Alles was sich innerhalb <code>[lang=all]</code> befindet wird in der Beschreibung angezeigt, unabhängig davon in welcher Sprache sich ein Benutzer angemeldet hat.<br>
+Dies kann nützlich sein, um zum Beispiel HTML/Javascript in einer Beschreibung anzuzeigen.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

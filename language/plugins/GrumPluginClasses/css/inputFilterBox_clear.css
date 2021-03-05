@@ -1,0 +1,20 @@
+/* roma css */
+
+
+/* dialog box */
+.ui-inputDialogFilterBox {
+  background:#AAAAAA;
+  border:1px solid #999999;
+}
+.ui-inputDialogFilterBox div.ui-dialog-titlebar {
+  background:#DDDDDD;
+  color:#666666;
+}
+.ui-inputDialogFilterBox div.ui-dialog-buttonpane button {
+  background:none repeat scroll 0 0 #999999;
+  border-color:#DDDDDD #666666 #666666 #DDDDDD;
+  color:#005E89;
+}
+.ui-inputDialogFilterBox div.ui-dialog-buttonpane button:active {
+  border-color:#666666 #DDDDDD #DDDDDD #666666;
+}

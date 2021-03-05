@@ -1,0 +1,26 @@
+<h4>[slider album=xx ]</h4>
+<p>Questo tag permette di inserire una presentazione.</p>
+
+<b>Opzioni:</b> (è necessario impostare <code>album</code> o <code>elenco</code>)
+<ul>
+  <li><code>album</code> album di origine (opzionale) </li>
+  <li><code>nb_images</code> (opzionale) numero massimo di foto da visualizzare nella presentazione</li>
+  <li><code>random</code> (facoltativo) sceglie foto casualmente nell'album</li>
+  <li><code>list</code> (opzionale) un elenco di foto ID separato da una virgola</li>
+  <li><code>size</code> (opzionale) le dimensioni delle foto, da <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (opzionale) la velocità di presentazione (in secondi)</li>
+  <li><code>title</code> (opzionale) visualizza titolo foto</li>
+  <li><code>effect</code> (opzionale) effetto di transizione (vedere <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5"> NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (opzionale) visualizza frecce di navigazione</li>
+  <li><code>elastic</code> (opzionale) adatta dimensioni slideshow per ogni foto </li>
+  <li><code>control</code> (opzionale) visualizza i controlli di navigazione <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (opzionale) dimensioni miniature in pixel, se <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

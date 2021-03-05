@@ -1,0 +1,11 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/litera/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/litera/bootswatch";
+@import "common";
+
+.navbar {
+  &.navbar-transparent.navbar-sm {
+    margin-top: -100px !important;
+  }
+}

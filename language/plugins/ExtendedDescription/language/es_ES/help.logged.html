@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p> Esta etiqueta permite insertar un enlace de conexión a todas partes con la redirección automática a la pagina actual.</p>
+
+<b>Opciones:</b>
+<ul> 
+  <li><code>html</code> (opcional) si la posición esta en <code>false</code> la etiqueta sólo devuelve la URL de inicio de sesión, sin HTML</li>
+  <li><code>text</code> (opcional) la etiqueta de enlace, puede contener <code>[lang]</code> etiquetas</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]conectase[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Muestra un bloque de texto sólo si el usuario actual esta registrado o no.</p>
+
+<pre>
+[logged=true] Bienvenido de nuevo [/logged]
+[logged=false] Por favor, inicie sesión [/logged]
+</pre>

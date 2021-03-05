@@ -1,0 +1,2 @@
+https://github.com/Piwigo/piwigo-smartpocket.git
+6e45823f36de0a3263a96fb5b9e0d07df6aa7d82 2021-01-24 11:02:51 +0100

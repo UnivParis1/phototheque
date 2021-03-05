@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Valor máximo de <b>O número máximo de fotos por set para baixar</b> deslizante.<br>
+<i>O padrão é <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Valor máximo do <b>Tamanho máximo de cada arquivo</b> deslizante.<br>
+<i>O padrão é <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Array contendo as extensões de arquivo para download (existe distição entre maiúsculas e minúsculas).<br>
+<i>O padrão é <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Padrão para nomes de arquivos no arquivo.<br>
+Campos disponíveis são <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+As funções disponíveis são <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>O valor padrão é <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Exemplo: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>

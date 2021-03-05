@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Met dit label kunt u een diashow toevoegen.</p>
+
+<b>Opties:</b> (NB <code>album</code> OF <code>list</code> gebruiken)
+<ul>
+  <li><code>album</code> (optioneel) bronalbum</li>
+  <li><code>nb_images</code> (optioneel) max aantal foto's om weer te geven in de diashow</li>
+  <li><code>random</code> (optioneel) kies de foto's willekeurig uit het aangtegeven album</li>
+  <li><code>list</code> (optioneel) een lijst fotonummers gescheiden door een komma</li>
+  <li><code>size</code> (optioneel) de grootte van de foto's, van <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (optioneel) de snelheid van de diashow (in seconden)</li>
+  <li><code>title</code> (optioneel) geef de fototitel weer</li>
+  <li><code>effect</code> (optioneel) overgangs-effect (zie <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (optioneel) geef navigatie-pijltjes weer</li>
+  <li><code>elastic</code> (optioneel) pas de diashow-grootte aan, aan iedere foto</li>
+  <li><code>control</code> (optioneel) geef bedieningselementen weer <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optioneel) de grootte van de klikplaatjes in pixel als <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

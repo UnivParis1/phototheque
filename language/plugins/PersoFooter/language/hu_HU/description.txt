@@ -1,0 +1,1 @@
+Egyéni információk megjelenítése a láblécben (footer)

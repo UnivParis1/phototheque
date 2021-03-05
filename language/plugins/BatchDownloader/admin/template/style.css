@@ -1,0 +1,56 @@
+.chzn-choices li {
+  clear:none !important;
+}
+
+input[name='max_size'], input[name='max_elements'] {
+  border:none;
+  background:none;
+  font-weight:bold;
+  margin-left:5px;
+}
+
+#max_size, #max_elements {
+  display:inline-block;
+  width:300px;
+}
+
+.table2 .throw {
+  font-size:100%;
+  line-height: 1em;
+}
+TABLE.table2 THEAD TD {
+  padding: 3px 5px !important;
+}
+.table2 .action {
+  width:70px;
+}
+.table2 .user {
+  width:150px;
+}
+.table2 .date {
+  width:230px;
+}
+.table2 .size {
+  width:100px;
+}
+.table2 .img_size {
+  width:120px;
+}
+.table2 .images {
+  width:100px;
+}
+.table2 .archives {
+  width:110px;
+}
+.table2 .status {
+  width:120px;
+}
+
+.advanced span {
+  font-family: 'Courrier New',monospace;
+  font-size: 11pt;
+  font-style:normal;
+}
+.advanced dd:not(:last-child) {
+  margin-bottom:1em;
+}

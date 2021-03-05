@@ -1,0 +1,17 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/darkly/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/darkly/bootswatch";
+@import "common";
+
+.navbar {
+  &.navbar-transparent.navbar-sm {
+    margin-top: -97px !important;
+  }
+
+  &.navbar-contextual {
+    .nav-item + .nav-item {
+      margin-left: .2rem;
+    }
+  }
+}

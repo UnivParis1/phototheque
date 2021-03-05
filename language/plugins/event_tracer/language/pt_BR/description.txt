@@ -1,0 +1,1 @@
+Para os desenvolvedores. Mostra todas as chamadas para gatilho_evento (trigger_event).

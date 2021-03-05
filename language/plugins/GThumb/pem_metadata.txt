@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: https://github.com/plegall/Piwigo-GThumb 
+Revision: 7862f46704b82c8bf771768618a3a001b20f3d08 (Fri Mar 4 12:20:29 2016 +0100)

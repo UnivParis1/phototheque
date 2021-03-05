@@ -1,0 +1,168 @@
+.pwg-icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.pwg-button-text {
+  display: none;
+}
+
+/* GThumb+ */
+ul.thumbnailCategories,
+ul.thumbnails,
+ul#thumbnails {
+  padding-left: 0px;
+}
+ul#thumbnails:not(.thumbnails) {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+ul#thumbnails .gthumb a img.thumbnail {
+  border-radius: 0;
+  background: none;
+}
+#content div.loader {
+  display: none;
+}
+
+/* Openstreetmap Plugin fixlets */
+.pwg-icon-globe {
+  font-family: none !important;
+  line-height: none !important;
+
+  &:before {
+    content:""\f0ac"";
+    font-family:"Font Awesome 5 Free";
+  }
+}
+
+/* BatchDownloader */
+.batch-downloader-icon {
+  background: none !important;
+}
+
+/* User Collections */
+.user-collections-icon {
+  width:16px;
+  height:16px;
+}
+#thumbnails li .addCollection {
+  background: rgba(0,0,0,0.7);
+  border-radius: 0;
+}
+#collectionsDropdown {
+  z-index: 1050 !important;
+  padding: 10px;
+  color: #4f4f4f;
+  background-color: #fff;
+
+  a {
+    color: #4f4f4f;
+
+    &:hover {
+      color: #262626; 
+      text-decoration: none;
+      background-color: #f5f5f5;
+    }
+  }
+}
+.navbar-nav .user-collections-icon,
+#theCollectionPage .user-collections-share-icon,
+#theCollectionPage .user-collections-mail-icon,
+#theCollectionPage .user-collections-clear-icon,
+#theCollectionPage .user-collections-delete-icon {
+  background: none !important;
+}
+.navbar-nav .user-collections-icon:before {
+  content:"\f006";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 400;
+}
+#theCollectionPage .user-collections-share-icon:before {
+  content:"\f14d";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 400;
+}
+#theCollectionPage .user-collections-mail-icon:before {
+  content:"\f0e0";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 400;
+}
+#theCollectionPage .user-collections-clear-icon:before {
+  content:"\f00d";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 900;
+}
+#theCollectionPage .user-collections-delete-icon:before {
+  content:"\f2ed";
+  font-family:"Font Awesome 5 Free";
+  font-weight: 400;
+}
+
+.card-thumbnail .addCollection {
+  opacity: 0;
+  transition: opacity 0.25s ease-in;
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  color: $yellow;
+  background-color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    opacity: 0.9;
+  }
+  > span {
+    color: #fff;
+    font-size: 0.9rem;
+  }
+}
+.card-thumbnail a:hover {
+  .addCollection {
+    opacity: 0.9;
+  }
+}
+
+/* PWG_Stuffs */
+.pwgstuffs-container { padding-top: 20px; }
+.pwgstuffs-content .card-thumbnail {
+  margin-bottom: 2rem;
+}
+
+/* RV Autocomplete */
+ul.ui-autocomplete { z-index: 150; }
+
+/* Extended Description */
+ul.thumbnailCategories { padding-top: 20px; }
+
+/* Language Switch */
+[class*="langflag-text-"] {
+  background-position: 0 50px !important;
+}
+
+// Admin tools
+#ato_header,
+#ato_header_closed {
+  z-index: 1040 !important;
+}
+
+// Tag Groups
+#tagGroupsTable {
+  td {
+    border-top: none;
+  }
+}
+
+// Additional Pages
+#theAdditionalPage .navbar-contextual .nav-breadcrumb>a {
+  padding-right: 0.5rem;
+}

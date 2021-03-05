@@ -1,0 +1,44 @@
+/* for progressArea plugin */
+
+.ui-progressArea-globalText,
+.ui-progressArea-detailText {
+  padding-top:8px;
+}
+
+.ui-progressArea-globalBar,
+.ui-progressArea-detailBar {
+  border:1px solid #666666;
+}
+
+.ui-progressArea-globalBarText,
+.ui-progressArea-detailBarText {
+  color:#FF7700;
+}
+
+.ui-progressArea-globalBarProgress,
+.ui-progressArea-detailBarProgress {
+  background:#444444;
+}
+
+.ui-progressArea-workInProgress {
+  background:url("./../icons/processing.gif") no-repeat scroll 0 8px transparent;
+}
+
+
+/* dialog box */
+.ui-dialogProgressArea {
+  background:#222222;
+  border:1px solid #666666;
+}
+.ui-dialogProgressArea div.ui-dialog-titlebar {
+  background:#666666;
+  color:#222222;
+}
+.ui-dialogProgressArea div.ui-dialog-buttonpane button {
+  background:none repeat scroll 0 0 #666666;
+  border-color:#999999 #444444 #444444 #999999;
+  color:#222222;
+}
+.ui-dialogProgressArea div.ui-dialog-buttonpane button:active {
+  border-color:#444444 #999999 #999999 #444444;
+}

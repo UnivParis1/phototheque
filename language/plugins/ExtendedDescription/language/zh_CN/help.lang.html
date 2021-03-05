@@ -1,0 +1,31 @@
+<p>多语言描述放在<code>[lang=xx]</code> 和 <code>[/lang]</code> 标签之间，其中 xx 是语言代码（如 zh, en, fr, ...)。</p>
+
+<pre>
+[lang=zh]默认描述[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>特殊语言 <i>default</i></h4>
+<p>如果用户选择的语言不能使用，将显示默认描述。如果 <code>[lang=default]</code> 标签不存在，所有在 <code>[lang]</code> 标签外的内容将被视为默认描述。</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// 或
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>特殊语言 <i>all</i></h4>
+<p>所有在 <code>[lang=all]</code> 标签里的内容将被包含进描述，不论用户指定了什么语言。这主要用于将 HTML/JavaScript 代码写进描述。</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

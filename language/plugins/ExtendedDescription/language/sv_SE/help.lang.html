@@ -1,0 +1,33 @@
+<p>Flerspråkiga beskrivningar placeras mellan <code>[lang=xx]</code> och <code>[/lang]</code> tag, där xx är språkkoden (t.ex. sv, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>speciella språk <i>default</i></h4>
+<p>Den förvalda beskrivning ska användas om beskrivningen är inte tillgänglig i den anslutna användaren valda språket.<br>
+om <code>[lang=default]</code> inte finns, något utanför <code>[lang]</code> taggar kommer att betraktas som standard beskrivning.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>speciella språk <i>all</i></h4>
+<p>något inuti <code>[lang=all]</code> kommer att ingå i beskrivningen, 0avsätt vad den anslutna användar definierade språk är.<br>
+Detta är främst användbart att inkludera HTML/JavaScript-kod i en beskrivning.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

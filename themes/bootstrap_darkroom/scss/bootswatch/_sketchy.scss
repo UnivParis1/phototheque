@@ -1,0 +1,67 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/sketchy/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/sketchy/bootswatch";
+@import "common";
+
+.navbar-contextual {
+  .navbar-brand a {
+    text-decoration: none;
+  }
+
+  &.navbar-transparent.navbar-sm {
+    margin-top: -100px !important;
+  }
+}
+
+.navbar-main + .jumbotron {
+  border: none;
+}
+
+.card {
+  border-color: inherit;
+  overflow: initial;
+}
+
+.card-thumbnail {
+  a {
+    text-decoration: none;
+  }
+
+  .card-footer {
+    background-color: inherit;
+    border-top: none;
+  }
+}
+
+[type="radio"] {
+  &:before {
+    position: relative;
+    top: 0;
+  }
+}
+
+.form-check-label {
+  padding-left: 1.5rem;
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar .dropdown-menu {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #333 !important;
+      outline: 1px solid #333 !important;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 4px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 4px;
+    }
+  }
+}
+
+.page-header,
+.page-header:before,
+.page-header-image {
+  border-radius: 0px 0px 30px 5px/5px 0px 15px 25px;
+}

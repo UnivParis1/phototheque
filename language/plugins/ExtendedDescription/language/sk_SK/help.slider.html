@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Toto kľúčové slovo bude vložené do slideshow.</p>
+
+<b>Voľby:</b> (musíte nastaviť <code>album</code> alebo <code>list</code>)
+<ul>
+  <li><code>album</code> (voliteľné) zdrojový album</li>
+  <li><code>nb_images</code> (voliteľné) max počet fotiek na zobrazenie v slideshow</li>
+  <li><code>random</code> (voliteľné) označenie náhodných fotky v albume</li>
+  <li><code>list</code> (voliteľné) zoznam id fotiek oddelené čiarkou</li>
+  <li><code>size</code> (voliteľné) veľkosť fotiek, od <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (voliteľné) rýchlosť slideshow (v sekundách)</li>
+  <li><code>title</code> (voliteľné) zobrazenie názvu fotky</li>
+  <li><code>effect</code> (voliteľné) prechodový efekt (pozri <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (voliteľné) zobrazenie navigačných šipiek</li>
+  <li><code>elastic</code> (voliteľné) prispôsobenie veľkosti slideshow každej fotke</li>
+  <li><code>control</code> (voliteľné) zobrazenie ovládacích prvkov <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (voliteľné) veľkosť náhľadov v pixeloch, ak <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

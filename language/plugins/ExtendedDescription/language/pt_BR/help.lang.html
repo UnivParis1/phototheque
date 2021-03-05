@@ -1,0 +1,33 @@
+<p>Descrições em vários idiomas são colocados entre <code>[lang=xx]</code> e <code>[/lang]</code> etiquetas, onde xx é o código de idioma (por exemplo pt, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Linguagem especial <i>default</i></h4>
+<p>A descrição padrão será utilizado se a descrição selecionada não estiver disponível no idioma do usuário conectado.<br>
+Se <code>[lang=default]</code> não existir, qualquer coisa fora da <code>[lang]</code> tags será considerada como a descrição padrão.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Linguagem especial <i>all</i></h4>
+<p>qualquer coisa dentro <code>[lang=all]</code> será incluído na descrição, qualquer que seja o idioma definido para o usuário conectado.<br>
+Isso é útil principalmente para incluir código HTML/JavaScript dentro de uma descrição.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

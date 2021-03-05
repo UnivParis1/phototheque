@@ -1,0 +1,33 @@
+<p>Vícejazyčné popisy jsou umístěny mezi elementy <code>[lang=xx]</code> a <code>[/lang]</code>, kde xx je kód jazyka (například cs, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Speciální jazyk <i>default</i></h4>
+<p>Výchozí popis bude použit v případě, že popis není dostupný v daném jazyce.<br>
+Pokud <code>[lang=default]</code> neexistuje, tak bude jako výchozí popis použito cokoliv mimo elementy <code>[lang]</code>.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Speciální jazyk <i>all</i></h4>
+<p>všechno co je uvedeno uvnitř <code>[lang=all]</code> vždy bude vloženo do popisu bez ohledu na zvolený jazyk.<br>
+Toto je užitečné zejména pro vkládání kódu HTML/JavaScript do popisu.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

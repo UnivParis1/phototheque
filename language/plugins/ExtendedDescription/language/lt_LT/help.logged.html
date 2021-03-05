@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Ši žyma leidžia visur įterpti prisijungimo nuorodą su automatiniu peradresavimu į dabartinį puslapį</p>
+
+<b>Parametrai:</b>
+<ul>
+  <li><code>html</code> (neprivaloma) jei nustatyta į <code>false</code>, tai žyma grąžina tik prisijungimo nuorodą be HTML </li>
+  <li><code>text</code> (neprivaloma) nuoroda gali turėti <code>[lang]</code> žymas</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="login[lang=lt]Prisijungti[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Rodyti bloką tik tuomet, kai lankytojas prisijungęs arba ne.</p>
+
+<pre>
+[logged=true] Sveikas sugrįžęs [/logged]
+[logged=false] Prašome prisijungti [/logged]
+</pre>

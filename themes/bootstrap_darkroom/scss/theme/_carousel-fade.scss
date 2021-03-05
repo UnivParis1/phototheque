@@ -1,0 +1,14 @@
+/* Bootstrap carousel fading animation */
+/* the fading animation */
+.carousel-fade {
+  .carousel-item {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.25s ease-in-out;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}

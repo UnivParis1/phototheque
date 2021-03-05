@@ -1,0 +1,25 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/slate/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/slate/bootswatch";
+@import "common";
+
+@include media-breakpoint-up(lg) {
+  #navbar-menubar > #quicksearch {
+    margin-right: 10px;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  #navbar-menubar>#quicksearch {
+    input[type="text"] {
+      color: $gray-700 !important;
+    }
+  }
+}
+
+.navbar {
+  &.navbar-transparent.navbar-sm {
+    margin-top: -112px !important;
+  }
+}

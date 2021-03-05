@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Šis tegs dod jums iespēju ievietot vienu jebkura izmēra attēlu</p>
+
+<b>Iespējas:</b>
+<ul>
+  <li><code>id</code> foto identifikators</li>
+  <li><code>album</code> (izvēles) pamatalbūma identifikators</li>
+  <li><code>size</code> (izvēles) foto izmērs, no <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (izvēles) ja iestatīts, <code>false</code> tegs atgriež tikai foto URL bez HTML</li>
+  <li><code>link</code> (izvēles) ja iestatīts, <code>true</code> foto ir iekļauts saitē uz attēla lapu</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Tāpat kā iepriekš, izņemot to, ka fotoattēls ir izvēlēts nejauši no <code>albūma</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Ar šo tegu ievieto albūmu aprakstā, kur <code>xx</code> ir albūma identifikators.</p>

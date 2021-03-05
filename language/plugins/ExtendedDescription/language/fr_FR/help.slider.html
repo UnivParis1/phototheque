@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Permet d'insérer un diaporama.</p>
+
+<b>Options:</b> (vous devez renseigner <code>album</code> OU <code>list</code>)
+<ul>
+  <li><code>album</code> (facultatif) album source</li>
+  <li><code>nb_images</code> (facultatif) nombre maximal de photos dans le diaporama</li>
+  <li><code>random</code> (facultatif) choisir les photos aléatoirement dans l'album</li>
+  <li><code>list</code> (facultatif) une liste de photos séparées par une virgule</li>
+  <li><code>size</code> (facultatif) la taille des photos, parmi <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (facultatif) la vitesse du diaporama (en secondes)</li>
+  <li><code>title</code> (facultatif) afficher le nom de la photo</li>
+  <li><code>effect</code> (facultatif) effet de transition (voir <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">la doc de NivoSlider</a>)</li>
+  <li><code>arrows</code> (facultatif) afficher les flèches de navigations</li>
+  <li><code>elastic</code> (facultatif) adapter la taille du diaporama à chaque photo</li>
+  <li><code>control</code> (facultatif) afficher la barre de navigation, peut aussi valoir <code>thumb</code></li>
+  <li><code>thumbs_size</code> (facultatif) taille des miniatures en pixel si <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

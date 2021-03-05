@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Denne taggen gjør det mulig å sette inn en innloggingslink med automatisk omdirigering til nåværende sider.</p>
+
+<b>Alternativer:</b>
+<ul>
+  <li><code>html</code> (valgfritt) hvis satt til <code>false</code> taggen returnerer bare til login URL, uten HTML</li>
+  <li><code>text</code> (valgfritt) linken, kan inneholde <code>[språk]</code> tags</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[Innlogget]</h4>
+<p>Vis tekst bare hvis den aktuelle brukeren er innlogget eller ikke.</p>
+
+<pre>
+[Innlogget=true] Velkommen tilbake[/logged]
+[Innlogget=false] Vennligst log in [/Innlogget]
+</pre>

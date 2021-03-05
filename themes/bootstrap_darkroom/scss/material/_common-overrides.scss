@@ -1,0 +1,78 @@
+// sidebar
+$sidebar-bg: theme-color("primary") !default;
+@import "../common/picture-info-sidebar";
+
+// faulty .sticky-top override in material
+.sticky-top {
+  z-index: 1020;
+}
+
+// additional styles
+.navbar-main {
+  box-shadow: none;
+}
+.navbar-form .bmd-form-group {
+  display: block !important;
+}
+.nav-link {
+  text-transform: none;
+}
+
+.dropdown-menu {
+  min-width: 15rem;
+
+  // work around broken collapsed navbar
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+  .dropdown-item {
+    max-width: 100%;
+  }
+}
+
+// awkward stuff...
+.checkbox label,
+.checkbox-inline,
+.is-focused .checkbox label,
+.is-focused .checkbox-inline,
+.is-focused .radio label,
+.is-focused .radio-inline,
+.is-focused .switch label,
+.radio label,
+.radio-inline,
+.switch label,
+select.form-control,
+textarea.form-control,
+input[type=text].form-control,
+.form-control:focus {
+  color: inherit;
+}
+select.form-control>option {
+  color: $input-color;
+}
+
+[class*=' bmd-label'],
+[class^=bmd-label] {
+  color: $link-color;
+}
+
+.navbar-form .bmd-form-group input::placeholder {
+  color: grey !important;
+}
+
+// Slick carousel
+.slick-prev:before,
+.slick-next:before {
+  color: theme-color('primary'); 
+}
+
+#theImageInfos #Tags .btn {
+  text-transform: none;
+}
+
+.card-thumbnail h5.card-title {
+  font-size: 1.25rem;
+}
+.card-thumbnail h6.card-title {
+  font-size: 1.1rem;
+}
