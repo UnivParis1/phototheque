@@ -1,0 +1,33 @@
+<p>Apraksti vairākās valodās ir izvietoti starp <code>[lang=xx]</code> un <code>[/lang]</code> iezīmēm, kur xx ir valodas kods (piemēram lv, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Speciālā valoda <i>default</i></h4>
+<p>Apraksts pēc noklusējuma tiks lietots, ja apraksts savienojumā esošā lietotāja izvēlētajā valodā nav pieejams.
+If <code>[lang=default]</code> neeksistē, jebkas ārpus <code>[lang]</code> iezīmēm tiks uzskatīts par aprakstu pēc noklusējuma.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Speciālā valoda <i>all</i></h4>
+<p>jebkas iekšpus <code>[lang=all]</code> tiks ietverts aprakstā neskatoties, kāda ir lietotāja izvēlētā valoda.<br>
+Tas galvenokārt lietderīgi, lai aprakstā ievietotu HTML/JavaScript kodu.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

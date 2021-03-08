@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: https://github.com/Piwigo/AdditionalPages 
+Revision: cc5c6765d59cc4cd5fc9c4e44efb3e8be2550430 (Thu Nov 12 07:04:52 2020 +0100)

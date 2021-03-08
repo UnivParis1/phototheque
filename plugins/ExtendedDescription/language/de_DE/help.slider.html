@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Dieser Tag erlaubt das Einfügen einer Bildershow.</p>
+
+<b>Optionen:</b> (es muss <code>album</code> ODER <code>list</code> gesetzt werden)
+<ul>
+  <li><code>album</code> (optional) Quell Album</li>
+  <li><code>nb_images</code> (optional) Max. Anzahl Fotos in der Bildershow</li>
+  <li><code>random</code> (optional) Wählt die Fotos zufällig aus</li>
+  <li><code>list</code> (optional) Eine Liste der Bilder nach IDs Komma-Separiert</li>
+  <li><code>size</code> (optional) Die Größe der Fotos, Auswahl <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (optional) Die Anzeigedauer eines Fotos in Sekunden</li>
+  <li><code>title</code> (optional) Anzeige des Bildtitels</li>
+  <li><code>effect</code> (optional) Überblendungs-Effekt (siehe <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (optional) Navigationspfeile anzeigen</li>
+  <li><code>elastic</code> (optional) Bildershow an jedes Foto anpassen</li>
+  <li><code>control</code> (optional) Navigationsflächen anzeigen <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) Symbolgröße in Pixel falls <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

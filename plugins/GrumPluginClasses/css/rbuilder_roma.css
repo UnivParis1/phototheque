@@ -1,0 +1,39 @@
+.pnInactive:hover { background:#999999; color:#444444; }
+.pnActive { background:#999999; color:#444444; }
+div.cbOperatorBg { background:#333333; }
+.iconSwitchCondition,
+.iconMove,
+.iconDelete,
+.iconEdit {
+  background:url(./../icons/buttons.png) no-repeat 0 0 transparent;
+}
+.iconSwitchCondition {
+  background-position:-300px -15px;
+}
+.iconSwitchCondition:hover {
+  background-position:-300px -0px;
+}
+
+.iconMove {
+  background-position:-285px -15px;
+}
+.iconMove:hover {
+  background-position:-285px -0px;
+}
+
+.iconDelete {
+  background-position:-255px -15px;
+}
+.iconDelete:hover {
+  background-position:-255px -0px;
+}
+
+.iconEdit {
+  background-position:-240px -15px;
+}
+.iconEdit:hover {
+  background-position:-240px -0px;
+}
+
+.cbItemMultiple { border:1px solid #666666; }
+.cbItemOverGroup { border:1px dotted #666666; }

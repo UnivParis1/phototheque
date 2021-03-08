@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Този таг Ви позволява да поставяте навсякъде линк за вход със автоматична регистрация и на възрастта.</p>
+
+<b>Описание:</b>
+<ul>
+  <li><code>html</code> (опция) ако е зададен само <code>false</code> тага връща само адреса за вход URL, без HTML</li>
+  <li><code>text</code> (опция) етикета на линка, може да съдържа <code>[lang]</code> тагове</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Показва блок с текст само без значение дали потребителят е логнат или не.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

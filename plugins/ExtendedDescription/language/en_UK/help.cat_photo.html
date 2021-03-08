@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>This tag allows you to insert one photo of any size you want.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>id</code> the photo identifier</li>
+  <li><code>album</code> (optional) the parent album identifier</li>
+  <li><code>size</code> (optional) the size of the photo, from <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (optional) if set to <code>false</code> the tag only returns the URL of the photo, without HTML</li>
+  <li><code>link</code> (optional) if set to <code>true</code> the photo is wrapped into a link to the photo page</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Same thing as above, except that the photo is chosen randomly from the whole gallery or from <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>This tag inserts an album in the description, where <code>xx</code> is the album identifier.</p>

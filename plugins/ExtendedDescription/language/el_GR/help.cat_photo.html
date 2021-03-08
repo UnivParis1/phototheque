@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Αυτή η ετικέτα σας επιτρέπει να εισάγετε μια εικόνα που θέλετε οποιουδήποτε μεγέθους.</p>
+
+<b>επιλογές:</b>
+<ul>
+  <li><code>id</code> το αναγνωριστικό της φωτογραφίας</li>
+  <li><code>album</code> (optional) το αναγνωριστικό του γονικού λευκώματος</li>
+  <li><code>size</code> (optional) το μέγεθος της φωτογραφίας, από <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (optional) αν οριστεί σε <code>false</code>  η ετικέτα επιστρέφει μόνο το URL της φωτογραφίας, χωρίς HTML</li>
+  <li><code>link</code> (optional) αν οριστεί σε <code>true</code> η φωτογραφία είναι εμπεριέχεται σε ένα σύνδεσμο στη σελίδα της εικόνας</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Το ίδιο πράγμα όπως παραπάνω, εκτός του ότι η φωτογραφία έχει επιλεγεί τυχαία από <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Αυτή η ετικέτα εισάγει ένα λεύκωμα στην περιγραφή, όπου <code>xx</code> είναι το αναγνωριστικό του λευκώματος.</p>

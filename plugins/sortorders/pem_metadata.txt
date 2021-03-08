@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: https://github.com/persandstrom/SortOrders.git 
+Revision: 7bd3afbfa174898346da931e0dd291f384b481f0 (Tue Oct 13 20:09:13 2015 +0200)

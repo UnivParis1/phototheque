@@ -1,0 +1,33 @@
+<p>Багатомовні описи розміщено між <code>[lang=xx]</code> та <code>[/lang]</code> теґами, де xx є мовним кодом (для прикладу uk, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Спеціальні мови <i>default</i></h4>
+<p>Опис за замовчуванням буде використовуватися, якщо опис недоступний для вибраної користувачем мови.<br>
+Якщо <code>[lang=default]</code> не існує , все, що поза теґом <code>[lang]</code> будуть розглядатися як опис за замовчуванням.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Спеціальні мови <i>all</i></h4>
+<p>все, що всередині <code>[lang=all]</code> будуте включено в опис, все що пов'язане з мовою певного користувача.<br>
+Це головним чином корисно, щоб включати код HTML/JavaScript усередині опису.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

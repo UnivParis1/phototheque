@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: https://github.com/plegall/Piwigo-download_by_size 
+Revision: d9416928408182044b7b8ee6b6754f81783c0f3c (Fri Nov 15 15:43:52 2019 +0100)

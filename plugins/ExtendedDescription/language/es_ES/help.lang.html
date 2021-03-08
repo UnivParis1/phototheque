@@ -1,0 +1,33 @@
+<p>Las descripciones multilingües se hacen entre las balizas <code>[lang=xx]</code> y <code>[/lang]</code>, O xx es el código de la lengua (por ejemplo es, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Baliza <i>default</i></h4>
+<p>La descripción por defecto será utilizada si la descripción en la lengua del usuario no es definida.<br>
+Si <code>[lang=default]</code> no existe, todo lo que está situado aparte de las balizas de lenguas estará considerado como descripción por defecto.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Baliza <i>all</i></h4>
+<p>Todo lo que está situado entre las balizas <code>[lang=all]</code> y <code>[/lang]</code> será incluido en la descripción, cualquiera que sea la lengua del usuario.<br>
+Esto es particularmente práctico para incluir del código HTML o Javascript en una descripción.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

@@ -1,0 +1,1 @@
+Tilføj ekode fra fx Google Analytics på alle sider.

@@ -1,0 +1,1 @@
+Fügt Google Analytics oder PhpMyVisites Codes auf allen Seiten der Galerie.

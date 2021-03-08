@@ -1,0 +1,33 @@
+<p>Çoklu Dil açıklamaları <code>[lang=xx]</code> ve <code>[/lang]</code> etiketleri arasında, xx dil kodu olmakla beraber (örnekler tr, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Özel dil <i>default</i></h4>
+<p>Bağlı olan kullanıcının seçtiği dildeki açıklama yoksa varsayılan açıklama kullanılır.<br>
+Eğer <code>[lang=default]</code> yoksa, <code>[lang]</code> etiketi dışındaki açıklama varsayılan açıklama olarak kabul edilecektir.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Özel dil <i>all</i></h4>
+<p><code>[lang=all]</code> içinde olanlar açıklama olarak tüm bağlı olan kullanıcılar için geçerli açıklama olacaktır.<br>
+Bu çoğunlukla HTML/JavaScript kodları içine açıklama eklemek için faydalıdır.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

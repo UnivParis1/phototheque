@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Šis tegs dod iespēju ievietot slaidus.</p>
+
+<b>Iespējas:</b> (jums jāiestāda <code>album</code> VAI <code>list</code>)
+<ul>
+  <li><code>album</code> (izvēles) avota albūms</li>
+  <li><code>nb_images</code> (izvēles) slaidrādē parādāmo fotogrāfiju maksimālais maksimālais skaits</li>
+  <li><code>random</code> (izvēles) veikt fotogrāfiju gadījumizvēli no albūma</li>
+  <li><code>list</code> (izvēles) ar komatu atdalītu fotogrāfiju ids saraksts </li>
+  <li><code>size</code> (izvēles) fotogrāfiju izmērs, no <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (izvēles) slaidrādes ātrums (sekundēs)</li>
+  <li><code>title</code> (izvēles) rādīt foto nosaukumu</li>
+  <li><code>effect</code> (izvēles) pārejas efekts (skatīt <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (izvēles) rādīt navigācijas bultas</li>
+  <li><code>elastic</code> (izvēles) pielāgot slaidrādes izmēru katrai fotogrāfijai</li>
+  <li><code>control</code> (izvēles) rādīt navigācijas kontroles <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (izvēles) sīkbildes izmērs pikseļos, ja <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

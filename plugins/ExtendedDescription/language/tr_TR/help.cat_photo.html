@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Bu etiket istediğiniz boyuttaki bir resmi eklemenizi sağlar.</p>
+
+<b>Seçenekleri:</b>
+<ul>
+  <li><code>id</code> fotoğraf kimliği</li>
+  <li><code>album</code> (isteğe bağlı) ana albüm kimliği</li>
+  <li><code>size</code> (isteğe bağlı) fotoğraf büyüklüğü <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (isteğe bağlı) eğer <code>false</code> olarak ayarlanmışsa etiket HTML olmadan sadece fotoğrafın URL adresini döndürür</li>
+  <li><code>link</code> (isteğe bağlı) eğer <code>true</code> olarak ayarlanmışsa fotoğraf resim sayfasına bir bağlantı içine bağlanır</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Yukarıdakilerden farklı olarak fotoğraflar <code>album</code> den rastgele olarak seçilir.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Bu etiket, <code>xx</code> albüm tanımlayıcı olduğu yerdeki açıklamaya bir albüm ekler.</p>

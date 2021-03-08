@@ -1,0 +1,34 @@
+<p>Οι πολυγλωσσικές περιγραφές τοποθετούνται μεταξύ των ετικετών <code>[lang=xx]</code> και [/lang], όπου xx είναι ο κωδικός της γλώσσας (για παράδειγμα el, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=el]Προεπιλεγμένη περιγραφή[/lang]
+
+</pre>
+
+<h4>Ειδική γλώσσα <i>default</i></h4>
+<p>Η προεπιλεγμένη περιγραφή θα χρησιμοποιηθεί αν η περιγραφή δεν είναι διαθέσιμη στο συνδεδεμένο χρήστη που έχει επιλέξει γλώσσα.<br>
+Εαν <code>[lang=default]</code> δεν υπάρχει, οτιδήποτε έξω από την ετικέτα <code>[lang]</code> θα πρέπει να θεωρείται ως η προεπιλεγμένη περιγραφή.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Ειδική γλώσσα <i>all</i></h4>
+<p>οτιδήποτε μέσα στο <code>[lang=all]</code> θα πρέπει να περιλαμβάνεται στην περιγραφή, για οποιονδήποτε συνδεδεμένο χρήστη που έχει επιλέξει γλώσσα.<br>
+Αυτό είναι χρήσιμο κυρίως για να συμπεριλάβει HTML / JavaScript κώδικα μέσα σε μια περιγραφή.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=el]Προεπιλεγμένη περιγραφή[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

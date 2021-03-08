@@ -1,0 +1,33 @@
+<p>Pluralingvaj priskriboj troviĝas inter la etikedoj <code>[lang=xx]</code> kaj <code>[/lang]</code>, kie xx estas la lingva kodo (ekzemple eo, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Speciala lingvo <i>default</i></h4>
+<p>La apriora priskribo ne uziĝos se la priskribo ne disponeblas ĉe la lingvo selektita de la konektita uzanto.<br>
+Se <code>[lang=default]</code> ne ekzistas, ĉio ajn krom la <code>[lang]</code> etikedoj estos considerata kiel la apriora priskribo.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Speciala lingvo <i>all</i></h4>
+<p>ĉio ajn ene de <code>[lang=all]</code> estos inkluzivita en la priskribo, kia ajn estu la elektita lingvo de la konektita uzanto.<br>
+Tio ĉefe utilas por inkluzivi HTML/JavaScript-kodo ene de priskribo.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

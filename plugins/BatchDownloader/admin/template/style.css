@@ -1,0 +1,83 @@
+.chzn-choices li {
+  clear:none !important;
+}
+
+input[name='max_size'], input[name='max_elements'] {
+  border:none;
+  background:none;
+  font-weight:bold;
+  margin-left:5px;
+}
+
+#max_size, #max_elements {
+  display:inline-block;
+  width:300px;
+}
+
+.table2 .throw {
+  font-size:100%;
+  line-height: 1em;
+}
+TABLE.table2 THEAD TD {
+  padding: 3px 5px !important;
+}
+.table2 .action {
+  width:70px;
+}
+.table2 .user {
+  width:150px;
+}
+.table2 .date {
+  width:230px;
+}
+.table2 .size {
+  width:100px;
+}
+.table2 .img_size {
+  width:120px;
+}
+.table2 .images {
+  width:100px;
+}
+.table2 .archives {
+  width:110px;
+}
+.table2 .status {
+  width:120px;
+}
+
+.showInfo {
+  display:inline;
+}
+
+.advanced span {
+  font-family: 'Courrier New',monospace;
+  font-size: 11pt;
+  font-style:normal;
+}
+.advanced dd:not(:last-child) {
+  margin-bottom:1em;
+}
+
+/* sliders */
+body#theAdminPage .ui-slider-horizontal .ui-slider-handle {top: -.7em !important; width: 1.4em; height: 1.4em;}
+body#theAdminPage .ui-slider-handle.ui-state-default.ui-corner-all {border-radius: 10px;}
+body#theAdminPage .ui-slider-horizontal .ui-slider-range {height: 2px;}
+body#theAdminPage .ui-slider-horizontal {height: 4px;}
+body#theAdminPage .ui-slider .ui-slider-range {background: rgba(255,166,70, 0.9); border: 1px solid #ffaf58;}
+body#theAdminPage .ui-widget-content {border: none; background: #DDD;}
+body#theAdminPage .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
+  background: #ffaf58;
+}
+.ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+  background: #ffaf58;
+}
+.ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}

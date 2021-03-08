@@ -1,0 +1,26 @@
+/* for inputTag plugin */
+.ui-tag-selector-input { padding:1px; }
+.ui-tag-selector-input input { border:none; background:transparent; }
+.ui-tag-selector-list { margin-top:-1px; }
+.ui-tag-selector-selected-tag-list { list-style:none; margin:0; padding:0; }
+.ui-tag-selector-selected-tag-list li span {
+  font-family:sans;
+  font-size:80%;
+  font-weight:bold;
+  padding:0 3px;
+  position:relative;
+  top:-1px;
+}
+li.ui-tag-selector-list-item, .ui-tag-selector-text { padding:2px; }
+.ui-tag-selector-selected-tag-list li.ui-tag-selector-selected-tag {
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  -khtml-border-radius:8px;
+  border-radius:8px;
+  float:left;
+  margin-bottom:1px;
+  margin-right:1px;
+  padding:0 4px;
+  cursor:default;
+}
+.ui-tag-selector-selected-tag-list li.ui-tag-selector-selected-tag span { cursor:pointer; }

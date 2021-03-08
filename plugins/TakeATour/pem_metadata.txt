@@ -1,0 +1,2 @@
+https://github.com/Piwigo/TakeATour.git
+aed7a7ef480ccfd23df75d59ca74d8821068f131 2021-01-28 06:27:02 +0100

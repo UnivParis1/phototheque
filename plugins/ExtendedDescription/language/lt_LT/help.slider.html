@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Ši žyma leidžia įterpti skaidrių peržiūrą.</p>
+
+<b>Pasirinkimai:</b> (privaloma nurodyti <code>album</code> ARBA <code>list</code>)
+<ul>
+  <li><code>album</code> (optional) albumas</li>
+  <li><code>nb_images</code> (optional) maksimalus nuotraukų skaičius, kuris bus rodomas skaidrių peržiūroje</li>
+  <li><code>random</code> (optional) atsitiktinės albumo nuotraukos</li>
+  <li><code>list</code> (optional) nuotraukų ID sąrašas, atskirtas kableliais</li>
+  <li><code>size</code> (optional) nuotraukų dydžiai, iš <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (optional) peržiūros greitis (sekundėmis)</li>
+  <li><code>title</code> (optional) rodyti nuotraukos pavadinimą</li>
+  <li><code>effect</code> (optional) perėjimo efektas (žr. <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (optional) rodyti navigacines rodykles</li>
+  <li><code>elastic</code> (optional) adaptuoti kiekvienos skaidrės dydį</li>
+  <li><code>control</code> (optional) rodyti navigacijos valdiklius <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) miniatiūrų dydis pikseliais, jei <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

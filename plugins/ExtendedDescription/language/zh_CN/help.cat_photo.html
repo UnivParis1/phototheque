@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>此tag标签用于在描述中插入一张任意尺寸的图片：</p>
+
+<b>选项：</b>
+<ul>
+  <li><code>id</code> 图片id</li>
+  <li><code>album</code> (可选) 当前相册id</li>
+  <li><code>size</code> (可选) 图片尺寸，有 <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (可选) 如果设为 <i>false</i> 则tag标签仅给出图片的URL，不包含HTML</li>
+  <li><code>link</code> (可选) 如果设为 <i>true</i> 则点击图片可进入该图片所在页面</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>同上，只是图片是从整个图库或<code>album</code>中随机抽选的。</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>此tag标签可在描述中插入一个相册，xx为相册id。</p>

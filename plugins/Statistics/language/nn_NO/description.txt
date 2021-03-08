@@ -1,0 +1,1 @@
+Legg til kjeldekode frå til dømes Google Analytics på kvar side.

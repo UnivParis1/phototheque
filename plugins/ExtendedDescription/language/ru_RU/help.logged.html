@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Этот признак позволяет устанавливать автоматическую связь логина с текущей страницей.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>html</code> (дополнительно) если Вы установите ключ <code>false</code>, то будет вызываться только URL для логина без HTML</li>
+  <li><code>text</code> (дополнительно) ссылка, которая может содержать признак языка <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=ru]Вход по логину[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Отображать блок текста только текущему пользователю или нет.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

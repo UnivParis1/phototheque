@@ -1,0 +1,1 @@
+Makes it possible for the administrator to select which sort orders that should be visible to users. It also adds a random sort order. 

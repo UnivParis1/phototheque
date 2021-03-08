@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Этот тэг позволяет Вам создать слайд-шоу.</p>
+
+<b>опции:</b> (Вы должны указать <code>album</code> ИЛИ <code>list</code>)
+<ul>
+  <li><code>album</code> (не обязательно) альбом-источник изображений</li>
+  <li><code>nb_images</code> (не обязательно) максимальное число изображений, показываемых в слайд-шоу</li>
+  <li><code>random</code> (не обязательно) случайный выбор изображений из альбома</li>
+  <li><code>list</code> (не обязательно) список идентификаторов изображений (должны быть разделены запятыми)</li>
+  <li><code>size</code> (не обязательно) размеры изображений, из диапазона <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (не обязательно) скорость смены изображений (в секундах)</li>
+  <li><code>title</code> (не обязательно) отображать название изображений</li>
+  <li><code>effect</code> (не обязательно) transition effect (подробности в <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (не обязательно) отображать стрелки навигации</li>
+  <li><code>elastic</code> (не обязательно) адаптировать размеры слайд-шоу для каждого изображения</li>
+  <li><code>control</code> (не обязательно) отображать панель навигации <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (не обязательно) размеры миниатюр (в пикселях) если ранее была включена функция <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

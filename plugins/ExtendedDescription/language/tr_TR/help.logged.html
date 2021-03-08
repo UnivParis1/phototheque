@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Bu etiket, her yere geçerli otomatik olarak yönlendiren bir giriş bağlantısı eklemenize izin verir.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>html</code> (isteğe bağlı)  <code>false</code> olarak ayarlanırsa, etiketi HTML olmadan yalnızca giriş URL'sini döndürür</li>
+  <li><code>text</code> (isteğe bağlı) bağlantı etiketi, içerebilir <code>[lang]</code> etiketler</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Bir metin bloğunu kullanıcı giriş yapsada yapmasada görüntüleyin.</p>
+
+<pre>
+[logged=true] Tekrar hoşgeldiniz [/logged]
+[logged=false] Lütfen giriş yapın [/logged]
+</pre>

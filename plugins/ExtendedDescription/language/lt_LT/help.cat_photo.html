@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Ši žyma leidžia įterpti įvairaus dydžio paveiksliuką.</p>
+
+<b>Pasirinkimai:</b>
+<ul>
+  <li><code>id</code> nuotraukos identifikatorius</li>
+  <li><code>album</code> (neprivaloma) pagrindinio albumo identifikatorius</li>
+  <li><code>size</code> (neprivaloma) nuotraukos dydis, nurodomas: <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (neprivaloma) jei nustatyta į <code>false</code> žyma grąžina tik nuotraukos nuorodą, be HTML </li>
+  <li><code>link</code> (neprivaloma) jei nustatyta į <code>true</code> nuotrauka įpinta į paveiksliuko puslapio nuorodą</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Tas pats, kas ir aukščiau, tik nuotrauka iš <code>album</code>o parenkama atsitiktinai.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Ši žyma į aprašymą įterpia albumą, kur <code>xx</code> yra albumo identifikatorius.</p>

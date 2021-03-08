@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p> Šis Tags dod iespēju jebkur ievietot logina saiti ar automātisku pāradresāciju uz tekošo vecumu. </p>
+
+<b>Options:</b>
+<ul>
+  <li><code>html</code> (izvēles) ja ir <code>false</code> tags atgriež tikai login URL, bez HTML</li>
+  <li><code>text</code> (izvēles) saites nosaukumsl var saturēt <code>[lang]</code> tagus</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p> Rāda teksta bloku tikai tad, ja esošais lietotājs ir ielogojies vai ne</p>
+
+<pre>
+[logged=true] Ar atgriešanos [/logged]
+[logged=false] Lūdzu ielogojieties [/logged]
+</pre>

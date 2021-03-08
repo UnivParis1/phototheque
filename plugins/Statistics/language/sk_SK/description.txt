@@ -1,0 +1,1 @@
+Pridať zdrojový kód Google Analytics na každú stránku.

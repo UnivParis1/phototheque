@@ -1,0 +1,1 @@
+在每頁上加入如Google Analytics的程式碼。

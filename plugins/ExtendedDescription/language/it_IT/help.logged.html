@@ -1,0 +1,21 @@
+<h4>[login-link]</h4>
+<p>Questo tag permette di inserire ovunque un link di accesso con reindirizzamento automatico all'attuale età.</p>
+
+<b>Opzioni:</b>
+<li><code>html</code> (opzionale) se è impostato a <code>false</code> il tag restituisce solo l'URL di accesso, senza HTML</li>
+<li><code>testo</code> etichetta di collegamento (opzionale), può contenere tag <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Visualizzare un blocco di testo solo se l'utente corrente è connesso o no.</p>
+
+<pre>
+[logged=true] Ben tornato [/logged]
+[logged=false] Prego fai log in [/logged]
+</pre>
