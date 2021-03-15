@@ -19,6 +19,9 @@
             </li>
             <li>
                 <label>Image for the connexion menu (url, relative to the piwigo root) : <input type="text" name="casu_logo" value="{$casu_logo}"></label>
+            </li>            
+            <li>
+                <label>Alternate text for the connexion menu : <input type="text" name="casu_logo_alt" value="{$casu_logo_alt}"></label>
             </li>
             <li>
                 <label>
@@ -31,6 +34,18 @@
             </li>
         </ul>
     </fieldset>
+    <fieldset id="altaccess">
+        <ul>
+            <li>
+                <label>Keep alternate access to the standard Piwigo identification page : <input type="checkbox" name="casu_altaccess" {if $casu_altaccess}checked="checked"{/if}> </label>
+            </li>
+            <li>
+                <label>Alternate access label : <input type="text" name="casu_altaccess_text" value="{$casu_altaccess_text}"></label>
+            </li>
+        </ul>
+
+    </fieldset>
+
     <fieldset>
         <ul>
             <li><label>Login attribute : <input type="text" name="casu_login" value="{$casu_login}"></label></li>
@@ -38,16 +53,14 @@
                 <ul>
                     {foreach from=$casu_groups key=group item=regexp}
                         <li><label>attr : <input type="text" name="casu_groups[{$group}][name]" value="{$group}"</label>  <label>Processing : <input type="text" name="casu_groups[{$group}][regexp]" value="{$regexp}"</label></li> 
-                    {/foreach}
+                            {/foreach}
                     <li><label>attr : <input type="text" name="casu_groups[new][name]" value=""</label>  <label>Processing : <input type="text" name="casu_groups[new][regexp]" value=""</label></li> 
-                    
+
                 </ul>
 
             </li>
         </ul>
 
-    <p style="text-align:left;"><input type="submit" name="save_config" value="{'Save Settings'|translate}"></p>
+        <p style="text-align:left;"><input type="submit" name="save_config" value="{'Save Settings'|translate}"></p>
+    </fieldset>
 </form>
-
-
-</fieldset>

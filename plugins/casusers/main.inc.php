@@ -39,12 +39,15 @@ function casu_init() {
     if (isset($_GET['noCAS'])) {
         pwg_set_session_var('noCASU', 'noCAS');
     }
+    if (isset($_GET['authCASU'])) {
+        pwg_unset_session_var('noCASU');
+    }
 
     //all the phpCAS stuff here :
     if (script_basename() == 'identification' && !pwg_get_session_var('noCASU') == 'noCAS' && isset($conf['casu']['casu_host'])) {
         require_once CASU_CAS;
         $ccas = conf_get_param('casu');
-
+        
 //        phpCAS::setDebug();
 //        phpCAS::setVerbose(true);
         phpCAS::client(SAML_VERSION_1_1, $ccas['casu_host'], (int) $ccas['casu_port'], $ccas['casu_context']);
@@ -53,30 +56,17 @@ function casu_init() {
         } else {
             phpCAS::setNoCasServerValidation();
         }
-
+        
         phpCAS::forceAuthentication();
         $cas_user = array(
             'id' => phpCAS::getUser(),
 //            'id' => "testcasid",
-        );
+            );
         if (phpCAS::hasAttributes()) {
             $cas_user['attributes'] = phpCAS::getAttributes();
             $cas_user['user'] = $cas_user['attributes'][$ccas['casu_login']];
         }
-//            $cas_user['attributes'] = array(
-//                'uid'=> 'plevy',
-//                'eduPersonAffiliation'=> array('member','employee','staff'),
-//                'mail'=> 'Pascal.Levy@univ-paris1.fr',
-//                'sn'=> 'Levy',
-//                'supannEntiteAffectation'=> 'DGOC_4',
-//                'givenName' => 'Pascal',
-//                'memberOfarray' => array('cn=applications.phraseanet.phototheque-com,ou=groups,dc=univ-paris1,dc=fr','cn=applications.phraseanet.phototheque-boss,ou=groups,dc=univ-paris1,dc=fr','cn=applications.ailleur.phototheque-com,ou=groups,dc=univ-paris1,dc=fr'),
-//                'memberOf' => 'cn=applications.phraseanet.phototheque-com-alone,ou=groups,dc=univ-paris1,dc=fr',
-//                'displayName'=> 'Pascal Levy', 
-//
-//            );
-//            $cas_user['user'] = "testcasuser";
-        
+
 //all the actual stuff is comming trough get but identification.php need to think it's post
         $_POST['login'] = true;
         if (isset($_GET['redirect'])) {
@@ -84,7 +74,7 @@ function casu_init() {
         }
         $_POST['username'] = $cas_user;
         $_POST['password'] = 'fake';
-
+        
 //if we are here we should have a valid CAS user, we want to log in with :
         add_event_handler('try_log_user', 'casu_try_log_user', 49, CASU_PATH . 'include/auth.inc.php');
     }
