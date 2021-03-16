@@ -4,7 +4,7 @@
 
 $phpcas_path = 'include/phpCAS/source/';
 
-$cas_host = 'cas.univ-paris1.fr';
+$cas_host = 'cas-test.univ-paris1.fr';
 $cas_context = '/cas';
 $cas_port = 443;
 
