@@ -1,0 +1,33 @@
+<p>Mô tả đa ngôn ngữ được đặt giữa thẻ <code>[lang=xx]</code> và <code>[/lang]</code>, với xx mã ngôn ngữ (ví dụ vi, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Từ khóa đặc biệt <i>default</i></h4>
+<p>Mô tả mặc định sẽ được sử dụng nếu phần mô tả không dùng được trong ngôn ngữ được lựa chọn của người dùng đã kết nối.<br>
+Nếu ngôn ngữ mặc định <code>[lang=default]</code> không tồn tại, bất kỳ từ nào nằm ngoài <code>[lang]</code> sẽ được xem là mô tả mặc định.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Từ khóa đặc biệt <i>all</i></h4>
+<p>bất kỳ từ nào thuộc trong chỉ định <code>[lang=all]</code> sẽ được bao gồm trong mô tả, và bất kỳ từ nào mà ngôn ngữ được định nghĩa của người dùng đã kết nối.<br>
+Đây là lợi ích chính nhằm kết hợp mã HTML/JavaScript bên trong một mô tả.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

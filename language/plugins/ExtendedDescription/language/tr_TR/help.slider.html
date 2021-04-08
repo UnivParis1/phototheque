@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Bu etikey slayt gösterisi eklemenizi sağlar.</p>
+
+<b>Seçenekleri:</b> (<code>album</code> yada <code>list</code> seçilmiş olmalıdır)
+<ul>
+  <li><code>album</code> (isteğe bağlı) kaynak albüm</li>
+  <li><code>nb_images</code> (isteğe bağlı) slayt gösterisinde görüntülenecek azami fotoğraf sayısı</li>
+  <li><code>random</code> (isteğe bağlı) fotoğrafları albümden rastgele olarak seç</li>
+  <li><code>list</code> (isteğe bağlı) virgülle ayrılmış bir fotoğraf ID'leri listesi</li>
+  <li><code>size</code> (isteğe bağlı) fotoğraf büyüklüğü, <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (isteğe bağlı) slayt gösterisi hızı (saniye olarak)</li>
+  <li><code>title</code> (isteğe bağlı) fotoğraf başlığını görüntülenmesi <i>(evet, hayır)</i></li>
+  <li><code>effect</code> (isteğe bağlı) geçiş efekti (<a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a> a bakınız.)</li>
+  <li><code>arrows</code> (isteğe bağlı) gezinme oklarını göster</li>
+  <li><code>elastic</code> (isteğe bağlı) her fotoğraf için slayt gösterisi boyutunu uyarla</li>
+  <li><code>control</code> (isteğe bağlı) gezinme kontrollerini göster <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (isteğe bağlı) eğer <code>control=thumb</code> seçili ise piksel olarak küçük resim boyutu</li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

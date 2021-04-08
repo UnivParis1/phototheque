@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Dieser This erlaubt es überall einen Anmeldelink mit einer automatischen Weiterleitung auf die aktuelle Seite einzufügen.</p>
+
+<b>Optionen:</b>
+<ul>
+  <li><code>html</code> (optional) <code>false</code> liefert nur die Login URL zurück, ohne HTML</li>
+  <li><code>text</code> (optional) Linkbeschreibung, darf den Tag <code>[lang]</code> beinhalten</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Zeigt den Text-Anmeldeblock an und ob der Benutzer angemeldet ist oder nicht.</p>
+
+<pre>
+[logged=true] Willkommen zurück [/logged]
+[logged=false] Bitte melde dich an [/logged]
+</pre>

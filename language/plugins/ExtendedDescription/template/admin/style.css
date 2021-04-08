@@ -1,0 +1,27 @@
+fieldset, h4 {
+  text-align:left !important;
+}
+
+h4 {
+  margin-left:-20px;
+  text-decoration:underline;
+}
+
+code {
+  font-family:"Courier New", monospace;
+  font-size:12px;
+}
+
+pre {
+  border:1px dashed rgba(127,127,127,0.5);
+  padding:1em 1em 1em 1.5em;
+  background:#23241F;
+  color:#eee;
+  white-space:pre-wrap;
+}
+
+code .c { color:#5CCE00; }
+code .b { color:#F92672; }
+code .p { color:#F92672; }
+code .v { color:#AE81FF !important; }
+code .h { color:#E6DB74; }

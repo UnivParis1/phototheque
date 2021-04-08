@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Αυτή η ετικέτα σας επιτρέπει να εισάγετε ένα slideshow παρουσίαση.</p>
+
+<b>επιλογές:</b> (πρέπει να ορίσετε <code>album</code> OR <code>list</code>)
+<ul>
+  <li><code>album</code> (optional) πηγή άλμπουμ</li>
+  <li><code>nb_images</code> (optional) τον μέγιστο αριθμό των φωτογραφιών που θα εμφανιστούν στην παρουσίαση</li>
+  <li><code>random</code> (optional) επιλέξετε τις φωτογραφίες τυχαία στο λεύκωμα</li>
+  <li><code>list</code> (optional) μια λίστα με τις ID ταυτότητες φωτογραφιών χωρισμένες με κόμμα</li>
+  <li><code>size</code> (optional) το μέγεθος των φωτογραφιών, από <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (optional) η ταχύτητα της παρουσίασης (σε δευτερόλεπτα)</li>
+  <li><code>title</code> (optional) προβολή Τίτλου φωτογραφιών</li>
+  <li><code>effect</code> (optional) μετάβαση αποτέλεσμα (see <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (optional) προβολή βελών πλοήγησης</li>
+  <li><code>elastic</code> (optional) προσαρμογή του μεγέθους slideshow σε κάθε φωτογραφία<i>(yes, no)</i></li>
+  <li><code>control</code> (optional) προβολή ελέγχου πλοήγησης <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) μέγεθος μικρογραφιών σε pixel, αν <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

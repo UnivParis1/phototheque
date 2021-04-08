@@ -1,0 +1,1 @@
+Arendajatele. Näitab kõiki kutsungeid trigger_event'ile.

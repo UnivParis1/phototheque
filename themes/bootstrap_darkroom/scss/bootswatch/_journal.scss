@@ -1,0 +1,18 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/journal/variables";
+
+$jumbotron-bg: $primary !default;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/journal/bootswatch";
+@import "common";
+
+.jumbotron {
+  color: #fff;
+}
+
+.navbar {
+  &.navbar-transparent.navbar-sm {
+    margin-top: -101px !important;
+  }
+}

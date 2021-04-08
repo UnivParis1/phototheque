@@ -1,0 +1,2 @@
+https://github.com/Piwigo/piwigo-smartpocket.git
+3c8dc68bfc2eb0126468124f8c29c165c63f8f57 2019-07-03 22:20:25 +0900

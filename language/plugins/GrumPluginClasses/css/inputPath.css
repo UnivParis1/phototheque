@@ -1,0 +1,13 @@
+/* inputPath generic CSS file */
+.ui-inputPath {
+  font-weight:bold;
+}
+
+span.ui-inputPath-separator {
+  padding-left:4px;
+  padding-right:4px;
+}
+
+span.ui-inputPath-itemSelectable {
+  cursor:pointer;
+}

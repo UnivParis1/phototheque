@@ -1,0 +1,57 @@
+#thumbnails {
+  overflow: hidden;
+}
+
+#thumbnails .gthumb {
+  position: relative;
+  overflow: hidden;
+  float: left;
+  display: inline;
+  background: none !important;
+}
+
+#thumbnails .gthumb a {
+  position: absolute;
+  z-index:0;
+}
+
+#thumbnails .gthumb a img.thumbnail,
+#thumbnails .gthumb a img.thumbnail:hover {
+  border: 0 none;
+  margin: 0;
+  padding: 0;
+  top: 0;
+}
+
+#thumbnails .gthumb .thumbLegend {
+  position:absolute;
+  z-index:100;
+  bottom:-40px;
+  top:auto;
+  height:30px;
+  left:0;
+  right:0;
+  padding:5px 0;
+  width:100%;
+  background:rgba(0,0,0,0.7);
+  text-align:center;
+  overflow:hidden;
+  color:#aaa;
+  -webkit-transition:all 200ms ease-out;
+  -moz-transition:all 200ms ease-out;
+  -ms-transition:all 200ms ease-out;
+  -o-transition:all 200ms ease-out;
+  transition:all 200ms ease-out;
+}
+  #thumbnails .gthumb:hover .thumbLegend {
+    bottom:0px;
+  }
+#thumbnails .thumbLegend .thumbName {
+  display:block;
+  font-weight:bold;
+  color:#eee;
+}
+
+.isotope {
+  height:auto !important;
+}

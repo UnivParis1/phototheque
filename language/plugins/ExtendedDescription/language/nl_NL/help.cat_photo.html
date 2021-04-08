@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Met dit label kunt u een afbeelding van zelfbepaalde grootte toevoegen.</p>
+
+<b>Opties:</b>
+<ul>
+  <li><code>id</code> het foto-nummer</li>
+  <li><code>album</code> (optioneel) het nummer van het hoofdalbum identifier</li>
+  <li><code>size</code> (optioneel) de grootte van de foto, van <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (optioneel) indien ingesteld op <code>false</code> zal dit label alleen de URL van de foto opleveren, zonder HTML</li>
+  <li><code>link</code> (optioneel) indien ingesteld op <code>true</code> zal de foto middels een link op de fotopagina worden toegevoegd</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Zelfde als hierboven, alleen wordt er een willekeurige foto gekozen van <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Dit label voegt een album toe in de beschrijving, waarbij <code>xx</code> het ID van het album is.</p>

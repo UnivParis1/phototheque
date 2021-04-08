@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Този таг ви позволява да добавяте една снимка от какъвто размер искате.</p>
+
+<b>Опции:</b>
+<ul>
+  <li><code>id</code> Номер на снимка</li>
+  <li><code>album</code> (optional) под албум</li>
+  <li><code>size</code> (optional) размер на снимка, от <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (optional) Ако е <code>false</code> тага само връщя URL адреса на снимката, без HTML</li>
+  <li><code>link</code> (optional) Ако е <code>true</code> снимката е свързана с линк към страница</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Също като горното но е свързан с случайна снимка от линка за албум <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Този таг добавя албум в описанието, където <code>xx</code> е номера (индетификатора) на албума.</p>

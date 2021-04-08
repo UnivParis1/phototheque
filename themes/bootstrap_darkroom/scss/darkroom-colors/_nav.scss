@@ -1,0 +1,62 @@
+// Navbar overrides
+.navbar-dark {
+  .navbar-brand {
+    color: $navbar-dark-color !important;
+  }
+  a.navbar-brand,
+  .navbar-brand a {
+    color: $navbar-dark-color !important;
+    &:focus {
+      color: $navbar-dark-color !important;
+    }
+    &:hover {
+      color: $navbar-dark-hover-color !important;
+    }
+  }
+}
+
+.navbar-main {
+  .navbar-brand {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.navbar-contextual {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.navbar-transparent {
+  .navbar-toggler {
+    color: $navbar-dark-color;
+  }
+}
+
+// Nav overrides
+.nav-tabs {
+  .nav-link {
+    @include hover-focus {
+      background-color: $gray-darker-2;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .nav-tabs.nav-link {
+    border-bottom: none;
+  }
+
+  // verify these
+  .dropdown-divider { background-color: $gray-darker-2; }
+  .navbar-collapse.show .dropdown-menu {
+    background-color: $gray-darker-1;
+
+    .dropdown-item {
+      color: $gray-lighter-1;
+
+      &:hover, &:focus {
+        background-color: $gray-lighter-2;
+        color: $black;
+      }
+    }
+  }
+}

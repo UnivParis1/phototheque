@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Tag'et gør det muligt, hvor som helst at indsætte et loginlink med automatisk viderestilling til den akuelle alder.</p>
+
+<b>Indstillinger:</b>
+<ul>
+  <li><code>html</code> (valgfri) hvis opsat tilk <code>false</code> returnerer tag'et kun login-URL'en, uden HTML</li>
+  <li><code>text</code> (valgfri) linktekst, kan indeholde <code>[lang]</code>-tags</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=da]log på[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Vis er tekstblok, kun hvis den aktuelle bruger er logget på eller ej.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

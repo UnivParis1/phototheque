@@ -1,0 +1,1 @@
+Eklentiler arasında paylaşılan sınıflar

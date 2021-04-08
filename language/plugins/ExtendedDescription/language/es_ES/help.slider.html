@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Esta etiqueta permite insertar una presentación de diapositivas.</p>
+
+<b>Opciones:</b> (debe establecer <code>album</code> O <code>list</code>)
+<ul>
+  <li><code>album</code> (opcional) Album fuente</li>
+  <li><code>nb_images</code> (opcional) número máximo de fotos que desea mostrar en la presentación de diapositivas</li>
+  <li><code>random</code> (opcional) elegir las fotos de forma aleatoria en el álbum</li>
+  <li><code>list</code> (opcional) una lista de los identificadores de las fotos separados por una coma</li>
+  <li><code>size</code> (opcional), el tamaño de las fotos, desde <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (opcional) velocidad de la presentación (en segundos)</li>
+  <li><code>title</code> (opcional) mostrar titulo de la foto</li>
+  <li><code>effect</code> (opcional) efecto de transición (ver <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (opcional) mostrar flechas de navegación</li>
+  <li><code>elastic</code> (opcional) adaptar el tamaño de presentación de diapositivas a cada foto</li>
+  <li><code>control</code> (opcional) mostrar controles de navegación <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (opcional) tamaño de las miniaturas  en píxeles si <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

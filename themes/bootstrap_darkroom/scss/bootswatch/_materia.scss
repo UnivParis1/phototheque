@@ -1,0 +1,15 @@
+@import "../common/variables";
+@import "node_modules/bootswatch/dist/materia/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/materia/bootswatch";
+@import "common";
+
+.navbar {
+  &.navbar-transparent.navbar-sm {
+    margin-top: -109px !important;
+  }
+}
+
+.nav-breadcrumb > .nav-breadcrumb-item {
+  font-size: $navbar-brand-font-size;
+}

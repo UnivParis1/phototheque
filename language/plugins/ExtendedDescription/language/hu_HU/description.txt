@@ -1,0 +1,1 @@
+Lehetővé teszi többnyelvű leírások hozzáadását, (bannerek, e-mail értesítés, kategória név) valamint további lehetőségeket biztosít.

@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Ce tag permet d'ajouter n'importe où un lien de connexion avec redirection automatique vers la page courante.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>html</code> (facultatif) si <code>false</code>, la balise ne retourne que l'URL du lien, sans HTML</li>
+  <li><code>text</code> (facultatif) texte du lien, peut contenir des tags <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Affiche un block de texte selon si l'utilisateur est connecté ou pas.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

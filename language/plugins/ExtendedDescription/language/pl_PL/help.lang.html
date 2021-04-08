@@ -1,0 +1,33 @@
+<p>Wielojęzykowe opisy umieszcza się między tagami <code>[lang=xx]</code> a <code>[/lang]</code>, gdzie xx to kod języka (na przykład pl, en, fr itd.).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Specjalny tag językowy <i>default</i></h4>
+<p>Opis domyślny używany będzie wtedy, gdy opis nie będzie zdefiniowany tagami w języku połączonego użytkownika.<br>
+Jeżeli tag <code>[lang=default]</code> nie będzie istniał, wszystko poza tagami <code>[lang]</code> będzie uznane jako domyślny opis.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Specjalny tag językowy <i>all</i></h4>
+<p>wszystko co jest zawarte w opisie w obrębie <code>[lang=all]</code>, będzie wyświetlane w języku, w jakim domyślnie posługuje się połączony użytkownik.<br>
+Jest to przydatne głównie do stosowania kodu HTML/JavaScript w opisie.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

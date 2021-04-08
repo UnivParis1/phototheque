@@ -1,0 +1,8 @@
+/*
+Plugin Name: xmpreader
+Version: auto
+Description: try to read some xmp metadata from our picture.
+Plugin URI: auto
+Author: Pascal
+Author URI: http://www.pantheonsorbonne.fr
+*/

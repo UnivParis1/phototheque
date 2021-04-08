@@ -1,0 +1,8 @@
+/* 
+    Created on : 16 mai 2019, 12:38:04
+    Author     : plevy
+*/
+
+     .pswp__button, #thumbnails, .navbar, .container {
+	display: none;
+     }
