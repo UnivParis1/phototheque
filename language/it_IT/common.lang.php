@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Italiano [IT]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=424
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -70,7 +70,7 @@ $lang['Author: %s'] = 'Autore: %s';
 $lang['Auto login'] = 'Conessione automatica';
 $lang['available for administrators only'] = 'disponibile solo per gli amministratori';
 $lang['Bad status for user "guest", using default status. Please notify the webmaster.'] = 'Lo stato dell\'utente "guest" non è conforme, viene usato lo stato predefinito. Per favore avvisa il webmaster.';
-$lang['Best rated'] = 'I più votati';
+$lang['Best rated'] = 'Le più votate';
 $lang['Browser: %s'] = 'Browser: %s';
 $lang['Calendar'] = 'Calendario';
 $lang['Change my password'] = 'Cambiare la mia password';
@@ -413,3 +413,5 @@ $lang['Link: %s'] = 'Link: %s';
 $lang['Your authentication key is no longer valid.'] = 'La chiave di autenticazione non è più valida';
 $lang['Invalid username or password!'] = 'Nome utente o password non valida';
 $lang['generate random password'] = 'Rigenerare una nuova password';
+$lang['Related albums'] = 'Album collegati';
+$lang['Password: ********** (no copy by email)'] = 'Password: ********** (nessuna copia via e-mail)';

@@ -28,20 +28,53 @@
 }
 .themeShot img {
   width: 280px;
+  border: 1px solid white;
+  margin: 0 15px;
 }
+
 .themeBox {
   padding:5px 5px 10px 5px;
   background-color: #e5e5e5;
+  display: inline-table;
 }
+
+.themeBoxModusConfig {
+  text-align: center;
+  margin: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: none;
+  padding: 5px 5px 10px 5px;
+  background-color: #e5e5e5;
+  display: inline-table;
+  position: relative;
+  height: 192px;
+}
+
+.themeNameModusConfig {
+  color: black;
+  margin: 5px 0;
+  position: relative;
+}
+
 .themeDefault {
   background-color: #333;
 }
-.themeDefault .themeName {
+.themeDefault .themeNameModusConfig {
   color:#fff;
 }
 .themeDefault a {
   color:#aaa;
 }
+
+.fieldsetModusConfig {
+  border-top: 2px solid #ddd;
+}
+
+.legendModusConfig {
+  padding: 0 10px;
+}
+
 {/html_style}
 
 
@@ -67,12 +100,11 @@ jQuery(document).ready(function() {
       jQuery("input[name=album_thumb_size]").val(ui.value);
     }
   });
-
   jQuery(".themeBoxes a").colorbox({ rel:'group1' });
 
   jQuery("input[name='skin']").change(function() {
-    jQuery("input[name='skin']").parents(".themeBox").removeClass("themeDefault");
-    jQuery(this).parents(".themeBox").addClass("themeDefault");
+    jQuery("input[name='skin']").parents(".themeBoxModusConfig").removeClass("themeDefault");
+    jQuery(this).parents(".themeBoxModusConfig").addClass("themeDefault");
   });
 });
 {/footer_script}
@@ -82,24 +114,24 @@ jQuery(document).ready(function() {
 <form method="post" action="" id="modus-config">
 
 
-<fieldset><legend>{'Skin'|translate}</legend>
-        <div class="themeBoxes font-checkbox">
-        {foreach from=$available_skins item=skin_name key=skin_code}
-          <div class="themeBox {if $skin_code==$SKIN}themeDefault{/if}">
-            <label class="font-checkbox">
-              <div class="themeName">
-                <span class="icon-dot-circled"></span>
-                <input type="radio" name="skin" value="{$skin_code}" {if $skin_code==$SKIN}checked{/if}>
-                {$skin_name}
-              </div>
-              <div class="themeShot">
-                <img src="{$ROOT_URL}themes/modus/skins/{$skin_code}-screenshot.jpg"/>
-              </div>
-            </label>
-            <a href="{$ROOT_URL}themes/modus/skins/{$skin_code}-screenshot.jpg" class="icon-zoom-in" title="{$skin_name}">{'Preview'|translate}</a>
-          </div>
-        {/foreach}
+<fieldset class="fieldsetModusConfig"><legend class="legendModusConfig">{'Skin'|translate}</legend>
+  <div class="themeBoxes font-checkbox">
+  {foreach from=$available_skins item=skin_name key=skin_code}
+    <div class="{if $skin_code==$SKIN}themeDefault{/if} themeBoxModusConfig">
+      <label class="font-checkbox">
+        <div class="themeNameModusConfig">
+          <span class="icon-dot-circled"></span>
+          <input type="radio" name="skin" value="{$skin_code}" {if $skin_code==$SKIN}checked{/if}>
+          {$skin_name}
         </div>
+        <div class="themeShot">
+          <img src="{$ROOT_URL}themes/modus/skins/{$skin_code}-screenshot.jpg"/>
+        </div>
+      </label>
+      <a href="{$ROOT_URL}themes/modus/skins/{$skin_code}-screenshot.jpg" class="icon-zoom-in" title="{$skin_name}">{'Preview'|translate}</a>
+    </div>
+  {/foreach}
+  </div>
 {*
 <select name="skin">
 		{html_options options=$available_skins selected=$SKIN}

@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Polski [PL]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=430
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -436,3 +436,5 @@ $lang['Link: %s'] = 'Link: %s';
 $lang['Invalid username or password!'] = 'Niepoprawna nazwa użytkownika lub hasło!';
 $lang['Your authentication key is no longer valid.'] = 'Twój klucz autoryzacyjny jest już nieważny.';
 $lang['generate random password'] = 'wygeneruj losowe hasło';
+$lang['Password: ********** (no copy by email)'] = 'Hasło: ********** (nie kopiuj emailem)';
+$lang['Related albums'] = 'Powiązane albumy';

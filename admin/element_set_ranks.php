@@ -71,7 +71,7 @@ if (isset($_POST['submit']))
   }
   elseif ($image_order_choice=='rank')
   {
-    $image_order = 'rank ASC';
+    $image_order = '`rank` ASC';
   }
   $query = '
 UPDATE '.CATEGORIES_TABLE.' 
@@ -109,7 +109,7 @@ SELECT *
 ;';
 $category = pwg_db_fetch_assoc(pwg_query($query));
 
-if ($category['image_order']=='rank ASC')
+if ($category['image_order']=='rank ASC' or $category['image_order']=='`rank` ASC')
 {
   $image_order_choice = 'rank';
 }

@@ -74,6 +74,10 @@ class plugins
     $file_to_include = PHPWG_PLUGINS_PATH . $plugin_id . '/maintain';
     $classname = $plugin_id.'_maintain';
 
+    // piwigo-videojs and piwigo-openstreetmap unfortunately have a "-" in their folder
+    // name (=plugin_id) and a class name can't have a "-". So we have to replace with a "_"
+    $classname = str_replace('-', '_', $classname);
+
     // 2.7 pattern (OO only)
     if (file_exists($file_to_include.'.class.php'))
     {
@@ -238,7 +242,7 @@ DELETE FROM '. PLUGINS_TABLE .'
         {
           break;
         }
-
+        include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
         deltree(PHPWG_PLUGINS_PATH . $plugin_id, PHPWG_PLUGINS_PATH . 'trash');
         break;
     }
@@ -285,6 +289,7 @@ DELETE FROM '. PLUGINS_TABLE .'
           'uri'=>'',
           'description'=>'',
           'author'=>'',
+          'hasSettings'=>false,
         );
       $plg_data = file_get_contents($path.'/main.inc.php', null, null, 0, 2048);
 
@@ -315,6 +320,22 @@ DELETE FROM '. PLUGINS_TABLE .'
       if (preg_match("|Author URI:\\s*(https?:\\/\\/.+)|", $plg_data, $val))
       {
         $plugin['author uri'] = trim($val[1]);
+      }
+      if (preg_match("/Has Settings:\\s*([Tt]rue|[Ww]ebmaster)/", $plg_data, $val))
+      {
+        if (strtolower($val[1]) == 'webmaster')
+        {
+          global $user;
+
+          if ('webmaster' == $user['status'])
+          {
+            $plugin['hasSettings'] = true;
+          }
+        }
+        else
+        {
+          $plugin['hasSettings'] = true;
+        }
       }
       if (!empty($plugin['uri']) and strpos($plugin['uri'] , 'extension_view.php?eid='))
       {

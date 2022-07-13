@@ -1,7 +1,7 @@
 <?php
 /*
 Theme Name: Sylvia
-Version: 2.9.5
+Version: 2.9.6
 Description: Dark background, flora and pink decorations.
 Theme URI: http://piwigo.org/ext/extension_view.php?eid=368
 Author: Piwigo team
@@ -21,7 +21,7 @@ function Sylvia_album($tpl_thumbnails_var)
     $template->set_prefilter('index_category_thumbnails', 'Sylvia_album_prefilter');
     return $tpl_thumbnails_var;
 }
-function Sylvia_album_prefilter($content, &$smarty)
+function Sylvia_album_prefilter($content)
 {
   $search = '#\{html_style\}#';
   $replacement = '{html_style}

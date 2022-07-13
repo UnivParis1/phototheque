@@ -132,8 +132,9 @@ INPUT[type="submit"]:hover{
   box-shadow: 5px 5px 10px black;
 }
 
-#mbCategories dd ul li span:nth-child(even){
+.badge{
   background-color: #7682A6;
+  border-radius:20px;
   color:black;
 }
 
@@ -419,4 +420,14 @@ ul.token-input-list li input{
     color: white;
     box-shadow: 5px 5px 10px black;
   }
-  
+}
+
+.thumbnailCategory {
+  background-color: #EBEBF2;
+  color:#1E3259;
+}
+
+.thumbnailCategory h3 a{
+  color:#1E3259;
+}
+

@@ -121,7 +121,7 @@
                             <i class="fas fa-th fa-fw"></i><span class="d-lg-none ml-2">{'Grid view'|@translate}</span>
                         </a>
                     </li>
-                    <li id="btn-list" class="nav-item{if $smarty.cookies.view == 'list'} active{/if}">
+                    <li id="btn-list" class="nav-item{if !empty($smarty.cookies.view) && $smarty.cookies.view == 'list'} active{/if}">
                         <a class="nav-link" href="javascript:;" title="{'List view'|@translate}">
                             <i class="fas fa-th-list fa-fw"></i><span class="d-lg-none ml-2">{'List view'|@translate}</span>
                         </a>
@@ -163,7 +163,7 @@
 {/if}
     </div>
 {/if}
-    <div id="content" class="{if $smarty.cookies.view == 'list'}content-list{else}content-grid{/if}{if empty($CONTENT_DESCRIPTION)} pt-3{/if}">
+    <div id="content" class="{if !empty($smarty.cookies.view) && $smarty.cookies.view == 'list'}content-list{else}content-grid{/if}{if empty($CONTENT_DESCRIPTION)} pt-3{/if}">
 {if !empty($CONTENT)}
     <!-- Start of content -->
     {$CONTENT}
@@ -220,7 +220,7 @@ $(document).ready(function() {
 {assign var=derivative_medium value=$pwg->derivative($derivative_params_medium, $thumbnail.src_image)}
 {assign var=derivative_large value=$pwg->derivative($derivative_params_large, $thumbnail.src_image)}
 {assign var=derivative_xxlarge value=$pwg->derivative($derivative_params_xxlarge, $thumbnail.src_image)}
-            <a href="{$thumbnail.URL}" data-index="{$idx}" data-name="{$thumbnail.NAME}" data-description="{$thumbnail.DESCRIPTION}" data-src-medium="{$derivative_medium->get_url()}" data-size-medium="{$derivative_medium->get_size_hr()}" data-src-large="{$derivative_large->get_url()}" data-size-large="{$derivative_large->get_size_hr()}" data-src-xlarge="{$derivative_xxlarge->get_url()}" data-size-xlarge="{$derivative_xxlarge->get_size_hr()}"{if preg_match("/(mp4|m4v)$/", $thumbnail.PATH)} data-src-original="{$U_HOME}{$thumbnail.PATH}" data-size-original="{$thumbnail.SIZE}" data-video="true"{else}{if $theme_config->photoswipe_metadata} data-exif-make="{$thumbnail.EXIF.make}" data-exif-model="{$thumbnail.EXIF.model}" data-exif-lens="{$thumbnail.EXIF.lens}" data-exif-iso="{$thumbnail.EXIF.iso}" data-exif-apperture="{$thumbnail.EXIF.apperture}" data-exif-shutter-speed="{$thumbnail.EXIF.shutter_speed}" data-exif-focal-length="{$thumbnail.EXIF.focal_length}" data-date-created="{$thumbnail.DATE_CREATED}"{/if}{/if}></a>
+            <a href="{$thumbnail.URL}" data-index="{$idx}" data-name="{$thumbnail.NAME}" data-description="{$thumbnail.DESCRIPTION}" data-src-medium="{$derivative_medium->get_url()}" data-size-medium="{$derivative_medium->get_size_hr()}" data-src-large="{$derivative_large->get_url()}" data-size-large="{$derivative_large->get_size_hr()}" data-src-xlarge="{$derivative_xxlarge->get_url()}" data-size-xlarge="{$derivative_xxlarge->get_size_hr()}"{if preg_match("/(mp4|m4v)$/", $thumbnail.PATH)} data-src-original="{$U_HOME}{$thumbnail.PATH}" data-size-original="{$thumbnail.SIZE}" data-video="true"{else}{/if}></a>
 {assign var=idx value=$idx+1}
 {/foreach}
 {include file='_photoswipe_js.tpl' selector='#photoSwipeData'}
@@ -249,6 +249,13 @@ function setupPhotoSwipe() {
          });
       }
    });
+
+   if (window.location.hash) {
+        const pidMatch = /(#|&)pid=(\d+)(&|$)/.exec(window.location.hash);
+        if (pidMatch) {
+            startPhotoSwipe(parseInt(pidMatch[2]) - 1);
+        }
+   }
 }
 
 {if $theme_config->thumbnail_linkto == 'photoswipe' || ($theme_config->thumbnail_linkto == 'photoswipe_mobile_only' && get_device() != 'desktop')}

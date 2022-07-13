@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Türkçe [TR]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=436
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -414,3 +414,7 @@ $lang['Link: %s'] = 'Bağlantı: %s';
 $lang['Your authentication key is no longer valid.'] = 'Kimlik doğrulama anahtarınız artık geçerli değil.';
 $lang['Invalid username or password!'] = 'Geçersiz kullanıcı adı veya şifre!';
 $lang['generate random password'] = 'rastgele şifre oluştur';
+$lang['Password: ********** (no copy by email)'] = 'Şifre: ********** (not edin, eposta ile kopyası gönderilmiyor)';
+$lang['Related albums'] = 'İlgili albümler';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Albüm adı, 1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Albüm adı, 100 &rarr; 10 &rarr; 5 &rarr; 1';

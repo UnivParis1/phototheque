@@ -29,7 +29,7 @@ class ThemeController {
         add_event_handler('loc_begin_page_header', array($this, 'checkIfHomepage'));
         add_event_handler('loc_after_page_header', array($this, 'stripBreadcrumbs'));
         add_event_handler('format_exif_data', array($this, 'exifReplacements'));
-        add_event_handler('loc_end_picture', array($this, 'registerPictureTemplates'));
+        add_event_handler('loc_end_picture', array($this, 'registerPictureTemplates'), 1000);
         add_event_handler('loc_begin_index_thumbnails', array($this, 'returnPageStart'));
 
         if ($this->config->slick_enabled === true || $this->config->photoswipe === true) {
@@ -79,7 +79,7 @@ class ThemeController {
     public function checkIfHomepage() {
         global $template, $page;
 
-        if (isset($page['is_homepage'])) {
+        if (isset($page['is_homepage']) and $page['is_homepage']) {
             $template->assign('is_homepage', true);
         } else {
             $template->assign('is_homepage', false);
@@ -132,6 +132,8 @@ class ThemeController {
         global $template;
 
         $template->set_filenames(array('picture_nav'=>'picture_nav.tpl'));
+        $template->parse_picture_buttons();
+        $template->parse_index_buttons();
         $template->assign_var_from_handle('PICTURE_NAV', 'picture_nav');
     }
 
@@ -168,15 +170,28 @@ class ThemeController {
     {
         global $template, $conf, $user, $page;
 
-        include_once(PHPWG_ROOT_PATH.'/include/functions_metadata.inc.php');
-
         if (!$page['items'] || ($page['section'] == 'categories' && !isset($page['category']) && !isset($page['chronology_field']) && !isset($page['flat']))) {
-            return;
+          return;
+        }
+
+        if (count($page['items']) > 1000)
+        {
+          $this->config->slick_enabled = false; 
+          $this->config->photoswipe = false; 
+
+          return;
         }
 
         // select all pictures for this category
         $query = '
-            SELECT *
+            SELECT 
+              id,
+              file,
+              width,
+              height,
+              date_creation,
+              path,
+              rotation
             FROM '.IMAGES_TABLE.'
             WHERE id IN ('.implode(',', $page['items']).')
             ORDER BY FIELD(id, '.implode(',', $page['items']).')
@@ -193,23 +208,6 @@ class ThemeController {
         $tpl_thumbnails_var = array();
 
         $theme_config = $template->get_template_vars('theme_config');
-
-        if ($theme_config->photoswipe_metadata) {
-            if (array_key_exists('bootstrap_darkroom_ps_exif_mapping', $conf)) {
-                $exif_mapping = $conf['bootstrap_darkroom_ps_exif_mapping'];
-            } else {
-                $exif_mapping = array(
-                                      'date_creation' => 'DateTimeOriginal',
-                                      'make'          => 'Make',
-                                      'model'         => 'Model',
-                                      'lens'          => 'UndefinedTag:0xA434',
-                                      'shutter_speed' => 'ExposureTime',
-                                      'iso'           => 'ISOSpeedRatings',
-                                      'apperture'     => 'FNumber',
-                                      'focal_length'  => 'FocalLength',
-                                     );
-            }
-        }
 
         foreach ($pictures as $row)
         {
@@ -233,22 +231,9 @@ class ThemeController {
                 'SIZE' => $row['width'].'x'.$row['height'],
                 'PATH' => $row['path'],
                 'DATE_CREATED' => $row['date_creation'],
+                'file_ext' => strtolower(get_extension($row['file'])),
+                'path_ext' => strtolower(get_extension($row['path'])),
             ));
-
-            if ($theme_config->photoswipe_metadata) {
-                $tpl_var = array_merge($tpl_var, array (
-                    'EXIF' => get_exif_data($row['path'], $exif_mapping),
-                ));
-
-                //optional replacements
-                if (array_key_exists('bootstrap_darkroom_ps_exif_replacements', $conf)) {
-                    foreach ($conf['bootstrap_darkroom_ps_exif_replacements'] as $tag => $replacement) {
-                        if (array_key_exists($tag, $tpl_var['EXIF'])) {
-                            $tpl_var['EXIF'][$tag] = str_replace($replacement[0], $replacement[1], $tpl_var['EXIF'][$tag]);
-                        }
-                    }
-                }
-            }
 
             $tpl_thumbnails_var[] = $tpl_var;
         }

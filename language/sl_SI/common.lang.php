@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Slovenšcina [SI]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=453
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -412,3 +412,7 @@ $lang['Photo title'] = 'Ime slike';
 $lang['Your authentication key is no longer valid.'] = 'Vaš avtorizacijski ključ ni več veljaven.';
 $lang['Invalid username or password!'] = 'Napačno uporabniško ime ali geslo!';
 $lang['generate random password'] = 'generiraj naključno geslo';
+$lang['Password: ********** (no copy by email)'] = 'Geslo: ********** (brez kopije po e-pošti)';
+$lang['Related albums'] = 'Sorodni albumi';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Ime albuma, 1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Ime albuma, 100 &rarr; 10 &rarr; 5 &rarr; 1';

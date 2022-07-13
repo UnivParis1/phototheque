@@ -172,7 +172,7 @@ li, #mbCategories UL{
   padding-left:0;
 }
 
-#mbCategories dd ul li span:nth-child(even){
+.badge{
   background-color: #FF2F63;
   border-radius: 20px;
   color: white;
@@ -578,4 +578,8 @@ ul.token-input-list li input{
   #theTagsPage A .pwg-icon, #theTagsPage A:hover .pwg-icon{
     color:#FF2F63;
   }
+}
+
+.thumbnailCategory {
+  background-color:#f2f2f2;
 }

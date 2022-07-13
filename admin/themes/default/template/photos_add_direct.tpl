@@ -134,6 +134,7 @@ jQuery(document).ready(function(){
       QueueChanged : function(up) {
         jQuery('#addFiles').addClass("addFilesButtonChanged");
         jQuery('#startUpload').prop('disabled', up.files.length == 0);
+        jQuery("#addFiles").removeClass('buttonGradient').addClass('buttonLike');
 
         if (up.files.length > 0) {
           jQuery('.plupload_filelist_footer').show();
@@ -142,6 +143,7 @@ jQuery(document).ready(function(){
 
         if (up.files.length == 0) {
           jQuery('#addFiles').removeClass("addFilesButtonChanged");
+          jQuery("#addFiles").removeClass('buttonLike').addClass('buttonGradient');
           jQuery('.plupload_filelist_footer').hide();
           jQuery('.plupload_filelist').css("overflow-y", "hidden");
         }
@@ -220,6 +222,16 @@ jQuery(document).ready(function(){
         
         Piecon.reset();
 
+        jQuery.ajax({
+          url: "ws.php?format=json&method=pwg.images.uploadCompleted",
+          type:"POST",
+          data: {
+            pwg_token: pwg_token,
+            image_id: uploadedPhotos.join(","),
+            category_id: uploadCategory.id,
+          }
+        });
+
         jQuery(".selectAlbum, .selectFiles, #permissions, .showFieldset").hide();
 
         jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length)+'</li></ul>');
@@ -258,7 +270,7 @@ jQuery(document).ready(function(){
     <div class="addAlbumEmpty"{if $NB_ALBUMS > 0} style="display:none;"{/if}>
       <div class="addAlbumEmptyTitle">{'Welcome!'|translate}</div>
       <p class="addAlbumEmptyInfos">{'Piwigo requires an album to add photos.'|translate}</p>
-      <a href="#" data-add-album="category" title="{'Create a first album'|translate}" class="buttonLike">{'Create a first album'|translate}</a>
+      <a href="#" data-add-album="category" class="buttonLike">{'Create a first album'|translate}</a>
     </div>
   </div>
 
@@ -290,14 +302,15 @@ jQuery(document).ready(function(){
 
   <form id="uploadForm" enctype="multipart/form-data" method="post" action="{$form_action}"{if $NB_ALBUMS == 0} style="display:none;"{/if}>
     <fieldset class="selectAlbum">
-      <legend>{'Drop into album'|@translate}</legend>
+      <legend><span class="icon-folder-open icon-red"></span>{'Drop into album'|@translate}</legend>
       <div class="selectedAlbum"{if !isset($ADD_TO_ALBUM)} style="display: none"{/if}><span class="icon-sitemap">{$ADD_TO_ALBUM}</span></div>
       <div class="selectAlbumBlock"{if isset($ADD_TO_ALBUM)} style="display: none"{/if}>
-        <a href="#" data-add-album="category" title="{'create a new album'|@translate}" class="icon-plus"></a>
         <span id="albumSelection">
           <select data-selectize="categories" data-value="{$selected_category|@json_encode|escape:html}"
           data-default="first" name="category" style="width:600px"></select>
         </span>
+        <span class="orChoice">{'... or '|@translate} </span>
+        <a href="#" data-add-album="category" class="orCreateAlbum icon-plus-circled"> {'create a new album'|@translate}</a>
       </div>
     </fieldset>
 {*
@@ -312,9 +325,9 @@ jQuery(document).ready(function(){
     </fieldset>
 *}
     <fieldset class="selectFiles">
-      <legend>{'Select files'|@translate}</legend>
+      <legend><span class="icon-file-image icon-yellow"></span>{'Select files'|@translate}</legend>
       <div class="selectFilesButtonBlock">
-        <button id="addFiles" class="buttonLike">{'Add Photos'|translate}<i class="icon-plus-circled"></i></button>
+        <button id="addFiles" class="buttonGradient">{'Add Photos'|translate}<i class="icon-plus-circled"></i></button>
         <div class="selectFilesinfo">
           {if isset($original_resize_maxheight)}
           <p class="uploadInfo">{'The picture dimensions will be reduced to %dx%d pixels.'|@translate:$original_resize_maxwidth:$original_resize_maxheight}</p>
@@ -334,14 +347,13 @@ jQuery(document).ready(function(){
     </fieldset>
     
     <div id="uploadingActions" style="display:none">
-      <button id="cancelUpload" class="buttonLike icon-cancel-circled">{'Cancel'|translate}</button>
-      
-      <div class="big-progressbar">
+      <div class="big-progressbar" style="max-width:98%;margin-bottom: 10px;">
         <div class="progressbar" style="width:0%"></div>
       </div>
+      <button id="cancelUpload" class="buttonLike icon-cancel-circled">{'Cancel'|translate}</button>
     </div>
 
-    <button id="startUpload" class="buttonLike icon-upload" disabled>{'Start Upload'|translate}</button>
+    <button id="startUpload" class="buttonGradient icon-upload" disabled>{'Start Upload'|translate}</button>
 
   </form>
 

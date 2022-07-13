@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Українська [UA]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=523
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -415,3 +415,7 @@ $lang['Link: %s'] = 'Посилання: %s';
 $lang['Your authentication key is no longer valid.'] = 'Ваш ключ аутентифікації більше не дійсний.';
 $lang['Invalid username or password!'] = 'Недійсне ім\'я користувача чи пароль';
 $lang['generate random password'] = 'Генерувати випадковий пароль';
+$lang['Password: ********** (no copy by email)'] = 'Пароль: ********** (без копії електронною поштою)';
+$lang['Related albums'] = 'Схожі альбоми';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Назва альбому, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Назва альбому, 1 &rarr; 5 &rarr; 10 &rarr; 100';

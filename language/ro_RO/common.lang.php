@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Română [RO]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=433
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -416,3 +416,7 @@ $lang['Your authentication key is no longer valid.'] = '
 Cheia dvs. de autentificare nu mai este valabilă.';
 $lang['generate random password'] = 'generează parolă aleatoare';
 $lang['Invalid username or password!'] = 'Nume de utilizator sau parola incorecte!';
+$lang['Password: ********** (no copy by email)'] = 'Parolă: ********** (fără copie prin e-mail)';
+$lang['Related albums'] = 'Albume conexe';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Numele albumului, 1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Numele albumului, 100 &rarr; 10 &rarr; 5 &rarr; 1';

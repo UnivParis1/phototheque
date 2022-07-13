@@ -128,15 +128,6 @@ function pwg_query($query)
 {
   global $mysqli, $conf, $page, $debug, $t2;
 
-  // starting with MySQL 8, rank becomes a reserved keyword, we need to escape it
-  if (preg_match('/\brank\b/', $query))
-  {
-    // first we unescape what's already escaped (to avoid double escaping)
-    $query = preg_replace('/`rank`/', 'rank', $query);
-    // then we escape the keyword
-    $query = preg_replace('/\brank\b/', '`rank`', $query);
-  }
-
   $start = microtime(true);
   ($result = $mysqli->query($query)) or my_error($query, $conf['die_on_sql_error']);
 
@@ -679,13 +670,13 @@ function do_maintenance_all_tables()
 
 function pwg_db_concat($array)
 {
-  $string = implode($array, ',');
+  $string = implode(',', $array);
   return 'CONCAT('. $string.')';
 }
 
 function pwg_db_concat_ws($array, $separator)
 {
-  $string = implode($array, ',');
+  $string = implode(',', $array);
   return 'CONCAT_WS(\''.$separator.'\','. $string.')';
 }
 

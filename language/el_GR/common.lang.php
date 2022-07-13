@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Ελληνικά [GR]
-Version: 2.10.2
+Version: 12.3.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=508
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -353,8 +353,8 @@ $lang['thumb'] = 'Μικρογραφία';
 $lang['small'] = 'Μικρό';
 $lang['medium'] = 'Ενδιάμεσο';
 $lang['large'] = 'Μεγάλο';
-$lang['xlarge'] = 'Πολύ μεγάλο';
-$lang['xxlarge'] = 'Εξαιρετικά μεγάλο';
+$lang['xlarge'] = 'XL - Πολύ μεγάλο';
+$lang['xxlarge'] = 'XXL - Εξαιρετικά μεγάλο';
 $lang['Original'] = 'Γνήσιοl';
 $lang['Thank you for registering at %s!'] = 'Ευχαριστούμε για την εγγραφή στο %s!';
 $lang['Here are your connection settings'] = 'Οι ρυθυμίσεις σύνδεσης σας';
@@ -414,3 +414,7 @@ $lang['Link: %s'] = 'Σύνδεσμος: %s';
 $lang['Your authentication key is no longer valid.'] = 'Το κλειδί ταυτοποίησης σας δεν είναι πλέον έγκυρο.';
 $lang['generate random password'] = 'δημιουργήστε τυχαίο κωδικό πρόσβασης';
 $lang['Invalid username or password!'] = 'Μη έγκυρο όνομα ή κωδικός!';
+$lang['Related albums'] = 'Σχετικά Λευκώματα';
+$lang['Password: ********** (no copy by email)'] = 'Κωδικός πρόσβασης: ********** (χωρίς αντίγραφο μέσω email)';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Όνομα λευκώματος, 1 &rarr; 5 &​​rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Όνομα άλμπουμ, , 100 &rarr; 10 &rarr; 5 &rarr; 1';

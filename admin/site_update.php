@@ -73,6 +73,18 @@ if (isset($page['no_md5sum_number']))
 }
 
 // +-----------------------------------------------------------------------+
+// | tabs                                                                  |
+// +-----------------------------------------------------------------------+
+
+include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
+$my_base_url = get_root_url().'admin.php?page=';
+
+$tabsheet = new tabsheet();
+$tabsheet->set_id('site_update');
+$tabsheet->select('synchronization');
+$tabsheet->assign();
+
+// +-----------------------------------------------------------------------+
 // | Quick sync                                                            |
 // +-----------------------------------------------------------------------+
 
@@ -93,6 +105,7 @@ if (isset($_GET['quick_sync']))
 $general_failure = true;
 if (isset($_POST['submit']))
 {
+
   if ($site_reader->open())
   {
     $general_failure = false;
@@ -314,7 +327,7 @@ SELECT id_uppercat, MAX(`rank`)+1 AS next_rank
       pwg_activity('album', $category_ids, 'add', array('sync'=>true));
 
       $category_up=implode(',',array_unique($category_up));
-      if ($conf['inheritance_by_default'])
+      if ($conf['inheritance_by_default'] and !empty($category_up))
       {
         $query = '
           SELECT *
@@ -394,13 +407,6 @@ SELECT id_uppercat, MAX(`rank`)+1 AS next_rank
                   'cat_id' => $ids
                   );
               }
-            }
-            foreach (get_admins() as $granted_user)
-            {
-              $insert_granted_users[] = array(
-                'user_id' => $granted_user,
-                'cat_id' => $ids
-                );
             }
           }
         }

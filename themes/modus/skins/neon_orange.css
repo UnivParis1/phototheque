@@ -179,7 +179,7 @@ li, #mbCategories UL{
   padding-left:0;
 }
 
-#mbCategories dd ul li span:nth-child(even){
+.badge{
   background-color: #ff7700;
   border-radius: 20px;
   color: #fff;
@@ -586,4 +586,8 @@ ul.token-input-list li input{
   #theTagsPage A .pwg-icon, #theTagsPage A:hover .pwg-icon{
     color:#ff7700;
   }
+}
+
+.thumbnailCategory {
+  background-color:#f2f2f2;
 }

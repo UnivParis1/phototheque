@@ -164,7 +164,7 @@ INPUT[type="submit"]:hover{
   background-color:white;
 }
 
-#mbCategories dd ul li span:nth-child(even){
+.badge{
   font-weight:600;
   background-color: #BF0D08;
   color:white;
@@ -491,4 +491,8 @@ td .nbEntries{
   #theTagsPage A .pwg-icon, #theTagsPage A:hover .pwg-icon{
     color:black ;
   }
+}
+
+.thumbnailCategory {
+  background-color:#e8e8ea;
 }

@@ -160,7 +160,7 @@ INPUT[type="reset"]:hover{
   color:#0b6aff;
 }
 
-#mbCategories dd ul li span:nth-child(even){
+.badge{
   background-color: #0b6aff;
   border-radius: 20px;
   color:#e8e8ea;
@@ -561,4 +561,8 @@ form.properties a{
   #theTagsPage A .pwg-icon, #theTagsPage A:hover .pwg-icon{
     color:#0b6aff;
   }  
+}
+
+.thumbnailCategory {
+  background-color:#e8e8ea;
 }
