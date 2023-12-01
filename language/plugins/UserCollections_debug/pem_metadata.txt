@@ -1,4 +1,0 @@
-File automatically created from SVN or Git repository.
-
-URL: https://github.com/mistic100/Piwigo-User-Collections 
-Revision: d362774d181a530259071db7a11a0eda1dfd6e2b (Wed May 9 21:49:50 2018 +0200)

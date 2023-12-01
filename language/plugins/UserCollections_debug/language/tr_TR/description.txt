@@ -1,1 +1,0 @@
-Kayıtlı kullanıcılar galeriden resim seçerek gelişmiş favorilere benzer biçimde koleksiyonlara kaydedebilirler.

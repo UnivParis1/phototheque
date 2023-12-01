@@ -1,1 +1,0 @@
-Carga as&iacute;ncrona usando las miniaturas de ajax en la p&aacute;gina de &iacute;ndice, mientras vas bajando por la p&aacute;gina

@@ -1,1 +1,0 @@
-Permite utilizatorilor să descarce seturi de imagini în ZIP-uri. Compatibil cu Colecții Utilizatori.

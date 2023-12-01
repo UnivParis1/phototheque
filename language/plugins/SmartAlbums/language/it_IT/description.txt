@@ -1,1 +1,0 @@
-Create facilmente degli album in modo dinamico con tag, data, ed altre opzioni

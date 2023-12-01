@@ -1,1 +1,0 @@
-Klasser som deles af plugin'er

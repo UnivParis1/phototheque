@@ -1,1 +1,0 @@
-Möjliggör för andvändare att ladda ned bilder som ZIPade paket. Kompatibel med "User Collections".

@@ -1,1 +1,0 @@
-Classes compartilhadas entre plugins

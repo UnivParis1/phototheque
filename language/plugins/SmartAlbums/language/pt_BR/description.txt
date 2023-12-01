@@ -1,1 +1,0 @@
-Facilmente cria  dinamicamente categorias com tags, datas e outros critérios.

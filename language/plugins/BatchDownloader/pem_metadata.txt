@@ -1,4 +1,0 @@
-File automatically created from SVN or Git repository.
-
-URL: https://github.com/mistic100/Piwigo-BatchDownloader 
-Revision: 9fee0c71d00feb929208bdb824efd1fba5a2b80a (Sun Jan 6 17:29:55 2019 +0100)

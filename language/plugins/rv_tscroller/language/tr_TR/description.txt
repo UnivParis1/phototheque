@@ -1,1 +1,0 @@
-Sayfayı aşağı kaydırırken indeks sayfasında ajax pul resimlerini kullanarak async yükler

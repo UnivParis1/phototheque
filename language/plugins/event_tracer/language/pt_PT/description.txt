@@ -1,1 +1,0 @@
-Para os desenvolvedores. Mostra todas as chamadas para trigger_event.

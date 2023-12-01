@@ -1,1 +1,0 @@
-För utvecklare. Visar alla anrop till trigger_event.

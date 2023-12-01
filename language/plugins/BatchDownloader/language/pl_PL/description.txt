@@ -1,1 +1,0 @@
-Pozwala użytkownikom na pobieranie zdjęć w formacie ZIP. Kompatybilne z User Collections.

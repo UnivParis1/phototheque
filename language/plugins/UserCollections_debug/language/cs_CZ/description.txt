@@ -1,1 +1,0 @@
-Registrovaní uživatelé mohou vybrat obrázky z galerie a uložit je do kolekcí jako pokročilé oblíbené.

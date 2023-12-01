@@ -1,1 +1,0 @@
-Sta gebruikers toe om meerdere afbeeldingen tegelijk te downloaden als ZIP. Werkt goed samen met de User Collections plugin.

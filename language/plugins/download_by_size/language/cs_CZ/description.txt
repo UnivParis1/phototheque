@@ -1,1 +1,0 @@
-Uživatelská volba výběru rozměrů fotky před jejím downloadem.

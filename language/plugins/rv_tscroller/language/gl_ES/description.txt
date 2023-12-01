@@ -1,1 +1,0 @@
-Carga a demanda das miniaturas a medida que se baixa pola páxina, empregando AJAX.

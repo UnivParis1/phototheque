@@ -1,1 +1,0 @@
-Kullanıcılara, resim gruplarını ZIP içerisinde indirmesine olanak sağlar. Kullanıcı Koleksiyonları (User Collections) ile uyumludur.

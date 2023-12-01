@@ -1,1 +1,0 @@
-Etiket, tarih ve diğer kriterlere göre kolayca dinamik albüm yaratmanızı sağlar.

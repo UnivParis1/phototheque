@@ -1,1 +1,0 @@
-Permite seleccionar las dimensiones de una foto antes de descargarla.

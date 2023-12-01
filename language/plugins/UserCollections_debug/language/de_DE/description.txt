@@ -1,1 +1,0 @@
-Registrierte Benutzer können Fotos von der Galerie auswählen und diese als Sammlung speichern (wie erweiterte Favoriten).

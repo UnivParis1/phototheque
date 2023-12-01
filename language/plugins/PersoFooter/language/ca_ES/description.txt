@@ -1,1 +1,0 @@
-Permet afegir informació personalitzada al peu de la galeria.

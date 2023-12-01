@@ -1,1 +1,0 @@
-Consente agli utenti di scaricare i set di immagini in un file ZIP. Compatibile con le collezioni dell'utente.

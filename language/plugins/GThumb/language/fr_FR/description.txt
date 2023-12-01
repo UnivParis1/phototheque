@@ -1,1 +1,0 @@
-Affiche les miniatures en patchwork.

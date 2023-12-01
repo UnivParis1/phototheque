@@ -1,1 +1,0 @@
-Crea fácilmente álbumes dinámicos con las etiquetas, fechas y otras restricciones

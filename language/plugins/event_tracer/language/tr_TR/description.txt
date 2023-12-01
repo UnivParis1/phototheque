@@ -1,1 +1,0 @@
-Geliştiriciler içindir. trigger_event çağrılarını görüntüler.

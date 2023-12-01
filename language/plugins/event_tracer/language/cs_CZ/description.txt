@@ -1,1 +1,0 @@
-Pro vývojáře. Zobrazí všechna volání do trigger_event.

@@ -1,1 +1,0 @@
-Display thumbnails as patchwork.

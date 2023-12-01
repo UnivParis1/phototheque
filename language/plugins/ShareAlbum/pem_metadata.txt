@@ -1,4 +1,0 @@
-File automatically created from SVN or Git repository.
-
-URL: https://github.com/petitssuisses/piwigo-ShareAlbum 
-Revision: 79ee4d9ae17a190f9425955a273fa227ddde7e9c (Wed Dec 20 20:34:59 2017 +0100)

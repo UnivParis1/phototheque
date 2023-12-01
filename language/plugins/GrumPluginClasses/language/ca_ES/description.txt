@@ -1,1 +1,0 @@
-Aquest complement en sí no té cap funcionalitat, però si és necessari per a que funcionin correctament altres complements que en depenen directament d'ell.
