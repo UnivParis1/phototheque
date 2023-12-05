@@ -54,6 +54,27 @@ if (isset($page['nb_pending_comments']))
   $page['messages'][] = $message;
 }
 
+// any orphan photo?
+$nb_orphans = $page['nb_orphans']; // already calculated in admin.php
+
+if ($page['nb_photos_total'] >= 100000) // but has not been calculated on a big gallery, so force it now
+{
+  $nb_orphans = count(get_orphans());
+}
+
+if ($nb_orphans > 0)
+{
+  $orphans_url = PHPWG_ROOT_PATH.'admin.php?page=batch_manager&amp;filter=prefilter-no_album';
+
+  $message = '<a href="'.$orphans_url.'"><i class="icon-heart-broken"></i>';
+  $message.= l10n('Orphans').'</a>';
+  $message.= '<span class="adminMenubarCounter">'.$nb_orphans.'</span>';
+
+  $page['warnings'][] = $message;
+}
+
+fs_quick_check();
+
 // +-----------------------------------------------------------------------+
 // |                             template init                             |
 // +-----------------------------------------------------------------------+
@@ -154,7 +175,7 @@ $template->assign(
     'NB_RATES' => $nb_rates,
     'NB_VIEWS' => number_format_human_readable($nb_views),
     'NB_PLUGINS' => count($pwg_loaded_plugins),
-    'STORAGE_USED' => l10n('%sGB', number_format($du_gb, $du_decimals)),
+    'STORAGE_USED' => str_replace(' ', '&nbsp;', l10n('%sGB', number_format($du_gb, $du_decimals))),
     'U_QUICK_SYNC' => PHPWG_ROOT_PATH.'admin.php?page=site_update&amp;site=1&amp;quick_sync=1&amp;pwg_token='.get_pwg_token(),
     'CHECK_FOR_UPDATES' => $conf['dashboard_check_for_updates'],
     )
@@ -172,20 +193,20 @@ SELECT COUNT(*)
   $template->assign('NB_COMMENTS', 0);
 }
 
-if ($nb_photos > 0)
+if ($conf['show_piwigo_latest_news'])
 {
-  $query = '
-SELECT MIN(date_available)
-  FROM '.IMAGES_TABLE.'
-;';
-  list($first_date) = pwg_db_fetch_row(pwg_query($query));
+  $latest_news = get_piwigo_news();
 
-  $template->assign(
-    array(
-      'first_added_date' => format_date($first_date),
-      'first_added_age' => time_since($first_date, 'year', null, false, false),
-      )
+  if (isset($latest_news['id']) and $latest_news['posted_on'] > time()-60*60*24*30)
+  {
+    $page['messages'][] = sprintf(
+      '%s <a href="%s" title="%s" target="_blank"><i class="icon-bell"></i> %s</a>',
+      l10n('Latest Piwigo news'),
+      $latest_news['url'],
+      time_since($latest_news['posted_on'], 'year').' ('.$latest_news['posted'].')',
+      $latest_news['subject']
     );
+  }
 }
 
 trigger_notify('loc_end_intro');
@@ -365,49 +386,51 @@ $template->assign('DAY_LABELS', $day_labels);
 
 $video_format = array('webm','webmv','ogg','ogv','mp4','m4v');
 $data_storage = array();
+$file_extensions_of = array();
 
 //Select files in Image_Table
 $query = '
 SELECT
+  COUNT(*) AS ext_counter,
    SUBSTRING_INDEX(path,".",-1) AS ext,
    SUM(filesize) AS filesize
   FROM `'.IMAGES_TABLE.'`
   GROUP BY ext
 ;';
 
-$file_extensions = query2array($query, 'ext', 'filesize');
+$file_extensions = query2array($query, 'ext');
 
-foreach ($file_extensions as $ext => $size)
+foreach ($file_extensions as $ext => $ext_details)
 {
+  $type = null;
   if (in_array(strtolower($ext), $conf['picture_ext']))
   {
-    if (isset($data_storage['Photos'])) 
-    {
-      $data_storage['Photos'] += $size;
-    } else {
-      $data_storage['Photos'] = $size;
-    }
+    $type = 'Photos';
   }
   elseif (in_array(strtolower($ext), $video_format))
   {
-    if (isset($data_storage['Videos'])) 
-    {
-      $data_storage['Videos'] += $size;
-    } else {
-      $data_storage['Videos'] = $size;
-    }
+    $type = 'Videos';
   }
   else
   {
-    if (isset($data_storage['Other']))
-    {
-      $data_storage['Other'] += $size;
-    }
-    else
-    {
-      $data_storage['Other'] = $size;
-    }
+    $type = 'Other';
   }
+
+  @$file_extensions_of[$type][strtoupper($ext)] = $ext_details['ext_counter'];
+  @$data_storage[$type] += $ext_details['filesize'];
+}
+
+$data_storage_details = array();
+
+foreach ($file_extensions_of as $type => $extensions)
+{
+  $details = array();
+
+  foreach ($extensions as $ext => $counter)
+  {
+    $details[] = $counter.'x'.$ext;
+  }
+  $data_storage_details[$type] = implode(', ', $details);
 }
 
 //Select files from format table
@@ -423,6 +446,19 @@ if (isset($result[0]['SUM(filesize)']))
   $data_storage['Formats'] = $result[0]['SUM(filesize)'];
 }
 
+// Add cache size if requested and known.
+if ($conf['add_cache_to_storage_chart'] && isset($conf['cache_sizes']))
+{
+  $cache_sizes = unserialize($conf['cache_sizes']);
+  if (isset($cache_sizes))
+  {
+    if (isset($cache_sizes[0]) && isset($cache_sizes[0]['value']))
+    {
+      $data_storage['Cache'] = $cache_sizes[0]['value']/1024;
+    }
+  }
+}
+
 //Calculate total storage
 $total_storage = 0;
 foreach ($data_storage as $value) 
@@ -433,6 +469,7 @@ foreach ($data_storage as $value)
 //Pass data to HTML
 $template->assign('STORAGE_TOTAL',$total_storage);
 $template->assign('STORAGE_CHART_DATA',$data_storage);
+$template->assign('STORAGE_DETAILS', json_encode($data_storage_details));
 // +-----------------------------------------------------------------------+
 // |                           sending html code                           |
 // +-----------------------------------------------------------------------+

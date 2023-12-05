@@ -2374,7 +2374,7 @@ function cat_admin_access($category_id)
 
   // $filter['visible_categories'] and $filter['visible_images']
   // are not used because it's not necessary (filter <> restriction)
-  if (in_array($category_id, explode(',', $user['forbidden_categories'])))
+  if (in_array($category_id, @explode(',', $user['forbidden_categories'])))
   {
     return false;
   }
@@ -2699,7 +2699,7 @@ function get_active_menu($menu_page)
 
     case 'album':
     case 'cat_list':
-    case 'cat_move':
+    case 'albums':
     case 'cat_options':
     case 'cat_search':
     case 'permalinks':
@@ -2710,6 +2710,7 @@ function get_active_menu($menu_page)
     case 'group_list':
     case 'group_perm':
     case 'notification_by_mail':
+    case 'user_activity';
       return 2;
 
     case 'site_manager':
@@ -2950,7 +2951,7 @@ function clear_derivative_cache($types='all')
     $type = $types[$i];
     if ($type == IMG_CUSTOM)
     {
-      $type = derivative_to_url($type).'[a-zA-Z0-9]+';
+      $type = derivative_to_url($type).'_[a-zA-Z0-9]+';
     }
     elseif (in_array($type, ImageStdParams::get_all_types()))
     {
@@ -3358,6 +3359,7 @@ function number_format_human_readable($numbers)
 {
   $readable = array("",  "k", "M");
   $index = 0;
+  $numbers = empty($numbers) ? 0 : $numbers;
 
   while ($numbers >= 1000)
   {
@@ -3454,4 +3456,136 @@ function get_cache_size_derivatives($path)
     closedir($contents);
   }
   return $msizes;
+}
+
+/**
+ * Displays a header warning if we find missing photos on a random sample.
+ *
+ * @since 13.4.0
+ */
+function fs_quick_check()
+{
+  global $page, $conf;
+
+  if ($conf['fs_quick_check_period'] == 0)
+  {
+    return;
+  }
+
+  if (isset($page[__FUNCTION__.'_already_called']))
+  {
+    return;
+  }
+
+  $page[__FUNCTION__.'_already_called'] = true;
+  conf_update_param('fs_quick_check_last_check', date('c'));
+
+  $query = '
+SELECT
+    id
+  FROM '.IMAGES_TABLE.'
+  WHERE date_available < \'2022-12-08 00:00:00\'
+    AND path LIKE \'./upload/%\'
+  LIMIT 5000
+;';
+  $issue1827_ids = query2array($query, null, 'id');
+  shuffle($issue1827_ids);
+  $issue1827_ids = array_slice($issue1827_ids, 0, 50);
+
+  $query = '
+SELECT
+    id
+  FROM '.IMAGES_TABLE.'
+  LIMIT 5000
+;';
+  $random_image_ids = query2array($query, null, 'id');
+  shuffle($random_image_ids);
+  $random_image_ids = array_slice($random_image_ids, 0, 50);
+
+  $fs_quick_check_ids = array_unique(array_merge($issue1827_ids, $random_image_ids));
+
+  if (count($fs_quick_check_ids) < 1)
+  {
+    return;
+  }
+
+  $query = '
+SELECT
+    id,
+    path
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN ('.implode(',', $fs_quick_check_ids).')
+;';
+  $fsqc_paths = query2array($query, 'id', 'path');
+
+  foreach ($fsqc_paths as $id => $path)
+  {
+    if (!file_exists($path))
+    {
+      global $template;
+
+      $template->assign(
+        'header_msgs',
+        array(
+          l10n('Some photos are missing from your file system. Details provided by plugin Check Uploads'),
+        )
+      );
+
+      return;
+    }
+  }
+}
+
+/**
+ * Return latest news from piwigo.org.
+ *
+ * @since 13
+ */
+function get_piwigo_news()
+{
+  global $lang_info;
+
+  $news = null;
+
+  $cache_path = PHPWG_ROOT_PATH.conf_get_param('data_location').'cache/piwigo_latest_news-'.$lang_info['code'].'.cache.php';
+  if (!is_file($cache_path) or filemtime($cache_path) < strtotime('24 hours ago'))
+  {
+    $url = PHPWG_URL.'/ws.php?method=porg.news.getLatest&format=json';
+
+    if (fetchRemote($url, $content))
+    {
+      $all_news = array();
+
+      $porg_news_getLatest = json_decode($content, true);
+
+      if (isset($porg_news_getLatest['result']))
+      {
+        $topic = $porg_news_getLatest['result'];
+
+        $news = array(
+          'id' => $topic['topic_id'],
+          'subject' => $topic['subject'],
+          'posted_on' => $topic['posted_on'],
+          'posted' => format_date($topic['posted_on']),
+          'url' => $topic['url'],
+        );
+      }
+
+      if (mkgetdir(dirname($cache_path)))
+      {
+        file_put_contents($cache_path, serialize($news));
+      }
+    }
+    else
+    {
+      return array();
+    }
+  }
+
+  if (is_null($news))
+  {
+    $news = unserialize(file_get_contents($cache_path));
+  }
+
+  return $news;
 }

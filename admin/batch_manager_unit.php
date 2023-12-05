@@ -109,6 +109,7 @@ $template->assign(
     'U_ELEMENTS_PAGE' => $base_url.get_query_string_diff(array('display','start')),
     'F_ACTION' => $base_url.get_query_string_diff(array()),
     'level_options' => get_privacy_level_options(),
+    'ADMIN_PAGE_TITLE' => l10n('Batch Manager'),
     )
   );
 
@@ -212,7 +213,8 @@ SELECT
     {
       $legend.= ' ('.$row['file'].')';
     }
-
+    $extTab = explode('.',$row['path']);
+    
     $template->append(
       'elements', array_merge($row,
       array(
@@ -221,12 +223,13 @@ SELECT
         'FILE_SRC' => DerivativeImage::url(IMG_LARGE, $src_image),
         'LEGEND' => $legend,
         'U_EDIT' => get_root_url().'admin.php?page=photo-'.$row['id'],
-        'NAME' => htmlspecialchars(@$row['name']),
-        'AUTHOR' => htmlspecialchars(@$row['author']),
+        'NAME' => htmlspecialchars(isset($row['name']) ? $row['name'] : ""),
+        'AUTHOR' => htmlspecialchars(isset($row['author']) ? $row['author'] : ""),
         'LEVEL' => !empty($row['level'])?$row['level']:'0',
-        'DESCRIPTION' => htmlspecialchars(@$row['comment']),
+        'DESCRIPTION' => htmlspecialchars(isset($row['comment']) ? $row['comment'] : ""),
         'DATE_CREATION' => $row['date_creation'],
         'TAGS' => $tag_selection,
+        'is_svg' => (strtoupper(end($extTab)) == 'SVG'),
         )
       ));
   }

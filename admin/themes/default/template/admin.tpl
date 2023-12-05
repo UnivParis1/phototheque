@@ -72,8 +72,7 @@ jQuery(document).ready(function() {
 		<dt><i class="icon-sitemap"> </i><span>{'Albums'|@translate}&nbsp;</span><i class="icon-down-open open-menu"></i></dt>
     <dd>
       <ul>
-        <li><a href="{$U_CATEGORIES}"><i class="icon-folder-open"></i>{'Manage'|@translate}</a></li>
-        <li><a href="{$U_CAT_MOVE}"><i class="icon-move"></i>{'Move'|@translate}</a></li>
+        <li><a href="{$U_ALBUMS}"><i class="icon-folder-open"></i>{'Manage'|@translate}</a></li>
         <li><a href="{$U_CAT_OPTIONS}"><i class="icon-pencil"></i>{'Properties'|@translate}</a></li>
       </ul>
     </dd>
@@ -106,7 +105,9 @@ jQuery(document).ready(function() {
           <span class="adminMenubarCounter" title="{'%d waiting for validation'|translate:$NB_PENDING_COMMENTS}">{$NB_PENDING_COMMENTS}</span>
         {/if}</a></li>
 {/if}
+{if isset($U_UPDATES)}
         <li><a href="{$U_UPDATES}"><i class="icon-arrows-cw"></i>{'Updates'|@translate}</a></li>
+{/if}
       </ul>
 		</dd>
   </dl>

@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Deutsch [DE]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=416
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -299,7 +299,7 @@ $lang['Rank'] = 'Rang';
 $lang['group by letters'] = 'Nach Anfangsbuchstaben gruppieren';
 $lang['letters'] = 'Buchstaben';
 $lang['show tag cloud'] = 'Schlagwortwolke anzeigen';
-$lang['cloud'] = 'Wolke';
+$lang['cloud'] = 'Cloud';
 $lang['Reset to default values'] = 'Auf Standardwerte zurücksetzen';
 $lang['delete all photos from your favorites'] = 'Alle Fotos aus Ihren Favoriten entfernen';
 $lang['Sent by'] = 'Gesendet von';
@@ -418,3 +418,4 @@ $lang['Password: ********** (no copy by email)'] = 'Passwort: ********** (keine 
 $lang['Related albums'] = 'Verwandte Alben';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Albumname, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Albumname, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Datum des Beginns';

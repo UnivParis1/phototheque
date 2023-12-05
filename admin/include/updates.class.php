@@ -460,15 +460,20 @@ class updates
 
     if ($check_current_version and !version_compare($upgrade_to, PHPWG_VERSION, '>'))
     {
+      // TODO why redirect to a plugin page? maybe a remaining code from when
+      // the update system was provided as a plugin?
       redirect(get_root_url().'admin.php?page=plugin-'.basename(dirname(__FILE__)));
     }
+
+    $obsolete_list = null;
 
     if ($step == 2)
     {
       $code = get_branch_from_version(PHPWG_VERSION).'.x_to_'.$upgrade_to;
       $dl_code = str_replace(array('.', '_'), '', $code);
       $remove_path = $code;
-      $obsolete_list = 'obsolete.list';
+      // no longer try to delete files on a minor upgrade
+      // $obsolete_list = 'obsolete.list';
     }
     else
     {
@@ -542,9 +547,15 @@ class updates
 
           if (empty($error))
           {
-            self::process_obsolete_list($obsolete_list);
+            if (!empty($obsolete_list))
+            {
+              self::process_obsolete_list($obsolete_list);
+            }
+
             deltree(PHPWG_ROOT_PATH.$conf['data_location'].'update');
             invalidate_user_cache(true);
+            pwg_activity('system', ACTIVITY_SYSTEM_CORE, 'update', array('from_version'=>PHPWG_VERSION, 'to_version'=>$upgrade_to));
+
             if ($step == 2)
             {
               // only delete compiled templates on minor update. Doing this on
@@ -552,9 +563,11 @@ class updates
               // changes. Anyway, a compiled template purge will be performed
               // by upgrade.php
               $template->delete_compiled_templates();
+              conf_delete_param('fs_quick_check_last_check');
 
               $page['infos'][] = l10n('Update Complete');
               $page['infos'][] = $upgrade_to;
+              $page['updated_version'] = $upgrade_to;
               $step = -1;
             }
             else

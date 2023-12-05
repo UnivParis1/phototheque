@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Español [ES]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=169
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -426,3 +426,4 @@ $lang['Password: ********** (no copy by email)'] = 'Contraseña: ********** (sin
 $lang['Related albums'] = 'Álbumes relacionados';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Nombre del album, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Nombre del album, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Fecha de inicio';

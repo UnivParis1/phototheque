@@ -11,6 +11,11 @@ if( !defined("PHPWG_ROOT_PATH") )
   die ("Hacking attempt!");
 }
 
+if (!$conf['enable_core_update'])
+{
+  die('Piwigo core update system is disabled');
+}
+
 include_once(PHPWG_ROOT_PATH.'admin/include/updates.class.php');
 include_once(PHPWG_ROOT_PATH.'admin/include/pclzip.lib.php');
 
@@ -113,7 +118,7 @@ if (!is_webmaster())
 
 $template->assign(array(
   'STEP'          => $step,
-  'PHPWG_VERSION' => PHPWG_VERSION,
+  'PIWIGO_CURRENT_VERSION' => isset($page['updated_version']) ? $page['updated_version'] : PHPWG_VERSION,
   'UPGRADE_TO'    => $upgrade_to,
   )
 );
@@ -138,6 +143,7 @@ if (isset($new_versions['major']))
   );
 }
 
+$template->assign('ADMIN_PAGE_TITLE', l10n('Updates'));
 $template->set_filename('plugin_admin_content', 'updates_pwg.tpl');
 $template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
 

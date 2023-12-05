@@ -57,9 +57,9 @@ p.release .errors {margin:0}
 </div>
 {/if}
 
-<div class="titrePage">
-<h2>{'Updates'|@translate}</h2>
-</div>
+{if isset($PIWIGO_CURRENT_VERSION)}
+<p><i class="icon-info-circled-1"></i> {'Currently running version %s'|translate:$PIWIGO_CURRENT_VERSION}</p>
+{/if}
 
 {if $STEP == 0}
   {if $CHECK_VERSION}

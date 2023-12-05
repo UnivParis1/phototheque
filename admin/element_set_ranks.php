@@ -126,7 +126,7 @@ $navigation = get_cat_display_name_cache(
 
 $template->assign(
   array(
-    'CATEGORIES_NAV' => $navigation,
+    'CATEGORIES_NAV' => preg_replace("# {2,}#"," ",preg_replace("#(\r\n|\n\r|\n|\r)#"," ",$navigation)),
     'F_ACTION' => $base_url.get_query_string_diff(array()),
    )
  );
@@ -203,7 +203,7 @@ $sort_fields = array(
 
 $template->assign('image_order_options', $sort_fields);
 
-$image_order = explode(',', $category['image_order']);
+$image_order = explode(',', isset($category['image_order']) ? $category['image_order'] : "");
 
 for ($i=0; $i<3; $i++) // 3 fields
 {

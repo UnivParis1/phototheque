@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 
 // Default settings
-define('PHPWG_VERSION', '12.3.0');
+define('PHPWG_VERSION', '13.8.0');
 define('PHPWG_DEFAULT_LANGUAGE', 'en_UK');
 
 // this constant is only used in the upgrade process, the true default theme
@@ -30,8 +30,14 @@ define('ACCESS_ADMINISTRATOR', 3);
 define('ACCESS_WEBMASTER', 4);
 define('ACCESS_CLOSED', 5);
 
+// System activities
+define('ACTIVITY_SYSTEM_CORE', 1);
+define('ACTIVITY_SYSTEM_PLUGIN', 2);
+define('ACTIVITY_SYSTEM_THEME', 3);
+
 // Sanity checks
 define('PATTERN_ID', '/^\d+$/');
+define('PATTERN_ORDER', '/^(rand(om)?|[a-z_]+(\s+(asc|desc))?)(\s*,\s*(rand(om)?|[a-z_]+(\s+(asc|desc))?))*$/i');
 
 // Table names
 if (!defined('CATEGORIES_TABLE'))

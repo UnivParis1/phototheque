@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Français [FR]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=421
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -42,7 +42,7 @@ $lang['%d photos'] = '%d photos';
 $lang['%d rates'] = '%d notes';
 $lang['(!) This comment requires validation'] = '(!) Ce commentaire doit être validé';
 $lang['... or browse your empty gallery'] = '... ou naviguez sur votre galerie vide';
-$lang['... or please deactivate this message, I will find my way by myself'] = '... ou désactiver ce message, je me débrouillerai par moi-même';
+$lang['... or please deactivate this message, I will find my way by myself'] = '... ou désactiver ce message SVP, je me débrouillerai par moi-même';
 $lang['A comment on your site'] = 'Un commentaire sur le site';
 $lang['About Piwigo'] = 'À propos de Piwigo';
 $lang['About'] = 'À propos';
@@ -146,7 +146,7 @@ $lang['Email: %s'] = 'Email : %s';
 $lang['Empty query. No criteria has been entered.'] = 'Requête vide. Aucun critère saisi.';
 $lang['End-Date'] = 'Date de fin';
 $lang['Enter your new password below.'] = 'Entrez votre nouveau mot de passe ci-dessous.';
-$lang['Enter your personnal informations'] = 'Entrer vos informations personnelles';
+$lang['Enter your personnal informations'] = 'Saisissez vos informations personnelles';
 $lang['Error sending email'] = 'Erreur à l\'envoi du mail';
 $lang['excluded'] = 'exclus';
 $lang['EXIF Metadata'] = 'Données EXIF';
@@ -341,7 +341,7 @@ $lang['Welcome to your Piwigo photo gallery!'] = 'Bienvenue sur votre galerie ph
 $lang['Welcome'] = 'Bienvenue';
 $lang['wrong date'] = 'date erronée';
 $lang['Yes'] = 'Oui';
-$lang['You are not authorized to access the requested page'] = 'Vous n\'êtes pas autorisé à accéder à la page demandée';
+$lang['You are not authorized to access the requested page'] = 'Vous n\'avez pas l\'autorisation pour accéder à la page demandée';
 $lang['You will receive a link to create a new password via email.'] = 'Par email, vous recevrez un lien à cliquer pour renouveler votre mot de passe.';
 $lang['Your comment has been registered'] = 'Votre commentaire a été enregistré';
 $lang['Your comment has NOT been registered because it did not pass the validation rules'] = 'Votre commentaire n\'a pas été enregistré parce qu\'il ne satisfait aux règles de validation';
@@ -417,4 +417,4 @@ $lang['Related albums'] = 'Albums liés';
 $lang['Password: ********** (no copy by email)'] = 'Mot de passe : ********** (pas de copie par email)';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Nom d\'album, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Nom d\'album, 100 &rarr; 10 &rarr; 5 &rarr; 1';
-
+$lang['Start-Date'] = 'Date de début';

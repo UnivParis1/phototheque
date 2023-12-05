@@ -1,7 +1,7 @@
 <?php
 /*
 Theme Name: Smart Pocket
-Version: 12.3.0
+Version: 13.8.0
 Description: Mobile theme.
 Theme URI: http://piwigo.org/ext/extension_view.php?eid=599
 Author: P@t
@@ -51,14 +51,14 @@ class SPThumbPicker
     $this->height = $height;
   }
   
-  function pick($src_image)
+  function pick($src_image, $height)
   {
     $ok = false;
     foreach($this->candidates as $candidate)
     {
       $deriv = new DerivativeImage($candidate, $src_image);
       $size = $deriv->get_size();
-      if ($size[1]>=$row_height-2)
+      if ($size[1]>=$height-2)
       {
         $ok = true;
         break;
@@ -124,44 +124,6 @@ function sp_end_section_init()
     );
 }
 
-add_event_handler('ws_add_methods', 'sp_add_methods');
-function sp_add_methods($arr)
-{
-  $service = &$arr[0];
-  $service->addMethod(
-    'smartpocket.images.logHistory',
-    'ws_sp_log_history',
-    array(
-      'image_id' => array('type'=>WS_TYPE_ID),
-      'cat_id' => array('type'=>WS_TYPE_ID, 'default'=>null),
-      'section' => array('default'=>null),
-      'tags_string' => array('default'=>null),
-      ),
-    'Log visit in history'
-    );
-}
-
-function ws_sp_log_history($params, &$service)
-{
-  global $logger, $page;
-
-  if (!empty($params['section']) and in_array($params['section'], get_enums(HISTORY_TABLE, 'section')))
-  {
-    $page['section'] = $params['section'];
-  }
-
-  if (!empty($params['cat_id']))
-  {
-    $page['category'] = array('id' => $params['cat_id']);
-  }
-
-  if (!empty($params['tags_string']) and preg_match('/^\d+(,\d+)*$/', $params['tags_string']))
-  {
-    $page['tag_ids'] = explode(',', $params['tags_string']);
-  }
-
-  pwg_log($params['image_id'], 'picture');
-}
 //------------------------------------------------------------- mobile version & theme config
 add_event_handler('init', 'mobile_link');
 

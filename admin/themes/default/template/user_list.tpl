@@ -22,18 +22,32 @@ const title_msg = '{'Are you sure you want to delete the user "%s"?'|@translate|
 const are_you_sure_msg  = '{'Are you sure?'|@translate|@escape:'javascript'}';
 const confirm_msg = '{'Yes, I am sure'|@translate|@escape}';
 const cancel_msg = '{'No, I have changed my mind'|@translate|@escape}';
-const str_and_others_tags = '{'and %s others'|@translate}';
+const str_and_others_tags = '{'and %s others'|@translate|escape:javascript}';
 const missingConfirm = "{'You need to confirm deletion'|translate|escape:javascript}";
 const missingUsername = "{'Please, enter a login'|translate|escape:javascript}";
 const fieldNotEmpty = "{'Name field must not be empty'|@translate|escape:javascript}"
 
-const registered_str = '{"Registered"|@translate}';
-const last_visit_str = '{"Last visit"|@translate}';
-const dates_infos = '{'between %s and %s'|translate}'
-const hide_str = '{'Hide'|@translate}';
-const show_str = '{'Show'|@translate}';
-const user_added_str = '{'User %s added'|@translate}';
-const str_popin_update_btn = '{'Update'|@translate}';
+const registered_str = '{"Registered"|@translate|escape:javascript}';
+const last_visit_str = '{"Last visit"|@translate|escape:javascript}';
+const dates_infos = '{'between %s and %s'|translate|escape:javascript}'
+const hide_str = '{'Hide'|@translate|escape:javascript}';
+const show_str = '{'Show'|@translate|escape:javascript}';
+const user_added_str = '{'User %s added'|@translate|escape:javascript}';
+const str_popin_update_btn = '{'Update'|@translate|escape:javascript}';
+const filtered_users = '{'<b>%d</b> filtered users'|@translate|escape:javascript}';
+const filtered_user = '{'<b>%d</b> filtered user'|@translate|escape:javascript}';
+const history_base_url = "{$U_HISTORY}";
+
+const status_to_str = {
+  'webmaster': "{'user_status_webmaster'|translate}",
+  'admin': "{'user_status_admin'|translate}",
+  'normal': "{'user_status_normal'|translate}",
+  'generic': "{'user_status_generic'|translate}",
+  'guest': "{'user_status_guest'|translate}",
+}
+
+const view_selector = '{$view_selector}';
+const pagination = '{$pagination}';
 
 months = [
   "{'Jan'|@translate}",
@@ -190,19 +204,19 @@ $(document).ready(function() {
     <div class="user-manager-header">
 
       <div class="UserViewSelector">
-        <input type="radio" name="layout" class="switchLayout" id="displayCompact" {if $smarty.cookies.pwg_user_manager_view == 'compact'}checked{/if}/><label for="displayCompact"><span class="icon-th-large firstIcon tiptip" title="{'Compact View'|translate}"></span></label><input type="radio" name="layout" class="switchLayout tiptip" id="displayLine" {if $smarty.cookies.pwg_user_manager_view == 'line' || !$smarty.cookies.pwg_user_manager_view}checked{/if}/><label for="displayLine"><span class="icon-th-list tiptip" title="{'Line View'|translate}"></span></label><input type="radio" name="layout" class="switchLayout" id="displayTile" {if $smarty.cookies.pwg_user_manager_view == 'tile'}checked{/if}/><label for="displayTile"><span class="icon-pause lastIcon tiptip" title="{'Tile View'|translate}"></span></label>
+        <input type="radio" name="layout" class="switchLayout" id="displayCompact" {if $view_selector == 'compact'}checked{/if}/><label for="displayCompact"><span class="icon-th-large firstIcon tiptip" title="{'Compact View'|translate}"></span></label><input type="radio" name="layout" class="switchLayout tiptip" id="displayLine" {if $view_selector == 'line'}checked{/if}/><label for="displayLine"><span class="icon-th-list tiptip" title="{'Line View'|translate}"></span></label><input type="radio" name="layout" class="switchLayout" id="displayTile" {if $view_selector == 'tile'}checked{/if}/><label for="displayTile"><span class="icon-pause lastIcon tiptip" title="{'Tile View'|translate}"></span></label>
       </div>
 
       <div style="display:flex;justify-content:space-between; flex-grow:1;">
         <div style="display:flex; align-items: center;">
-          <div class="not-in-selection-mode user-header-button add-user-button" style="margin: auto; margin-right: 10px">
-            <label class="user-header-button-label icon-plus-circled">
+          <div class="not-in-selection-mode user-header-button add-user-button" style="margin: auto;">
+            <label class="head-button-2 icon-plus-circled">
               <p>{'Add a user'|@translate}</p>
             </label>
           </div>
 
-          <div class="not-in-selection-mode user-header-button" style="margin: auto; margin-right: 10px">
-            <label class="user-header-button-label icon-user-secret edit-guest-user-button">
+          <div class="not-in-selection-mode user-header-button" style="margin: auto;">
+            <label class="head-button-2 icon-user-secret edit-guest-user-button">
               <p>{'Edit guest user'|@translate}</p>
             </label>
           </div>
@@ -228,58 +242,60 @@ $(document).ready(function() {
       <div class="not-in-selection-mode" style="width: 264px; height:2px">
       </div>
     </div>
-    <div id="advanced_filter_button" class="icon-filter">
+    <div class="filtered-users"></div>
+    <div class="advanced-filter-btn icon-filter">
       <span>{'Filters'|@translate}</span>
+      <span class="filter-counter"></span>
     </div>
     <div id='search-user'>
         <div class='search-info'> </div>
           {*This input (#user_search2) is used to bait the chrome autocomplete tool. It is hidden in navigator and is not meant to be seen.*}
-          <input id="user_search2" class='search-input' type='text' placeholder='{'Search'|@translate}'> 
+          <input id="user_search2" class='search-input2' type='text' placeholder='{'Search'|@translate}'> 
           <span class='icon-search search-icon'> </span>
           <span class="icon-cancel search-cancel"></span>
           <input id="user_search" class='search-input' type='text' placeholder='{'Search'|@translate}'>
         </div>
-    <div id="advanced-filter-container">
-      <div class="advanced-filters-header">
+    <div class="advanced-filter">
+      <div class="advanced-filter-header">
         <span class="advanced-filter-title">{'Advanced filters'|@translate}</span>
         <span class="advanced-filter-close icon-cancel"></span>
       </div>
-      <div class="advanced-filters">
-        <div class="advanced-filter-status">
-          <label class="advanced-filter-label">{'Status'|@translate}</label>
-          <div class="advanced-filter-select-container">
+      <div class="advanced-filter-container">
+      <div class="advanced-filter-status advanced-filter-item">
+          <label class="advanced-filter-item-label">{'Status'|@translate}</label>
+          <div class="advanced-filter-select-container advanced-filter-item-container">
             <select class="user-action-select advanced-filter-select" name="filter_status">
               <option value="" label="" selected></option>
               {html_options options=$pref_status_options}
             </select>
           </div>
         </div>
-        <div class="advanced-filter-level">
-          <label class="advanced-filter-label">{'Privacy level'|@translate}</label>
-          <div class="advanced-filter-select-container">
+        <div class="advanced-filter-level advanced-filter-item">
+          <label class="advanced-filter-item-label">{'Privacy level'|@translate}</label>
+          <div class="advanced-filter-select-container advanced-filter-item-container">
             <select class="user-action-select advanced-filter-select" name="filter_level" size="1">
               <option value="" label="" selected></option>
               {html_options options=$level_options}
             </select>
           </div>
         </div>
-        <div class="advanced-filter-group">
-          <label class="advanced-filter-label">{'Group'|@translate}</label>
-          <div class="advanced-filter-select-container">
+        <div class="advanced-filter-group advanced-filter-item">
+          <label class="advanced-filter-item-label">{'Group'|@translate}</label>
+          <div class="advanced-filter-select-container advanced-filter-item-container">
             <select class="user-action-select advanced-filter-select" name="filter_group">
               <option value="" label="" selected></option>
               {html_options options=$association_options}
             </select>
           </div>
         </div>
-        <div class="advanced-filter-date">
+        <div class="advanced-filter-date advanced-filter-item">
           <div class="advanced-filter-date-title" style="display:flex">
-            <span class="advanced-filter-label">{'Registered'|@translate}</span>
+            <span class="advanced-filter-item-label">{'Registered'|@translate}</span>
             <span class='dates-infos'></span>
           </div>
           <div class="dates-select-bar">
-              <div class="select-bar-wrapper">
-                <div class="select-bar-container"></div>
+              <div class="slider-bar-wrapper">
+                <div class="slider-bar-container"></div>
               </div>
             </div>
         </div>
@@ -446,8 +462,8 @@ $(document).ready(function() {
             <div class="user-property-label photos-select-bar">{'Photos per page'|translate}
               <br/>
               <span class="nb-img-page-infos"></span>
-              <div class="select-bar-wrapper">
-                <div class="select-bar-container"></div>
+              <div class="slider-bar-wrapper">
+                <div class="slider-bar-container"></div>
               </div>
               <input name="nb_image_page" />
             </div>
@@ -477,8 +493,8 @@ $(document).ready(function() {
             <div class="user-property-label period-select-bar">{'Recent period'|translate}
               <br />
               <span class="recent_period_infos"></span>
-              <div class="select-bar-wrapper">
-                <div class="select-bar-container"></div>
+              <div class="slider-bar-wrapper">
+                <div class="slider-bar-container"></div>
               </div>
             </div>
           </div>
@@ -535,7 +551,7 @@ $(document).ready(function() {
             <input id="applyAction" class="submit" type="submit" value="{'Apply action'|@translate}" name="submit"> <span id="applyOnDetails"></span></input>
             <span id="applyActionLoading" style="display:none"><img src="themes/default/images/ajax-loader-small.gif"></span>
             <br />
-            <span class="infos icon-ok" style="display:inline-block;display:none;max-width:100%;margin:0;margin-top:30px;min-height:0;border-left: 2px solid #00FF00;">{'Users modified'|translate}</span>
+            <span class="infos icon-ok icon-green" style="display:inline-block;display:none;max-width:100%;margin:0;margin-top:30px;min-height:0;">{'Users modified'|translate}</span>
           </p>
         </div> {* #permitActionUserList *}
       </fieldset>
@@ -635,6 +651,11 @@ $(document).ready(function() {
             <div class="user-property-permissions">
               <p class="user-property-button"> <span class="icon-lock user-edit-icon"> </span><a href="#" >{'Permissions'|@translate}</a></p>
             </div>
+            <div class="user-stats">
+              <div class="user-property-history">
+                <p class="user-property-button"> <span class="icon-signal user-edit-icon"> </span><a href="" >{'Visit history'|@translate}</a></p>
+              </div>
+            </div>
           </div>
           <div class="user-property-register-visit">
             <span class="user-property-register"><!-- Registered date XX/XX/XXXX --></span>
@@ -722,8 +743,8 @@ $(document).ready(function() {
       </div>
       <div class="user-property-label photos-select-bar">{'Photos per page'|translate}
         <span class="nb-img-page-infos"></span>
-        <div class="select-bar-wrapper">
-          <div class="select-bar-container"></div>
+        <div class="slider-bar-wrapper">
+          <div class="slider-bar-container"></div>
         </div>
         <input name="recent_period" />
       </div>
@@ -745,8 +766,8 @@ $(document).ready(function() {
       </div>
       <div class="user-property-label period-select-bar">{'Recent period'|translate}
         <span class="recent_period_infos"></span>
-        <div class="select-bar-wrapper">
-          <div class="select-bar-container"></div>
+        <div class="slider-bar-wrapper">
+          <div class="slider-bar-container"></div>
         </div>
       </div>
       
@@ -880,8 +901,8 @@ $(document).ready(function() {
         </div>
         <div class="user-property-label photos-select-bar">{'Photos per page'|translate}
           <span class="nb-img-page-infos"></span>
-          <div class="select-bar-wrapper">
-            <div class="select-bar-container"></div>
+          <div class="slider-bar-wrapper">
+            <div class="slider-bar-container"></div>
           </div>
           <input name="recent_period" />
         </div>
@@ -903,8 +924,8 @@ $(document).ready(function() {
         </div>
         <div class="user-property-label period-select-bar">{'Recent period'|translate}
           <span class="recent_period_infos"><!-- 7 days --></span>
-          <div class="select-bar-wrapper">
-            <div class="select-bar-container"></div>
+          <div class="slider-bar-wrapper">
+            <div class="slider-bar-container"></div>
           </div>
         </div>
 
@@ -1036,25 +1057,6 @@ $(document).ready(function() {
   padding-bottom:10px;
 }
 
-.user-header-button {
-  position:relative;
-}
-
-.user-header-button-label {
-	position: relative;
-	padding: 10px;
-	box-shadow: 0px 2px #00000024;
-	border-radius: 5px;
-	font-weight: bold;
-	display: flex;
-	align-items: baseline;
-	cursor: pointer;
-}
-
-
-.user-header-button-label p {
-  margin:0;
-}
 
 #AddUserSuccess {
   display:none;
@@ -1064,22 +1066,19 @@ $(document).ready(function() {
   font-weight:bold;
 }
 
-#AddUserSuccess span {
-  color: #0a0;
-}
-
 #AddUserSuccess label {
   padding: 10px;
-  background-color:  #c2f5c2;
-  border-left: 2px solid #00FF00;
   cursor: default;
-  color: #0a0;
 }
 
 #AddUserSuccess .edit-now {
   color: #3a3a3a;
   cursor: pointer;
   margin-left:10px;
+}
+
+.user-header-button {
+  position:relative;
 }
 
 /* filters bar */
@@ -1200,6 +1199,11 @@ $(document).ready(function() {
 .user-container-email {
     width:20%;
     max-width: 220px;
+    margin-right: 20px;
+}
+.user-container-email span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-header-groups,
@@ -1475,43 +1479,8 @@ $(document).ready(function() {
   margin-left: 220px;
 }
 
-.advanced-filter-select-container {
-  position: relative;
-  text-align:left;
-  width:100%;
-}
-
 .user-action-select-container {
   position:relative;
-}
-
-
-.select-bar-wrapper {
-    padding-left:10px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.select-bar-wrapper .select-bar-container {
-  height: 2px;
-}
-
-.select-bar-wrapper .ui-slider-horizontal .ui-slider-handle{
-    background-color:#ffaf58;
-    border: 1px solid #ffaf58;
-    border-radius:25px;
-    top: -.7em !important;
-    width: 1.4em;
-    height: 1.4em;
-}
-
-.select-bar-wrapper .ui-slider-horizontal .ui-slider-range {
-  background-color: #ffaf58;
-}
-
-.select-bar-wrapper .ui-slider-horizontal{
-    border:none;
-    border-radius:25px;
 }
 
 .user-list-checkbox {
@@ -1739,9 +1708,6 @@ $(document).ready(function() {
 .update-user-success {
     padding:10px;
     display:none;
-    background-color:#c2f5c2;
-    color: #0a0;
-    border-left: 2px solid #00FF00;
 }
 
 .update-user-fail {
@@ -1981,22 +1947,13 @@ Advanced filter
   margin-left: 500px;
 }
 
-#advanced_filter_button {
-
-  width: 70px;
-
+.advanced-filter-btn {
   position: absolute;
-  z-index: 2;
   right: 650px;
-
-
-  cursor:pointer;
-  padding:10px;
   margin-right:10px;
-}
-
-#advanced_filter_button.icon-filter::before {
-  transform: scale(1.2);
+  
+  display: flex;
+  justify-content: center;
 }
 
 #search-user {
@@ -2016,7 +1973,7 @@ Advanced filter
   font-size:1em;
 }
 
-.advanced-filters-header {
+.advanced-filter-header {
   display:flex;
   justify-content:space-between;
   margin-bottom:10px;
@@ -2026,18 +1983,7 @@ Advanced filter
   font-weight:bold;
 }
 
-.advanced-filters {
-  display:flex;
-  padding:5px;
-}
-
 .advanced-filter-status, 
-.advanced-filter-level,
-.advanced-filter-group {
-  margin-right: 30px;
-  min-width: 130px;
-}
-
 .advanced-filter-level {
   max-width: 160px;
   width: 16%;
@@ -2064,7 +2010,7 @@ Advanced filter
   flex-direction: row;
 }
 
-.select-bar-wrapper {
+.slider-bar-wrapper {
   margin-top: 12px;
 }
 
@@ -2221,6 +2167,7 @@ Advanced filter
   margin: 10px auto;
   justify-content: center;
   max-height: 40px;
+  width: 190px;
 }
 
 .tileView .user-container-groups {
@@ -2466,5 +2413,48 @@ Advanced filter
 
 .notClickableBefore:before {
   color: #bbb;
+}
+
+.filter-counter {
+  background: #ffa500;
+  border-radius: 50%;
+  justify-content: center;
+
+  font-size: 10px;
+  padding: 1px 6px;
+  color: black;
+
+  margin:0 4px 0 7px;
+  display: none;  
+}
+
+.filtered-users {
+  position: absolute;
+  right: 770px;
+  line-height: 38px;
+}
+
+@media (max-width: 1550px) {
+  #user_search {
+    width: 120px;
+  }
+  .advanced-filter-btn {
+    right: 570px;
+  }
+  .filtered-users {
+    right: 690px;
+  }
+}
+
+@media (max-width: 1465px) {
+  #user_search {
+    width: 70px;
+  }
+  .advanced-filter-btn {
+    right: 520px;
+  }
+  .filtered-users {
+    right: 640px;
+  }
 }
 </style>

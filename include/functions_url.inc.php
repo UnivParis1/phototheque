@@ -33,6 +33,13 @@ function get_root_url()
 function get_absolute_root_url($with_scheme=true)
 {
   // TODO - add HERE the possibility to call PWG functions from external scripts
+
+  // Support X-Forwarded-Proto header for HTTPS detection in PHP
+  if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and 'https' == $_SERVER['HTTP_X_FORWARDED_PROTO'])
+  {
+    $_SERVER['HTTPS'] = 'on';
+  }
+
   $url = '';
   if ($with_scheme)
   {
@@ -686,6 +693,11 @@ function parse_well_known_params_url($tokens, &$i)
       array_shift($chronology_tokens);
       $page['chronology_style'] = $chronology_tokens[0];
 
+      if (!in_array($page['chronology_style'], array('monthly', 'weekly')))
+      {
+        fatal_error('bad chronology field (style)');
+      }
+
       array_shift($chronology_tokens);
       if ( count($chronology_tokens)>0 )
       {
@@ -696,6 +708,15 @@ function parse_well_known_params_url($tokens, &$i)
           array_shift($chronology_tokens);
         }
         $page['chronology_date'] = $chronology_tokens;
+
+        foreach ($page['chronology_date'] as $date_token)
+        {
+          // each date part must be an integer (number of the year, number of the month, number of the week or number of the day)
+          if (!preg_match('/^(\d+|any)$/', $date_token))
+          {
+            fatal_error('bad chronology field (date)');
+          }
+        }
       }
     }
     elseif (preg_match('/^start-(\d+)/', $tokens[$i], $matches))
@@ -878,6 +899,30 @@ function url_is_remote($url)
     return true;
   }
   return false;
+}
+
+/**
+ * List favorite image_ids of the current user.
+ * @since 13
+ */
+function get_user_favorites()
+{
+  global $user;
+
+  if (is_a_guest())
+  {
+    return array();
+  }
+
+  $query = '
+SELECT
+    image_id,
+    1 as fake_value
+  FROM '.FAVORITES_TABLE.'
+  WHERE user_id = '.$user['id'].'
+';
+
+  return query2array($query, 'image_id', 'fake_value');
 }
 
 ?>

@@ -161,7 +161,6 @@ function add_uploaded_file($source_filepath, $original_filename=null, $categorie
   }
 
   $file_path = null;
-  $is_tiff = false;
 
   if (isset($image_id))
   {
@@ -217,11 +216,6 @@ SELECT
     elseif (IMAGETYPE_GIF == $type)
     {
       $file_path.= 'gif';
-    }
-    elseif (IMAGETYPE_TIFF_MM == $type or IMAGETYPE_TIFF_II == $type)
-    {
-      $is_tiff = true;
-      $file_path.= 'tif';
     }
     elseif (IMAGETYPE_JPEG == $type)
     {
@@ -427,6 +421,74 @@ SELECT
   return $image_id;
 }
 
+function add_format($source_filepath, $format_ext, $format_of)
+{
+  // 1) find infos about the extended image
+  //
+  // 2) move uploaded file to upload/2022/05/16/pwg_format/20100122003814-449ada00.cr2
+  //
+  // 3) register in database
+
+  if (!conf_get_param('enable_formats', false))
+  {
+    die('['.__FUNCTION__.'] formats are disabled');
+  }
+
+  if (!in_array($format_ext, conf_get_param('format_ext', array('cr2'))))
+  {
+    die('['.__FUNCTION__.'] unexpected format extension "'.$format_ext.'" (authorized extensions: '.implode(', ', conf_get_param('format_ext', array('cr2'))).')');
+  }
+
+  $query = '
+SELECT
+    path
+  FROM '.IMAGES_TABLE.'
+  WHERE id = '.$format_of.'
+;';
+  $images = query2array($query);
+
+  if (!isset($images[0]))
+  {
+    die('['.__FUNCTION__.'] this photo does not exist in the database');
+  }
+
+  $format_path = dirname($images[0]['path']).'/pwg_format/';
+  $format_path.= get_filename_wo_extension(basename($images[0]['path']));
+  $format_path.= '.'.$format_ext;
+
+  prepare_directory(dirname($format_path));
+
+  if (is_uploaded_file($source_filepath))
+  {
+    move_uploaded_file($source_filepath, $format_path);
+  }
+  else
+  {
+    rename($source_filepath, $format_path);
+  }
+  @chmod($format_path, 0644);
+
+  $file_infos = pwg_image_infos($format_path);
+
+  $insert = array(
+    'image_id' => $format_of,
+    'ext' => $format_ext,
+    'filesize' => $file_infos['filesize'],
+  );
+
+  single_insert(IMAGE_FORMAT_TABLE, $insert);
+  $format_id = pwg_db_insert_id(IMAGE_FORMAT_TABLE);
+
+  pwg_activity('photo', $format_of, 'edit', array('action'=>'add format', 'format_ext'=>$format_ext, 'format_id'=>$format_id));
+
+  $format_infos = $insert;
+  $format_infos['format_id'] = $format_id;
+
+  trigger_notify('loc_end_add_format', $format_infos);
+
+  return $format_id;
+}
+
 add_event_handler('upload_file', 'upload_file_pdf');
 function upload_file_pdf($representative_ext, $file_path)
 {
@@ -571,16 +633,49 @@ function upload_file_video($representative_ext, $file_path)
 
   prepare_directory(dirname($representative_file_path));
 
-  $second = 1;
+  // Get duration of video and determine time of poster
+  exec('ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1'." '$file_path'", $O, $S);
 
+  if (!empty($O[0]))
+  {
+    $second = min(floor($O[0]*10)/10, 2);
+  }
+  else
+  {
+    $second = 0; // Safest position of the poster
+  }
+
+  $logger->info(__FUNCTION__.', Poster at '.$second.'s');
+
+  // Generate poster, see https://trac.ffmpeg.org/wiki/Seeking
   $ffmpeg = $conf['ffmpeg_dir'].'ffmpeg';
-  $ffmpeg.= ' -i "'.$file_path.'"';
-  $ffmpeg.= ' -an -ss '.$second;
-  $ffmpeg.= ' -t 1 -r 1 -y -vcodec mjpeg -f mjpeg';
-  $ffmpeg.= ' "'.$representative_file_path.'"';
+  $ffmpeg.= ' -ss '.$second;  // Fast seeking
+  $ffmpeg.= ' -i "'.$file_path.'"'; // Video file
+  $ffmpeg.= ' -frames:v 1';  // Extract one frame
+  $ffmpeg.= ' "'.$representative_file_path.'"'; // Output file
 
-  @exec($ffmpeg);
+  @exec($ffmpeg.' 2>&1', $FO, $FS);
+  if (!empty($FO[0]))
+  {
+    $logger->debug(__FUNCTION__.', Tried '.$ffmpeg);
+    $logger->debug($FO[0]);
+  }
 
+  // Did we generate the file ?
+  if (!file_exists($representative_file_path))
+  {
+    // Let's try with avconv if ffmpeg unavailable
+    $avconv = str_replace('ffmpeg', 'avconv', $ffmpeg);
+    @exec($avconv.' 2>&1', $AO, $AS);
+
+    if (!empty($AO[0]))
+    {
+      $logger->debug(__FUNCTION__.', Tried '.$avconv);
+      $logger->debug($AO[0]);
+    }
+  }
+
+  // Did we finally generate the file ?
   if (!file_exists($representative_file_path))
   {
     return null;

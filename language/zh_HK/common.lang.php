@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: 中文 (香港) [HK]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=614
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -414,3 +414,8 @@ $lang['Link: %s'] = '連結: %s';
 $lang['Your authentication key is no longer valid.'] = '您的認證密鑰已失效。';
 $lang['generate random password'] = '產生隨機密碼';
 $lang['Invalid username or password!'] = '無效的用戶名或密碼！';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = '相簿名稱，1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = '相簿名稱，100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Password: ********** (no copy by email)'] = '密碼：**********（不複製自電郵）';
+$lang['Start-Date'] = '開始日期';
+$lang['Related albums'] = '相關相簿';

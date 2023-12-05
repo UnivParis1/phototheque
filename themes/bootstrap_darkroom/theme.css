@@ -143,6 +143,8 @@ body {
 #theImage img.path-ext-svg,
 #theImage img.file-ext-svg {
   min-width: 100px;
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .form-control-plaintext {
@@ -1223,18 +1225,14 @@ ul.thumbnailCategories {
   padding-right: 0.5rem;
 }
 
-.container-original-to-resize{
-  text-align: center;
-  position: relative
+#TagsGroupRemoveTag img{
+  display:none;
 }
 
-.container-original-to-resize img.thumb-img{
-  max-height: 100%;
-  width: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  position: absolute;
+#TagsGroupRemoveTag i{
+  transform: rotate(45deg);
+  margin: 5px;
+  font-size: 15px;
 }
 
 /*# sourceMappingURL=theme.css.map */

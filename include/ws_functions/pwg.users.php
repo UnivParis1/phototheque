@@ -29,6 +29,11 @@ function ws_users_getList($params, &$service)
 {
   global $conf;
 
+  if (!preg_match(PATTERN_ORDER, $params['order']))
+  {
+    return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid input parameter order');
+  }
+
   $where_clauses = array('1=1');
 
   if (!empty($params['user_id']))
@@ -761,6 +766,34 @@ SELECT
     'user_id' => $params['user_id'],
     'display' => 'basics,'.implode(',', array_keys($updates_infos)),
     ));
+}
+
+/**
+ * API method
+ * Set a preferences parameter to current user
+ * @since 13
+ * @param mixed[] $params
+ *    @option string param
+ *    @option string|mixed value
+ */
+function ws_users_preferences_set($params, &$service)
+{
+  global $user;
+
+  if (!preg_match('/^[a-zA-Z0-9_-]+$/', $params['param']))
+  {
+    return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid param name #'.$params['param'].'#');
+  }
+
+  $value = stripslashes($params['value']);
+  if ($params['is_json'])
+  {
+    $value = json_decode($value, true);
+  }
+
+  userprefs_update_param($params['param'], $value, true);
+
+  return $user['preferences'];
 }
 
 /**

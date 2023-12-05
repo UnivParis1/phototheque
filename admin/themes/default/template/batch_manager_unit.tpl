@@ -35,8 +35,6 @@ jQuery("a.preview-box").colorbox( {
 }());
 {/footer_script}
 
-<h2>{'Batch Manager'|@translate}</h2>
-
 <form action="{$F_ACTION}" method="POST">
   <div style="margin: 30px 0; display: flex; justify-content: space-between;">
     <div style="margin-left: 22px;">
@@ -58,7 +56,7 @@ jQuery("a.preview-box").colorbox( {
   <legend>{$element.LEGEND}</legend>
 
   <span class="thumb">
-    <a href="{$element.FILE_SRC}" class="preview-box icon-zoom-in" title="{$element.LEGEND|@htmlspecialchars}"><img src="{$element.TN_SRC}" alt=""></a>
+    <a href="{$element.FILE_SRC}" class="preview-box icon-zoom-in" title="{$element.LEGEND|@htmlspecialchars}"><img src="{$element.TN_SRC}" alt="" {if $element.is_svg}style="{if $current.width < 100}min-width: 100px;{/if}{if $current.height < 100} min-height: 100px; {/if}" {/if}></a>
     <a href="{$element.U_EDIT}" class="icon-pencil">{'Edit'|@translate}</a>
   </span>
 

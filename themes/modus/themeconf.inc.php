@@ -1,7 +1,7 @@
 <?php
 /*
 Theme Name: modus
-Version: 12.3.0.1
+Version: 13.8.0
 Description: Responsive, horizontal menu, retina aware, no lost space.
 Theme URI: http://piwigo.org/ext/extension_view.php?eid=728
 Author: rvelices
@@ -208,10 +208,10 @@ function modus_thumbs($x, $smarty)
 		elseif ($csize[1] > $row_height)
 			$csize = $c->get_scaled_size(9999, $row_height);
 		if ($do_over) {?>
-<li style=width:<?=$csize[0]?>px;height:<?=$row_height?>px><a href="<?=$item['URL']?>"<?=$a_style?>><img src="<?=$c->get_url()?>" width=<?=$csize[0]?> height=<?=$csize[1]?> alt="<?=$item['TN_ALT']?>"></a><div class=overDesc><?=$item['NAME']?><?=$new?></div></li>
+<li class="path-ext-<?=$item["path_ext"]?> file-ext-<?=$item["file_ext"]?>" style=width:<?=$csize[0]?>px;height:<?=$row_height?>px><a href="<?=$item['URL']?>"<?=$a_style?>><img src="<?=$c->get_url()?>" width=<?=$csize[0]?> height=<?=$csize[1]?> alt="<?=$item['TN_ALT']?>"></a><div class=overDesc><?=$item['NAME']?><?=$new?></div></li>
 <?php
 		} else {?>
-<li style=width:<?=$csize[0]?>px;height:<?=$row_height?>px><a href="<?=$item['URL']?>"<?=$a_style?>><img src="<?=$c->get_url()?>" width=<?=$csize[0]?> height=<?=$csize[1]?> alt="<?=$item['TN_ALT']?>"></a></li>
+<li class="path-ext-<?=$item["path_ext"]?> file-ext-<?=$item["file_ext"]?>" style=width:<?=$csize[0]?>px;height:<?=$row_height?>px><a href="<?=$item['URL']?>"<?=$a_style?>><img src="<?=$c->get_url()?>" width=<?=$csize[0]?> height=<?=$csize[1]?> alt="<?=$item['TN_ALT']?>"></a></li>
 <?php
 		}
 	}
@@ -276,6 +276,9 @@ function modus_index_category_thumbnails($items)
 	{
 		$src_image = $item['representative']['src_image'];
 		$src_size = $src_image->get_size();
+    
+    $item['path_ext'] = strtolower(get_extension($item['representative']['path']));
+    $item['file_ext'] = strtolower(get_extension($item['representative']['file']));
 
 		$deriv = null;
 		if (isset($alt_params) && $src_size[0]>=$src_size[1])

@@ -62,10 +62,6 @@ $(window).bind("load", function() {
 
 {/literal}{/footer_script}
 
-<div class="titrePage">
-  <h2>{'Installed Themes'|@translate}</h2>
-</div>
-
 <div id="themesContent">
 
 {assign var='field_name' value='null'} {* <!-- 'counter' for fieldset management --> *}
@@ -118,7 +114,7 @@ $(window).bind("load", function() {
       <div class="showInfo-dropdown-content">
         {$theme.DESC|@escape:'html'}
       </div>
-      {if $theme.STATE != "active"}
+      {if $theme.STATE != "active" and $CONF_ENABLE_EXTENSIONS_INSTALL}
         {if $theme.DELETABLE}
             <a class="dropdown-option icon-trash delete-plugin-button delete-theme-button" href="{$delete_baseurl}{$theme.ID}">{'Delete'|@translate}</a>
         {else}

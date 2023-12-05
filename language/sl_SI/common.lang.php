@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Slovenšcina [SI]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=453
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -416,3 +416,4 @@ $lang['Password: ********** (no copy by email)'] = 'Geslo: ********** (brez kopi
 $lang['Related albums'] = 'Sorodni albumi';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Ime albuma, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Ime albuma, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Začetni datum';

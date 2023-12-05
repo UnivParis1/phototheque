@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Íslenska [IS]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=518
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -38,7 +38,7 @@ $lang['At least one listed rule must be satisfied.'] = 'Að minnsta kosti einn f
 $lang['Author'] = 'Höfundur';
 $lang['Close this window'] = 'Loka þessum glugga';
 $lang['Confirm Password'] = 'Staðfesta lykilorð';
-$lang['Connection settings'] = 'Stillingar fyrir tengingu';
+$lang['Connection settings'] = 'Stillingar fyrir innskráningu';
 $lang['Login'] = 'Innskráning';
 $lang['Contact webmaster'] = 'Hafa samband við vefstjóra';
 $lang['Create a new account'] = 'Stofna nýjan aðgang';
@@ -157,7 +157,7 @@ $lang['created after %s (%s)'] = 'búið til eftir %s (%s)';
 $lang['created before %s (%s)'] = 'búið til fyrir %s (%s)';
 $lang['created between %s (%s) and %s (%s)'] = 'búið til milli %s (%s) og %s (%s)';
 $lang['created on %s'] = 'búið til á %s';
-$lang['Customize'] = 'Sérsníða';
+$lang['Customize'] = 'Aðlögun';
 $lang['Your Gallery Customization'] = 'Aðlögun á þínu galleríi';
 $lang['Default'] = 'Sjálfgefið';
 $lang['delete this photo from your favorites'] = 'eyða þessari mynd úr uppáhalds';
@@ -192,10 +192,10 @@ $lang['last %d days'] = 'síðustu %d daga';
 $lang['Last'] = 'Síðasta';
 $lang['Logout'] = 'Útskrá';
 $lang['obligatory'] = 'skylda';
-$lang['display a calendar by creation date'] = 'sýna dagatal hjá dagsetningu sem búið til var á';
+$lang['display a calendar by creation date'] = 'birta dagatal eftir stofnunardagsetningu';
 $lang['display all photos in all sub-albums'] = 'birta allar myndir í öllum undiralbúmum';
 $lang['return to normal view mode'] = 'aftur í venjulegan skjá';
-$lang['display a calendar by posted date'] = 'birta dagatal hjá dagsetningu sem birt var á';
+$lang['display a calendar by posted date'] = 'birta dagatal eftir birtingardagsetningu';
 $lang['Most visited'] = 'Oftast heimsótt';
 $lang['display most visited photos'] = 'birta mest heimsóttar myndir';
 $lang['Unknown identifier'] = 'Óþekkt auðkenni';
@@ -242,7 +242,7 @@ $lang['Empty query. No criteria has been entered.'] = 'Tóm fyrirspurn. Engin vi
 $lang['Search results'] = 'Leitarniðurstöður';
 $lang['Search in sub-albums'] = 'Leita í undiralbúmum';
 $lang['searched words : %s'] = 'orð sem leitað var að :%s';
-$lang['Contact'] = 'Tengiliðir';
+$lang['Contact'] = 'Hafa samband';
 $lang['set as album representative'] = 'setja sem smámynd á albúmi';
 $lang['Show number of comments'] = 'Sýna fjölda umsagna';
 $lang['Show number of hits'] = 'Sýna fjölda niðurstaða';
@@ -316,7 +316,7 @@ $lang['Email address is missing. Please specify an email address.'] = 'Netfang v
 $lang['This author modified following comment:'] = 'Þessi höfundur breytti eftirfarandi umsögn:';
 $lang['This author removed the comment with id %d'] = 'Þessi höfundur fjarlægði umsögnina með auðkenninu %d';
 $lang['html tags are not allowed in login'] = 'html merkingar eru ekki leyfilegar við innskráningu';
-$lang['Desktop'] = 'Skjáborð';
+$lang['Desktop'] = 'Tölvuskjá';
 $lang['Mobile'] = 'Farsíma';
 $lang['Photo title, A &rarr; Z'] = 'Titill myndar, A &rarr; Ö';
 $lang['Photo title, Z &rarr; A'] = 'Titill myndar, Ö &rarr; A';
@@ -417,3 +417,4 @@ $lang['Your password has been reset'] = 'Lykilorðið þitt hefur verið endurst
 $lang['Your username has been successfully changed to : %s'] = 'Notandanafni þínu hefur verið breytt í: %s';
 $lang['Your website URL is invalid'] = 'Vefslóðin að þínu vefsvæði er ógild';
 $lang['generate random password'] = 'útbúa handahófskennt lykilorð';
+$lang['Start-Date'] = 'Upphafsdagur';

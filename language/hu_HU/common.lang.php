@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Magyar [HU]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=423
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -422,3 +422,4 @@ $lang['Password: ********** (no copy by email)'] = 'Jelszó: ********** (nincs e
 $lang['Related albums'] = 'Kapcsolódó albumok';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Album neve, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Album neve, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Kezdő dátum';

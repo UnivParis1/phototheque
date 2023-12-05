@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Català [CA]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=413
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -417,3 +417,4 @@ $lang['Password: ********** (no copy by email)'] = 'Contrasenya: ********** (sen
 $lang['Related albums'] = 'Àlbums relacionats';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Nom de l\'àlbum, 1 &rarr; 5&rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Nom de l\'àlbum, 100 &rarr; 10&rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Data d\'inici';

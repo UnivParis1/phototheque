@@ -106,7 +106,7 @@ if (isset($_POST['submit']))
       $conf['allow_html_descriptions'] ?
         @$_POST['comment'] : strip_tags(@$_POST['comment']),
     );
-     
+
   if ($conf['activate_comments'])
   {
     $data['commentable'] = isset($_POST['commentable'])? 'true':'false';
@@ -201,7 +201,7 @@ $form_action = $admin_album_base_url.'-properties';
 $template->set_filename( 'album_properties', 'cat_modify.tpl');
 
 $base_url = get_root_url().'admin.php?page=';
-$cat_list_url = $base_url.'cat_list';
+$cat_list_url = $base_url.'albums';
 
 $self_url = $cat_list_url;
 if (!empty($category['id_uppercat']))
@@ -211,7 +211,7 @@ if (!empty($category['id_uppercat']))
 
 $template->assign(
   array(
-    'CATEGORIES_NAV'     => $navigation,
+    'CATEGORIES_NAV'     => preg_replace("# {2,}#"," ",preg_replace("#(\r\n|\n\r|\n|\r)#"," ",$navigation)),
     'CAT_ID'             => $category['id'],
     'CAT_NAME'           => @htmlspecialchars($category['name']),
     'CAT_COMMENT'        => @htmlspecialchars($category['comment']),
@@ -226,7 +226,7 @@ $template->assign(
     'U_ADD_PHOTOS_ALBUM' => $base_url.'photos_add&amp;album='.$category['id'],
     'U_CHILDREN' => $cat_list_url.'&amp;parent_id='.$category['id'],
     'U_HELP' => get_root_url().'admin/popuphelp.php?page=cat_modify',
-    'U_MOVE' => $base_url.'cat_move#cat-'.$category['id'],
+    'U_MOVE' => $base_url.'albums&amp;parent_id='.$category['id'].'#cat-'.$category['id'],
 
     'F_ACTION' => $form_action,
     )

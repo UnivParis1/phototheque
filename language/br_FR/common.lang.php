@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Brezhoneg [FR]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=698
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -436,3 +436,4 @@ $lang['Related albums'] = 'Rummadoù stag';
 $lang['Password: ********** (no copy by email)'] = 'Ger-tremen: ********** (eilad ebet kaset dre bostel)';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Anv ar rummad, 100 &rarr; 10 &rarr; 5 &rarr; 1';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Anv ar rummad, 1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Start-Date'] = 'Deiziad deroù';

@@ -14,6 +14,7 @@ let last_user_id = -1;
 let pwg_token = '';
 let selection = [];
 let first_update = true;
+let total_users = 0
 /*----------------
 Escape of pop-in
 ----------------*/
@@ -203,17 +204,13 @@ $( document ).ready(function() {
 
     $("#permitActionUserList select[name=selectAction]").val("-1");
 
-    $("#advanced_filter_button").click(advanced_filter_button_click);
-    $("#advanced-filter-container span.icon-cancel").click(advanced_filter_hide);
+    $(".advanced-filter-btn").click(advanced_filter_button_click);
+    $(".advanced-filter span.icon-cancel").click(advanced_filter_hide);
     $(".advanced-filter-select").change(update_user_list);
     $("#user_search").on("input", update_user_list);
 
 
     /*View manager*/
-
-    if (!$.cookie("pwg_user_manager_view")) {
-        $.cookie("pwg_user_manager_view", "line");
-    }
 
     if ($("#displayCompact").is(":checked")) {
         setDisplayCompact();
@@ -233,9 +230,7 @@ $( document ).ready(function() {
         if ($(".addAlbum").hasClass("input-mode")) {
             $(".addAlbum p").hide();
         }
-        
-        $.cookie("pwg_user_manager_view", "compact");
-
+        set_view_selector('compact');
     });
 
     $("#displayLine").change(function () {
@@ -244,8 +239,7 @@ $( document ).ready(function() {
         if ($(".addAlbum").hasClass("input-mode")) {
             $(".addAlbum p").hide();
         }
-
-        $.cookie("pwg_user_manager_view", "line");
+        set_view_selector('line');
     });
 
     $("#displayTile").change(function () {
@@ -254,36 +248,76 @@ $( document ).ready(function() {
         if ($(".addAlbum").hasClass("input-mode")) {
             $(".addAlbum p").show();
         }
-        
-        $.cookie("pwg_user_manager_view", "tile");
+        set_view_selector('tile');
     });
 
     /* Pagination */
 
-    if ($.cookie("pwg_user_manager_view") === "compact") {
-        if (per_page < 10) {
-            per_page = 10
-            update_pagination_menu();
-            update_user_list();
-        
-            $("#pagination-per-page-5").removeClass("selected-pagination");
-            $("#pagination-per-page-10").addClass("selected-pagination");
-            $("#pagination-per-page-25").removeClass("selected-pagination");
-            $("#pagination-per-page-50").removeClass("selected-pagination");
-        }
-    } else {
+    switch (pagination) {
+      case '5':
         $("#pagination-per-page-5").addClass("selected-pagination");
         $("#pagination-per-page-10").removeClass("selected-pagination");
         $("#pagination-per-page-25").removeClass("selected-pagination");
         $("#pagination-per-page-50").removeClass("selected-pagination");
+        break;
+      case '10':
+        $("#pagination-per-page-5").removeClass("selected-pagination");
+        $("#pagination-per-page-10").addClass("selected-pagination");
+        $("#pagination-per-page-25").removeClass("selected-pagination");
+        $("#pagination-per-page-50").removeClass("selected-pagination");
+      
+        break;
+      case '25':
+        $("#pagination-per-page-5").removeClass("selected-pagination");
+        $("#pagination-per-page-10").removeClass("selected-pagination");
+        $("#pagination-per-page-25").addClass("selected-pagination");
+        $("#pagination-per-page-50").removeClass("selected-pagination");
+      
+        break;
+      case '50':
+        $("#pagination-per-page-5").removeClass("selected-pagination");
+        $("#pagination-per-page-10").removeClass("selected-pagination");
+        $("#pagination-per-page-25").removeClass("selected-pagination");
+        $("#pagination-per-page-50").addClass("selected-pagination");
+        break;
+      default:
+
+        break;
     }
+
+    $("#pagination-per-page-"+pagination).trigger('click');
 
     if (has_group) {
       advanced_filter_button_click();
       $("select[name='filter_group']").val(has_group);
       update_user_list();
     }
+
+    $('.search-cancel').on('click', function () {
+      $('.search-input').val('');
+      $('.search-input').trigger ("input");
+    })
+    
+    $('.search-input').on('input', function() {
+      if ($('.search-input').val() == '') {
+        $('.search-cancel').hide();
+      } else {
+        $('.search-cancel').show();
+      }
+    })
 });
+
+function set_view_selector(view_type) {
+  $.ajax({
+    url: "ws.php?format=json&method=pwg.users.preferences.set",
+    type: "POST",
+    dataType: "JSON",
+    data: {
+      param: 'user-manager-view',
+      value: view_type,
+    }
+  })
+}
 
 function setDisplayTile() {
     $(".user-container-wrapper").removeClass("compactView").removeClass("lineView").addClass("tileView");
@@ -377,7 +411,7 @@ function getRecentPeriodInfoFromIdx(idx) {
 }
 
 /* Photos bar slider */
-jQuery('#UserList .photos-select-bar .select-bar-container').slider({
+jQuery('#UserList .photos-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: nb_image_page_values.length - 1,
@@ -394,7 +428,7 @@ jQuery('#UserList .photos-select-bar .select-bar-container').slider({
 });
 
 
-jQuery('#GuestUserList .photos-select-bar .select-bar-container').slider({
+jQuery('#GuestUserList .photos-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: nb_image_page_values.length - 1,
@@ -411,7 +445,7 @@ jQuery('#GuestUserList .photos-select-bar .select-bar-container').slider({
 });
 
 $('#permitActionUserList .photos-select-bar .nb-img-page-infos').html(getNbImagePageInfoFromIdx(0));
-jQuery('#permitActionUserList .photos-select-bar .select-bar-container').slider({
+jQuery('#permitActionUserList .photos-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: nb_image_page_values.length - 1,
@@ -428,7 +462,7 @@ jQuery('#permitActionUserList .photos-select-bar .select-bar-container').slider(
 });
 
 /* recent_period slider */
-$('#UserList .period-select-bar .select-bar-container').slider({
+$('#UserList .period-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: recent_period_values.length - 1,
@@ -444,7 +478,7 @@ $('#UserList .period-select-bar .select-bar-container').slider({
     }
 });
 
-$('#GuestUserList .period-select-bar .select-bar-container').slider({
+$('#GuestUserList .period-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: recent_period_values.length - 1,
@@ -460,7 +494,7 @@ $('#GuestUserList .period-select-bar .select-bar-container').slider({
     }
 });
 
-$('#permitActionUserList .period-select-bar .select-bar-container').slider({
+$('#permitActionUserList .period-select-bar .slider-bar-container').slider({
     range: "min",
     min: 0,
     max: recent_period_values.length - 1,
@@ -475,7 +509,7 @@ $('#permitActionUserList .period-select-bar .select-bar-container').slider({
         $('#permitActionUserList .period-select-bar input[name=recent_period]').val(recent_period_values[ui.value]).trigger('change');
     }
 });
-$('#permitActionUserList .photos-select-bar .select-bar-container').slider("option", "value", 0);
+$('#permitActionUserList .photos-select-bar .slider-bar-container').slider("option", "value", 0);
 let period_info = getRecentPeriodInfoFromIdx(0);
 $('#permitActionUserList .period-select-bar .recent_period_infos').html(period_info);
 
@@ -510,6 +544,17 @@ $('.pagination-arrow.left').on('click', () => {
 })
 
 $('.pagination-per-page a').on('click',function () {
+
+    jQuery.ajax({
+      url: "ws.php?format=json&method=pwg.users.preferences.set",
+      type: "POST",
+      data: {
+          param: "user-manager-pagination",
+          value: parseInt($(this).html()),
+          is_json: false,
+      }
+  });
+
     per_page = parseInt($(this).html());
     actual_page = 1;
     update_pagination_menu();
@@ -584,23 +629,20 @@ Advanced filter
 ------------------*/
 
 function advanced_filter_button_click() {
-    if ($("#advanced-filter-container").css("display") === "none") {
-        advanced_filter_show(); 
+    if (!$(".advanced-filter").hasClass("advanced-filter-open")) {
+        advanced_filter_show();
     } else { 
-        advanced_filter_hide(); 
+        advanced_filter_hide();
     }
+    // update_user_list();
 }
 
 function advanced_filter_show() {
-    $("#advanced-filter-container").show();
-    $("#advanced_filter_button").addClass("extended-filter-btn");
-    // update_user_list();
+    $(".advanced-filter-btn, .advanced-filter").addClass("advanced-filter-open");
 }
 
 function advanced_filter_hide() {
-    $("#advanced-filter-container").hide();
-    $("#advanced_filter_button").removeClass("extended-filter-btn");
-    // update_user_list();
+    $(".advanced-filter-btn, .advanced-filter").removeClass("advanced-filter-open");
 }
 
 let months = [];
@@ -612,24 +654,24 @@ function getDateStr(date) {
 }
 
 function setupRegisterDates(register_dates) {
-    $('#advanced-filter-container .dates-select-bar .select-bar-container').slider({
+    $('.advanced-filter .dates-select-bar .slider-bar-container').slider({
         range: true,
         min: 0,
         max: register_dates.length - 1,
         values: [0, register_dates.length - 1],
         change: function( event, ui ) {
-            $("#advanced-filter-container .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
+            $(".advanced-filter .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
         },
         slide: function( event, ui ) {
-            $("#advanced-filter-container .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
+            $(".advanced-filter .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
         },
         stop: function( event, ui ) {
-            $("#advanced-filter-container .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
+            $(".advanced-filter .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[ui.values[0]]), getDateStr(register_dates[ui.values[1]])));
             update_user_list();
         }
     });
 
-    $("#advanced-filter-container .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[0]), getDateStr(register_dates[register_dates.length - 1])));
+    $(".advanced-filter .dates-infos").html(sprintf(dates_infos, getDateStr(register_dates[0]), getDateStr(register_dates[register_dates.length - 1])));
             
 }
 /*------------------
@@ -660,7 +702,7 @@ function add_user_close() {
 function add_user_open() {
     $('#AddUser .AddUserInput').val('');
     $("#AddUser").fadeIn();
-    $(".AddUserInput").first().focus();
+    $(".AddUserLabelUsername input").first().focus();
 }
 
 /*------------------
@@ -789,11 +831,11 @@ function selectionMode(isSelection) {
         $(".in-selection-mode").show();
         $(".not-in-selection-mode").hide();
 
-        if ($.cookie("pwg_user_manager_view") === "tile") {
+        if (view_selector === "tile") {
             $(".user-container-email").show();
         }
 
-        if ($.cookie("pwg_user_manager_view") !== "tile" || $.cookie("pwg_user_manager_view") === "line") {
+        if (view_selector === "compact") {
             $(".user-container-email").css({
                 display: "none"
             })
@@ -805,7 +847,7 @@ function selectionMode(isSelection) {
         $(".in-selection-mode").hide();
         $(".not-in-selection-mode").show();
 
-        if ($.cookie("pwg_user_manager_view") === "tile" || $.cookie("pwg_user_manager_view") === "line") {
+        if (view_selector === "tile" || view_selector === "line") {
             $(".user-container-email").css({
                 display: "flex"
             })
@@ -921,7 +963,7 @@ function fill_container_user_info(container, user_index) {
     container.attr('key', user_index);
     container.find(".user-container-username span").html(user.username);
     container.find(".user-container-initials span").html(get_initials(user.username)).addClass(color_icons[user.id % 5]);
-    container.find(".user-container-status span").html(user.status);
+    container.find(".user-container-status span").html(status_to_str[user.status]);
     container.find(".user-container-email span").html(user.email);
     generate_groups(container, user.groups);
     container.find(".user-container-registration-date").html(registration_dates[0]);
@@ -1001,6 +1043,7 @@ function fill_user_edit_summary(user_to_edit, pop_in, isGuest) {
     pop_in.find('.user-property-register').tipTip({content:`${registered_str}<br />${user_to_edit.registration_date_since}`});
     pop_in.find('.user-property-last-visit').html(get_formatted_date(user_to_edit.last_visit));
     pop_in.find('.user-property-last-visit').tipTip({content: `${last_visit_str}<br />${user_to_edit.last_visit_since}`});
+    pop_in.find('.user-property-history a').attr('href', history_base_url + user_to_edit.id);
 }
 
 function fill_user_edit_properties(user_to_edit, pop_in) {
@@ -1029,7 +1072,7 @@ function fill_user_edit_preferences(user_to_edit, pop_in) {
     let slider_key_photos = getSliderKeyFromValue(parseInt(user_to_edit.nb_image_page), nb_image_page_values);
     let slider_key_period = getSliderKeyFromValue(parseInt(user_to_edit.recent_period), recent_period_values);
     
-    pop_in.find('.photos-select-bar .select-bar-container').slider("option", "value", slider_key_photos);
+    pop_in.find('.photos-select-bar .slider-bar-container').slider("option", "value", slider_key_photos);
     pop_in.find('.user-property-theme select option').each(function () {
         if ($(this).val() == user_to_edit.theme) {
             $(this).prop('selected', true);
@@ -1040,7 +1083,7 @@ function fill_user_edit_preferences(user_to_edit, pop_in) {
             $(this).prop('selected', true);
         }
     });
-    pop_in.find('.period-select-bar .select-bar-container').slider("option", "value", slider_key_period);
+    pop_in.find('.period-select-bar .slider-bar-container').slider("option", "value", slider_key_period);
     pop_in.find('.user-list-checkbox[name="expand_all_albums"]').attr('data-selected', user_to_edit.expand == 'true' ? '1' : '0');
     pop_in.find('.user-list-checkbox[name="show_nb_comments"]').attr('data-selected', user_to_edit.show_nb_comments == 'true' ? '1' : '0');
     pop_in.find('.user-list-checkbox[name="show_nb_hits"]').attr('data-selected', user_to_edit.show_nb_hits == 'true' ? '1' : '0');   
@@ -1054,6 +1097,7 @@ function fill_user_edit_update(user_to_edit, pop_in) {
     pop_in.find('.delete-user-button').unbind("click").click(function () {
         $.confirm({
             title: title_msg.replace('%s', user_to_edit.username),
+            content: "",
             buttons: {
                 confirm: {
                     text: confirm_msg,
@@ -1185,8 +1229,8 @@ function fill_ajax_data_from_properties(ajax_data, pop_in) {
 function fill_ajax_data_from_preferences(ajax_data, pop_in) {
     ajax_data['theme'] = pop_in.find('.user-property-theme select').val();
     ajax_data['language'] = pop_in.find('.user-property-lang select').val();
-    ajax_data['nb_image_page'] = nb_image_page_values[pop_in.find('.photos-select-bar .select-bar-container').slider("option", "value")];
-    ajax_data['recent_period'] = recent_period_values[pop_in.find('.period-select-bar .select-bar-container').slider("option", "value")];
+    ajax_data['nb_image_page'] = nb_image_page_values[pop_in.find('.photos-select-bar .slider-bar-container').slider("option", "value")];
+    ajax_data['recent_period'] = recent_period_values[pop_in.find('.period-select-bar .slider-bar-container').slider("option", "value")];
     ajax_data['expand'] = pop_in.find('.user-list-checkbox[name="expand_all_albums"]').attr('data-selected') == '1' ? true : false;
     ajax_data['show_nb_comments'] = pop_in.find('.user-list-checkbox[name="show_nb_comments"]').attr('data-selected') == '1' ? true : false ;
     ajax_data['show_nb_hits'] = pop_in.find('.user-list-checkbox[name="show_nb_hits"]').attr('data-selected') == '1' ? true : false ;
@@ -1237,7 +1281,13 @@ function select_whole_set() {
             order: "id",
             page: actual_page - 1,
             per_page: 0,
-            exclude: [guest_id]
+            exclude: [guest_id],
+            status: $(".advanced-filter-select[name=filter_status]").val(),
+            group_id: $(".advanced-filter-select[name=filter_group]").val(),
+            min_level: $(".advanced-filter-select[name=filter_level]").val(),
+            max_level: $(".advanced-filter-select[name=filter_level]").val(),
+            min_register: register_dates[$(".dates-select-bar .slider-bar-container").slider("option", "values")[0]],
+            max_register: register_dates[$(".dates-select-bar .slider-bar-container").slider("option", "values")[1]],
         },
         beforeSend: function() {
             $("#checkActions .loading").show();
@@ -1358,6 +1408,11 @@ function update_user_info() {
             } else if (data.stat === 'fail') {
                 $("#UserList .update-user-fail").html(data.message);
                 $("#UserList .update-user-fail").fadeIn();
+                $(".update-user-button i").addClass("icon-floppy").removeClass("icon-spin6 animate-spin");
+                $(".update-user-button").removeClass("unclickable");
+                setTimeout(() => {
+                  $("#UserList .update-user-fail").fadeOut();
+                }, 5000);
             }
         }
     });
@@ -1432,7 +1487,7 @@ function update_guest_info() {
 function update_user_list() {
     let update_data = {
         display: "all",
-        order: "id",
+        order: "id DESC", // We want the most recent user first
         page: actual_page - 1,
         per_page: per_page,
         exclude: [guest_id]
@@ -1440,13 +1495,13 @@ function update_user_list() {
     if ($("#user_search").val().length != 0) {
       update_data["filter"] = $("#user_search").val();
     }
-    if ($("#advanced-filter-container").css("display") !== "none") {
+    if ($(".advanced-filter").hasClass('advanced-filter-open')) {
         update_data["status"] = $(".advanced-filter-select[name=filter_status]").val();
         update_data["group_id"] = $(".advanced-filter-select[name=filter_group]").val();
         update_data["min_level"] = $(".advanced-filter-select[name=filter_level]").val();
         update_data["max_level"] = $(".advanced-filter-select[name=filter_level]").val();
-        update_data["min_register"] = register_dates[$(".dates-select-bar .select-bar-container").slider("option", "values")[0]];
-        update_data["max_register"] = register_dates[$(".dates-select-bar .select-bar-container").slider("option", "values")[1]];
+        update_data["min_register"] = register_dates[$(".dates-select-bar .slider-bar-container").slider("option", "values")[0]];
+        update_data["max_register"] = register_dates[$(".dates-select-bar .slider-bar-container").slider("option", "values")[1]];
     }
     jQuery.ajax({
         url: "ws.php?format=json&method=pwg.users.getList",
@@ -1461,8 +1516,8 @@ function update_user_list() {
                 console.log(data.message);
                 return;
             }
+            total_users = data.result.total_count;
             if (first_update) {
-                let total_users = data.result.total_count;
                 $("h1").append(`<span class='badge-number'>${total_users}</span>`);
                 first_update = false;
             }
@@ -1480,6 +1535,15 @@ function update_user_list() {
             set_selected_to_selection();
 
             $(".user-update-spinner").hide();
+
+            let nb_filters = 0;
+            ($(".advanced-filter-select[name=filter_status]").val() != "") ? nb_filters += 1 : false;
+            ($(".advanced-filter-select[name=filter_group]").val() != "") ? nb_filters += 1 : false;
+            ($(".advanced-filter-select[name=filter_level]").val() != "") ? nb_filters += 1 : false;
+            ($(".dates-select-bar .slider-bar-container").slider("option", "values")[0] != 0) ? nb_filters += 1 : false;
+            ($(".dates-select-bar .slider-bar-container").slider("option", "values")[1] != register_dates.length -1) ? nb_filters += 1 : false;
+        
+            show_filter_infos(nb_filters);
         },
         error: (raw_data) => {
             $(".user-update-spinner").hide();
@@ -1557,4 +1621,28 @@ function delete_user(uid) {
             //jQuery('#user'+uid+' .userDelete .loading').hide();
         }
     })
+}
+
+function show_filter_infos(nb_filters) {
+  if ($("#user_search").val().length != 0 || nb_filters != 0) {
+    if (total_users != "1") {
+      $(".filtered-users").html(filtered_users.replace(/%d/g, total_users));
+    } else {
+      $(".filtered-users").html(filtered_user.replace(/%d/g, total_users));
+    }
+  } else {
+    $(".filtered-users").html("");
+  }
+  
+  if (nb_filters != 0) {
+    $(".advanced-filter-btn").css({
+      width: "80px",
+    });
+    $(".filter-counter").html(nb_filters).css('display', 'flex');
+  } else {
+    $(".advanced-filter-btn").css({
+      width: "70px",
+    });
+    $(".filter-counter").css('display', 'none').html(0);
+  }
 }

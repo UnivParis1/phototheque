@@ -536,6 +536,13 @@ function pwg_activity($object, $object_id, $action, $details=array())
     return;
   }
 
+  if (isset($_REQUEST['method']) and 'pwg.plugins.performAction' == $_REQUEST['method'] and $_REQUEST['action'] != $action)
+  {
+    // for example, if you "restore" a plugin, the internal sequence will perform deactivate/uninstall/install/activate.
+    // We only want to keep the last call to pwg_activity with the "restore" action.
+    return;
+  }
+
   $object_ids = $object_id;
   if (!is_array($object_id))
   {
@@ -556,9 +563,17 @@ function pwg_activity($object, $object_id, $action, $details=array())
     }
   }
 
-  if ('user' == $object and 'login' == $action)
+  if ('autoupdate' == $action)
   {
-    $details['agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'unknown';
+    // autoupdate on a plugin can happen anywhere, the "script/method" is not meaningfull
+    unset($details['method']);
+    unset($details['script']);
+  }
+
+  $user_agent = null;
+  if ('user' == $object and 'login' == $action and isset($_SERVER['HTTP_USER_AGENT']))
+  {
+    $user_agent = strip_tags($_SERVER['HTTP_USER_AGENT']);
   }
 
   if ('photo' == $object and 'add' == $action and !isset($details['sync']))
@@ -568,7 +583,6 @@ function pwg_activity($object, $object_id, $action, $details=array())
     {
       $details['added_with'] = 'browser';
     }
-    $details['agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'unknown';
   }
 
   if (in_array($object, array('album', 'photo')) and 'delete' == $action and isset($_GET['page']) and 'site_update' == $_GET['page'])
@@ -585,10 +599,11 @@ function pwg_activity($object, $object_id, $action, $details=array())
   $inserts = array();
   $details_insert = pwg_db_real_escape_string(serialize($details));
   $ip_address = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+  $session_id = !empty(session_id()) ? session_id() : 'none';
 
   foreach ($object_ids as $loop_object_id)
   {
-    $performed_by = $user['id'];
+    $performed_by = $user['id'] ?? 0; // on a plugin autoupdate, $user is not yet loaded
 
     if ('logout' == $action)
     {
@@ -600,9 +615,10 @@ function pwg_activity($object, $object_id, $action, $details=array())
       'object_id' => $loop_object_id,
       'action' => $action,
       'performed_by' => $performed_by,
-      'session_idx' => session_id(),
+      'session_idx' => $session_id,
       'ip_address' => $ip_address,
       'details' => $details_insert,
+      'user_agent' => pwg_db_real_escape_string($user_agent),
     );
   }
 
@@ -2193,7 +2209,7 @@ function url_check_format($url)
     return false;
   }
 
-  return filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED)!==false;
+  return filter_var($url, FILTER_VALIDATE_URL)!==false;
 }
 
 /**

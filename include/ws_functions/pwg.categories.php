@@ -21,6 +21,7 @@ function ws_categories_getImages($params, &$service)
   global $user, $conf;
 
   $images = array();
+  $image_ids = array();
 
   //------------------------------------------------- get the related categories
   $where_clauses = array();
@@ -45,7 +46,9 @@ function ws_categories_getImages($params, &$service)
     );
 
   $query = '
-SELECT id, name, permalink, image_order
+SELECT
+    id,
+    image_order
   FROM '. CATEGORIES_TABLE .'
   WHERE '. implode("\n    AND ", $where_clauses) .'
 ;';
@@ -77,9 +80,10 @@ SELECT id, name, permalink, image_order
       $order_by = $cats[ $params['cat_id'][0] ]['image_order'];
     }
     $order_by = empty($order_by) ? $conf['order_by'] : 'ORDER BY '.$order_by;
+    $favorite_ids = get_user_favorites();
 
     $query = '
-SELECT SQL_CALC_FOUND_ROWS i.*, GROUP_CONCAT(category_id) AS cat_ids
+SELECT SQL_CALC_FOUND_ROWS i.*
   FROM '. IMAGES_TABLE .' i
     INNER JOIN '. IMAGE_CATEGORY_TABLE .' ON i.id=image_id
   WHERE '. implode("\n    AND ", $where_clauses) .'
@@ -92,7 +96,10 @@ SELECT SQL_CALC_FOUND_ROWS i.*, GROUP_CONCAT(category_id) AS cat_ids
 
     while ($row = pwg_db_fetch_assoc($result))
     {
+      $image_ids[] = $row['id'];
+
       $image = array();
+      $image['is_favorite'] = isset($favorite_ids[ $row['id'] ]);
       foreach (array('id', 'width', 'height', 'hit') as $k)
       {
         if (isset($row[$k]))
@@ -106,38 +113,83 @@ SELECT SQL_CALC_FOUND_ROWS i.*, GROUP_CONCAT(category_id) AS cat_ids
       }
       $image = array_merge($image, ws_std_get_urls($row));
 
-      $image_cats = array();
-      foreach (explode(',', $row['cat_ids']) as $cat_id)
-      {
-        $url = make_index_url(
-          array(
-            'category' => $cats[$cat_id],
-            )
-          );
-        $page_url = make_picture_url(
-          array(
-            'category' => $cats[$cat_id],
-            'image_id' => $row['id'],
-            'image_file' => $row['file'],
-            )
-          );
-        $image_cats[] = array(
-          'id' => (int)$cat_id,
-          'url' => $url,
-          'page_url' => $page_url,
-          );
-      }
-
-      $image['categories'] = new PwgNamedArray(
-        $image_cats,
-        'category',
-        array('id', 'url', 'page_url')
-        );
       $images[] = $image;
     }
-  }
 
-  list($total_images) = pwg_db_fetch_row(pwg_query('SELECT FOUND_ROWS()'));
+    list($total_images) = pwg_db_fetch_row(pwg_query('SELECT FOUND_ROWS()'));
+
+    // let's take care of adding the related albums to each photo
+    if (count($image_ids) > 0)
+    {
+      $category_ids = array();
+
+      // find the complete list (given permissions) of albums linked to photos
+      $query = '
+SELECT
+    image_id,
+    category_id
+  FROM '.IMAGE_CATEGORY_TABLE.'
+  WHERE image_id IN ('.implode(',', $image_ids).')
+    AND '.get_sql_condition_FandF(array('forbidden_categories' => 'category_id'), null, true).'
+;';
+      $result = pwg_query($query);
+      while ($row = pwg_db_fetch_assoc($result))
+      {
+        $category_ids[] = $row['category_id'];
+        @$categories_of_image[ $row['image_id'] ][] = $row['category_id'];
+      }
+
+      if (count($category_ids) > 0)
+      {
+        // find details (for URL generation) about each album
+        $query = '
+SELECT
+    id,
+    name,
+    permalink
+  FROM '. CATEGORIES_TABLE .'
+  WHERE id IN ('. implode(',', $category_ids) .')
+;';
+        $details_for_category = query2array($query, 'id');
+      }
+
+      foreach ($images as $idx => $image)
+      {
+        $image_cats = array();
+
+        // it should not be possible at this point, but let's consider a photo can be in no album
+        if (!isset($categories_of_image[ $image['id'] ]))
+        {
+          continue;
+        }
+
+        foreach ($categories_of_image[ $image['id'] ] as $cat_id)
+        {
+          $url = make_index_url(array('category' => $details_for_category[$cat_id]));
+
+          $page_url = make_picture_url(
+            array(
+              'category' => $details_for_category[$cat_id],
+              'image_id' => $image['id'],
+              'image_file' => $image['file'],
+            )
+          );
+
+          $image_cats[] = array(
+            'id' => (int)$cat_id,
+            'url' => $url,
+            'page_url' => $page_url,
+          );
+        }
+
+        $images[$idx]['categories'] = new PwgNamedArray(
+          $image_cats,
+          'category',
+          array('id', 'url', 'page_url')
+        );
+      }
+    }
+  }
 
   return array(
     'paging' => new PwgNamedStruct(
@@ -266,7 +318,7 @@ SELECT
     }
 
     $row['comment'] = strip_tags(
-      trigger_change(
+      (string) trigger_change(
         'render_category_description',
         $row['comment'],
         'ws_categories_getList'
@@ -474,6 +526,14 @@ SELECT id, path, representative_ext
  */
 function ws_categories_getAdminList($params, &$service)
 {
+
+  global $conf;
+
+  if (!isset($params['additional_output'])) {
+    $params['additional_output'] = "";
+  }
+  $params['additional_output'] = array_map('trim', explode(',', $params['additional_output']));
+
   $query = '
 SELECT category_id, COUNT(*) AS counter
   FROM '. IMAGE_CATEGORY_TABLE .'
@@ -481,17 +541,35 @@ SELECT category_id, COUNT(*) AS counter
 ;';
   $nb_images_of = query2array($query, 'category_id', 'counter');
 
+  // pwg_db_real_escape_string
+
   $query = '
-SELECT id, name, comment, uppercats, global_rank, dir, status
-  FROM '. CATEGORIES_TABLE .'
+SELECT SQL_CALC_FOUND_ROWS id, name, comment, uppercats, global_rank, dir, status
+  FROM '. CATEGORIES_TABLE;
+
+  if (isset($params["search"]) and $params['search'] != "") 
+  {
+    $query .= '
+  WHERE name LIKE \'%'.pwg_db_real_escape_string($params["search"]).'%\'
+  LIMIT '.$conf["linked_album_search_limit"];
+  }
+
+  $query .= '
 ;';
   $result = pwg_query($query);
+
+  list($counter) = pwg_db_fetch_row(pwg_query('SELECT FOUND_ROWS()'));
 
   $cats = array();
   while ($row = pwg_db_fetch_assoc($result))
   {
     $id = $row['id'];
     $row['nb_images'] = isset($nb_images_of[$id]) ? $nb_images_of[$id] : 0;
+
+    $cat_display_name = get_cat_display_name_cache(
+      $row['uppercats'],
+      'admin.php?page=album-'
+    );
 
     $row['name'] = strip_tags(
       trigger_change(
@@ -500,12 +578,8 @@ SELECT id, name, comment, uppercats, global_rank, dir, status
         'ws_categories_getAdminList'
         )
       );
-    $row['fullname'] = strip_tags(
-      get_cat_display_name_cache(
-        $row['uppercats'],
-        null
-        )
-      );
+    $row['fullname'] = strip_tags($cat_display_name);
+    isset($row['comment']) ? false : $row['comment'] = "";
     $row['comment'] = strip_tags(
       trigger_change(
         'render_category_description',
@@ -514,7 +588,17 @@ SELECT id, name, comment, uppercats, global_rank, dir, status
         )
       );
 
+    if (in_array('full_name_with_admin_links', $params['additional_output']))
+    {
+      $row["full_name_with_admin_links"] = $cat_display_name;
+    }
+
     $cats[] = $row;
+  }
+
+  $limit_reached = false;
+  if ($counter > $conf["linked_album_search_limit"]) {
+    $limit_reached = true;
   }
 
   usort($cats, 'global_rank_compare');
@@ -522,8 +606,10 @@ SELECT id, name, comment, uppercats, global_rank, dir, status
     'categories' => new PwgNamedArray(
       $cats,
       'category',
-      array('id', 'nb_images', 'name', 'uppercats', 'global_rank', 'status')
-      )
+      array('id', 'nb_images', 'name', 'uppercats', 'global_rank', 'status', 'test')
+    ),
+    'limit' => $conf["linked_album_search_limit"],
+    'limit_reached' => $limit_reached,
     );
 }
 
@@ -542,6 +628,14 @@ function ws_categories_add($params, &$service)
 {
   include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
 
+  global $conf;
+
+  if (!empty($params['position']) and in_array($params['position'], array('first','last')))
+  {
+    //TODO make persistent with user prefs
+    $conf['newcat_default_position'] = $params["position"];
+  }
+
   $options = array();
   if (!empty($params['status']) and in_array($params['status'], array('private','public')))
   {
@@ -553,7 +647,7 @@ function ws_categories_add($params, &$service)
     // TODO do not strip tags if pwg_token is provided (and valid)
     $options['comment'] = strip_tags($params['comment']);
   }
-
+  
   $creation_output = create_virtual_category(
     strip_tags($params['name']), // TODO do not strip tags if pwg_token is provided (and valid)
     $params['parent'],

@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Česky [CZ]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=414
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -23,7 +23,7 @@ $lang_info['zero_plural'] = true;
 
 $lang['%d Kb'] = '%d Kb';
 $lang['%d album updated'] = '%d album aktualizováno';
-$lang['%d albums updated'] = '%d alba aktualizovány';
+$lang['%d albums updated'] = '%d alb aktualizováno';
 $lang['%d comment to validate'] = '%d komentář ke kontrole';
 $lang['%d comments to validate'] = '%d komentářů ke kontrole';
 $lang['%d new comment'] = '%d nový komentář';
@@ -421,3 +421,4 @@ $lang['Related albums'] = 'Související alba';
 $lang['Password: ********** (no copy by email)'] = 'Heslo: ********** (ne zasláno e-mailem)';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Název alba, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Název alba, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Od data';

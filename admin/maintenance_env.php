@@ -229,7 +229,8 @@ DELETE
       }
       else if (version_compare($versions['current'], $versions['latest']) < 0)
       {
-        $page['infos'][] = l10n('A new version of Piwigo is available.');
+        $update_url = PHPWG_ROOT_PATH.'admin.php?page=updates';
+        $page['infos'][] = '<a href="'. $update_url . '">' . l10n('A new version of Piwigo is available.') . '<i class="icon-right"></i></a>';
       }
       else
       {
@@ -342,6 +343,28 @@ else
       'U_MAINT_LOCK_GALLERY' => sprintf($url_format, 'lock_gallery'),
       )
     );
+}
+
+$query = '
+SELECT
+    registration_date
+  FROM '.USER_INFOS_TABLE.'
+  WHERE user_id = 2
+;';
+$users = query2array($query);
+if (count($users) > 0)
+{
+  $installed_on = $users[0]['registration_date'];
+
+  if (!empty($installed_on))
+  {
+    $template->assign(
+      array(
+        'INSTALLED_ON' => format_date($installed_on, array('day', 'month', 'year')),
+        'INSTALLED_SINCE' => time_since($installed_on, 'day'),
+      )
+    );
+  }
 }
 
 // +-----------------------------------------------------------------------+

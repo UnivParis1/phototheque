@@ -646,10 +646,12 @@ SELECT *
 ;';
     $result = pwg_query($query);
     $image_ids = array_flip($image_ids);
+    $favorite_ids = get_user_favorites();
 
     while ($row = pwg_db_fetch_assoc($result))
     {
       $image = array();
+      $image['is_favorite'] = isset($favorite_ids[ $row['id'] ]);
       foreach (array('id', 'width', 'height', 'hit') as $k)
       {
         if (isset($row[$k]))
@@ -1317,6 +1319,28 @@ function ws_images_upload($params, $service)
     return new PwgError(403, 'Invalid security token');
   }
 
+  if (isset($params['format_of']))
+  {
+    $format_ext = null;
+
+    // are formats enabled?
+    if (!$conf['enable_formats'])
+    {
+      return new PwgError(401, 'formats are disabled');
+    }
+
+    // We must check if the extension is in the authorized list.
+    if (preg_match('/\.('.implode('|', $conf['format_ext']).')$/', $params['name'], $matches))
+    {
+      $format_ext = $matches[1];
+    }
+
+    if (empty($format_ext))
+    {
+      return new PwgError(401, 'unexpected format extension of file "'.$params['name'].'" (authorized extensions: '.implode(', ', $conf['format_ext']).')');
+    }
+  }
+
   // usleep(100000);
 
   // if (!isset($_FILES['image']))
@@ -1404,6 +1428,31 @@ function ws_images_upload($params, $service)
     rename("{$filePath}.part", $filePath);
 
     include_once(PHPWG_ROOT_PATH.'admin/include/functions_upload.inc.php');
+
+    if (isset($params['format_of']))
+    {
+      $query='
+SELECT *
+  FROM '.IMAGES_TABLE.'
+  WHERE id = '. $params['format_of'] .'
+;';
+      $images = query2array($query);
+      if (count($images) == 0)
+      {
+        return new PwgError(404, __FUNCTION__.' : image_id not found');
+      }
+
+      $image = $images[0];
+
+      add_format($filePath, $format_ext, $image['id']);
+
+      return array(
+        'image_id' => $image['id'],
+        'src' => DerivativeImage::thumb_url($image),
+        'square_src' => DerivativeImage::url(ImageStdParams::get_by_type(IMG_SQUARE), $image),
+        'name' => $image['name'],
+        );
+    }
 
     $image_id = add_uploaded_file(
       $filePath,
@@ -1754,7 +1803,7 @@ function ws_images_exist($params, $service)
     // search among photos the list of photos already added, based on md5sum list
     $md5sums = preg_split(
       $split_pattern,
-      $params['md5sum_list'],
+      (string) $params['md5sum_list'],
       -1,
       PREG_SPLIT_NO_EMPTY
     );
@@ -1804,6 +1853,197 @@ SELECT id, file
   }
 
   return $result;
+}
+
+/**
+ * API method
+ * Check if an image exists by it's name or md5 sum
+ * 
+ * @since 13
+ * @param mixed[] $params
+ *    @option string category_id (optional)
+ *    @option string filename_list
+ */
+function ws_images_formats_searchImage($params, $service)
+{
+  global $conf, $logger;
+
+  $logger->debug(__FUNCTION__, 'WS', $params);
+
+  $candidates = json_decode(stripslashes($params['filename_list']), true);
+
+  $unique_filenames_db = array();
+
+  $query = '
+SELECT
+    id,
+    file
+  FROM '.IMAGES_TABLE.'
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $filename_wo_ext = get_filename_wo_extension($row['file']);
+    @$unique_filenames_db[ $filename_wo_ext ][] = $row['id'];
+  }
+
+  // we want "long" format extensions first to match "cmyk.jpg" before "jpg" for example
+  usort($conf['format_ext'], function($a, $b) {
+    return strlen($b) - strlen($a);
+  });
+
+  $result = array();
+
+  foreach ($candidates as $format_external_id => $format_filename)
+  {
+    $candidate_filename_wo_ext = null;
+
+    if (preg_match('/^(.*?)\.('.implode('|', $conf['format_ext']).')$/', $format_filename, $matches))
+    {
+      $candidate_filename_wo_ext = $matches[1];
+    }
+
+    if (empty($candidate_filename_wo_ext))
+    {
+      $result[$format_external_id] = array('status' => 'not found');
+      continue;
+    }
+
+    if (isset($unique_filenames_db[$candidate_filename_wo_ext]))
+    {
+      if (count($unique_filenames_db[$candidate_filename_wo_ext]) > 1)
+      {
+        $result[$format_external_id] = array('status' => 'multiple');
+        continue;
+      }
+
+      $result[$format_external_id] = array('status' => 'found', 'image_id' => $unique_filenames_db[$candidate_filename_wo_ext][0]);
+      continue;
+    }
+
+    $result[$format_external_id] = array('status' => 'not found');
+  }
+
+  return $result;
+}
+
+/**
+ * API method
+ * Remove a formats from the database and the file system
+ * 
+ * @since 13
+ * @param mixed[] $params
+ *    @option int format_id
+ *    @option string pwg_token
+ */
+function ws_images_formats_delete($params, $service) {
+  if (get_pwg_token() != $params['pwg_token'])
+  {
+    return new PwgError(403, 'Invalid security token');
+  }
+
+  if (!is_array($params['format_id']))
+  {
+    $params['format_id'] = preg_split(
+      '/[\s,;\|]/',
+      $params['format_id'],
+      -1,
+      PREG_SPLIT_NO_EMPTY
+      );
+  }
+  $params['format_id'] = array_map('intval', $params['format_id']);
+
+  $format_ids = array();
+  foreach ($params['format_id'] as $format_id)
+  {
+    if ($format_id >= 0)
+    {
+      $format_ids[] = $format_id;
+    }
+  }
+
+  include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
+
+  $image_ids = array();
+  $formats_of = array();
+
+  //Delete physical file
+  $ok = true;
+  
+  $query = '
+SELECT
+    image_id,
+    ext
+  FROM '.IMAGE_FORMAT_TABLE.'
+  WHERE format_id IN ('.implode(',', $format_ids).')
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+
+    if (!isset($formats_of[ $row['image_id'] ]))
+    {
+      $image_ids[] = $row['image_id'];
+      $formats_of[ $row['image_id'] ] = array();
+    }
+
+    $formats_of[ $row['image_id'] ][] = $row['ext'];
+  }
+
+  if (count($image_ids) == 0)
+  {
+    return new PwgError(404, 'No format found for the id(s) given');
+  }
+
+  $query = '
+SELECT
+    id,
+    path,
+    representative_ext
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN ('.implode(',', $image_ids).')
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    if (url_is_remote($row['path']))
+    {
+      continue;
+    }
+
+    $files = array();
+    $image_path = get_element_path($row);
+
+    if (isset($formats_of[ $row['id'] ]))
+    {
+      foreach ($formats_of[ $row['id'] ] as $format_ext)
+      {
+        $files[] = original_to_format($image_path, $format_ext);
+      }
+    }
+
+    foreach ($files as $path)
+    {
+      if (is_file($path) and !unlink($path))
+      {
+        $ok = false;
+        trigger_error('"'.$path.'" cannot be removed', E_USER_WARNING);
+        break;
+      }
+    }
+  }
+
+
+  //Delete format in the database
+  $query = '
+DELETE FROM '.IMAGE_FORMAT_TABLE.'
+  WHERE format_id IN ('.implode(',', $format_ids).')
+;';
+  pwg_query($query);
+
+  invalidate_user_cache();
+
+  return $ok;
 }
 
 /**

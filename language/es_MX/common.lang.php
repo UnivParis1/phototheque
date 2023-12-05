@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: México [MX]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=726
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -412,3 +412,11 @@ $lang['A comment on your site'] = 'Un comentario en tu sitio';
 $lang['About'] = 'Acerca de';
 $lang['About Piwigo'] = 'Acerca de Piwigo';
 $lang['Accelerate diaporama speed'] = 'Incrementar la velocidad del pase de diapositivas';
+$lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Nombre del álbum, 1 &rarr; 5 &rarr; 10 &rarr; 100';
+$lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Nombre del álbum, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Invalid username or password!'] = '¡Usuario o contraseña invalido!';
+$lang['Password: ********** (no copy by email)'] = 'Contraseña:********** (sin copia por correo electrónico)';
+$lang['Related albums'] = 'Álbumes relacionados';
+$lang['Start-Date'] = 'Fecha de inicio';
+$lang['Your authentication key is no longer valid.'] = 'Su clave de autenticación ya no es válida.';
+$lang['generate random password'] = 'Generar contraseña aleatoria';

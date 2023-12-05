@@ -173,7 +173,7 @@ function register_user($login, $password, $mail_address, $notify_admin=true, &$e
   if (empty($errors))
   {
     $insert = array(
-      $conf['user_fields']['username'] => pwg_db_real_escape_string($login),
+      $conf['user_fields']['username'] => $login,
       $conf['user_fields']['password'] => $conf['password_hash']($password),
       $conf['user_fields']['email'] => $mail_address
       );
@@ -394,6 +394,8 @@ SELECT
       }
   }
   unset($value);
+
+  $userdata['preferences'] = empty($userdata['preferences']) ? array() : unserialize($userdata['preferences']);
 
   if ($use_cache)
   {
@@ -795,20 +797,76 @@ function get_default_language()
 
 /**
  * Tries to find the browser language among available languages.
- * @todo : try to match 'fr_CA' before 'fr'
  *
  * @return string
  */
 function get_browser_language()
 {
-  $browser_language = substr(@$_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+  $language_header = @$_SERVER['HTTP_ACCEPT_LANGUAGE'];
+  if ($language_header == '')
+  {
+    return false;
+  }
+
+  // case insensitive match
+  // 'en-US;q=0.9, fr-CH, kok-IN;q=0.7' => 'en_us;q=0.9, fr_ch, kok_in;q=0.7'
+  $language_header = strtolower(str_replace("-", "_", $language_header));
+  $match_pattern = '/(([a-z]{1,8})(?:_[a-z0-9]{1,8})*)\s*(?:;\s*q\s*=\s*([01](?:\.[0-9]{0,3})?))?/';
+  $matches = null;
+  preg_match_all($match_pattern, $language_header, $matches);
+  $accept_languages_full = $matches[1];  // ['en-us', 'fr-ch', 'kok-in']
+  $accept_languages_short = $matches[2];  // ['en', 'fr', 'kok']
+  if (!count($accept_languages_full))
+  {
+    return false;
+  }
+
+  // if the quality value is absent for an language, use 1 as the default
+  $q_values = $matches[3];  // ['0.9', '', '0.7']
+  foreach ($q_values as $i => $q_value)
+  {
+    $q_values[$i] = ($q_values[$i] === '') ? 1 : floatval($q_values[$i]);
+  }
+
+  // since quick sort is not stable,
+  // sort by $indices explicitly after sorting by $q_values
+  $indices = range(1, count($q_values));
+  array_multisort(
+    $q_values, SORT_DESC, SORT_NUMERIC,
+    $indices, SORT_ASC, SORT_NUMERIC,
+    $accept_languages_full,
+    $accept_languages_short
+  );
+
+  // list all enabled language codes in the Piwigo installation
+  // in both full and short forms, and case insensitive
+  $languages_available = array();
   foreach (get_languages() as $language_code => $language_name)
   {
-    if (substr($language_code, 0, 2) == $browser_language)
+    $lowercase_full = strtolower($language_code);
+    $lowercase_parts = explode('_', $lowercase_full, 2);
+    $lowercase_prefix = $lowercase_parts[0];
+    $languages_available[$lowercase_full] = $language_code;
+    $languages_available[$lowercase_prefix] = $language_code;
+  }
+
+  foreach ($q_values as $i => $q_value)
+  {
+    // if the exact language variant is present, make sure it's chosen
+    // en-US;q=0.9 => en_us => en_US
+    if (array_key_exists($accept_languages_full[$i], $languages_available))
     {
-      return $language_code;
+      return $languages_available[$accept_languages_full[$i]];
+    }
+    // only in case that an exact match was not available,
+    // should we fallback to other variants in the same language family
+    // fr_CH => fr => fr_FR
+    else if (array_key_exists($accept_languages_short[$i], $languages_available))
+    {
+      return $languages_available[$accept_languages_short[$i]];
     }
   }
+
   return false;
 }
 
@@ -861,7 +919,7 @@ function create_user_infos($user_ids, $override_values=null)
       {
         $status = 'normal';
       }
-
+      
       $insert = array_merge(
         array_map('pwg_db_real_escape_string', $default_user),
         array(
@@ -1707,5 +1765,101 @@ UPDATE '.USER_INFOS_TABLE.'
   }
 
   return $last_visit;
+}
+
+/**
+ * Save user preferences in database
+ * @since 13
+ */
+function userprefs_save()
+{
+  global $user;
+
+  $dbValue = pwg_db_real_escape_string(serialize($user['preferences']));
+
+  $query = '
+UPDATE '.USER_INFOS_TABLE.'
+  SET preferences = \''.$dbValue.'\'
+  WHERE user_id = '.$user['id'].'
+;';
+  pwg_query($query);
+}
+
+/**
+ * Add or update a user preferences parameter
+ * @since 13
+ *
+ * @param string $param
+ * @param string $value
+ * @param boolean $updateGlobal update global *$conf* variable
+ */
+function userprefs_update_param($param, $value)
+{
+  global $user;
+
+  // If the field is true or false, the variable is transformed into a boolean value.
+  if ('true' == $value)
+  {
+    $value = true;
+  }
+  elseif ('false' == $value)
+  {
+    $value = false;
+  }
+
+  $user['preferences'][$param] = $value;
+
+  userprefs_save();
+}
+
+/**
+ * Delete one or more user preferences parameters
+ * @since 13
+ *
+ * @param string|string[] $params
+ */
+function userprefs_delete_param($params)
+{
+  global $user;
+
+  if (!is_array($params))
+  {
+    $params = array($params);
+  }
+  if (empty($params))
+  {
+    return;
+  }
+
+  foreach ($params as $param)
+  {
+    if (isset($user['preferences'][$param]))
+    {
+      unset($user['preferences'][$param]);
+    }
+  }
+
+  userprefs_save();
+}
+
+/**
+ * Return a default value for a user preferences parameter.
+ * @since 13
+ *
+ * @param string $param the configuration value to be extracted (if it exists)
+ * @param mixed $default_value the default value if it does not exist yet.
+ *
+ * @return mixed The configuration value if the variable exists, otherwise the default.
+ */
+function userprefs_get_param($param, $default_value=null)
+{
+  global $user;
+
+  if (isset($user['preferences'][$param]))
+  {
+    return $user['preferences'][$param];
+  }
+
+  return $default_value;
 }
 ?>

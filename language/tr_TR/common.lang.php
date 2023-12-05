@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Türkçe [TR]
-Version: 12.3.0
+Version: 13.8.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=436
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -418,3 +418,4 @@ $lang['Password: ********** (no copy by email)'] = 'Şifre: ********** (not edin
 $lang['Related albums'] = 'İlgili albümler';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Albüm adı, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Albüm adı, 100 &rarr; 10 &rarr; 5 &rarr; 1';
+$lang['Start-Date'] = 'Başlangıç ​​tarihi';
