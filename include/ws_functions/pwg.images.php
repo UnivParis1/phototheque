@@ -690,6 +690,167 @@ SELECT *
 
 /**
  * API method
+ * Registers a new search
+ * @param mixed[] $params
+ *    @option string query
+ */
+function ws_images_filteredSearch_create($params, $service)
+{
+  global $user;
+
+  include_once(PHPWG_ROOT_PATH.'include/functions_search.inc.php');
+
+  // * check the search exists
+  if (isset($params['search_id']))
+  {
+    if (empty(get_search_id_pattern($params['search_id'])))
+    {
+      return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid search_id input parameter.');
+    }
+
+    $search_info = get_search_info($params['search_id']);
+    if (empty($search_info))
+    {
+      return new PwgError(WS_ERR_INVALID_PARAM, 'This search does not exist.');
+    }
+  }
+
+  $search = array('mode' => 'AND');
+
+  // * check all parameters
+  if (isset($params['allwords']))
+  {
+    $search['fields']['allwords'] = array();
+
+    if (!isset($params['allwords_mode']))
+    {
+      $params['allwords_mode'] = 'AND';
+    }
+    if (!preg_match('/^(OR|AND)$/', $params['allwords_mode']))
+    {
+      return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter allwords_mode');
+    }
+    $search['fields']['allwords']['mode'] = $params['allwords_mode'];
+
+    $allwords_fields_available = array('name', 'comment', 'file', 'author', 'tags', 'cat-title', 'cat-desc');
+    if (!isset($params['allwords_fields']))
+    {
+      $params['allwords_fields'] = $allwords_fields_available;
+    }
+    foreach ($params['allwords_fields'] as $field)
+    {
+      if (!in_array($field, $allwords_fields_available))
+      {
+        return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter allwords_fields');
+      }
+    }
+    $search['fields']['allwords']['fields'] = $params['allwords_fields'];
+
+    $search['fields']['allwords']['words'] = split_allwords($params['allwords']);
+  }
+
+  if (isset($params['tags']))
+  {
+    foreach ($params['tags'] as $tag_id)
+    {
+      if (!preg_match('/^\d+$/', $tag_id))
+      {
+        return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter tags');
+      }
+    }
+
+    if (!isset($params['tags_mode']))
+    {
+      $params['tags_mode'] = 'AND';
+    }
+    if (!preg_match('/^(OR|AND)$/', $params['tags_mode']))
+    {
+      return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter tags_mode');
+    }
+
+    $search['fields']['tags'] = array(
+      'words' => $params['tags'],
+      'mode'  => $params['tags_mode'],
+    );
+  }
+
+  if (isset($params['categories']))
+  {
+    foreach ($params['categories'] as $cat_id)
+    {
+      if (!preg_match('/^\d+$/', $cat_id))
+      {
+        return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter categories');
+      }
+    }
+
+    $search['fields']['cat'] = array(
+      'words'   => $params['categories'],
+      'sub_inc' => $params['categories_withsubs'] ?? false,
+    );
+  }
+
+  if (isset($params['authors']))
+  {
+    $authors = array();
+
+    foreach ($params['authors'] as $author)
+    {
+      $authors[] = strip_tags($author);
+    }
+
+    $search['fields']['author'] = array(
+      'words' => $authors,
+      'mode' => 'OR',
+    );
+  }
+
+  if (isset($params['filetypes']))
+  {
+    foreach ($params['filetypes'] as $ext)
+    {
+      if (!preg_match('/^[a-z0-9]+$/i', $ext))
+      {
+        return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter filetypes');
+      }
+    }
+
+    $search['fields']['filetypes'] = $params['filetypes'];
+  }
+
+  if (isset($params['added_by']))
+  {
+    foreach ($params['added_by'] as $user_id)
+    {
+      if (!preg_match('/^\d+$/', $user_id))
+      {
+        return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter added_by');
+      }
+    }
+
+    $search['fields']['added_by'] = $params['added_by'];
+  }
+
+  if (isset($params['date_posted']))
+  {
+    if (!preg_match('/^(24h|7d|30d|3m|6m|y\d+|)$/', $params['date_posted']))
+    {
+      return new PwgError(WS_ERR_INVALID_PARAM, 'Invalid parameter date_posted');
+    }
+
+    $search['fields']['date_posted'] = $params['date_posted'];
+  }
+
+  list($search_uuid, $search_url) = save_search($search, $search_info['id'] ?? null);
+
+  return array(
+    'search_id' => $search_uuid,
+    'search_url' => $search_url,
+  );
+}
+
+/**
+ * API method
  * Sets the level of an image
  * @param mixed[] $params
  *    @option int image_id
@@ -2131,6 +2292,11 @@ function ws_images_setInfo($params, $service)
 {
   global $conf;
 
+  if (isset($params['pwg_token']) and get_pwg_token() != $params['pwg_token'])
+  {
+    return new PwgError(403, 'Invalid security token');
+  }
+
   include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
 
   $query='
@@ -2162,13 +2328,10 @@ SELECT *
   {
     if (isset($params[$key]))
     {
-      if (!$conf['allow_html_descriptions'])
+      if (!$conf['allow_html_descriptions'] or !isset($params['pwg_token']))
       {
         $params[$key] = strip_tags($params[$key], '<b><strong><em><i>');
       }
-
-      // TODO do not strip tags if pwg_token is provided (and valid)
-      $params[$key] = strip_tags($params[$key]);
 
       if ('fill_if_empty' == $params['single_value_mode'])
       {
@@ -2495,5 +2658,55 @@ function ws_images_deleteOrphans($params, $service)
     'nb_deleted' => $deleted_count,
     'nb_orphans' => count(get_orphans()),
     );
+}
+
+/**
+ * API method
+ * Associate/Dissociate/Move photos with an album.
+ * 
+ * @since 14
+ * @param mixed[] $params
+ *    @option int[] image_id
+ *    @option int category_id
+ *    @option string action
+ *    @option string pwg_token
+ */
+function ws_images_setCategory($params, $service)
+{
+  if (get_pwg_token() != $params['pwg_token'])
+  {
+    return new PwgError(403, 'Invalid security token');
+  }
+
+  // does the category really exist?
+  $query = '
+SELECT
+    id
+  FROM '.CATEGORIES_TABLE.'
+  WHERE id = '.$params['category_id'].'
+;';
+  $categories = query2array($query);
+
+  if (count($categories) == 0)
+  {
+    return new PwgError(404, 'category_id not found');
+  }
+
+  include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
+
+  if ('associate' == $params['action'])
+  {
+    associate_images_to_categories($params['image_id'], array($params['category_id']));
+  }
+  elseif ('dissociate' == $params['action'])
+  {
+    dissociate_images_from_category($params['image_id'], $params['category_id']);
+  }
+  elseif ('move' == $params['action'])
+  {
+    move_images_to_categories($params['image_id'], array($params['category_id']));
+  }
+
+  invalidate_user_cache();
 }
 ?>

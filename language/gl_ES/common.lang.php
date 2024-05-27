@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Galego [ES]
-Version: 13.8.0
+Version: 14.4.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=681
 Author: Piwigo team
 Author URI: http://piwigo.org

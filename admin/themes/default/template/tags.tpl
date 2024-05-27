@@ -56,7 +56,7 @@ if (!$.cookie("pwg_tags_per_page")) {
 
 {function name=tagContent}
 {function tagContent}
-    <p class='tag-name'>{$tag_name}</p>
+    <p class='tag-name {($tag_raw_name !== $tag_name) ? 'icon-globe' : ''}' data-rawname="{$tag_raw_name}">{$tag_name}</p>
     <a class="icon-ellipsis-vert showOptions"></a>
     <div class="tag-dropdown-block dropdown">
       <div class="dropdown-content">
@@ -139,10 +139,10 @@ if (!$.cookie("pwg_tags_per_page")) {
     <a id="selectInvert">{'Invert'|@translate}</a> 
   </div>
   {if $warning_tags != ""}
-  <div class='tag-warning tag-info icon-attention not-in-selection-mode'><p> {$warning_tags} </p></div>
+  <div class='info-warning tag-info icon-attention not-in-selection-mode'><p> {$warning_tags} </p></div>
   {/if}
-  <div class='tag-message tag-info icon-ok not-in-selection-mode' {if $message_tags != ""}style='display:flex'{/if}> <p> {$message_tags} </p> </div>
-  <div class='tag-error tag-info icon-cancel not-in-selection-mode'> <p> </p> </div>
+  <div class='info-message tag-info  icon-ok not-in-selection-mode' {if $message_tags != ""}style='display:flex'{/if}> <p> {$message_tags} </p> </div>
+  <div class='info-error tag-info icon-cancel not-in-selection-mode'> <p> </p> </div>
 </div>
 <div class="pageLoad">
   <i class='icon-spin6 animate-spin'> </i>
@@ -197,6 +197,7 @@ if (!$.cookie("pwg_tags_per_page")) {
         tag_U_EDIT = 'admin.php?page=batch_manager&amp;filter=tag-%s'|@sprintf:$tag['id']
         has_image = ($tag.counter > 0)
         tag_count = $tag.counter
+        tag_raw_name = $tag.raw_name
       }
   {else}
     {tagContent 
@@ -205,6 +206,7 @@ if (!$.cookie("pwg_tags_per_page")) {
         tag_U_EDIT = 'admin.php?page=batch_manager&amp;filter=tag-%s'|@sprintf:$tag['id']
         has_image = false
         tag_count = 0
+        tag_raw_name = $tag.raw_name
       }
   {/if}
 
@@ -256,5 +258,6 @@ if (!$.cookie("pwg_tags_per_page")) {
     tag_U_EDIT='%U_EDIT%'
     has_image=false
     tag_count='%count%'
+    tag_raw_name = '%raw_name%'
   }
 </div> 

@@ -141,10 +141,7 @@ function add_uploaded_file($source_filepath, $original_filename=null, $categorie
   //
   // 3) register in database
 
-  // TODO
-  // * check md5sum (already exists?)
-
-  global $conf, $user;
+  global $conf, $user, $logger;
 
   if (!is_null($original_filename))
   {
@@ -158,6 +155,33 @@ function add_uploaded_file($source_filepath, $original_filename=null, $categorie
   else
   {
     $md5sum = md5_file($source_filepath);
+  }
+
+  // we only try to detect duplicate on a new image, not when updating an existing image
+  if (!isset($image_id) and $conf['upload_detect_duplicate'])
+  {
+    $query = '
+SELECT
+    id
+  FROM '. IMAGES_TABLE .'
+  WHERE md5sum = \''.$md5sum.'\'
+;';
+    $images_found = query2array($query);
+
+    if (count($images_found) > 0)
+    {
+      $image_id = $images_found[0]['id'];
+      $logger->info('['.__FUNCTION__.'] image already exist #'.$image_id.', we delete the newly uploaded file : '.$source_filepath);
+      unlink($source_filepath);
+
+      // if the destination category is already linked to this photo, no worry,
+      // associate_images_to_categories perfectly handles this case
+      add_uploaded_file_add_to_categories($image_id, $categories);
+
+      // TODO should we update level? If yes, then we should invalidate_user_cache
+
+      return $image_id;
+    }
   }
 
   $file_path = null;
@@ -221,6 +245,10 @@ SELECT
     {
       $file_path.= 'jpg';
     }
+    elseif (IMAGETYPE_WEBP == $type)
+    {
+      $file_path.= 'webp';
+    }
     elseif (isset($conf['upload_form_all_types']) and $conf['upload_form_all_types'])
     {
       $original_extension = strtolower(get_extension($original_filename));
@@ -258,7 +286,6 @@ SELECT
   // pwg_representative file.
   $representative_ext = trigger_change('upload_file', null, $file_path);
 
-  global $logger;
   $logger->info("Handling " . (string)$file_path . " got " . (string)$representative_ext);
   
   // If it is set to either true (the file didn't need a
@@ -356,6 +383,45 @@ SELECT
     pwg_activity('photo', $image_id, 'add');
   }
 
+  add_uploaded_file_add_to_categories($image_id, $categories);
+
+  // update metadata from the uploaded file (exif/iptc)
+  if ($conf['use_exif'] and !function_exists('exif_read_data'))
+  {
+    $conf['use_exif'] = false;
+  }
+  sync_metadata(array($image_id));
+
+  // cache a derivative
+  $query = '
+SELECT
+    id,
+    path,
+    representative_ext
+  FROM '.IMAGES_TABLE.'
+  WHERE id = '.$image_id.'
+;';
+  $image_infos = pwg_db_fetch_assoc(pwg_query($query));
+  $src_image = new SrcImage($image_infos);
+
+  set_make_full_url();
+  // in case we are on uploadify.php, we have to replace the false path
+  $derivative_url = preg_replace('#admin/include/i#', 'i', DerivativeImage::url(IMG_MEDIUM, $src_image));
+  unset_make_full_url();
+
+  $logger->info(__FUNCTION__.' : force cache generation, derivative_url = '.$derivative_url);
+
+  fetchRemote($derivative_url, $dest);
+
+  trigger_notify('loc_end_add_uploaded_file', $image_infos);
+
+  return $image_id;
+}
+
+function add_uploaded_file_add_to_categories($image_id, $categories)
+{
+  global $conf;
+
   if (!isset($conf['lounge_active']))
   {
     conf_update_param('lounge_active', false, true);
@@ -383,42 +449,10 @@ SELECT
     }
   }
 
-  // update metadata from the uploaded file (exif/iptc)
-  if ($conf['use_exif'] and !function_exists('exif_read_data'))
-  {
-    $conf['use_exif'] = false;
-  }
-  sync_metadata(array($image_id));
-
   if (!$conf['lounge_active'])
   {
     invalidate_user_cache();
   }
-
-  // cache a derivative
-  $query = '
-SELECT
-    id,
-    path,
-    representative_ext
-  FROM '.IMAGES_TABLE.'
-  WHERE id = '.$image_id.'
-;';
-  $image_infos = pwg_db_fetch_assoc(pwg_query($query));
-  $src_image = new SrcImage($image_infos);
-
-  set_make_full_url();
-  // in case we are on uploadify.php, we have to replace the false path
-  $derivative_url = preg_replace('#admin/include/i#', 'i', DerivativeImage::url(IMG_MEDIUM, $src_image));
-  unset_make_full_url();
-
-  $logger->info(__FUNCTION__.' : force cache generation, derivative_url = '.$derivative_url);
-
-  fetchRemote($derivative_url, $dest);
-
-  trigger_notify('loc_end_add_uploaded_file', $image_infos);
-
-  return $image_id;
 }
 
 function add_format($source_filepath, $format_ext, $format_of)
@@ -526,6 +560,55 @@ function upload_file_pdf($representative_ext, $file_path)
   $exec.= ' "'.realpath($file_path).'"[0]';
   $exec.= ' "'.$representative_file_path.'"';
   $exec.= ' 2>&1';
+  @exec($exec, $returnarray);
+
+  // Return the extension (if successful) or false (if failed)
+  if (file_exists($representative_file_path))
+  {
+    $representative_ext = $ext;
+  }
+
+  return $representative_ext;
+}
+
+add_event_handler('upload_file', 'upload_file_heic');
+function upload_file_heic($representative_ext, $file_path)
+{
+  global $logger, $conf;
+
+  $logger->info(__FUNCTION__.', $file_path = '.$file_path.', $representative_ext = '.$representative_ext);
+
+  if (isset($representative_ext))
+  {
+    return $representative_ext;
+  }
+
+  if (pwg_image::get_library() != 'ext_imagick')
+  {
+    return $representative_ext;
+  }
+
+  if (!in_array(strtolower(get_extension($file_path)), array('heic')))
+  {
+    return $representative_ext;
+  }
+
+  $ext = 'jpg';
+
+  // move the uploaded file to pwg_representative sub-directory
+  $representative_file_path = original_to_representative($file_path, $ext);
+  prepare_directory(dirname($representative_file_path));
+
+  list($w,$h) = get_optimal_dimensions_for_representative();
+
+  $exec = $conf['ext_imagick_dir'].'convert';
+  $exec.= ' -sampling-factor 4:2:0 -quality 85 -interlace JPEG -colorspace sRGB -auto-orient +repage -resize "'.$w.'x'.$h.'>"';
+  $exec.= ' "'.realpath($file_path).'"';
+  $exec.= ' "'.$representative_file_path.'"';
+  $exec.= ' 2>&1';
+
+  $logger->info(__FUNCTION__.', exec = '.$exec);
+
   @exec($exec, $returnarray);
 
   // Return the extension (if successful) or false (if failed)
@@ -679,6 +762,117 @@ function upload_file_video($representative_ext, $file_path)
   if (!file_exists($representative_file_path))
   {
     return null;
+  }
+
+  return $representative_ext;
+}
+
+add_event_handler('upload_file', 'upload_file_psd');
+function upload_file_psd($representative_ext, $file_path)
+{
+  global $logger, $conf;
+
+  $logger->info(__FUNCTION__.', $file_path = '.$file_path.', $representative_ext = '.$representative_ext);
+
+  if (isset($representative_ext))
+  {
+    return $representative_ext;
+  }
+
+  if (pwg_image::get_library() != 'ext_imagick')
+  {
+    return $representative_ext;
+  }
+
+  if (!in_array(strtolower(get_extension($file_path)), array('psd')))
+  {
+    return $representative_ext;
+  }
+
+  // move the uploaded file to pwg_representative sub-directory
+  $representative_file_path = dirname($file_path).'/pwg_representative/';
+  $representative_file_path.= get_filename_wo_extension(basename($file_path)).'.';
+
+  $representative_ext = 'png';
+  $representative_file_path.= $representative_ext;
+
+  prepare_directory(dirname($representative_file_path));
+
+  $exec = $conf['ext_imagick_dir'].'convert';
+
+  $exec .= ' "'.realpath($file_path).'"';
+
+  $dest = pathinfo($representative_file_path);
+  $exec .= ' "'.realpath($dest['dirname']).'/'.$dest['basename'].'"';
+
+  $exec .= ' 2>&1';
+  $logger->info(__FUNCTION__.', exec = '.$exec);
+  @exec($exec, $returnarray);
+
+  // sometimes ImageMagick creates file-0.png + file-1.png + file-2.png...
+  // It seems we can't avoid it.
+  $representative_file_abspath = realpath($dest['dirname']).'/'.$dest['basename'];
+  if (!file_exists($representative_file_abspath))
+  {
+    $first_file_abspath = preg_replace(
+      '/\.'.$representative_ext.'$/',
+      '-0.'.$representative_ext,
+      $representative_file_abspath
+      );
+
+    if (file_exists($first_file_abspath))
+    {
+      rename($first_file_abspath, $representative_file_abspath);
+    }
+  }
+
+  return get_extension($representative_file_abspath);
+}
+
+add_event_handler('upload_file', 'upload_file_eps');
+function upload_file_eps($representative_ext, $file_path)
+{
+  global $logger, $conf;
+
+  $logger->info(__FUNCTION__.', $file_path = '.$file_path.', $representative_ext = '.$representative_ext);
+
+  if (isset($representative_ext))
+  {
+    return $representative_ext;
+  }
+
+  if (pwg_image::get_library() != 'ext_imagick')
+  {
+    return $representative_ext;
+  }
+
+  if (!in_array(strtolower(get_extension($file_path)), array('eps')))
+  {
+    return $representative_ext;
+  }
+
+  // if the representative is "jpg", the derivatives are ugly. With "png" it's fine.
+  $ext = 'png';
+
+  // move the uploaded file to pwg_representative sub-directory
+  $representative_file_path = original_to_representative($file_path, $ext);
+  prepare_directory(dirname($representative_file_path));
+
+  // convert -density 300 image.eps -resize 2048x2048 image.png
+
+  $exec = $conf['ext_imagick_dir'].'convert';
+  $exec.= ' -density 300';
+  $exec.= ' "'.realpath($file_path).'"';
+  $exec.= ' -resize 2048x2048';
+  $exec.= ' "'.$representative_file_path.'"';
+  $exec.= ' 2>&1';
+  $logger->info(__FUNCTION__.', $exec = '.$exec);
+  @exec($exec, $returnarray);
+
+  // Return the extension (if successful) or false (if failed)
+  if (file_exists($representative_file_path))
+  {
+    $representative_ext = $ext;
   }
 
   return $representative_ext;
@@ -858,5 +1052,41 @@ function ready_for_upload_message()
   }
 
   return null;
+}
+
+/**
+ * Return the optimized resize dimensions for a representative, based on maximum display size.
+ * There is no need to generate a 4000x3000 JPEG from a 4000x3000 HEIC if XXL size is only 1600x1200.
+ * 
+ * @since 14
+ *
+ * @return array(width, height)
+ */
+function get_optimal_dimensions_for_representative()
+{
+  global $conf;
+
+  $enabled = ImageStdParams::get_defined_type_map();
+  $disabled = @unserialize(@$conf['disabled_derivatives']);
+  if ($disabled === false)
+  {
+    $disabled = array();
+  }
+
+  $w = $h = 2000; // safe default values
+
+  foreach(ImageStdParams::get_all_types() as $type)
+  {
+    $params = $enabled[$type] ?? @$disabled[$type];
+
+    if ($params)
+    {
+      list($w, $h) = $params->sizing->ideal_size;
+    }
+  }
+
+  $margin_coef = 1.5;
+
+  return array($w*$margin_coef, $h*$margin_coef);
 }
 ?>

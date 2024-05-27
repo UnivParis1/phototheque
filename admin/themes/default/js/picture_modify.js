@@ -32,59 +32,27 @@ $(document).ready(function () {
   $(".related-categories-container .breadcrumb-item .remove-item").on("click", function () {
     remove_related_category($(this).attr("id"));
   })
-})
-
-function set_up_popin() {
-  $(".ClosePopIn").on('click', function () {
-    linked_albums_close();
+  // Unsaved settings message before leave this page
+  let form_unsaved = false;
+  let user_interacted = false;
+  $('#pictureModify').find(':input').on('focus', function () {
+    user_interacted = true;
   });
-}
-
-function linked_albums_close() {
-  $("#addLinkedAlbum").fadeOut();
-}
-function linked_albums_open() {
-  $("#addLinkedAlbum").fadeIn();
-  $(".search-input").val("");
-  $(".search-input").focus();
-  $("#searchResult").empty();
-  $(".limitReached").html(str_no_search_in_progress);
-}
-function linked_albums_search(searchText) {
-  $(".linkedAlbumPopInContainer .searching").show();
-  $.ajax({
-    url: "ws.php?format=json&method=pwg.categories.getAdminList",
-    type: "POST",
-    dataType: "json",
-    data : {
-      search: searchText,
-      additional_output: "full_name_with_admin_links",
-    },
-    before: function () {
-      
-    },
-    success: function (raw_data) {
-      $(".linkedAlbumPopInContainer .searching").hide();
-
-      categories = raw_data.result.categories;
-      fill_results(categories);
-
-      if (raw_data.result.limit_reached) {
-        $(".limitReached").html(str_result_limit.replace("%d", categories.length));
-      } else {
-        if (categories.length == 1) {
-          $(".limitReached").html(str_album_found);
-        } else {
-          $(".limitReached").html(str_albums_found.replace("%d", categories.length));
-        }
-      }
-    },
-    error: function (e) {
-      $(".linkedAlbumPopInContainer .searching").hide();
-      console.log(e.message);
+  $('#pictureModify').find(':input').on('change', function () {
+    if (user_interacted) {
+      form_unsaved = true;
+      console.log($(this)[0].name, $(this));
     }
-  })
-}
+  });
+  $(window).on('beforeunload', function () {
+    if (form_unsaved) {
+      return 'Somes changes are not registered';
+    }
+  });
+  $('#pictureModify').on('submit', function () {
+    form_unsaved = false;
+  });
+})
 
 function fill_results(cats) {
   $("#searchResult").empty();
@@ -112,6 +80,7 @@ function fill_results(cats) {
 
 function remove_related_category(cat_id) {
   $(".invisible-related-categories-select option[value="+ cat_id +"]").remove();
+  $(".invisible-related-categories-select").trigger('change');
   $("#" + cat_id).parent().remove();
 
   cat_to_remove_index = related_categories_ids.indexOf(cat_id);
@@ -132,7 +101,7 @@ function add_related_category(cat_id, cat_link_path) {
 
     $(".search-result-item #" + cat_id).addClass("notClickable");
     related_categories_ids.push(cat_id);
-    $(".invisible-related-categories-select").append("<option selected value="+ cat_id +"></option>");
+    $(".invisible-related-categories-select").append("<option selected value="+ cat_id +"></option>").trigger('change');
 
     $("#"+ cat_id).on("click", function () {
       remove_related_category($(this).attr("id"))

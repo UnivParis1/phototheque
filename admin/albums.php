@@ -25,45 +25,12 @@ list($albums_counter) = pwg_db_fetch_row(pwg_query($query));
 // +-----------------------------------------------------------------------+
 check_status(ACCESS_ADMINISTRATOR);
 
-if (!empty($_POST) or isset($_GET['delete']))
-{
-  check_pwg_token();
-}
-
 // +-----------------------------------------------------------------------+
 // | tabs                                                                  |
 // +-----------------------------------------------------------------------+
 
 $page['tab'] = 'list';
 include(PHPWG_ROOT_PATH.'admin/include/albums_tab.inc.php');
-
-// +-----------------------------------------------------------------------+
-// |                    virtual categories management                      |
-// +-----------------------------------------------------------------------+
-
-// This code section is meant to be deleted after we implement the new album editor
-
-// request to delete a virtual category
-if (isset($_GET['delete']) and is_numeric($_GET['delete']))
-{
-  $photo_deletion_mode = 'no_delete';
-  if (isset($_GET['photo_deletion_mode']))
-  {
-    $photo_deletion_mode = $_GET['photo_deletion_mode'];
-  }
-  delete_categories(array($_GET['delete']), $photo_deletion_mode);
-
-  $_SESSION['page_infos'] = array(l10n('Virtual album deleted'));
-  update_global_rank();
-  invalidate_user_cache();
-
-  $redirect_url = get_root_url().'admin.php?page=albums';
-  if (isset($_GET['parent_id']))
-  {
-    $redirect_url.= '&parent_id='.$_GET['parent_id'];
-  }
-  redirect($redirect_url);
-}
 
 // +-----------------------------------------------------------------------+
 // |                         categories auto order                         |
@@ -181,7 +148,7 @@ $template->assign("POS_PREF", $conf['newcat_default_position']); //TODO use user
 
 //Get all albums
 $query = '
-SELECT id,name,`rank`,status, uppercats, lastmodified
+SELECT id,name,`rank`,status, visible, uppercats, lastmodified
   FROM '.CATEGORIES_TABLE.'
 ;';
 
@@ -204,6 +171,11 @@ foreach ($allAlbum as $album)
   $the_place['cat'] = $album;
 }
 
+// WARNING $user['forbidden_categories'] is 100% reliable only on gallery side because
+// it's a cache variable. On administration side, if you modify public/private status
+// of an album or change permissions, this variable is reset and not recalculated until
+// you open the gallery. As this situation doesn't occur each time you use the
+// administration, it's quite reliable but not as much as on gallery side.
 $is_forbidden = array_fill_keys(@explode(',', $user['forbidden_categories']), 1);
 
 //Make an ordered tree
@@ -229,6 +201,7 @@ function assocToOrderedTree($assocT)
     $orderedCat['name'] = $cat['cat']['name'];
     $orderedCat['status'] = $cat['cat']['status'];
     $orderedCat['id'] = $cat['cat']['id'];
+    $orderedCat['visible'] = $cat['cat']['visible'];
     $orderedCat['nb_images'] = isset($nb_photos_in[$cat['cat']['id']]) ? $nb_photos_in[$cat['cat']['id']] : 0;
     $orderedCat['last_updates'] = $cat['cat']['lastmodified'];
     $orderedCat['has_not_access'] = isset($is_forbidden[$cat['cat']['id']]);

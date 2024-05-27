@@ -1914,7 +1914,8 @@ function fill_lounge($images, $categories)
     mass_inserts(
       LOUNGE_TABLE,
       array_keys($inserts[0]),
-      $inserts
+      $inserts,
+      array('ignore'=>true)
     );
   }
 }
@@ -1941,7 +1942,7 @@ function empty_lounge($invalidate_user_cache=true)
   }
 
   $exec_id = generate_key(4);
-  $logger->debug(__FUNCTION__.', exec='.$exec_id.', begins');
+  $logger->debug(__FUNCTION__.(isset($_REQUEST['method']) ? ' (API:'.$_REQUEST['method'].')' : '').', exec='.$exec_id.', begins');
 
   // if lounge is already being emptied, skip
   $query = '
@@ -2103,6 +2104,43 @@ SELECT
 }
 
 /**
+ * Dissociate a list of images from a category.
+ *
+ * @param int[] $images
+ * @param int $categories
+ */
+function dissociate_images_from_category($images, $category)
+{
+  // physical links must not be broken, so we must first retrieve image_id
+  // which create virtual links with the category to "dissociate from".
+  $query = '
+SELECT id
+  FROM '.IMAGE_CATEGORY_TABLE.'
+    INNER JOIN '.IMAGES_TABLE.' ON image_id = id
+  WHERE category_id ='.$category.'
+    AND id IN ('.implode(',', $images).')
+    AND (
+      category_id != storage_category_id
+      OR storage_category_id IS NULL
+    )
+;';
+  $dissociables = array_from_query($query, 'id');
+
+  if (!empty($dissociables))
+  {
+    $query = '
+DELETE
+  FROM '.IMAGE_CATEGORY_TABLE.'
+  WHERE category_id = '.$category.'
+    AND image_id IN ('.implode(',', $dissociables).')
+';
+    pwg_query($query);
+  }
+
+  return count($dissociables);
+}
+
+/**
  * Dissociate images from all old categories except their storage category and
  * associate to new categories.
  * This function will preserve ranks.
@@ -2206,6 +2244,7 @@ UPDATE '.USER_CACHE_TABLE.'
   SET need_update = \'true\';';
     pwg_query($query);
   }
+  conf_delete_param('count_orphans');
   trigger_notify('invalidate_user_cache', $full);
 }
 
@@ -2327,6 +2366,9 @@ function get_extents($start='')
  */
 function create_tag($tag_name)
 {
+  // clean the tag, no html/js allowed in tag name
+  $tag_name = strip_tags($tag_name);
+
   // does the tag already exists?
   $query = '
 SELECT id
@@ -2592,6 +2634,17 @@ function delete_groups($group_ids)
     return false;
   }
 
+  if (preg_match('/^group:(\d+)$/', conf_get_param('email_admin_on_new_user', 'undefined'), $matches))
+  {
+    foreach ($group_ids as $group_id)
+    {
+      if ($group_id == $matches[1])
+      {
+        conf_update_param('email_admin_on_new_user', 'all', true);
+      }
+    }
+  }
+
   $group_id_string = implode(',', $group_ids);
 
   // destruction of the access linked to the group
@@ -2813,7 +2866,7 @@ function get_tag_ids($raw_tags, $allow_create=true)
     elseif ($allow_create)
     {
       // we have to create a new tag
-      $tag_ids[] = tag_id_from_tag_name($raw_tag);
+      $tag_ids[] = tag_id_from_tag_name(strip_tags($raw_tag));
     }
   }
 
@@ -3256,6 +3309,33 @@ SELECT path
     $updates
   );
   return count($ids);
+}
+
+function count_orphans()
+{
+  if (is_null(conf_get_param('count_orphans')))
+  {
+    // we don't care about the list of image_ids, we only care about the number
+    // of orphans, so let's use a faster method than calling count(get_orphans())
+    $query = '
+SELECT
+    COUNT(*)
+  FROM '.IMAGES_TABLE.'
+;';
+    list($image_counter_all) = pwg_db_fetch_row(pwg_query($query));
+
+    $query = '
+SELECT
+    COUNT(DISTINCT(image_id))
+  FROM '.IMAGE_CATEGORY_TABLE.'
+;';
+    list($image_counter_in_categories) = pwg_db_fetch_row(pwg_query($query));
+
+    $counter = $image_counter_all - $image_counter_in_categories;
+    conf_update_param('count_orphans', $counter, true);
+  }
+
+  return conf_get_param('count_orphans');
 }
 
 /**

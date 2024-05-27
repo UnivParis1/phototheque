@@ -111,7 +111,8 @@ SELECT id, name, permalink
   $output = '';
   if ($single_link)
   {
-    $single_url = add_url_params(get_root_url().$url.array_pop(explode(',', $uppercats)), $add_url_params);
+    $uppercats_array = explode(',', $uppercats);
+    $single_url = add_url_params(get_root_url().$url.array_pop($uppercats_array), $add_url_params);
     $output.= '<a href="'.$single_url.'"';
     if (isset($link_class))
     {
@@ -136,7 +137,7 @@ SELECT id, name, permalink
     }
     else
     {
-      $output.= $conf['level_separator'];
+      $output.= '<span>'.$conf['level_separator'].'</span>';
     }
 
     if ( !isset($url) or $single_link )
@@ -573,7 +574,7 @@ function render_element_name($info)
 {
   if (!empty($info['name']))
   {
-    return trigger_change('render_element_name', $info['name']);
+    return trigger_change('render_element_name', $info['name'], $info);
   }
   return get_name_from_file($info['file']);
 }
@@ -610,12 +611,12 @@ function get_thumbnail_title($info, $title, $comment='')
 
   if (!empty($info['hit']))
   {
-    $details[] = $info['hit'].' '.strtolower(l10n('Visits'));
+    $details[] = l10n('%d visits', $info['hit']);
   }
 
   if ($conf['rate'] and !empty($info['rating_score']))
   {
-    $details[] = strtolower(l10n('Rating score')).' '.$info['rating_score'];
+    $details[] = l10n('rating score %s', $info['rating_score']);
   }
 
   if (isset($info['nb_comments']) and $info['nb_comments'] != 0)

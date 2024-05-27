@@ -258,6 +258,12 @@ include(PHPWG_ROOT_PATH . 'admin/include/functions_upgrade.php');
 if (isset($_POST['install']))
 {
   install_db_connect($infos, $errors);
+
+  if (count($errors) > 0)
+  {
+    print_r($errors);
+  }
+
   pwg_db_check_charset();
 
   $webmaster = trim(preg_replace('/\s{2,}/', ' ', $admin_name));
@@ -414,18 +420,6 @@ INSERT INTO '.$prefixeTable.'config (param,value,comment)
       array_keys($datas[0]),
       $datas
       );
-
-    if ($is_newsletter_subscribe)
-    {
-      fetchRemote(
-        get_newsletter_subscribe_base_url($language).$admin_mail,
-        $result,
-        array(),
-        array('origin' => 'installation')
-        );
-
-      conf_update_param('show_newsletter_subscription', 'false');
-    }
   }
 }
 
@@ -493,6 +487,19 @@ else
     $user = build_user(1, true);
     log_user($user['id'], false);
     
+    // newsletter subscription
+    if ($is_newsletter_subscribe)
+    {
+      fetchRemote(
+        get_newsletter_subscribe_base_url($language).$admin_mail,
+        $result,
+        array(),
+        array('origin' => 'installation')
+        );
+
+      userprefs_update_param('show_newsletter_subscription', false);
+    }
+
     // email notification
     if (isset($_POST['send_credentials_by_mail']))
     {

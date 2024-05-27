@@ -386,6 +386,35 @@ SELECT id, name
 }
 
 /**
+ * Does the current user must log visits in history table
+ *
+ * @since 14
+ *
+ * @param int $image_id
+ * @param string $image_type
+ *
+ * @return bool
+ */
+function do_log($image_id = null, $image_type = null)
+{
+  global $conf;
+
+  $do_log = $conf['log'];
+  if (is_admin())
+  {
+    $do_log = $conf['history_admin'];
+  }
+  if (is_a_guest())
+  {
+    $do_log = $conf['history_guest'];
+  }
+
+  $do_log = trigger_change('pwg_log_allowed', $do_log, $image_id, $image_type);
+
+  return $do_log;
+}
+
+/**
  * log the visit into history table
  *
  * @param int $image_id
@@ -414,19 +443,7 @@ UPDATE '.USER_INFOS_TABLE.'
     pwg_query($query);
   }
 
-  $do_log = $conf['log'];
-  if (is_admin())
-  {
-    $do_log = $conf['history_admin'];
-  }
-  if (is_a_guest())
-  {
-    $do_log = $conf['history_guest'];
-  }
-
-  $do_log = trigger_change('pwg_log_allowed', $do_log, $image_id, $image_type);
-
-  if (!$do_log)
+  if (!do_log($image_id, $image_type))
   {
     return false;
   }
@@ -435,6 +452,14 @@ UPDATE '.USER_INFOS_TABLE.'
   if ('tags'==@$page['section'])
   {
     $tags_string = implode(',', $page['tag_ids']);
+
+    if (strlen($tags_string) > 50)
+    {
+      // we need to truncate, mysql won't accept a too long string
+      $tags_string = substr($tags_string, 0, 50);
+      // the last tag_id may have been truncated itself, so we must remove it
+      $tags_string = substr($tags_string, 0, strrpos($tags_string, ','));
+    }
   }
 
   $ip = $_SERVER['REMOTE_ADDR'];
@@ -459,7 +484,10 @@ UPDATE '.USER_INFOS_TABLE.'
 
     $conf['history_sections_cache'] = safe_unserialize($conf['history_sections_cache']);
 
-    if (in_array($page['section'], $conf['history_sections_cache']))
+    if (
+      in_array($page['section'], $conf['history_sections_cache'])
+      or in_array(strtolower($page['section']), array_map('strtolower', $conf['history_sections_cache']))
+    )
     {
       $section = $page['section'];
     }
@@ -477,7 +505,7 @@ UPDATE '.USER_INFOS_TABLE.'
       $section = $page['section'];
     }
   }
-  
+
   $query = '
 INSERT INTO '.HISTORY_TABLE.'
   (
@@ -487,6 +515,7 @@ INSERT INTO '.HISTORY_TABLE.'
     IP,
     section,
     category_id,
+    search_id,
     image_id,
     image_type,
     format_id,
@@ -501,6 +530,7 @@ INSERT INTO '.HISTORY_TABLE.'
     \''.$ip.'\',
     '.(isset($section) ? "'".$section."'" : 'NULL').',
     '.(isset($page['category']['id']) ? $page['category']['id'] : 'NULL').',
+    '.(isset($page['search_id']) ? $page['search_id'] : 'NULL').',
     '.(isset($image_id) ? $image_id : 'NULL').',
     '.(isset($image_type) ? "'".$image_type."'" : 'NULL').',
     '.(isset($format_id) ? $format_id : 'NULL').',
@@ -845,7 +875,7 @@ function format_fromto($from, $to, $full=false)
  * @param bool $with_weeks
  * @return string
  */
-function time_since($original, $stop='minute', $format=null, $with_text=true, $with_week=true)
+function time_since($original, $stop='minute', $format=null, $with_text=true, $with_week=true, $only_last_unit=false)
 {
   $date = str2DateTime($original, $format);
 
@@ -877,17 +907,37 @@ function time_since($original, $stop='minute', $format=null, $with_text=true, $w
   $j = array_search($stop, array_keys($chunks));
 
   $print = ''; $i=0;
-  foreach ($chunks as $name => $value)
+  
+  if (!$only_last_unit)
   {
-    if ($value != 0)
+    foreach ($chunks as $name => $value)
     {
-      $print.= ' '.l10n_dec('%d '.$name, '%d '.$name.'s', $value);
+      if ($value != 0)
+      {
+        $print.= ' '.l10n_dec('%d '.$name, '%d '.$name.'s', $value);
+      }
+      if (!empty($print) && $i >= $j)
+      {
+        break;
+      }
+      $i++;
     }
-    if (!empty($print) && $i >= $j)
+  } else {
+    $reversed_chunks_names = array_keys($chunks);
+    while ($print == '' && $i<count($reversed_chunks_names )) 
     {
-      break;
+      $name = $reversed_chunks_names[$i];
+      $value = $chunks[$name];
+      if ($value != 0)
+      {
+        $print = l10n_dec('%d '.$name, '%d '.$name.'s', $value);
+      }
+      if (!empty($print) && $i >= $j)
+      {
+        break;
+      }
+      $i++;
     }
-    $i++;
   }
 
   $print = trim($print);
@@ -1377,6 +1427,29 @@ SELECT param, value
   }
 
   trigger_notify('load_conf', $condition);
+}
+
+/**
+ * Is the config table currentable writeable?
+ *
+ * @since 14
+ *
+ * @return boolean
+ */
+function pwg_is_dbconf_writeable()
+{
+  list($param, $value) = array('pwg_is_dbconf_writeable_'.generate_key(12), date('c').' '.generate_key(20));
+
+  conf_update_param($param, $value);
+  list($dbvalue) = pwg_db_fetch_row(pwg_query('SELECT value FROM '.CONFIG_TABLE.' WHERE param = \''.$param.'\''));
+
+  if ($dbvalue != $value)
+  {
+    return false;
+  }
+
+  conf_delete_param($param);
+  return true;
 }
 
 /**

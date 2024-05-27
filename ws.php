@@ -157,6 +157,7 @@ function ws_addDefaultMethods( $arr )
           'default' => IMG_THUMB,
           'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map()))
           ),
+        'search' => array('default' => null),
         ),
       'Returns a list of categories.',
       $ws_functions_root . 'pwg.categories.php'
@@ -291,6 +292,20 @@ function ws_addDefaultMethods( $arr )
 <li>rank becomes useless, only the order of the image_id list matters</li>
 <li>you are supposed to provide the list of all image_ids belonging to the album.
 </ul>',
+      $ws_functions_root . 'pwg.images.php',
+      array('admin_only'=>true, 'post_only'=>true)
+    );
+
+  $service->addMethod(
+      'pwg.images.setCategory',
+      'ws_images_setCategory',
+      array(
+        'image_id'    => array('flags'=>WS_PARAM_FORCE_ARRAY, 'type'=>WS_TYPE_ID),
+        'category_id' => array('type'=>WS_TYPE_ID),
+        'action'      => array('default'=>'associate', 'info' => 'associate/dissociate/move'),
+        'pwg_token'   => array(),
+        ),
+      'Manage associations of images with an album. <b>action</b> can be:<ul><li><i>associate</i> : add photos to this album</li><li><i>dissociate</i> : remove photos from this album</li><li><i>move</i> : dissociate photos from any other album and adds photos to this album</li></ul>',
       $ws_functions_root . 'pwg.images.php',
       array('admin_only'=>true, 'post_only'=>true)
     );
@@ -612,8 +627,9 @@ function ws_addDefaultMethods( $arr )
         'commentable' =>  array('default'=>true,
                                 'type'=>WS_TYPE_BOOL),
         'position' =>     array('default'=>null, 'info'=>'first, last'),
+        'pwg_token' => array('flags'=>WS_PARAM_OPTIONAL),
         ),
-      'Adds an album.',
+      'Adds an album.<br><br><b>pwg_token</b> required if you want to use HTML in name/comment.',
       $ws_functions_root . 'pwg.categories.php',
       array('admin_only'=>true)
     );
@@ -807,7 +823,7 @@ function ws_addDefaultMethods( $arr )
       array(
         'image_id' => array('default'=>null, 'flags'=>WS_PARAM_ACCEPT_ARRAY),
         'pwg_token' => array(),
-        'category_id' => array('default'=>null, 'type'=>WS_TYPE_ID),
+        'category_id' => array('type'=>WS_TYPE_ID),
         ),
       'Notifiy Piwigo you have finished to upload a set of photos. It will empty the lounge, if any.',
       $ws_functions_root . 'pwg.images.php',
@@ -833,11 +849,13 @@ function ws_addDefaultMethods( $arr )
                                   'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
         'single_value_mode' =>    array('default'=>'fill_if_empty'),
         'multiple_value_mode' =>  array('default'=>'append'),
+        'pwg_token' => array('flags'=>WS_PARAM_OPTIONAL),
         ),
       'Changes properties of an image.
 <br><b>single_value_mode</b> can be "fill_if_empty" (only use the input value if the corresponding values is currently empty) or "replace"
 (overwrite any existing value) and applies to single values properties like name/author/date_creation/comment.
-<br><b>multiple_value_mode</b> can be "append" (no change on existing values, add the new values) or "replace" and applies to multiple values properties like tag_ids/categories.',
+<br><b>multiple_value_mode</b> can be "append" (no change on existing values, add the new values) or "replace" and applies to multiple values properties like tag_ids/categories.
+<br><b>pwg_token</b> required if you want to use HTML in name/comment/author.',
       $ws_functions_root . 'pwg.images.php',
       array('admin_only'=>true, 'post_only'=>true)
     );
@@ -847,12 +865,24 @@ function ws_addDefaultMethods( $arr )
       'ws_categories_setInfo',
       array(
         'category_id' =>  array('type'=>WS_TYPE_ID),
-        'name' =>         array('default'=>null),
-        'comment' =>      array('default'=>null),
+        'name' =>         array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL,),
+        'comment' =>      array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL,),
         'status' =>       array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL,
                                 'info'=>'public, private'),
+        'visible' =>       array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL),
+        'commentable' =>  array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL,
+                                'info'=>'Boolean, effective if configuration variable activate_comments is set to true'),
+        'apply_commentable_to_subalbums' =>  array('default'=>null,
+                                'flags'=>WS_PARAM_OPTIONAL,
+                                'info'=>'If true, set commentable to all sub album'),
+        'pwg_token' => array('flags'=>WS_PARAM_OPTIONAL),
         ),
-      'Changes properties of an album.',
+      'Changes properties of an album.<br><br><b>pwg_token</b> required if you want to use HTML in name/comment.',
       $ws_functions_root . 'pwg.categories.php',
       array('admin_only'=>true, 'post_only'=>true)
     );
@@ -1092,9 +1122,16 @@ function ws_addDefaultMethods( $arr )
         'order' =>      array('default'=>'id',
                               'info'=>'id, username, level, email'),
         'exclude' =>    array('flags'=>WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
-                              'type'=>WS_TYPE_ID),
+                              'type'=>WS_TYPE_ID,
+                              'info'=>'Expects a user_id as value.'),
         'display' =>    array('default'=>'basics',
                               'info'=>'Comma saparated list (see method description)'),
+        'filter' =>     array('flags'=>WS_PARAM_OPTIONAL,
+                              'info'=>'Filter by username, email, group'),
+        'min_register' => array('flags'=>WS_PARAM_OPTIONAL,
+                                 'info'=>'See method description'),
+        'max_register' => array('flags'=>WS_PARAM_OPTIONAL,
+                                'info'=>'See method description'),
         ),
       'Retrieves a list of all the users.<br>
 <br>
@@ -1103,7 +1140,8 @@ all, basics, none,<br>
 username, email, status, level, groups,<br>
 language, theme, nb_image_page, recent_period, expand, show_nb_comments, show_nb_hits,<br>
 enabled_high, registration_date, registration_date_string, registration_date_since, last_visit, last_visit_string, last_visit_since<br>
-<b>basics</b> stands for "username,email,status,level,groups"',
+<b>basics</b> stands for "username,email,status,level,groups"<br>
+<b>min_register</b> and <b>max_register</b> filter users by their registration date expecting format "YYYY" or "YYYY-mm" or "YYYY-mm-dd".',
       $ws_functions_root . 'pwg.users.php',
       array('admin_only'=>true)
     );
@@ -1303,6 +1341,7 @@ enabled_high, registration_date, registration_date_string, registration_date_sin
       'cat_id' => array('type'=>WS_TYPE_ID, 'default'=>null),
       'section' => array('default'=>null),
       'tags_string' => array('default'=>null),
+      'is_download' => array('default'=>false, 'type'=>WS_TYPE_BOOL),
       ),
     'Log visit in history',
     $ws_functions_root . 'pwg.php'
@@ -1353,6 +1392,62 @@ enabled_high, registration_date, registration_date_string, registration_date_sin
       <br> <strong>Date format</strong> is yyyy-mm-dd
       <br> <strong>display_thumbnail</strong> can be : \'no_display_thumbnail\', \'display_thumbnail_classic\', \'display_thumbnail_hoverbox\'',
       $ws_functions_root . 'pwg.php'
+    );
+
+    $service->addMethod(
+      'pwg.images.filteredSearch.create',
+      'ws_images_filteredSearch_create',
+      array(
+        'search_id' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'info' => 'prior search_id (or search_key), if any',
+        ),
+        'allwords' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'info' => 'query to search by words',
+        ),
+        'allwords_mode' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'info' => 'AND (by default) | OR',
+        ),
+        'allwords_fields' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+          'info' => 'values among [name, comment, tags, file, author, cat-title, cat-desc]',
+        ),
+        'tags' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+          'type' => WS_TYPE_ID,
+        ),
+        'tags_mode' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'info' => 'AND (by default) | OR',
+        ),
+        'categories' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+          'type' => WS_TYPE_ID,
+        ),
+        'categories_withsubs' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'type' => WS_TYPE_BOOL,
+          'info' => 'false, by default',
+        ),
+        'authors' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+        ),
+        'added_by' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+          'type' => WS_TYPE_ID,
+        ),
+        'filetypes' => array(
+          'flags' => WS_PARAM_OPTIONAL|WS_PARAM_FORCE_ARRAY,
+        ),
+        'date_posted' => array(
+          'flags' => WS_PARAM_OPTIONAL,
+          'info' => 'files posted within 24 hours, 7 days or 30 days or 3 months or 6 months or year NNNN. Value among 24h|7d|30d|3m|6m|yNNNN',
+        ),
+      ),
+      '',
+      $ws_functions_root . 'pwg.images.php'
     );
 }
 

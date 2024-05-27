@@ -84,7 +84,7 @@ jQuery("a.preview-box").colorbox( {
       </td>
     </tr>
     <tr>
-      <td><strong>{'Who can see this photo?'|@translate}</strong></td>
+      <td><strong>{'Who can see this photo?'|@translate}</strong><br>({'Privacy level'|translate})</td>
       <td>
         <select name="level-{$element.id}">
           {html_options options=$level_options selected=$element.LEVEL}
@@ -114,8 +114,12 @@ jQuery("a.preview-box").colorbox( {
 {if !empty($navbar)}{include file='navigation_bar.tpl'|@get_extent:'navbar'}{/if}
 
 <p>
-  <input type="submit" value="{'Submit'|@translate}" name="submit">
-  <input type="reset" value="{'Reset'|@translate}">
+  <input type="hidden" name="pwg_token" value="{$PWG_TOKEN}">
+  <button class="buttonLike" type="submit" value="{'Submit'|@translate}" name="submit"><i class="icon-floppy"></i>{'Submit'|@translate}</button>
+  <button class="resetButton" type="reset" value="{'Reset'|@translate}" name="reset">{'Reset'|@translate}</button>
+
+  {* <span class="buttonLike" type="submit" name="submit"> {'Submit'|@translate}</span> *}
+  {* <input type="reset" value="{'Reset'|@translate}"> *}
 </p>
 {/if}
 

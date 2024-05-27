@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: 日本語 [JP]
-Version: 13.8.0
+Version: 14.4.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=425
 Author: Piwigo team
 Author URI: http://piwigo.org

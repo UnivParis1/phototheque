@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Français [FR]
-Version: 13.8.0
+Version: 14.4.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=421
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -63,9 +63,7 @@ $lang['Anti-flood system : please wait for a moment before trying to post anothe
 $lang['Any tag'] = 'N\'importe quel tag';
 $lang['Are you sure?'] = "Etes-vous sûr ?";
 $lang['ascending'] = 'croissant';
-$lang['At least one listed rule must be satisfied.'] = 'Au moins un des critères doit être satisfait.';
 $lang['Author'] = 'Auteur';
-$lang['author(s) : %s'] = 'auteur(s) : %s';
 $lang['Author: %s'] = 'Auteur : %s';
 $lang['Auto login'] = 'Connexion auto';
 $lang['available for administrators only'] = 'disponible uniquement pour les administrateurs';
@@ -136,7 +134,6 @@ $lang['display your favorites photos'] = 'afficher mes photos favorites';
 $lang['Display'] = 'Affichage';
 $lang['Download this file'] = 'Télécharger ce fichier';
 $lang['Download'] = 'Télécharger';
-$lang['Each listed rule must be satisfied.'] = 'Chaque critère doit être satisfait';
 $lang['Edit a comment'] = "Éditer un commentaire";
 $lang['edit'] = 'éditer';
 $lang['Edit'] = 'Editer';
@@ -283,11 +280,9 @@ $lang['Search for words'] = 'Recherche de mots';
 $lang['Search in albums'] = 'Rechercher dans les albums';
 $lang['Search in sub-albums'] = 'Rechercher dans les sous-albums';
 $lang['Search results'] = 'Résultats de recherche';
-$lang['Search rules'] = 'Critères de recherche';
 $lang['Search tags'] = 'Rechercher les tags';
 $lang['search'] = 'recherche';
 $lang['Search'] = 'Recherche';
-$lang['searched words : %s'] = 'mots recherchés : %s';
 $lang['Sent by'] = 'Envoyé par';
 $lang['Send my connection settings by email'] = 'Recevoir mes identifiants par email';
 $lang['set as album representative'] = 'Choisir comme représentante de cet album';
@@ -418,3 +413,34 @@ $lang['Password: ********** (no copy by email)'] = 'Mot de passe : ********** (p
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Nom d\'album, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Nom d\'album, 100 &rarr; 10 &rarr; 5 &rarr; 1';
 $lang['Start-Date'] = 'Date de début';
+$lang['Added by'] = 'Ajouté par';
+$lang['Filters'] = 'Filtres';
+$lang['Validate'] = 'Valider';
+$lang['Cancel'] = 'Annuler';
+$lang['Search in :'] = 'Rechercher dans :';
+$lang['Album title'] = 'Titre de l\'album';
+$lang['File name'] = 'Nom de fichier';
+$lang['Album description'] = 'Description de l\'album';
+$lang['No results are available.'] = 'Aucun résultat n\'est disponible';
+$lang['You can try to edit your filters and perform a new search.'] = 'Vous pouvez tenter de modifier vos filtres et effectuer une nouvelle recherche';
+$lang['File type'] = 'Type de fichier';
+$lang['Choose filters'] = 'Choisir les filtres';
+$lang['Clear'] = 'Vider';
+$lang['Fill in the filters to start a search'] = 'Complétez les filtres pour lancer une recherche';
+$lang['Pre-established filters are proposed, but you can add or remove them using the "Choose filters" button.'] = 'Des filtres préétablis vous sont proposés, mais vous pouvez aussi en ajouter ou en retirer grâce au bouton "Choisir les filtres".';
+$lang['Empty filters'] = 'Vider les filtres';
+$lang['last 7 days'] = '7 derniers jours';
+$lang['last 30 days'] = '30 derniers jours';
+$lang['last 6 months'] = '6 derniers mois';
+$lang['last year'] = 'Dernière année';
+$lang['Unknown time period'] = 'Période inconnue';
+$lang['Tags found'] = 'Tags trouvés';
+$lang['Albums found'] = 'Albums trouvés';
+$lang['Search in this set'] = 'Rechercher dans ce lot';
+$lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Les tags ci-dessous correspondent à votre recherche par mot. Cliquez sur l\'un d\'eux pour asculer en navigation par tag.';
+$lang['Albums listed here match your search by word. Click on one to browse by album.'] = 'Les albums ci-dessous correspondent à votre recherche par mot. Cliquez sur l\'un d\'eux our basculer en navigation par album.';
+$lang['%d visits'] = '%d visites';
+$lang['rating score %s'] = 'score %s';
+$lang['year %d'] = 'année %d';
+$lang['last 3 months'] = '3 derniers mois';
+$lang['last 24 hours'] = '24 dernières heures';

@@ -753,7 +753,7 @@ array(
 array(
   'name' => 'render_element_name',
   'type' => 'trigger_change',
-  'vars' => array('string', 'element_name'),
+  'vars' => array('string', 'element_name', 'array', 'info'),
   'files' => array('include\functions_html.inc.php (render_element_name)'),
 ),
 array(
@@ -900,20 +900,6 @@ array(
   'type' => 'trigger_notify',
   'vars' => array('Template', 'template', 'Combinable', '$combinable', 'FileCombiner', '$combiner'),
   'files' => array('include\template.class.php (FileCombiner::process_combinable)'),
-  'infos' => 'New in 2.6.',
-),
-array(
-  'name' => 'user_list_columns',
-  'type' => 'trigger_change',
-  'vars' => array('string[]', 'aColumns'),
-  'files' => array('admin\user_list_backend.php'),
-  'infos' => 'New in 2.6.',
-),
-array(
-  'name' => 'after_render_user_list',
-  'type' => 'trigger_change',
-  'vars' => array('array', 'output'),
-  'files' => array('admin\user_list_backend.php'),
   'infos' => 'New in 2.6.',
 ),
 array(

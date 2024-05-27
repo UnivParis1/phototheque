@@ -229,6 +229,7 @@ $template->assign(
     'U_ADD_PHOTOS' => $link_start.'photos_add',
     'U_CHANGE_THEME' => $change_theme_url,
     'ADMIN_PAGE_TITLE' => 'Piwigo Administration Page',
+    'ADMIN_PAGE_OBJECT_ID' => '',
     'U_SHOW_TEMPLATE_TAB' => $conf['show_template_in_side_menu'],
     'SHOW_RATING' => $conf['rate'],
     )
@@ -300,7 +301,7 @@ $page['nb_orphans'] = 0;
 list($page['nb_photos_total']) = pwg_db_fetch_row(pwg_query('SELECT COUNT(*) FROM '.IMAGES_TABLE));
 if ($page['nb_photos_total'] < 100000) // 100k is already a big gallery
 {
-  $page['nb_orphans'] = count(get_orphans());
+  $page['nb_orphans'] = count_orphans();
 }
 
 $template->assign(

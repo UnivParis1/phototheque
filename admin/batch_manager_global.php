@@ -51,7 +51,21 @@ if (isset($_POST['nb_photos_deleted']))
 }
 else if (isset($_POST['setSelected']))
 {
-  $collection = $page['cat_elements_id'];
+  // Here we don't use check_input_parameter because preg_match has a limit in
+  // the repetitive pattern. Found a limit to 3276 but may depend on memory.
+  //
+  // check_input_parameter('whole_set', $_POST, false, '/^\d+(,\d+)*$/');
+  //
+  // Instead, let's break the input parameter into pieces and check pieces one by one.
+  $collection = explode(',', $_POST['whole_set']);
+
+  foreach ($collection as $id)
+  {
+    if (!preg_match('/^\d+$/', $id))
+    {
+      fatal_error('[Hacking attempt] the input parameter "whole_set" is not valid');
+    }
+  }
 }
 else if (isset($_POST['selection']))
 {
@@ -206,31 +220,10 @@ DELETE
 
   else if ('dissociate' == $action)
   {
-    // physical links must not be broken, so we must first retrieve image_id
-    // which create virtual links with the category to "dissociate from".
-    $query = '
-SELECT id
-  FROM '.IMAGE_CATEGORY_TABLE.'
-    INNER JOIN '.IMAGES_TABLE.' ON image_id = id
-  WHERE category_id = '.$_POST['dissociate'].'
-    AND id IN ('.implode(',', $collection).')
-    AND (
-      category_id != storage_category_id
-      OR storage_category_id IS NULL
-    )
-;';
-    $dissociables = array_from_query($query, 'id');
+    $nb_dissociated = dissociate_images_from_category($collection, $_POST['dissociate']);
 
-    if (!empty($dissociables))
+    if ($nb_dissociated > 0)
     {
-      $query = '
-DELETE
-  FROM '.IMAGE_CATEGORY_TABLE.'
-  WHERE category_id = '.$_POST['dissociate'].'
-    AND image_id IN ('.implode(',', $dissociables).')
-';
-      pwg_query($query);
-
       $_SESSION['page_infos'] = array(
         l10n('Information data registered in database')
         );

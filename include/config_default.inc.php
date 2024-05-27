@@ -40,12 +40,15 @@
 
 // picture_ext : file extensions for picture file, must be a subset of
 // file_ext
-$conf['picture_ext'] = array('jpg','jpeg','png','gif');
+$conf['picture_ext'] = array('jpg','jpeg','png','gif','webp');
 
 // file_ext : file extensions (case sensitive) authorized
+//
+// * if you enable "eps" file extension, make sure you have this file type
+//   authorized in your ImageMagick policy
 $conf['file_ext'] = array_merge(
   $conf['picture_ext'],
-  array('tiff', 'tif', 'mpg','zip','avi','mp3','ogg','pdf','svg')
+  array('tiff', 'tif', 'mpg','zip','avi','mp3','ogg','pdf','svg', 'heic')
   );
 
 // enable_formats: should Piwigo search for multiple formats?
@@ -615,7 +618,7 @@ $conf['gallery_url'] = null;
 // (depends on the server AcceptPathInfo directive configuration)
 $conf['question_mark_in_urls'] = true;
 
-// php_extension_in_urls : if true, the urls generated for picture and
+// php_extension_in_urls : if false, the urls generated for picture and
 // category will not contain the .php extension. This will work only if
 // .htaccess defines Options +MultiViews parameter or url rewriting rules
 // are active.
@@ -637,6 +640,12 @@ $conf['picture_url_style'] = 'id';
 // Note that if you choose 'tag' and the url (ascii) representation of your
 // tags is not unique, all tags with the same url representation will be shown
 $conf['tag_url_style'] = 'id-tag';
+
+// force an explicit port in the url (like ":80" or ":443")
+// * 'none' : do not add any port, whatever protocol is detected
+// * 'auto' : tries to smartly add a port based on $_SERVER variables
+// * 123 : adds ":123" next to url host
+$conf['url_port'] = 'none';
 
 // +-----------------------------------------------------------------------+
 // |                                 tags                                  |
@@ -915,6 +924,10 @@ $conf['derivative_default_size'] = 'medium';
 // below which size (in pixels, ie width*height) do we remove metadata
 // EXIF/IPTC... from derivative?
 $conf['derivatives_strip_metadata_threshold'] = 256000;
+
+// For animated webP files, to avoid heavy derivatives, set a specific quality,
+// different from derivatives.resize_quality
+$conf['animated_webp_compression_quality'] = 70;
 
 //Maximum Ajax requests at once, for thumbnails on-the-fly generation
 $conf['max_requests']=3;

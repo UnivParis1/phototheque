@@ -10,6 +10,66 @@
  * @package functions\search
  */
 
+function get_search_id_pattern($candidate)
+{
+  $clause_pattern = null;
+  if (preg_match('/^psk-\d{8}-[a-z0-9]{10}$/i', $candidate))
+  {
+    $clause_pattern = 'search_uuid = \'%s\'';
+  }
+  elseif (preg_match('/^\d+$/', $candidate))
+  {
+    $clause_pattern = 'id = %u';
+  }
+
+  return $clause_pattern;
+}
+
+function get_search_info($candidate)
+{
+  global $page;
+
+  // $candidate might be a search.id or a search_uuid
+  $clause_pattern = get_search_id_pattern($candidate);
+
+  if (empty($clause_pattern))
+  {
+    die('Invalid search identifier');
+  }
+
+  $query = '
+SELECT *
+  FROM '.SEARCH_TABLE.'
+  WHERE '.sprintf($clause_pattern, $candidate).'
+;';
+  $searches = query2array($query);
+
+  if (count($searches) > 0)
+  {
+    // we don't want spies to be able to see the search rules of any prior search (performed
+    // by any user). We don't want them to be try index.php?/search/123 then index.php?/search/124
+    // and so on. That's why we have implemented search_uuid with random characters.
+    //
+    // We also don't want to break old search urls with only the numeric id, so we only break if
+    // there is no uuid.
+    //
+    // We also don't want to die if we're in the API.
+    if (script_basename() != 'ws' and 'id = %u' == $clause_pattern and isset($searches[0]['search_uuid']))
+    {
+      fatal_error('this search is not reachable with its id, need the search_uuid instead');
+    }
+
+    if (isset($page['section']) and 'search' == $page['section'])
+    {
+      // to be used later in pwg_log
+      $page['search_id'] = $searches[0]['id'];
+    }
+
+    return $searches[0];
+  }
+
+  return null;
+}
 
 /**
  * Returns search rules stored into a serialized array in "search"
@@ -20,19 +80,16 @@
  */
 function get_search_array($search_id)
 {
-  if (!is_numeric($search_id))
+  global $user;
+
+  $search = get_search_info($search_id);
+
+  if (empty($search))
   {
-    die('Search id must be an integer');
+    bad_request('this search identifier does not exist');
   }
 
-  $query = '
-SELECT rules
-  FROM '.SEARCH_TABLE.'
-  WHERE id = '.$search_id.'
-;';
-  list($serialized_rules) = pwg_db_fetch_row(pwg_query($query));
-
-  return unserialize($serialized_rules);
+  return unserialize($search['rules']);
 }
 
 /**
@@ -65,24 +122,34 @@ function get_sql_search_clause($search)
         }
       }
 
-      // adds brackets around where clauses
-      $local_clauses = prepend_append_array_items($local_clauses, '(', ')');
+      if (count($local_clauses) > 0)
+      {
+        // adds brackets around where clauses
+        $local_clauses = prepend_append_array_items($local_clauses, '(', ')');
 
-      $clauses[] = implode(
-        ' '.$search['fields'][$textfield]['mode'].' ',
-        $local_clauses
+        $clauses[] = implode(
+          ' '.$search['fields'][$textfield]['mode'].' ',
+          $local_clauses
         );
+      }
     }
   }
 
-  if (isset($search['fields']['allwords']) and count($search['fields']['allwords']['fields']) > 0)
+  if (isset($search['fields']['allwords']) and !empty($search['fields']['allwords']['words']) and count($search['fields']['allwords']['fields']) > 0)
   {
-    $fields = array('file', 'name', 'comment');
+    // 1) we search in regular fields (ie, the ones in the piwigo_images table)
+    $fields = array('file', 'name', 'comment', 'author');
 
     if (isset($search['fields']['allwords']['fields']) and count($search['fields']['allwords']['fields']) > 0)
     {
       $fields = array_intersect($fields, $search['fields']['allwords']['fields']);
     }
+
+    $cat_fields_dictionnary = array(
+      'cat-title' => 'name',
+      'cat-desc' => 'comment',
+    );
+    $cat_fields = array_intersect(array_keys($cat_fields_dictionnary), $search['fields']['allwords']['fields']);
 
     // in the OR mode, request bust be :
     // ((field1 LIKE '%word1%' OR field2 LIKE '%word1%')
@@ -92,6 +159,7 @@ function get_sql_search_clause($search)
     // ((field1 LIKE '%word1%' OR field2 LIKE '%word1%')
     // AND (field1 LIKE '%word2%' OR field2 LIKE '%word2%'))
     $word_clauses = array();
+    $cat_ids_by_word = $tag_ids_by_word = array();
     foreach ($search['fields']['allwords']['words'] as $word)
     {
       $field_clauses = array();
@@ -99,29 +167,138 @@ function get_sql_search_clause($search)
       {
         $field_clauses[] = $field." LIKE '%".$word."%'";
       }
-      // adds brackets around where clauses
-      $word_clauses[] = implode(
-        "\n          OR ",
-        $field_clauses
+
+      if (count($cat_fields) > 0)
+      {
+        $cat_word_clauses = array();
+        $cat_field_clauses = array();
+        foreach ($cat_fields as $cat_field)
+        {
+          $cat_field_clauses[] = $cat_fields_dictionnary[$cat_field]." LIKE '%".$word."%'";
+        }
+
+        // adds brackets around where clauses
+        $cat_word_clauses[] = implode(' OR ', $cat_field_clauses);
+
+        $query = '
+SELECT
+    id
+  FROM '.CATEGORIES_TABLE.'
+  WHERE '.implode(' OR ', $cat_word_clauses).'
+;';
+        $cat_ids = query2array($query, null, 'id');
+        $cat_ids_by_word[$word] = $cat_ids;
+        if (count($cat_ids) > 0)
+        {
+          $query = '
+SELECT
+    image_id
+  FROM '.IMAGE_CATEGORY_TABLE.'
+  WHERE category_id IN ('.implode(',', $cat_ids).')
+;';
+          $cat_image_ids = query2array($query, null, 'image_id');
+
+          if (count($cat_image_ids) > 0)
+          {
+            $field_clauses[] = 'id IN ('.implode(',', $cat_image_ids).')';
+          }
+        }
+      }
+
+      // search_in_tags
+      if (in_array('tags', $search['fields']['allwords']['fields']))
+      {
+        $query = '
+SELECT
+    id
+  FROM '.TAGS_TABLE.'
+  WHERE name LIKE \'%'.$word.'%\'
+;';
+        $tag_ids = query2array($query, null, 'id');
+        $tag_ids_by_word[$word] = $tag_ids;
+        if (count($tag_ids) > 0)
+        {
+          $query = '
+SELECT
+    image_id
+  FROM '.IMAGE_TAG_TABLE.'
+  WHERE tag_id IN ('.implode(',', $tag_ids).')
+;';
+          $tag_image_ids = query2array($query, null, 'image_id');
+
+          if (count($tag_image_ids) > 0)
+          {
+            $field_clauses[] = 'id IN ('.implode(',', $tag_image_ids).')';
+          }
+        }
+      }
+
+      if (count($field_clauses) > 0)
+      {
+        // adds brackets around where clauses
+        $word_clauses[] = implode(
+          "\n          OR ",
+          $field_clauses
         );
+      }
     }
 
-    array_walk(
-      $word_clauses,
-      function(&$s){ $s = "(".$s.")"; }
+    if (count($word_clauses) > 0)
+    {
+      array_walk(
+        $word_clauses,
+        function(&$s){ $s = "(".$s.")"; }
       );
+    }
 
     // make sure the "mode" is either OR or AND
-    if ($search['fields']['allwords']['mode'] != 'AND' and $search['fields']['allwords']['mode'] != 'OR')
+    if (!in_array($search['fields']['allwords']['mode'], array('OR', 'AND')))
     {
       $search['fields']['allwords']['mode'] = 'AND';
     }
 
-    $clauses[] = "\n         ".
-      implode(
-        "\n         ". $search['fields']['allwords']['mode']. "\n         ",
-        $word_clauses
-        );
+    $clauses[] = "\n         ".implode(
+      "\n         ". $search['fields']['allwords']['mode']. "\n         ",
+      $word_clauses
+    );
+
+    if (count($cat_ids_by_word) > 0)
+    {
+      $matching_cat_ids = null;
+      foreach ($cat_ids_by_word as $idx => $cat_ids)
+      {
+        if (is_null($matching_cat_ids))
+        {
+          // first iteration
+          $matching_cat_ids = $cat_ids;
+        }
+        else
+        {
+          $matching_cat_ids = array_merge($matching_cat_ids, $cat_ids);
+        }
+      }
+
+      $matching_cat_ids = array_unique($matching_cat_ids);
+    }
+
+    if (count($tag_ids_by_word) > 0)
+    {
+      $matching_tag_ids = null;
+      foreach ($tag_ids_by_word as $idx => $tag_ids)
+      {
+        if (is_null($matching_tag_ids))
+        {
+          // first iteration
+          $matching_tag_ids = $tag_ids;
+        }
+        else
+        {
+          $matching_tag_ids = array_merge($matching_tag_ids, $tag_ids);
+        }
+      }
+
+      $matching_tag_ids = array_unique($matching_tag_ids);
+    }
   }
 
   foreach (array('date_available', 'date_creation') as $datefield)
@@ -145,7 +322,44 @@ function get_sql_search_clause($search)
     }
   }
 
-  if (isset($search['fields']['cat']))
+  if (!empty($search['fields']['date_posted']))
+  {
+    $options = array(
+      '24h' => '24 HOUR',
+      '7d' => '7 DAY',
+      '30d' => '30 DAY',
+      '3m' => '3 MONTH',
+      '6m' => '6 MONTH',
+      '1y' => '1 YEAR',
+    );
+
+    if (isset($options[ $search['fields']['date_posted'] ]))
+    {
+      $clauses[] = 'date_available > SUBDATE(NOW(), INTERVAL '.$options[ $search['fields']['date_posted'] ].')';
+    }
+    elseif (preg_match('/^y(\d+)$/', $search['fields']['date_posted'], $matches))
+    {
+      // that is for y2023 = all photos posted in 2022
+      $clauses[] = 'YEAR(date_available) = '.$matches[1];
+    }
+  }
+
+  if (!empty($search['fields']['filetypes']))
+  {
+    $filetypes_clauses = array();
+    foreach ($search['fields']['filetypes'] as $ext)
+    {
+      $filetypes_clauses[] = 'path LIKE \'%.'.$ext.'\'';
+    }
+    $clauses[] = implode(' OR ', $filetypes_clauses);
+  }
+
+  if (!empty($search['fields']['added_by']))
+  {
+    $clauses[] = 'added_by IN ('.implode(',', $search['fields']['added_by']).')';
+  }
+
+  if (isset($search['fields']['cat']) and !empty($search['fields']['cat']['words']))
   {
     if ($search['fields']['cat']['sub_inc'])
     {
@@ -172,7 +386,11 @@ function get_sql_search_clause($search)
 
   $search_clause = $where_separator;
 
-  return $search_clause;
+  return array(
+    $search_clause,
+    isset($matching_cat_ids) ? array_values($matching_cat_ids) : null,
+    isset($matching_tag_ids) ? array_values($matching_tag_ids) : null
+  );
 }
 
 /**
@@ -188,6 +406,8 @@ function get_regular_search_results($search, $images_where='')
 
   $logger->debug(__FUNCTION__, 'search', $search);
 
+  $has_filters_filled = false;
+
   $forbidden = get_sql_condition_FandF(
         array
           (
@@ -201,29 +421,13 @@ function get_regular_search_results($search, $images_where='')
   $items = array();
   $tag_items = array();
 
-  if (isset($search['fields']['search_in_tags']))
-  {
-    $word_clauses = array();
-    foreach ($search['fields']['allwords']['words'] as $word)
-    {
-      $word_clauses[] = "name LIKE '%".$word."%'";
-    }
-
-    $query = '
-SELECT
-    id
-  FROM '.TAGS_TABLE.'
-  WHERE '.implode(' OR ', $word_clauses).'
-;';
-    $tag_ids = query2array($query, null, 'id');
-
-    $search_in_tags_items = get_image_ids_for_tags($tag_ids, 'OR');
-
-    $logger->debug(__FUNCTION__.' '.count($search_in_tags_items).' items in $search_in_tags_items');
-  }
-
   if (isset($search['fields']['tags']))
   {
+    if (!empty($search['fields']['tags']['words']))
+    {
+      $has_filters_filled = true;
+    }
+
     $tag_items = get_image_ids_for_tags(
       $search['fields']['tags']['words'],
       $search['fields']['tags']['mode']
@@ -232,14 +436,17 @@ SELECT
     $logger->debug(__FUNCTION__.' '.count($tag_items).' items in $tag_items');
   }
 
-  $search_clause = get_sql_search_clause($search);
+  list($search_clause, $matching_cat_ids, $matching_tag_ids) = get_sql_search_clause($search);
 
   if (!empty($search_clause))
   {
+    $has_filters_filled = true;
+
     $query = '
 SELECT DISTINCT(id)
   FROM '.IMAGES_TABLE.' i
     INNER JOIN '.IMAGE_CATEGORY_TABLE.' AS ic ON id = ic.image_id
+    LEFT JOIN '.IMAGE_TAG_TABLE.' AS it ON id = it.image_id
   WHERE '.$search_clause;
     if (!empty($images_where))
     {
@@ -250,23 +457,6 @@ SELECT DISTINCT(id)
     $items = array_from_query($query, 'id');
 
     $logger->debug(__FUNCTION__.' '.count($items).' items in $items');
-  }
-
-  if (isset($search_in_tags_items))
-  {
-    // TODO the sorting order will not match $conf['order_by'], a solution would be
-    // to have a new SQL query 'where id in (merged ids) order by $conf[order_by]'
-    //
-    // array_values will reset the numeric keys, without changing the sorting order.
-    // picture.php relies on these keys to be sequential {0,1,2} and not {0,1,5}
-    $items = array_values(
-      array_unique(
-        array_merge(
-          $items,
-          $search_in_tags_items
-          )
-        )
-      );
   }
 
   if ( !empty($tag_items) )
@@ -296,7 +486,14 @@ SELECT DISTINCT(id)
     }
   }
 
-  return $items;
+  return array(
+    'items' => $items,
+    'search_details' => array(
+      'matching_cat_ids' => $matching_cat_ids,
+      'matching_tag_ids' => $matching_tag_ids,
+      'has_filters_filled' => $has_filters_filled,
+    ),
+  );
 }
 
 
@@ -1496,13 +1693,93 @@ function get_search_results($search_id, $super_order_by, $images_where='')
   $search = get_search_array($search_id);
   if ( !isset($search['q']) )
   {
-    $result['items'] = get_regular_search_results($search, $images_where);
-    return $result;
+    return get_regular_search_results($search, $images_where);
   }
   else
   {
     return get_quick_search_results($search['q'], array('super_order_by'=>$super_order_by, 'images_where'=>$images_where) );
   }
+}
+
+function split_allwords($raw_allwords)
+{
+  $words = null;
+
+  $raw_allwords = trim($raw_allwords);
+
+  if (!preg_match('/^\s*$/', $raw_allwords))
+  {
+    $drop_char_match   = array(';','&','(',')','<','>','`','\'','"','|',',','@','?','%','.','[',']','{','}',':','\\','/','=','\'','!','*');
+    $drop_char_replace = array(' ',' ',' ',' ',' ',' ', '', '', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','' , ' ',' ',' ', ' ',' ');
+
+    // Split words
+    $words = array_unique(
+      preg_split(
+        '/\s+/',
+        str_replace(
+          $drop_char_match,
+          $drop_char_replace,
+          $raw_allwords
+        )
+      )
+    );
+  }
+
+  return $words;
+}
+
+function get_available_search_uuid()
+{
+  $candidate = 'psk-'.date('Ymd').'-'.generate_key(10);
+
+  $query = '
+SELECT
+    COUNT(*)
+  FROM '.SEARCH_TABLE.'
+  WHERE search_uuid = \''.$candidate.'\'
+;';
+  list($counter) = pwg_db_fetch_row(pwg_query($query));
+  if (0 == $counter)
+  {
+    return $candidate;
+  }
+  else
+  {
+    return get_available_search_uuid();
+  }
+}
+
+function save_search($rules, $forked_from=null)
+{
+  global $user;
+
+  list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW()'));
+  $search_uuid = get_available_search_uuid();
+
+  single_insert(
+    SEARCH_TABLE,
+    array(
+      'rules' => pwg_db_real_escape_string(serialize($rules)),
+      'created_on' => $dbnow,
+      'created_by' => $user['user_id'],
+      'search_uuid' => $search_uuid,
+      'forked_from' => $forked_from,
+    )
+  );
+
+  if (!is_a_guest() and !is_generic())
+  {
+    userprefs_update_param('gallery_search_filters', array_keys($rules['fields'] ?? array()));
+  }
+
+  $url = make_index_url(
+    array(
+      'section' => 'search',
+      'search'  => $search_uuid,
+    )
+  );
+
+  return array($search_uuid, $url);
 }
 
 ?>

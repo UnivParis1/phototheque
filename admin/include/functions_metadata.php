@@ -182,7 +182,7 @@ function get_sync_metadata($infos)
     $file = original_to_representative($file, $infos['representative_ext']);
   }
 
-  if (in_array(mime_content_type($file), array('image/svg+xml', 'image/svg')))
+  if (function_exists('mime_content_type') && in_array(mime_content_type($file), array('image/svg+xml', 'image/svg')))
   {
     $xml = file_get_contents($file);
 
@@ -231,6 +231,17 @@ function get_sync_metadata($infos)
   {
     $iptc = get_sync_iptc_data($file);
     $infos = array_merge($infos, $iptc);
+  }
+
+  foreach (array('name', 'author') as $single_line_field)
+  {
+    if (isset($infos[$single_line_field]))
+    {
+      foreach (array("\r\n", "\n") as $to_replace_string)
+      {
+        $infos[$single_line_field] = str_replace($to_replace_string, ' ', $infos[$single_line_field]);
+      }
+    }
   }
 
   return $infos;
@@ -393,6 +404,8 @@ function metadata_normalize_keywords_string($keywords_string)
   global $conf;
   
   $keywords_string = preg_replace($conf['metadata_keyword_separator_regex'], ',', $keywords_string);
+  // new lines are always considered as keyword separators
+  $keywords_string = str_replace(array("\r\n", "\n"), ',', $keywords_string);
   $keywords_string = preg_replace('/,+/', ',', $keywords_string);
   $keywords_string = preg_replace('/^,+|,+$/', '', $keywords_string);
       

@@ -297,6 +297,14 @@ UL.thumbnails li.rank-of-image {background-color: #ddd;}
   cursor: not-allowed;
 }
 
+.resetButton{
+  background-color:transparent;
+  color:#aaa;
+  font-weight:700;
+  border:none;
+  padding: 8px 15px;
+}
+
 #formCreateAlbum input[name="virtual_name"] {border: 1px solid #D5D5D5; transition: all 125ms ease-out;}
 #formCreateAlbum input[name="virtual_name"]:hover {border-color: #3C3C3C;}
 
@@ -797,7 +805,6 @@ li.plupload_delete a:hover {background: url("images/cancelhover.svg")!important;
 .breadcrumb-item {
   background-color: #fafafa;
   box-shadow: 0px 2px #00000024;
-  color: #777 !important;
 }
 .breadcrumb-item:hover {
   background: #ffd7ad;
@@ -838,3 +845,11 @@ li.plupload_delete a:hover {background: url("images/cancelhover.svg")!important;
   color: #ffd7ad;
   background-color: #f98100;
 }
+
+.eiw .messages a {
+  background-color: #00529b;
+  color: #bde5f8;
+  padding: 2px 7px;
+}
+
+#wImg {background-color: #e5e5e5;}
