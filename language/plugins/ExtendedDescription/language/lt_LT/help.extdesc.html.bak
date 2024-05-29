@@ -1,0 +1,22 @@
+<p>Išplėstinių aprašymų žymos leidžia kurti trumpus albumo aprašymus albumo išoreje ir ilgesnius albumo viduje. Galima netgi sukurti du skirtingus aprašymus albumo puslapyje.</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Tik trumpas aprašymas bus rodomas albumo išorėje. Albumo puslapyje matysite trumpą + ilgą aprašymus.</p>
+
+<pre>
+trumpas aprašymas &lt;!--more--&gt; ilgas aprašymas
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Tik trumpas aprašymas bus rodomas albumo išorėje. Albumo puslapyje matysite tik ilgą aprašyma, taigi, realiai turite du skirtingus aprašymus.</p>
+
+<pre>
+trumpas aprašymas &lt;!--complete--&gt; ilgas aprašymas
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Tik viršutinis aprašymas bus rodomas albumo išorėje. Albumo puslapyje viršutinis aprašymas bus rodomas virš sumažintos nuotraukos, o apatinis aprašymas bus rodomas po sumažinta nuotrauka.</p>
+
+<pre>
+viršutinis aprašymas &lt;!--up-down--&gt; apatinis aprašymas
+</pre>

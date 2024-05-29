@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Tiu etikedo permesas enŝovi ĉie salutligilo kun aŭtomata alidirektado al la aktuala aĝo.</p>
+
+<b>Opcioj:</b>
+<ul>
+  <li><code>html</code> (opcia) se agordita al <code>malvera</code> la etikedo nur liveras la reteja adreso por ensaluti, sen HTML</li>
+  <li><code>text</code> (opcia) ligila etikedo, povas enteni <code>[lang]</code> etikedojn</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=eo]konektu vin[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Vidigi tekstan blokon nur se la aktuala uzanto ensalutis aŭ ne.</p>
+
+<pre>
+[logged=true] Bonvenu denove [/logged]
+[logged=false] Bonvolu ensaluti [/logged]
+</pre>

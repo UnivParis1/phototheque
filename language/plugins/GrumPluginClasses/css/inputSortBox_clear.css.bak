@@ -1,0 +1,54 @@
+/* roma css */
+
+/* list */
+ul.ui-inputSortBox li {
+  border: 1px solid #666666;
+  margin-bottom: 5px;
+  padding: 4px;
+  background-color: #F9F9F9;
+}
+
+span.ui-inputSortBoxAsc,
+span.ui-inputSortBoxDesc {
+  color: #005e89;
+  background-image:url(./../icons/buttons.png);
+  background-repeat:no-repeat;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  -khtml-border-radius:2px;
+  border-radius:2px;
+}
+
+span.ui-inputSortBoxAsc {
+  background-position:-15px -90px;
+}
+span.ui-inputSortBoxAsc:hover {
+  background-position:-15px -105px;
+  background-color:#999999;
+}
+
+span.ui-inputSortBoxDesc {
+  background-position:0px -90px;
+}
+span.ui-inputSortBoxDesc:hover {
+  background-position:0px -105px;
+  background-color:#999999;
+}
+
+/* dialog box */
+.ui-inputDialogSortBox {
+  background:#AAAAAA;
+  border:1px solid #999999;
+}
+.ui-inputDialogSortBox div.ui-dialog-titlebar {
+  background:#DDDDDD;
+  color:#666666;
+}
+.ui-inputDialogSortBox div.ui-dialog-buttonpane button {
+  background:none repeat scroll 0 0 #999999;
+  border-color:#DDDDDD #666666 #666666 #DDDDDD;
+  color:#005E89;
+}
+.ui-inputDialogSortBox div.ui-dialog-buttonpane button:active {
+  border-color:#666666 #DDDDDD #DDDDDD #666666;
+}

@@ -1,0 +1,22 @@
+<p>Las balizas de descripción extensa permiten tener una descripción reducida para la presentación de una categoría, una descripción extendida para la descripción que se exhibe sobre la página de la categoría, o dos descripciones diferentes sobre la página de la categoría.</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Sólo la descripción reducida será fijada para la presentación de la categoría. Sobre la categoría misma, la descripción será la descripción reducida + la descripción detallada.</p>
+
+<pre>
+descripción reducida &lt;!--more--&gt; descripción detallada
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Sólo la descripción reducida será fijada para la presentación de la categoría. En cambio, sobre la categoría misma, la descripción únicamente será la descripción detallada, es decir 2 descripciones diferentes.</p>
+
+<pre>
+descripción reducida &lt;!--complete--&gt; descripción detallada
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Sólo la descripción alta será fijada para la presentación de la categoría. Sobre la categoría misma, la descripción alta será fijada por encima de las miniaturas, mientras que la descripción baja sea fijada debajo (en el emplazamiento normal de la descripción).</p>
+
+<pre>
+descripción alta &lt;!--up-down--&gt; descripción baja
+</pre>

@@ -1,0 +1,20 @@
+<h4>Kategorie verstecken nicht anzeigen</h4>
+<p>Dazu benützt man den Tag <code>&lt;!--hidden--&gt;</code> im Kategorienamen:</p>
+<ul>
+  <li>diese wird nicht mehr in der Parent-Kategorie angezeigt</li>
+  <li>bleibt weiterhin ersichtlich im Kategoriemenü</li>
+</ul>
+
+<h4>Kategoriemenü verstecken nicht anzeigen</h4>
+<p>Dazu benützt man den Tag <code>&lt;!--mb-hidden--&gt;</code> im Kategorienamen:</p>
+<ul>
+  <li>diese wird nicht mehr im Kategoriemenü angezeigt </li>
+  <li>bleibt weiterhin ersichtlich in der Parent-Kategorie</li>
+</ul>
+
+<h4>Bild verstecken nicht anzeigen</h4>
+<p>Dazu benützt man den Tag <code>&lt;!--hidden--&gt;</code> im Bildnamen:</p>
+<ul>
+  <li>diese wird nicht mehr auf der Vignettenseite angezeigt</li>
+  <li>bleibt weiterhin ersichtlich in der Kategorie</li>
+</ul>

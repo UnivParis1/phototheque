@@ -1,0 +1,26 @@
+
+div#iGpcTabs ul {
+  padding:0;
+}
+div#iGpcTabs ul li {
+  list-style:none;
+  float:left;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+div#iGpcTabs ul li.gpcSeparator {
+  border-right:1px solid;
+}
+div#iGpcTabs ul li a {
+  font-weight:bold;
+  cursor:pointer;
+}
+div#iGpcTabs ul li a.gpcTabSelected {
+}
+
+div#iGpcTabsContent {
+  position:relative;
+  top:40px;
+  clear:both;
+  padding-bottom: 30px;
+}

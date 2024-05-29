@@ -1,0 +1,33 @@
+<p>Многоезиково описание е поставеното между <code>[lang=xx]</code> and <code>[/lang]</code> тагове, където xx е езиковия код (за пример bg, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Специален език <i>default</i></h4>
+<p>"default" описанието ще бъде използвано по подразбиране там където не е въведено друго описание на езика на който отворил потребител на вашата галерия.<br>
+Ако <code>[lang=default]</code> не съществува, всичко написано извън тага <code>[lang]</code> ще се приема за описание по подразбиране.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Специален език <i>all</i></h4>
+<p>всичко в <code>[lang=all]</code> ще се приеме за описание, БЕЗ да има значение какво е описанието за конкретния език на потребителя на галерията.<br>
+Това е удобно при използване на HTML/JavaScript код вътре в описанието.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

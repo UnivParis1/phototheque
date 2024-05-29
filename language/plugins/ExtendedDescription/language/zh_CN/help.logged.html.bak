@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>此tag标签可在任何地方插入一个登录链接，登录后自动返回当前页。</p>
+
+<b>选项：</b>
+<ul>
+  <li><code>html</code> (可选) 如果设为 <code>false</code>，则仅显示登录URL，无HTML</li>
+  <li><code>text</code> (可选) 链接标签，可包含 <code>[lang]</code> 标签</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="登录[lang=EN]log in[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>显示一个当前用户已登录或未登录的文字块。</p>
+
+<pre>
+[logged=true] 欢迎回来 [/logged]
+[logged=false] 请登录 [/logged]
+</pre>

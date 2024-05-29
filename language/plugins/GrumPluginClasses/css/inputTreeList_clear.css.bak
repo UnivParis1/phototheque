@@ -1,0 +1,73 @@
+/* roma css */
+
+.ui-inputTreeList,
+.ui-inputTreeList-list {
+  background-color:#DDDDDD;
+  border:1px solid #999999;
+  color:#666666;
+}
+
+li.ui-inputTreeList-item:hover {
+  background-color:#AAAAAA;
+  color:#DDDDDD;
+}
+
+.ui-inputTreeList-selected-item {
+  background-color:#999999;
+  color:#DDDDDD;
+}
+
+.ui-inputTreeList-arrow,
+li.ui-inputTreeList-selected-item div.ui-inputTreeList-check,
+li.ui-inputTreeList-item div.ui-inputTreeList-check,
+li.ui-inputTreeList-expandable-item div.ui-inputTreeList-expand-item,
+li.ui-inputTreeList-collapsable-item div.ui-inputTreeList-expand-item {
+  background-image:url(./../icons/buttons.png);
+  background-repeat:no-repeat;
+  width:15px;
+  height:15px;
+}
+
+
+li.ui-inputTreeList-selected-item div.ui-inputTreeList-check {
+  background-position:-195px -90px;
+}
+li.ui-inputTreeList-unselected-item div.ui-inputTreeList-check {
+  background-position:-180px -90px;
+}
+li.ui-inputTreeList-collapsable-item div.ui-inputTreeList-expand-item {
+  background-position:-165px -90px;
+}
+li.ui-inputTreeList-expandable-item div.ui-inputTreeList-expand-item {
+  background-position:-150px -90px;
+}
+
+
+
+/* --- */
+.ui-inputTreeList-name ul li.ui-inputTreeList-selected-cat {
+  background:#999999;
+  color:#DDDDDD;
+  margin-top:1px;
+  padding-top:1px;
+}
+
+.ui-error, input[type='text'].ui-error {
+  background:#ff8080;
+  border-color:#800000;
+  color:#800000;
+}
+
+.ui-inputTreeList-arrow {
+  background-position:-30px -90px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  -khtml-border-radius:2px;
+  border-radius:2px;
+  color:#005E89;
+  border:0px;
+}
+.ui-inputTreeList-arrow:hover {
+  background-position:-30px -105px;
+  background-color:#999999;
+}

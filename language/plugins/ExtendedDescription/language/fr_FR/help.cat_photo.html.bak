@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Cette balise permet d'insérer une photo de n'importe quelle taille.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>id</code> le numéro de la photo</li>
+  <li><code>album</code> (facultatif) le numéro de l'album parent</li>
+  <li><code>size</code> (facultatif) la taille de la photo, parmi <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (facultatif) si <code>false</code>, la balise ne retourne que l'URL de la photo, sans HTML</li>
+  <li><code>link</code> (facultatif) si <code>true</code>, la photo est cliquable, vers sa page</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Même chose, sauf que la photo est prise aléatoirement dans toute la galerie ou dans <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Cette balise permet d'insérer un album dans la description, avec <code>xx</code> le numéro de l'album.</p>

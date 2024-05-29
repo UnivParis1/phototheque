@@ -1,0 +1,23 @@
+<h4>[photo id=xx]</h4>
+<p>Questo tag permette di inserire una foto di qualsiasi dimensione che si desidera.</p>
+
+<b>Opzioni:</b>
+<ul>
+  <li><code>id</code> identificatore della foto</li>
+  <li><code>album</code> (opzionale) identificatore di album di padre</li>
+  <li><code>size</code> (opzionale) la dimensione della foto, da <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (opzionale) se è impostato a <code>false</code> il tag restituisce solo l'URL della foto, senza HTML</li>
+  <li><code>link</code> (opzionale) se impostata su <code>true</code> la foto è avvolta in un link alla pagina foto</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Stessa cosa come sopra, tranne che la foto è scelta a caso dall' <code>album</code>.</p>
+
+<h4>[cat=xx]</h4>
+<p>Questo tag consente di inserire un album nella descrizione, dove <code>xx</code> è l'identificatore album.</p>

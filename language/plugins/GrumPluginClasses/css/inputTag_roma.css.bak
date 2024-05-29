@@ -1,0 +1,39 @@
+/* roma css */
+
+.ui-tag-selector-list, .ui-tag-selector-input {
+  background:#444444;
+  border:1px solid #666666;
+  color:#999999;
+}
+
+.ui-tag-selector-text {
+  font-style:italic;
+  font-size:80%;
+  border-top:1px dotted #666666;
+  background:#444444;
+  color:#999999;
+}
+
+li.ui-tag-selector-list-item:hover {
+  background:#666666;
+  cursor:pointer;
+}
+
+.ui-tag-selector-selected-tag-list li.ui-tag-selector-selected-tag {
+  background:#666666;
+  color:#999999;
+  margin-top:1px;
+  padding-top:1px;
+}
+
+.ui-tag-selector-highlight {
+  color:#FF7700;
+  font-weight:bold;
+  background:#666666;
+}
+
+.ui-error, input[type='text'].ui-error {
+  background:#ff8080;
+  border-color:#800000;
+  color:#800000;
+}

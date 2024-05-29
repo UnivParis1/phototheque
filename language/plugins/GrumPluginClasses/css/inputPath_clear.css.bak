@@ -1,0 +1,9 @@
+/* inputPath clear CSS file */
+
+span.ui-inputPath-itemSelectable {
+  color:#005e89;
+}
+
+span.ui-inputPath-itemSelectable:hover {
+  color:#d54e21;
+}

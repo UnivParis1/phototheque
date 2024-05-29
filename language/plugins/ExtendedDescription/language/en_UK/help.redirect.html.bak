@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Insert this tag into a album description to redirect it to the URL of your choice.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Redirect to a photo of your gallery where <code>xx</code> is the photo identifier; you can add the album identifier next to the photo identifier: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Redirect to a album of your gallery where <code>xx</code> the album identifier.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Redirect to a search page of your gallery where <code>xx</code> is the search identifier.</p>

@@ -1,0 +1,20 @@
+<h4>Skjul et album</h4>
+<p>Brug tag'et <code>&lt;!--hidden--&gt;</code>i albummets navn:</p>
+<ul>
+  <li>Det vil ikke blive vist i det overordnede album</li>
+  <li>Det forbliver synligt i albummenuen</li>
+</ul>
+
+<h4>Skjul et album i menuen</h4>
+<p>Brug tag'et <code>&lt;!--mb-hidden--&gt;</code> i albummets navn:</p>
+<ul>
+  <li>Det vil ikke blive vist i albummenuen</li>
+  <li>Det forbliver synligt i det overordnede album</li>
+</ul>
+
+<h4>Skjul et fotografi</h4>
+<p>Brug tag'et <code>&lt;!--hidden--&gt;</code> i billedets navn:</p>
+<ul>
+  <li>Det vil ikke blive vist på siden med miniaturebilleder</li>
+  <li>Det forbliver synligt inde i albummet</li>
+</ul>

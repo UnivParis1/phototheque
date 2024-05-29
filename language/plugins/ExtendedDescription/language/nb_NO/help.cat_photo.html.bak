@@ -1,0 +1,29 @@
+<h4>[bilde id=xx]</h4>
+<p>Denne taggen lar deg sette inn ett bilde i alle størrelser du måtte ønske.</p>
+
+<b>Alternativer:</b>
+<ul>
+  <li><code>id</code> bilde identifikator</li>
+  <li><code>album</code> (valgfritt) den overordnede album identifikator</li>
+  <li><code>size</code> (valgfritt) størrelsen på bilde, fra <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (valgfritt) hvis satt til <code>false</code> taggen returnerer bare til bildes URL, uten HTML</li>
+  <li><code>link</code> (valgfritt) hvis satt til <code>true</code> bildet blir pakket inn i en link til fotosiden</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[tilfeldig album=xx]</h4>
+<p>Samme som ovenfor, bortsett fra at bildet er tilfeldig valgt ut fra hele galleriet eller fra <code>album</code>.</p>
+
+<pre>
+[tilfeldig]
+
+[tilfeldig album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Denne taggen setter inn et album i beskrivelsen, der <code>xx</code> er albumet identifikatoren.</p>

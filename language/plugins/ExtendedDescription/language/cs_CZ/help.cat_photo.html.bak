@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Tento element umožní vložit jeden obázek o libovolné velikosti.</p>
+
+<b>Volby:</b>
+<ul>
+  <li><code>id</code> identifikátor obrázku</li>
+  <li><code>album</code> (nepovinný) identifikátor nadřazeného alba</li>
+  <li><code>size</code> (nepovinný) velikost obrázku (<i>SQ, TH, XXS, XS, S, M, L, XL, XXL</i>)</li>
+  <li><code>html</code> (nepovinný) pokud ne nastaveno <code>false</code> element pouze vrátí URL obrázku, bez HTML</li>
+  <li><code>link</code> (nepovinný) pokud je nastaveno <code>true</code> obrázek je zabalen do linku na stránku tohoto obrázku</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Stejné jako výše, jen obrázek je vybírán náhodně z složky <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Tento element vloží kategorii <code>xx</code> do popisu kategorie.</p>

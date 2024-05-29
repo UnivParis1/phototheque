@@ -1,0 +1,20 @@
+<h4>Nascondere un album</h4>
+<p>Si inserisce il tag <code>&lt;!--hidden--&gt;</code> nel nome dell'album :</p>
+<ul>
+  <li>L'album non viene più visualizzato sulla pagina dell'album parente</li>
+  <li>L'album rimane visibile nel menù degli album</li>
+</ul>
+
+<h4>Nascondere l'album nel menù</h4>
+<p>Si inserisce il tag <code>&lt;!--mb-hidden--&gt;</code> nel nome dell'album :</p>
+<ul>
+  <li>L'album non viene più visualizzato nel menù degli album</li>
+  <li>L'album rimane visibile nella pagina dell'album parente</li>
+</ul>
+
+<h4>Nascondere una foto</h4>
+<p>Si inserisce il tag <code>&lt;!--hidden--&gt;</code> nel nome della foto :</p>
+<ul>
+  <li>La foto non viene più visualizzata sulla pagina delle miniature</li>
+  <li>La foto rimane visibile nell'album</li>
+</ul>

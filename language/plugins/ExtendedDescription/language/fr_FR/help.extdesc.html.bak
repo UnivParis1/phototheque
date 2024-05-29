@@ -1,0 +1,22 @@
+<p>Les balises de description étendue permettent d'avoir une description réduite pour la présentation d'un album, une description étendue pour la description qui s'affiche sur la page de l'album, ou deux descriptions différentes sur la page de l'album.</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Seule la description réduite sera affichée pour la présentation de l'album. Sur l'album lui-même, la description sera la description réduite + la description détaillée.</p>
+
+<pre>
+description réduite &lt;!--more--&gt; description détaillée
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Seule la description réduite sera affichée pour la présentation de l'album. Par contre, sur l'album lui-même, la description sera uniquement la description détaillée, soit 2 descriptions différentes.</p>
+
+<pre>
+description réduite &lt;!--complete--&gt; description détaillée
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Seule la description haute sera affichée pour la présentation de l'album. Sur l'album lui-même, la description haute sera affichée au-dessus des miniatures, alors que la description basse sera affichée au-dessous (à l'emplacement normal de la description).</p>
+
+<pre>
+description haute &lt;!--up-down--&gt; description basse
+</pre>

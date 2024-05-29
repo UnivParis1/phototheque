@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Този таг позволява ползване на слайдшоу.</p>
+
+<b>Опции:</b> (вие трябва да зададете <code>album</code> или <code>list</code>)
+<ul>
+  <li><code>album</code> (optional) албум със снимките</li>
+  <li><code>nb_images</code> (optional) max номер за показване на снимки в слайдшоуто</li>
+  <li><code>random</code> (optional) безразборно подбрани снимки от албума</li>
+  <li><code>list</code> (optional) списък с номерата на снимките разделени със запетоя</li>
+  <li><code>size</code> (optional) размер на снимките, от <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (optional) скорост на слайдване (в секунди)</li>
+  <li><code>title</code> (optional) Показване на името на снимките</li>
+  <li><code>effect</code> (optional) Ефект на сменяне (виж <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (optional) показване на навигационни стрелки</li>
+  <li><code>elastic</code> (optional) адаптиране на слайдшоуто към размера на всяка снимка</li>
+  <li><code>control</code> (optional) показване на команди за упранление <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) thumbnails size in pixel if <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

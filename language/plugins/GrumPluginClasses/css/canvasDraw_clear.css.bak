@@ -1,0 +1,66 @@
+
+/* --------------------------- clear --------------------------- */
+
+
+div.cd-mainWindow div.ui-dialog-content {
+  background:#202020;
+}
+div.cd-boxWindow div.ui-dialog-content {
+  background:#888888;
+}
+div.ui-drawingArea-viewport,
+div.ui-drawingGraph-viewport {
+  background:#000000;
+}
+
+/* dialog resizeable borders */
+div.ui-resizable-se {
+  background:#666666;
+}
+
+/* dialog title */
+div.cd-mainWindow div.ui-dialog-titlebar {
+  background:#666666;
+  color:#222222;
+}
+
+/* secondary windows */
+div.cd-boxWindow div.ui-dialog-titlebar {
+  background:#666666;
+  color:#222222;
+  font-weight:normal;
+  font-size:9px;
+}
+
+/* tool box buttons */
+div#iBtToolsSelect,
+div#iBtToolsZoom,
+div#iBtToolsLines,
+div#iBtToolsTexts,
+div#iBtToolsShapes,
+div#iBtToolsArrows,
+div#iBtToolsImages {
+  background-image:url(./../img/tools.png);
+  background-repeat:no-repeat;
+  background-color:#888888;
+  border-color:#888888;
+}
+div#iBtToolsSelect.ui-inputSwitchButton-checked,
+div#iBtToolsZoom.ui-inputSwitchButton-checked,
+div#iBtToolsLines.ui-inputSwitchButton-checked,
+div#iBtToolsTexts.ui-inputSwitchButton-checked,
+div#iBtToolsShapes.ui-inputSwitchButton-checked,
+div#iBtToolsArrows.ui-inputSwitchButton-checked,
+div#iBtToolsImages.ui-inputSwitchButton-checked {
+  background-color:#555555;
+  border-color:#444444 #999999 #999999 #444444;
+}
+
+div.ui-drawingArea-sheet,
+div.ui-drawingGraph-sheet {
+  background:#F1F1F1;
+}
+div.ui-drawingArea-viewport,
+div.ui-drawingGraph-viewport {
+  background:#202020;
+}

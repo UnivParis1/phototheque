@@ -1,0 +1,33 @@
+<p>Les descriptions multilingues se font entre les balises <code>[lang=xx]</code> et <code>[/lang]</code>, ou xx est le code de la langue (par exemple fr, en, es, ...)</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Balise <i>default</i></h4>
+<p>La description par défaut sera utilisée si la description dans la langue de l'utilisateur n'est pas définie.<br>
+Si <code>[lang=default]</code> n'existe pas, tout ce qui est situé en dehors des balises de langues sera considéré comme description par défaut.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Balise <i>all</i></h4>
+<p>tout ce qui est situé entre les balises <code>[lang=all]</code> et <code>[/lang]</code> sera inclus dans la description, quelle que soit la langue de l'utilisateur.<br>
+Ceci est particulièrement pratique pour inclure du code HTML ou Javascript dans une description.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>
