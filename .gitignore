@@ -1,7 +1,5 @@
 # Piwigo specific directories
 /_data
-/plugins/*
-!/plugins/index.php
 /themes/*
 !/themes/index.php
 !/themes/default
