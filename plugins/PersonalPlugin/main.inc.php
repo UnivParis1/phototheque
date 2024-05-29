@@ -51,7 +51,7 @@ function add_ent_bandeau_js() {
  global $template;
  $script_content = <<<EOT
 $(document).ready(function() {
-  window.prolongation_ENT_args = { current: 'phototheque', extra_css:'https://phototheque.univ-paris1.fr/local/css/bandeau.css', logout: 'a[href="?act=logout"]'}
+  window.prolongation_ENT_args = { current: 'phototheque',Xis_logged: true, extra_css:'https://phototheque.univ-paris1.fr/local/css/bandeau.css', logout: 'a[href="?act=logout"]'}
   var myscript = document.createElement('script');
   myscript.setAttribute('src','https://ent.univ-paris1.fr/ProlongationENT/loader.js');
   document.head.appendChild(myscript);
