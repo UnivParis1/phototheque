@@ -1,0 +1,3 @@
+Compartir Álbum permite compartir álbumes privados.
+
+

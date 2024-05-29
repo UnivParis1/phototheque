@@ -1,0 +1,96 @@
+TODO for next versions : 
+- Clean and optimize code/requests + display (use CSS...)
+- Add another "star notation" (https://codepen.io/tobiasdev/pen/XgegoO)
+- Add compatibility with Smartpocket theme
+
+
+______________
+
+Version 12.0.x
+-------------
+12.0.0		- check compatibility with piwigo12
+
+______________
+
+Version 11.0.x
+-------------
+11.0.4		- Add infos (addedby) in audit/admin page
+11.0.3		- Add result link on category page (param) + corrections + show author/addedby on podium + result page
+11.0.2		- Correct language files and help.tpl file
+11.0.1		- Minor corrections
+			- Change rule for author check (custom choice between "author"/"added by"/both/none)
+			- param to disable meta display on photo when concours is prepared or active
+			- Add language (LV+SK)
+			- clean code (suppress Debug)
+11.0.0		- Version for Piwigo 11.x
+
+______________
+
+Version 2.9.x
+-------------
+2.9.1		- Add RU translation (thanks to Alexander)
+			- Add "stars style" to vote instead of "text style" (with param to choose)
+			- Adjust admin page 
+			- Add new page to vote for all images (with parameter to activate)
+			- Clean code 
+			- Allow method change when concours was closed if result not already present
+			- Allow admin to access to contest (param)
+			- Add overlay message when user already have vote (and param "do not allow user to change score" is active)
+
+2.9.0g		- Add parameters into admin page for the deadline information
+			- Add timer when the contest is prepared but not started
+			- Add parameter to allow possibility to mask photos before the contest start
+
+2.9.0f		- Add deadline information (with css/js)
+
+2.9.0e		- Corrections (pb guest)
+			- add RU language 
+
+2.9.0d 		- Correct config file for PWG Stuffs
+
+2.9.0c 		- Add missing language (FR/EN)
+			- Correct/complete the help page
+			- Correct error when reinit score (concours.class.php)
+			- Correct bad link for criteria in admin page
+			- Correct bad test when user have not already vote and option "disable second vote" actived
+			- Adjust "Author=user" control to display note and concours 
+
+2.9.0b		- Add PWG Stuffs module (thnaks to "contest" plugin from Mistic)
+			- Correct maintain.inc.php (old sql function not allowed in php7)
+
+2.9.0   - Correction display debug info "user id = " on image page even id debug=false
+		- Compatible with Piwigo 2.9
+		- Correct concours type not saved in second page (detailled criterias)
+		- Add method "moderation1" & "moderation2" for the result of concours (update DB needed)
+		- some little corrections (guest vote, templates...)
+______________
+
+Version 2.0.x
+-------------
+2.0.0   - Add to guest the possibility to vote for a concours (BETA)
+        - Some correction (code and database structure)
+        - Correct hour/min bug when time is set to 00h00 and control coherence between end and begin dates/hours
+        - Correct export to csv file (utf8decode)
+        - Add information on admin page
+        - Change blockmenu to show Contests without groups or for Guests.  
+		- Add help page for correct usage
+______________
+
+Version 1.0.x
+-------------
+1.2.0   - Add exaequo checking for the result (beta)
+        - Add EN language
+        - Correct "concours not displayed" when no group is selected in admin page. Now, concours is available for all registered user (not depending on the group appartenance)
+        - Add option to allow author to vote for their photos (disable check based on username=authorname)
+        - Add option to allow user to change the score after a validation
+1.1.0	- Add datas "moyenne" and "nbvotant" in database concours_result. Export theses datas in csv.
+		- add method of rank calculation in a concours (in database).
+		- generate the result (export) with the method (moyenne or sum)
+1.0.0 --> First public release
+_______________
+
+Version 0.0.x
+-------------
+0.0.1 --> Initial version (for testing)
+
+

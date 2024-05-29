@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Ez a tag lehetővé teszi diavetétés beszúrását.</p>
+
+<b>Lehetőségek:</b> (<code>album</code>-ot VAGY <code>listát</code> kell beállítanod)
+<ul>
+  <li><code>album</code>: (opcionális) forrásalbum</li>
+  <li><code>nb_images</code>: (opcionális) maximum ennyi fotó látszik a vetítésben</li>
+  <li><code>random</code>: (opcionális) véletlenszerű fotóválasztás az albumból</li>
+  <li><code>list</code>: (opcionális) fotóazonosítók (id) listája, vesszővel elválasztva</li>
+  <li><code>size</code>: (opcionális) fotóméretek, tól/től <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code>: (opcionális) a vetítés sebessége (váltások közötti idő másodpercben)</li>
+  <li><code>title</code>: (opcionális) fotó címének mutatása</li>
+  <li><code>effect</code>: (opcionális) váltási effekt (lásd: <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code>: (opcionális) navigációs nyilak mutatása</li>
+  <li><code>elastic</code>: (opcionális) vetítés méretének meghatározása adott fotó mérete alapján</li>
+  <li><code>control</code>: (opcionális) Navigációs kezelőszervek mutatása, <code>thumb</code>-ra (bélyegkép) is állítható</li>
+  <li><code>thumbs_size</code>: (opcionális) bélyegképek mérete <code>control=thumb</code> esetén</li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

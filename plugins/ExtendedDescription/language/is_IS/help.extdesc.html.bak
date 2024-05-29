@@ -1,0 +1,22 @@
+<p>Útvíkkuð lýsingarmerki gera það mögulegt að hafa stutta lýsingu fyrir albúmið utan albúmsins, lengri lýsingu fyrir albúmið inni á albúmsíðunni, eða jafnvel 2 aðskildar lýsingar inni á albúmsíðunni.</p>
+
+<h4>&lt;!--meira--&gt;</h4>
+<p>Aðeins stutt lýsing birtist fyrir utan albúmið. Á albúmsíðunni sérðu stutta lýsingu + langa lýsingu.</p>
+
+<pre>
+stutt lýsing &lt;!--meira--&gt; lengri lýsing
+</pre>
+
+<h4>&lt;!--allt--&gt;</h4>
+<p>Aðeins stutt lýsing birtist fyrir utan albúmið. Á albúmsíðunni sérðu aðeins löngu lýsinguna, þannig að þú hefur 2 aðskildar lýsingar.</p>
+
+<pre>
+stutt lýsing &lt;!--allt--&gt; lengri lýsing
+</pre>
+
+<h4>&lt;!--upp-niður--&gt;</h4>
+<p>Aðeins efri lýsingin birtist fyrir utan albúmið. Á albúmsíðunni er efri lýsingin sýnd fyrir ofan smámyndirnar, neðri lýsingin er sýnd fyrir neðan smámyndirnar.</p>
+
+<pre>
+efri lýsingin &lt;!--upp-niður--&gt; neðri lýsingin
+</pre>

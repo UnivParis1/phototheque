@@ -1,0 +1,27 @@
+<h4>[slider album=xx]</h4>
+
+<p>Tag'et giver mulighed for at indsætte et slideshow.</p>
+
+<b>Indstillinger:</b> (du skal vælge enten <code>album</code> ELLER <code>list</code>)
+<ul>
+  <li><code>album</code> (valgfrit) album hvor fra der vælges billeder</li>
+  <li><code>nb_images</code> (valgfrit) maksimalt antal billeder der skal vises i slideshow'et</li>
+  <li><code>random</code> (valgfrit) vælg tilfældigt blandt billederne i albummet</li>
+  <li><code>list</code> (valgfrit) liste over billed-id'er adskilt af kommaer</li>
+  <li><code>size</code> (valgfrit) størrelse på billeder, vælg mellem <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (valgfrit) slideshowhastighed (pr. sekunder)</li>
+  <li><code>title</code> (valgfrit) vis billedets titel</li>
+  <li><code>effect</code> (valgfrit) fortoningseffekt (se <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider-dokumentationen</a>)</li>
+  <li><code>arrows</code> (valgfrit) vis navigeringspile</li>
+  <li><code>elastic</code> (valgfrit) tilpas slideshowstørrelsen til hvert billede</li>
+  <li><code>control</code> (valgfrit) vis navigeringskontroller <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) thumbnails size in pixel if <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

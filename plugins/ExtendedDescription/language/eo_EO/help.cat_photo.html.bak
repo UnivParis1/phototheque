@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Tiu etikedo permesas al vi enŝovi unu bildon je iu ajn grandeco, kiun vi deziras.</p>
+
+<b>Agordoj:</b>
+<ul>
+  <li><code>id</code> la foto identigilo</li>
+  <li><code>album</code> (opcia) la identigilo de la patra fotaro</li>
+  <li><code>size</code> (opcia) la grandeco de la foto, inter (de la plej eta al la plej granda) <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (opcia) se agordita al <code>false</code> la etikedo montras nur la URL de la foto, sen HTML</li>
+  <li><code>link</code> (opcia) se agordita al <code>true</code> la foton ĉirkaŭfluas ligilo al la bildopaĝo</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Samo kiel ĉisupre, krom ke la foto estas hazarde elektita en la <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Tiu etikedo enŝovas fotaron en la priskribon, kie <code>xx</code> estas la fotara identigilo.</p>

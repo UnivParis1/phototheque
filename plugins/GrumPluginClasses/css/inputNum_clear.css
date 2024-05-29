@@ -1,0 +1,74 @@
+/* clear css */
+.ui-inputNum {
+  background:#DDDDDD;
+  border:1px solid #999999;
+  color:#666666;
+}
+
+.ui-inputNum-btDec, .ui-inputNum-btInc ,
+div.ui-inputNum a.ui-slider-handle {
+  background:#005e89;
+  border:1px solid #005e89;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  -khtml-border-radius:2px;
+  border-radius:2px;
+}
+div.ui-inputNum a.ui-slider-handle:hover {
+  background:#d54e21;
+  border-color:#d54e21;
+}
+
+.ui-inputNum-btDec,
+.ui-inputNum-btInc {
+  background-color:transparent;
+  background-image:url(./../icons/buttons.png);
+  background-repeat:no-repeat;
+  color:#005e89;
+  border:0px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  -khtml-border-radius:2px;
+  border-radius:2px;
+}
+
+.ui-inputNum-btDec {
+  background-position:-225px -90px;
+}
+.ui-inputNum-btDec:hover {
+  background-position:-225px -105px;
+  background-color:#999999;
+}
+
+.ui-inputNum-btInc {
+  background-position:-210px -90px;
+}
+.ui-inputNum-btInc:hover {
+  background-position:-210px -105px;
+  background-color:#999999;
+}
+
+div.ui-error div.ui-inputNum-btDec {
+  background-position:-225px -75px;
+}
+div.ui-error div.ui-inputNum-btInc {
+  background-position: -210px -75px;
+}
+
+div.ui-error div.ui-inputNum-btDec:hover,
+div.ui-error div.ui-inputNum-btInc:hover {
+  background-color:#EE4040;
+}
+
+.ui-error, input[type='text'].ui-error {
+  background:#ff8080;
+  border-color:#800000;
+  color:#800000;
+}
+
+div.ui-inputNum div.ui-slider-horizontal {
+  background:none repeat scroll 0 0 #999999;
+}
+
+
+

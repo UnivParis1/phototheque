@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Αυτή η ετικέτα επιτρέπει να εισάγετε παντού ένα δεσμό σύνδεσης με αυτόματη ανακατεύθυνση στην τρέχουσα θέση.</p>
+
+<b>επιλογές:</b>
+<ul>
+  <li><code>html</code> (προαιρετικά) αν ορισθεί ως <code>false</code> η ετικέτα επιστρέφει μόνο τη διεύθυνση σύνδεσης URL, χωρίς HTML</li>
+  <li><code>text</code> (προαιρετικά) η ετικέτα συνδέσμου, μπορεί να περιέχει <code>[lang]</code> ετικέτες</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Εμφάνιση ενός μπλοκ κειμένου μόνο εάν ο τρέχων χρήστης είναι συνδεδεμένος ή όχι.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

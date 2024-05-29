@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Ta oznaka omogoča vstavljanje diaprojekcije slik.</p>
+
+<b>Opcije:</b> (nastaviti morate <code>album</code> ALI <code>list</code>)
+<ul>
+  <li><code>album</code> : (neobvezno) izvorni album</li>
+  <li><code>nb_images</code> : (neobvezno) največje število slik za prikaz v diaprojekciji</li>
+  <li><code>random</code> : (neobvezno) naključno izberite sliko v albumu</li>
+  <li><code>list</code> : (neobvezno) seznam ID-jev slik, ločenih z vejico</li>
+  <li><code>size</code> : (neobvezno) velikost slik, od <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> : (neobvezno) hitrost diaprojekcije (v sekundah)</li>
+  <li><code>title</code> : (neobvezno) prikaz naslova slike</li>
+  <li><code>effect</code> : (neobvezno) učinek prehoda (glej <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> : (neobvezno) prikaz navigacijskih puščic</li>
+  <li><code>elastic</code> : (neobvezno) prilagodite velikost diaprojekcije vsaki sliki</li>
+  <li><code>control</code> : (neobvezno) prikaz navigacijskih kontrolnikov, lahko nastavite tudi na <code>thumb</code></li>
+  <li><code>thumbs_size</code> : (neobvezno) velikost sličic v slikovnih pikah (pixel), če <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

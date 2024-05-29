@@ -1,0 +1,22 @@
+<p>I tab di descrizione estesa permette di avere una descrizione ridotta per la presentazione di un album, una descrizione estesa per la descrizione che si trova sulla pagina dell'album, o due descrizioni differenti sulla pagina dell'album.</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Solo da descrizione ridotta apparirà per la presentazione dell'album. Sull'album stesso, la descrizione sarà quella ridotta + quella dettagliata.</p>
+
+<pre>
+descrizione ridotta &lt;!--more--&gt; descrizione estesa
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Solo da descrizione ridotta apparirà per la presentazione dell'album. Invece, sull'album, la descrizione sarà quella estesa unicamente, dunque 2 descrizioni differenti.</p>
+
+<pre>
+descrizione ridotta &lt;!--complete--&gt; descrizione estesa
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Solo da descrizione alta apparirà per la presentazione dell'album. Sull'album, la descrizione alta sarà visualizzata al disopra delle miniature, invece la descrizione bassa sarà visualizzata al disotto (li dove appare di solito la descrizione).</p>
+
+<pre>
+descrizione alta &lt;!--up-down--&gt; descrizione bassa
+</pre>

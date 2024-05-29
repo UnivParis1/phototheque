@@ -1,0 +1,65 @@
+/* roma css */
+
+.ui-category-selector,
+.ui-category-selector-list {
+  background-color:#444444;
+  border:1px solid #666666;
+  color:#999999;
+}
+
+li.ui-category-selector-item:hover {
+  background-color:#666666;
+}
+
+.ui-category-selector-selected-item {
+  background-color:#777777;
+}
+
+.ui-category-selector-arrow {
+  background-image:url(./../icons/buttons.png);
+  background-repeat:no-repeat;
+  width:15px;
+  height:15px;
+}
+.ui-category-selector-expandable-item {
+  background-image:url(./../icons/expand_roma.png);
+}
+
+.ui-category-selector-collapsable-item {
+  background-image:url(./../icons/collapse_roma.png);
+}
+
+li.ui-category-selector-item div.ui-category-selector-check {
+  background-image:url(./../icons/check_notchecked_roma.png);
+}
+li.ui-category-selector-selected-item div.ui-category-selector-check {
+  background-image:url(./../icons/check_checked_roma.png);
+}
+
+/* --- */
+.ui-category-selector-name ul li.ui-category-selector-selected-cat {
+  background:#666666;
+  color:#999999;
+  margin-top:1px;
+  padding-top:1px;
+}
+
+.ui-error, input[type='text'].ui-error {
+  background:#ff8080;
+  border-color:#800000;
+  color:#800000;
+}
+
+.ui-category-selector-arrow {
+  background-position:-30px -15px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  -khtml-border-radius:2px;
+  border-radius:2px;
+  color:#FF7700;
+  border:0px;
+}
+.ui-category-selector-arrow:hover {
+  background-position:-30px 0px;
+  background-color:#222222;
+}

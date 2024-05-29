@@ -1,0 +1,22 @@
+<p>Etiquetas de descrição Extendidas torna possível ter uma breve descrição para o álbum fora do álbum, uma descrição mais longa para o álbum dentro da página do álbum, ou até 2 Descrições distintas dentro da página de álbum</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Apenas a descrição curta é exibida fora do álbum. Na página do álbum, você vai ver breve descrição + descrição longa.</p>
+
+<pre>
+descrição curta &lt;!--more--&gt; descrição longa
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Apenas a descrição curta é exibida fora do álbum. Na página do álbum, você só vai ver a descrição longa, então você tem duas descrições distintas.</p>
+
+<pre>
+descrição curta &lt;!--complete--&gt; descrição longa
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Apenas a descrição superior é exibida fora do álbum. Na página do álbum, a descrição superior é exibido acima das miniaturas, a descrição inferior é exibida abaixo das miniaturas.</p>
+
+<pre>
+descrição no topo &lt;!--up-down--&gt; descrição em baixo
+</pre>

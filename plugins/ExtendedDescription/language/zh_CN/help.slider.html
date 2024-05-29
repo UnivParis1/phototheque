@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>该标签可插入一个slideshow幻灯。.</p>
+
+<b>选项：</b> （必须设置 <code>album</code> 或 <code>list</code>）
+<ul>
+  <li><code>album</code> (可选) 来源相册</li>
+  <li><code>nb_images</code> (可选) 在slideshow幻灯中显示的图片数的最大值</li>
+  <li><code>random</code> (可选) 在相册中随机选择图片</li>
+  <li><code>list</code> (可选) 图片id清单，以英文逗号分隔</li>
+  <li><code>size</code> (可选) 图片尺寸，有 <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (可选) slideshow幻灯速度(单位：秒)</li>
+  <li><code>title</code> (可选) 显示图片标题</li>
+  <li><code>effect</code> (可选) 变换效果 (见 <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (可选) 显示导航箭头</li>
+  <li><code>elastic</code> (可选) slideshow幻灯适应图片尺寸</li>
+  <li><code>control</code> (可选) 显示导航控制 <i>(true, false)</i>，也可设为 <code>thumb</code> </li>
+  <li><code>thumbs_size</code> (可选) 如果设置了 <code>control=thumb</code>，则缩略图的像素尺寸大小</li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

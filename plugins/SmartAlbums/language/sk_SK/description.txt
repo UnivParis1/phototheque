@@ -1,0 +1,1 @@
+Jednoduché vytváranie dynamických albumov s využitím štítkov, dátumov a iných vlastností

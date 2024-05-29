@@ -1,0 +1,1 @@
+Fotowettbewerbe mit spezifischen Kriterien in der Piwigo-Galerie erstellen

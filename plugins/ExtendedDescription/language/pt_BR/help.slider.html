@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Essa etiqueta permite inserir um slideshow.</p>
+
+<b>Opções:</b> (voce tem que configurar <code>album</code> OU <code>list</code>)
+<ul>
+  <li><code>album</code> (opcional) album fonte</li>
+  <li><code>nb_images</code> (opcional) número máximo de fotos para exibir no slideshow</li>
+  <li><code>random</code> (opcional) escolher aleatoriamente fotos no álbum</li>
+  <li><code>list</code> (opcional) uma lista de fotos ids separados por uma vírgula</li>
+  <li><code>size</code> (opcional) o tamanho das imagens, de <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code> (opcional) a velocidade da apresentação (em segundos)</li>
+  <li><code>title</code> (opcional) exibir o título da foto</li>
+  <li><code>effect</code> (opcional) efeito de transição (ver <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code> (opcional) exibir setas de navegação</li>
+  <li><code>elastic</code> (opcional) adaptar tamanho do slideshow para cada foto</li>
+  <li><code>control</code> (opcional) exibir controles de navegação <i>(true, false, thumb)</i></li>
+  <li><code>thumbs_size</code> (optional) tamanho da ministura em pixel se <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

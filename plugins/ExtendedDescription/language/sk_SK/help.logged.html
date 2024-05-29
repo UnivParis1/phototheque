@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Tento tag umožňuje vložiť všade prihlasovací link s automatickým presmerovaním na aktuálny čas.</p>
+
+<b>Možnosti:</b>
+<ul>
+  <li><code>html</code> (voliteľné) ak je nastavené na <code>false</code> tagu vráti iba URL loginu, bezHTML</li>
+  <li><code>text</code> (optional) link label, can contain <code>[lang]</code> tags</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Zobrazí blok textu, len ak je aktuálny používateľ prihlásený alebo nie.</p>
+
+<pre>
+[logged=true] Vitajte späť [/logged]
+[logged=false] Prihláste sa prosím [/logged]
+</pre>

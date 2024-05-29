@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Denna etikett lägger in en login-länk överallt med en automatisk ompekning till den aktuella sidan.</p>
+
+<b>Alternativ:</b>
+<ul>
+  <li><code>html</code> (valfritt) om satt till <code>falsk</code> kommer etiketten att bara svara med login-adress, utan HTML</li>
+  <li><code>text</code> (valfritt) länkstämpel, kan innehålla <code>[lang]</code> eiteketter</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Visa ett textblock bara om den nuvarande användaren är loggad eller inte.</p>
+
+<pre>
+[logged=true] Välkommen tillbaka [/logged]
+[logged=false] Vänligen logga in [/logged]
+</pre>

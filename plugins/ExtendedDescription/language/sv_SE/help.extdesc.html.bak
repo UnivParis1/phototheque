@@ -1,0 +1,22 @@
+<p>Utvidgad beskrivnings taggar gör det möjligt att ha en kort beskrivning för den kategorin utanför kategorin, en längre beskrivning för kategorin inuti kategori sidan eller till och med 2 separata beskrivningar inne i kategorin sidan.</p>
+
+<h4>taggen &lt;!--more--&gt;</h4>
+<p>Endast den korta beskrivning visas utanför kategorin. På kategori sidan ser du en kort beskrivning + utökade beskrivningen.</p>
+
+<pre>
+kort beskrivning &lt;!-more--&gt; utökad beskrivning
+</pre>
+
+<h4>taggen &lt;!--complete--&gt;</h4>
+<p>Endast den korta beskrivning visas utanför kategorin. På kategorin sidan, kommer du bara att se den långa beskrivningen, så du har 2 olika beskrivningar.</p>
+
+<pre>
+kort beskrivning &lt;!--complete--&gt; komplett beskrivning
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Endast den översta beskrivning visas utanför kategorin. På kategorin sidan, är toppen beskrivning visas ovanför miniatyrer, är botten beskrivningen visas under miniatyrbilderna.</p>
+
+<pre>
+topp beskrivning &lt;!--up-down--&gt; nedekants beskrivning
+</pre>

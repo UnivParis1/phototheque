@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Med den här taggen kan du infoga en bild av vilken storlek du vill.</p>
+
+<b>Val:</b>
+<ul>
+  <li><code>id</code> fotots unika ID</li>
+  <li><code>album</code> (valfritt) albumets unika ID</li>
+  <li><code>size</code> (valfritt) Önskad storlek på bilden, från <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (valfritt) Om inställd till <code>false</code> returnerar taggen endast webbadressen till bilden, utan HTML-kod</li>
+  <li><code>link</code> (valfritt) Om inställd till <code>true</code> blir bilden även en länk till den aktuella bildsidan</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Samma som ovan, förutom att fotot väljs slumpmässigt från valt <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Den här taggen infogar ett album i beskrivningen. <code>xx</code> ersätts med albumets unika ID.</p>

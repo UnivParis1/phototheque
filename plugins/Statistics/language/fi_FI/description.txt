@@ -1,0 +1,1 @@
+Lisää lähdekoodia kuten Google Analytics jokaiselle sivulle.

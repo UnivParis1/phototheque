@@ -1,0 +1,33 @@
+<p>多國語言的描述會放在 <code>[lang=xx]</code> 和 <code>[/lang]</code> 標籤之間，其中 xx 指的是語言的代碼（例如：en, fr, es, ...）。</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>特殊語言代碼：<i>default</i></h4>
+<p>如果某項描述在使用者所選擇並連結的語言中找不到的話，就會使用預設的描述。<br>
+如果 <code>[lang=default]</code> 不存在的話，所有在 <code>[lang]</code> 標籤以外的文字，就會被視為預設描述。</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// 或是
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>特殊語言代碼：<i>all</i></h4>
+<p>所有在 <code>[lang=all]</code> 中的文字會被包含在描述文字中，不管使用者選用哪種語言。<br>
+主要的用途是在描述文字中包含 HTML/JavaScript 程式碼。</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

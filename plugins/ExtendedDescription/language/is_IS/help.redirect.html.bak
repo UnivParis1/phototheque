@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Settu þetta merki inn í albúmlýsingu til að beina því á slóð að eigin vali.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Beindu á mynd af myndasafninu þínu þar sem <code>xx</code> er myndauðkenni; þú getur bætt albúmsauðkenninu við hlið myndauðkennisins: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Beindu áfram í albúm í galleríinu þínu þar sem <code>xx</code> er albúmaauðkennið.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Beindu á leitarsíðu í myndasafninu þínu þar sem <code>xx</code> er leitarauðkenni.</p>

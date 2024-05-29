@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Sätt denna tagg i en kategori beskrivning styra över dem till webbadressen för ditt val.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Omdirigera till en bild av ditt galleri där <code>xx</code> är fotot identifierare, du kan lägga till kategori ID bredvid fotot identifierare: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Omdirigera till en kategori av ditt galleri där <code>xx</code> kategorin id.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Omdirigering till en sökning på ditt galleri där <code>xx</code> är sök ID.</p>

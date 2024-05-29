@@ -1,0 +1,33 @@
+<p>Daugiakalbiai aprašymai rašomi tarp <code>[lang=xx]</code> ir <code>[/lang]</code> žymų, kur xx yra kalbos kodas (pvz.: lt, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Specliali kalba <i>default</i></h4>
+<p>Aprašymas pagal nutylėjimą bus naudojamas tuomet, kai nebus aprašymo pasirinkta prisijungusio vartotojo kalba.<br>
+Jei <code>[lang=default]</code> neegzistuoja, tai viskas už <code>[lang]</code> žymų bus laikoma aprašymu pagal nutylėjimą.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Specliali kalba <i>all</i></h4>
+<p>viskas, kas yra žymų viduje <code>[lang=all]</code> bus įtraukta į aprašymą, nepriklausomai nuo to, kokia pasirinkta prisijungusio vartotojo kalba.<br>
+Šiuo būdu labai patogu į aprašymą įtraukti HTML/JavaScript kodą.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

@@ -1,0 +1,33 @@
+<p>Meertalige beschrijvingen worden geplaatst tussen <code>[lang=xx]</code> en <code>[/lang]</code> tags, waar xx de taalcode is (bv: nl, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Special language <i>default</i></h4>
+<p>De standaard beschrijving zal gebruikt worden als de beschrijving niet beschikbaar is in de voor de huidige gebruiker geselecteerde taal.<br>
+Als <code>[lang=default]</code> niet bestaat, zal alles buiten de <code>[lang]</code> tags worden beschouwd als de standaard omschrijving.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Special language <i>all</i></h4>
+<p>alles binnen <code>[lang=all]</code> zal worden ingevoegd ,ongeacht wat de taal van de gebruiker is.<br>
+Dit is handig voor het invoegen van HTML/JavaScript code binnen een beschrijving.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

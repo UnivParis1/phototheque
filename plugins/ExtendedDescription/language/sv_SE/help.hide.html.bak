@@ -1,0 +1,20 @@
+<h4>Dölja en kategori</h4>
+<p>Använd tag<code>&lt;!--hidden--&gt;</code>  i kategori namnet:</p>
+<ul>
+   <li>Det kommer inte att visas i den överordnade kategorin</li>
+   <li>Det är fortfarande synlig i kategorin menyn</li>
+</ul>
+
+<h4>Dölja en kategori i menyn</h4>
+<p>Använd tag<code>&lt;!--mb-hidden--&gt;</code> i kategori namnet:</p>
+<ul>
+  <li>Den kommer inte att visas i kategori menyn</li>
+  <li>Den förblir synligt i den överordnade kategorin</li>
+</ul>
+
+<h4>Dölj en bild</h4>
+<p>Använd tag <code>&lt;!--hidden--&gt;</code> i bildens namn:</p>
+<ul>
+  <li>Det kommer inte att visas på miniatyrerna sidan</li>
+  <li>Det är fortfarande synlig i kategorin</li>
+</ul>

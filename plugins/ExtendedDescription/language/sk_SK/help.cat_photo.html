@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Toto kľúčové slovo môžete vkladať do fotky hociktorej veľkosti.</p>
+
+<b>Voľby:</b>
+<ul>
+  <li><code>id</code> identifikátorom fotky</li>
+  <li><code>album</code> (voliteľné) identifikátorom rodičovského albumu</li>
+  <li><code>size</code> (voliteľné) veľkosť fotky, od <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (voliteľné) ak nastavíte na <code>false</code> kľúčové slovo len vráti URL fotky, bez HTML</li>
+  <li><code>link</code> (voliteľné) ak nastavíte na <code>true</code> fotkaje zabalená do linku na stránke fotky</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>To isté ako vyššie, okrem toho, že fotografia je vybraná náhodne z <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Toto kľúčové slovo bude vložené do popisu albumu, kde <code>xx</code> je identifikátor albumu.</p>

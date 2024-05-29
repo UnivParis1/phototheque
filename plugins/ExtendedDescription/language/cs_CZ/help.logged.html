@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Tento tag umožňuje všude vložit odkaz pro přihlášení s automatickým přesměrováním na aktuální stránku.</p>
+
+<b>Nastavení:</b>
+<ul>
+  <li><code>html</code> (nepovinný) pokud nastaveno na <code>false</code> vrátí tag pouze přihlašovací URL, bez HTML</li>
+  <li><code>text</code> (nepovinný) titulek odkazu, může obsahovat tagy <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Zobrazení bloku textu pouze v případě, že je aktuální uživatel přihlášen nebo ne.</p>
+
+<pre>
+[logged=true]Vítejte zpět [/logged]
+[logged=false] Prosím, přihlaste se [/logged]
+</pre>

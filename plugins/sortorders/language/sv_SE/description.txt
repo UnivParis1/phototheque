@@ -1,0 +1,1 @@
+Möjliggör för en administrator att välja vilka sorteringsordningar som skall vara valbara av användare. Den adderar även en slumpmässing sorteringsordning.

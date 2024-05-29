@@ -1,0 +1,22 @@
+<p>Les etiquetes de descripció extensa permeten tindre una descripció redu&iuml;da per a la presentació d'un àlbum, una descripció extensa per la descripció que s'exhibeix sobre la pàgina de l'àlbum, o dues descripcions diferents sobre la pàgina de l'àlbum.</p>
+
+<h4>&lt;!--more--&gt;</h4>
+<p>Només la descripció reduïda es mostra fora de l'àlbum. A la pàgina de l'àlbum veureu la descripció curta + descripció llarga.</p>
+
+<pre>
+Descripció reduïda &lt;!--more--&gt; Descripció detallada
+</pre>
+
+<h4>&lt;!--complete--&gt;</h4>
+<p>Només la descripció de la part superior es mostra fora de l'àlbum. A la pàgina de l'àlbum, la descripció de la part superior es mostra per sobre de les miniatures, la descripció de la part inferior es mostra sota de les miniatures.</p>
+
+<pre>
+Descripció reduïda &lt;!--more--&gt; Descripció detallada
+</pre>
+
+<h4>&lt;!--up-down--&gt;</h4>
+<p>Només la descripció de la part superior es mostra fora de l'àlbum. A la pàgina de l'àlbum, la descripció de la part superior es mostra per sobre de les miniatures, la descripció de la part inferior es mostra sota de les miniatures.</p>
+
+<pre>
+descripció alta &lt;!--up-down--&gt; descripció baixa
+</pre>

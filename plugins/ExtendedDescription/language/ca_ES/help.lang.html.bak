@@ -1,0 +1,33 @@
+<p>Les descripcions multilingües es col·loquen entre les etiquetes <code>[lang=xx]</code> i <code>[/lang]</code>, on xx és el códi de l'idioma (per exemple ca, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Etiqueta especial <i>default</i></h4>
+<p>La descripció predeterminada s'utilitza si la descripció no està disponible en l'idioma que l'usuari ha seleccionat.<br>
+Si <code>[lang=default]</code> no existeix, tot el que estigui situat entre les etiquetes d'idioma estarà considerat como a descripció predeterminada.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// O BÉ
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Etiqueta especial <i>all</i></h4>
+<p>Tot el que estigui situat entre les etiquetes <code>[lang=all]</code> i <code>[/lang]</code> serà inclòs en la descripció, sigui quin sigui l'idioma de l'usuari.<br>
+Això és especialment pràctic per a incloure codi html o javascript en una descripció.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

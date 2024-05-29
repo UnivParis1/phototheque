@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Ten tag pozwala na wstawienie pokazu slajdów.</p>
+
+<b>Opcje:</b> (<code>album</code> LUB <code>list</code> są wymagane)
+<ul>
+  <li><code>album</code>: (opcjonalna) album źródłowy</li>
+  <li><code>nb_images</code>: (opcjonalna) maksymalna liczba zdjęć do wyświetlenia w pokazie</li>
+  <li><code>random</code>: (opcjonalna) wybierz zdjęcia losowo</li>
+  <li><code>list</code>: (opcjonalna) lista identyfikatorów zdjęć, oddzielone przecinakmi</li>
+  <li><code>size</code>: (opcjonalna) rozmiar zdjęć, wybór z: <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code>: (opcjonalna) szybkość pokazu (w sekundach)</li>
+  <li><code>title</code>: (opcjonalna) wyświetl tytuł zdjęcia</li>
+  <li><code>effect</code>: (opcjonalna) efekt przejścia (zobacz <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code>: (opcjonalna) wyświetl strzałki nawigacji</li>
+  <li><code>elastic</code>: (opcjonalna) dostosuj rozmiar pokazu do każdego zdjęcia</li>
+  <li><code>control</code>: (opcjonalna) wyświetl kontrolki nawigacyjne, może być też ustawione na <code>thumb</code></li>
+  <li><code>thumbs_size</code>: (opcjonalna) rozmiar miniaturek w pikselach, jeżeli <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

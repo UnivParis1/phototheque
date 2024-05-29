@@ -1,0 +1,33 @@
+<p>Multilingual descriptions are placed between <code>[lang=xx]</code> and <code>[/lang]</code> tags, where xx is the language code (for example en, fr, es, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Special language <i>default</i></h4>
+<p>The default description will be used if the description is not available in the connected user selected language.<br>
+If <code>[lang=default]</code> does not exists, anything outside the <code>[lang]</code> tags will be considered as the default description.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Special language <i>all</i></h4>
+<p>Anything inside <code>[lang=all]</code> will be included in the description, whatever the connected user defined language is.<br>
+This is mainly useful to include HTML/JavaScript code inside a description.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

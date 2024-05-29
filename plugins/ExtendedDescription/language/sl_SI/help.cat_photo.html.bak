@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Ta oznaka vam omogoča, da vstavite eno sliko poljubne velikosti.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>id</code> identifikator slike</li>
+  <li><code>album</code> (neobvezno) identifikator nadrejenega albuma</li>
+  <li><code>size</code> (neobvezno) velikost slike, od <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (neobvezno) če je nastavljena na <code>false</code>, oznaka vrne samo URL fotografije, brez HTML-ja</li>
+  <li><code>link</code> (neobvezno) če je nastavljena na <code>true</code>, je fotografija zavita v povezavo do strani s fotografijo</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Enako kot zgoraj, le da je fotografija izbrana naključno iz celotne galerije ali iz <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Ta oznaka v opis vstavi album, kjer je <code>xx</code> identifikator albuma.</p>

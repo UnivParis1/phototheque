@@ -1,0 +1,27 @@
+<?php
+$lang['Start the Tour'] = 'Spustit ukázku';
+$lang['Visit your Piwigo!'] = 'Prozkoumejte Piwigo!';
+$lang['Take a tour and discover the features of your Piwigo gallery » Go to the available tours'] = 'Vydej se na průzkum a objev nové vlastnosti tvé Piwigo fotogalerie » Přejít na dostupné ukázky';
+$lang['TAT_descrp'] = 'Vítejte! Zde vidíte seznam všech aktuálních ukázek které vám mohou pomoci lépe pochopit a využít funkce vaší Piwigo fotogalerie.<br><br>Spusťte ukázku níže, poté následujte instrukce. Klikněte na Další/Předchozí (nebo lze použít tlačítka šipek na vaší pc klávesnici) pro posun v průběhu ukázky. Když si prohlížíte ukázku, pokud přejdete na jinou stránku administrace, budete přesměrováni zpět na aktuální stránku ukázky. Pokud nechcete pokračovat a nemůžete ukončit ukázku, přejděte na <em>Pluginy » Take A Tour</em> což ukončí probíhající ukázku.';
+$lang['takeatour_configpage'] = 'Prohlédni si » Seznam ukázek';
+$lang['Prev'] = 'Předchozí';
+$lang['Next '] = 'Další';
+$lang['End tour'] = 'Konec ukázky';
+$lang['First Contact'] = 'První Kontakt';
+$lang['first_contact_descrp'] = 'Doporučené pro začátečníky, tato ukázka vás seznámí s Piwigo a jeho základními funkcemi. Na začátek vás tato ukázka seznámí zejména s tím jak přidávat fotky a spravovat je. Ukázka končí prací kolem správy album a úpravami jeho základního nastavení, šablon vzhledu a modulů.';
+$lang['2.7 Tour'] = 'Ukázka 2.7';
+$lang['2_7_0_descrp'] = 'Zjisti co je nového v Piwigo 2.7';
+$lang['Privacy'] = 'Soukromí';
+$lang['privacy_descrp'] = 'Tato ukázka prezentuje vše okolo ochrany vašich fotografií před veřejným přístupem díky možnostem nastavit oprávnění pro přístup na každé album a fotku a zamezení snadnému kopírování použitím aktivní ochrany obrázků.';
+$lang['2.8 Tour'] = '2.8 Prohlídka';
+$lang['2_8_0_descrp'] = 'Objevte některé nové funkce Piwigo verze 2.8. Přečíst si více v <a href="%s">podrobnostech k vydání</a>.';
+$lang['config_name'] = 'Konfigurace';
+$lang['plugins_name'] = 'Doplňky';
+$lang['2_9_0_name'] = '2.9 Ukázka';
+$lang['2_9_0_descrp'] = 'Objevte některé nové funkce Piwigo 2.9. Přečtěte si podrobnosti v <a href="%s">poznámkách k vydání</a>.';
+$lang['config_descrp'] = 'Nakonfigurujte si nastavení Piwigo. Objevte správce témat a vyberte vzhled vašeho Piwigo.';
+$lang['edit_photos_descrp'] = 'Fotografie jsou základním prvkem vašeho Piwigo. Podívejte se, jak můžete změnit jejich vlastnosti, jednu fotografii po druhé nebo hromadně.';
+$lang['edit_photos_name'] = 'Editovat Fotky';
+$lang['manage_albums_descrp'] = 'Hierarchie vašich alb je struktura vaší galerie. Naučte se je organizovat a upravovat jejich vlastnosti.';
+$lang['manage_albums_name'] = 'Spravovat Alba';
+$lang['plugins_descrp'] = 'Pluginy jsou klíčovou funkcí v Piwigo. Aktivujte různé funkce několika kliknutími a přizpůsobte Piwigo vašim potřebám.';

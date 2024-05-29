@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Þetta merki gerir þér kleift að setja inn myndasýningu.</p>
+
+<b>Valmöguleikar:</b> (þú verður að velja <code>album</code> EÐA <code>list</code>)
+<ul>
+  <li><code>album</code>: (valfrjálst) upprunaalbúm</li>
+  <li><code>nb_images</code>: (valfrjálst) hámarksfjöldi mynda til að sýna í myndasýningunni</li>
+  <li><code>random</code>: (valfrjálst) veldu myndir af handahófi í albúminu</li>
+  <li><code>list</code>: (valfrjálst) lista yfir myndaauðkenni aðskilin með kommu</li>
+  <li><code>size</code>: (valfrjálst) stærð myndanna, frá <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code>: (valfrjálst) hraða myndasýningarinnar (í sekúndum)</li>
+  <li><code>title</code>: (valfrjálst) birta heiti myndarinnar</li>
+  <li><code>effect</code>: (valfrjálst) umskiptiáhrif (sjá <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code>: (valfrjálst) sýna leiðsöguörvar</li>
+  <li><code>elastic</code>: (valfrjálst) aðlaga stærð myndasýningar að hverri mynd</li>
+  <li><code>control</code>: (valfrjálst) sýna leiðsögustýringar, einnig er hægt að stilla á <code>thumb</code></li>
+  <li><code>thumbs_size</code>: (valfrjálst) smámyndastærð í pixlum ef <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

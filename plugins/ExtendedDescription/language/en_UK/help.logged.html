@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>This tag allows to insert everywhere a login link with automatic redirection to the current page.</p>
+
+<b>Options:</b>
+<ul>
+  <li><code>html</code> (optional) if set to <code>false</code> the tag only returns the login URL, without HTML</li>
+  <li><code>text</code> (optional) link label, can contain <code>[lang]</code> tags</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Display a block of text only if the current user is logged or not.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

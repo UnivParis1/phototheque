@@ -1,0 +1,2 @@
+{combine_script id='core.scripts' load='async' path='themes/default/js/scripts.js'}
+<a class="button icon-help-circled" href="{$ROOT_URL}admin/popuphelp.php?page=extended_desc" onclick="popuphelp(this.href); return false;" title="{'Use Extended Description tags...'|translate}" style="vertical-align: middle; border: 0; margin: 0.5em; margin-left: 0;"></a>

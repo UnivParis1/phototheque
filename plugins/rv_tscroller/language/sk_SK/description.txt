@@ -1,0 +1,1 @@
+Asynchrónne načítavanie náhľadov obrázkov na hlavnej stránke pri skrolovaní stránky smerom nadol

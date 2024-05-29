@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Denne taggen tillater å sette inn lysbildefremvisning.</p>
+
+<b>Alternativ:</b> (du må velge <code>album</code> Eller <code>liste</code>)
+<ul>
+  <li><code>album</code>: (valgfritt) kilde album</li>
+  <li><code>nb_bilde</code>: (valgfritt) maks antall bilder som skal vises i lysbildefremvisningen</li>
+  <li><code>tilfeldig</code>: (valgfritt) velge bilder tilfeldig i albumet</li>
+  <li><code>liste</code>: (valgfritt) en liste over bilde adskilt med komma</li>
+  <li><code>størrelse</code>: (valgfritt) størrelsen på bildene, fra <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>hastighet</code>: (valgfritt) fremvisnings hastighet (i sekunder)</li>
+  <li><code>titel</code>: (valgfritt) viser bildetittel</li>
+  <li><code>effekt</code>: (valgfritt) overgangseffekt (se <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>piler</code>: (valgfritt) viser navigasjonspilene</li>
+  <li><code>elastik</code>: (valgfritt) tilpasser lysbildestørrelsen til hvert bilde</li>
+  <li><code>kontroll</code>: (valgfritt) viser navigeringskontroller, kan også settes til <code>miniatyr</code></li>
+  <li><code>miniatyr_størrelse</code>: (valgfritt) miniatyrbilde størrelse i pixel hvis <code>kontroll=miniatyr</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_bilde=10 tilfeldig=false størrelse=M fart=3 titel=false effekt=fade piler=true elastik=false kontrol=true miniatyr_størrelse=80]
+</pre>

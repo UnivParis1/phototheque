@@ -1,0 +1,1 @@
+Lire les métadonnées d'une photos de la galerie

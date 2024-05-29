@@ -1,0 +1,1 @@
+Ermöglicht dem Administrator die Auswahl der Sortierreihenfolge, die für die Benutzer sichtbar sein soll. Es fügt auch eine zufällige Sortierreihenfolge hinzu. 

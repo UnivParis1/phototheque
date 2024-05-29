@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Ta oznaka omogoča, da povsod vstavite povezavo za prijavo s samodejno preusmeritvijo na trenutno stran.</p>
+
+<b>Opcije:</b>
+<ul>
+  <li><code>html</code> (neobvezno) če je nastavljeno na <code>false</code>, oznaka vrne samo URL za prijavo, brez HTML-ja</li>
+  <li><code>text</code> (neobvezno) oznaka povezave, lahko vsebuje oznake <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Prikaz bloka besedila samo, če je trenutni uporabnik prijavljen ali ne.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

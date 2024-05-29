@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Esta etiqueta permite inserir uma imagem de qualquer tamanho que você queira.</p>
+
+<b>Opções:</b>
+<ul>
+  <li><code>id</code> identificador da foto</li>
+  <li><code>album</code> (opcional) o identificador do album pai</li>
+  <li><code>size</code> (opcional) o tamanho da foto, entre <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (opcional) se definido para <code>false</code> retorna a URL da foto, sem HTML</li>
+  <li><code>link</code> (opcional) se definido para <code>true</code> a foto é incluida num link para a página da foto</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>A Mesma coisa que acima, exceto que a foto é escolhida aleatoriamente em random dentro <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>tag [cat=xx]</h4>
+<p>Esta etiqueta insere um album na descrição, onde <code>xx</code> é o identificador do album.</p>

@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: http://piwigo.org/svn/extensions/PersoFooter 
+Revision: 32904

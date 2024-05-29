@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Aquesta etiqueta permet inserir una imatge amb la mida que es vulgui.</p>
+
+<b>Opcions:</b>
+<ul>
+  <li><code>id</code> identificador de la imatge</li>
+  <li><code>album</code> (opcional) identificador de l'àlbum pare</li>
+  <li><code>size</code> (opcional) mida de la imatge, entre <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (opcional) si s'estableix a <code>false</code> l'etiqueta només retorna l'URL de la imatge, sense HTML</li>
+  <li><code>link</code> (opcional) si s'estableix a <code>true</code> la imatge s'envolta en un enllaç a la pàgina de la imatge</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>De la mateixa manera, excepte que la imatge s'esculli de forma aleatòria en <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Aquesta etiqueta permet inserir un àlbum en la descripció, on <code>xx</code> és l'identificador de l'àlbum.</p>

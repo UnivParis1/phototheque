@@ -1,0 +1,12 @@
+.cSimpleTipContent {
+  background: none repeat scroll 0 0 #f1f1f1;
+  border: 2px solid #AAAAAA;
+  color: #777777;
+}
+.cSimpleTipShadow {
+  opacity: 0.1;
+}
+.cSimpleTipArrow {
+  background-image:url(./../icons/sTipArrows_clear.png);
+}
+

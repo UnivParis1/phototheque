@@ -1,0 +1,23 @@
+/* for inputDate plugin */
+.ui-inputDate {
+  cursor:text;
+  padding:0px;
+}
+.ui-inputDate input[type='text'] {
+  border:none;
+  background:transparent;
+  display:inline-block;
+}
+
+#ui-datepicker-div {
+  display: none;
+}
+
+.ui-inputDate-time {
+  width:60px;
+  border-left: 1px dotted;
+  padding-left: 5px;
+}
+.ui-inputDate-date {
+  width:80px;
+}

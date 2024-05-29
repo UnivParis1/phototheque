@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Vložiť toto kľúčové slovo do popisu kategórie na presmerovanie na URL Vašej voľby.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Presmerovanie na fotografiu Vašej galérie, kde <code>xx</code> je identifikátor fotografie; môžete pridať ďalší identifikátor kategórie pre fotografiu: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Presmerovanie na kategóriu Vašej galérie, kde <code>xx</code> je identifikátor kategórie.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Presmerovanie na vyhľadávaciu stránku Vašej galérie, kde <code>xx</code> je identifikátor vyhľadávnia.</p>

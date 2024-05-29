@@ -1,0 +1,26 @@
+<h4>[slider album=xx]</h4>
+<p>Denna tagg möjliggör en insättning av ett bildspel.</p>
+
+<b>Options:</b> (you must set <code>album</code> OR <code>list</code>)
+<ul>
+  <li><code>album</code>: (optional) källalbum</li>
+  <li><code>nb_images</code>: (optional) max antal bilder att visa i bildspelet</li>
+  <li><code>random</code>: (optional) välj bilderna slumpmässigt från albumet</li>
+  <li><code>list</code>: (optional) en kommaseparerad lista med bild-id</li>
+  <li><code>size</code>: (optional) bildstorleks, från <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>speed</code>: (optional) bildspelshastighet (i sekunder)</li>
+  <li><code>title</code>: (optional) visa bildtitel</li>
+  <li><code>effect</code>: (optional) övergångseffekt (se <a href="http://docs.dev7studios.com/jquery-plugins/nivo-slider#jumpNav-5">NivoSlider doc</a>)</li>
+  <li><code>arrows</code>: (optional) visa navigationspilar</li>
+  <li><code>elastic</code>: (optional) anpassa bildspelsstorleken till varje bild</li>
+  <li><code>control</code>: (optional) visa navigationskontroll, kan också sättas till <code>thumb</code></li>
+  <li><code>thumbs_size</code>: (optional) tumnagelstorlek i pixlar om <code>control=thumb</code></li>
+</ul>
+
+<pre>
+[slider album=123]
+
+[slider list=46,47,52]
+
+[slider album=123 nb_images=10 random=false size=M speed=3 title=false effect=fade arrows=true elastic=false control=true thumbs_size=80]
+</pre>

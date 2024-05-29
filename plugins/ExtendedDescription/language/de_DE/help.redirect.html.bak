@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Fügen Sie diesen Tag in der Beschreibung einer Kategorie um diese zur URL Ihrer Wahl weiterzuleiten.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Leitet auf einem Bild Ihrer Galerie weiter, wo <code>xx</code> die Foto-ID ist; Sie können die Kategorie-ID neben der Foto-ID einfügen: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Leitet auf eine Kategorie Ihrer Galerie weiter, wo <code>xx</code> die Kategorie-ID ist.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Leitet auf eine Suchseite Ihrer Galerie weiter, wo <code>xx</code> die Such-ID ist.</p>

@@ -1,0 +1,11 @@
+<h4>[redirect http://piwigo.org]</h4>
+<p>Vstavite to oznako v opis albuma, da jo preusmerite na URL po vaši izbiri.</p>
+
+<h4>[redirect img=xx]</h4>
+<p>Preusmerite na fotografijo vaše galerije, kjer je <code>xx</code> identifikator slike; lahko dodate identifikator albuma poleg identifikatorja slike: <code>xx.ccc</code>.</p>
+
+<h4>[redirect cat=xx]</h4>
+<p>Preusmerite na album vaše galerije, kjer je <code>xx</code> identifikator albuma.</p>
+
+<h4>[redirect search=xx]</h4>
+<p>Preusmerite na stran za iskanje vaše galerije, kjer je <code>xx</code> identifikator iskanja.</p>

@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Deze tag laat toe om overal een login-link te plaatsen met een automatische doorverwijzing naar de huidige leeftijd.</p>
+
+<b>Opties:</b>
+<ul>
+  <li><code>html</code> (optional) if set to <code>false</code> the tag only returns the login URL, without HTML</li>
+  <li><code>text</code> (optional) link label, can contain <code>[lang]</code> tags</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Plaats een tekstblok als de gebruiker is ingelogd of niet.</p>
+
+<pre>
+[logged=true] Welkom terug [/logged]
+[logged=false] Gelieve in te loggen [/logged]
+</pre>

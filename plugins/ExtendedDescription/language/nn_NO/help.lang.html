@@ -1,0 +1,33 @@
+<p>Flerispråklege skildringar er plassera mellom <code>[lang=xx]</code> og <code>[/lang]</code> taggar, der xx er språkkoden (for example nn, nb, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Spesialspråket <i>default</i></h4>
+<p>Standardskildringa vil bli bruka om skildringa ikkje er tilgjengeleg på språket til den pålogga brukaren.<br>
+Om <code>[lang=default]</code> ikkje eksisterar, ingenting på utsida av <code>[lang]</code> taggar vil bli bruka som standard skildring.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Spesialspråket <i>all</i></h4>
+<p>alt innom <code>[lang=all]</code> vill bli inkludera i skildringa, uansett kva for språk brukaren har definera.<br>
+This is mainly useful to include HTML/JavaScript code inside a description.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

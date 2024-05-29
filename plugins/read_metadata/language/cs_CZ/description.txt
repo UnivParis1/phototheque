@@ -1,0 +1,1 @@
+Načíst metadata fotografie z Piwigo

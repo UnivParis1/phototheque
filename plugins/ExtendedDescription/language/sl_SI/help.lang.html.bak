@@ -1,0 +1,33 @@
+<p>Večjezični opisi so umeščeni med oznaki <code>[lang=xx]</code> in <code>[/lang]</code> kjer, xx pomeni kodo jezika (naprimer sl, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Posebna jezikovna izbira <i>default</i></h4>
+<p>Uporabljen bo privzet opis če ni opisa v jeziku, ki si ga izbere uporabnik.<br>
+Če <code>[lang=default]</code> ne obstaja, bo vse izven oznak <code>[lang]</code> upoštevano kot privzet opis.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Posebna jezikovna izbira <i>all</i></h4>
+<p>vse v oznaki <code>[lang=all]</code> bo vključeno v opis, ne glede na jezik, ki ga izbere uporabnik.<br>
+To je primerno predvsem za vključitev HTML/JavaScript kode znotraj opisa.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

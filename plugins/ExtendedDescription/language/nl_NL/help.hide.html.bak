@@ -1,0 +1,20 @@
+<h4>Verberg een album</h4>
+<p>Gebruik het label <code>&lt;!--hidden--&gt;</code> in de albumnaam:</p>
+<ul>
+  <li>het wordt niet getoond in het bovenliggende album</li>
+  <li>het blijft zichtbaar in het album-menu</li>
+</ul>
+
+<h4>Verberg een album in een menu</h4>
+<p>Gebruik het label <code>&lt;!--mb-hidden--&gt;</code> in de albumnaam:</p>
+<ul>
+  <li>het wordt niet getoond in het album menu</li>
+  <li>het blijft zichtbaar in het bovenliggende album</li>
+</ul>
+
+<h4>Verberg een foto</h4>
+<p>Gebruik het label <code>&lt;!--hidden--&gt;</code> in de fotonaam:</p>
+<ul>
+  <li>het wordt niet getoond op de miniaturen-pagina</li>
+  <li>het blijft zichtbaar binnen het album</li>
+</ul>

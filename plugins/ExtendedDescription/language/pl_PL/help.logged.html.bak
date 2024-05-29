@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Ten tag umożliwia wstawienie linku do logowania w dowolnym miejscu z automatycznym przekierowaniem na bieżącą stronę.</p>
+
+<b>Opcje:</b>
+<ul>
+  <li><code>html</code> (opcjonalna) jeżeli ustawiona na <code>false</code> to zwraca tylko URL do logowania bez kodu HTML</li>
+  <li><code>text</code> (opcjonalna) tekst linku, może zawierać tagi <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Wyświetla teks tylko jeżeli użytkownik jest zalogowany lub nie</p>
+
+<pre>
+[logged=true] Witaj ponownie [/logged]
+[logged=false] Zaloguj się [/logged]
+</pre>

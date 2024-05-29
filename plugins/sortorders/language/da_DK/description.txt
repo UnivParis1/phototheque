@@ -1,0 +1,1 @@
+Gør det muligt for administratoren at vælge hvilke sorteringsrækkefølger, der skal være tilgængelige for brugerne. Desuden er der tilføjet en tilfældig sorteringsrækkefølge.

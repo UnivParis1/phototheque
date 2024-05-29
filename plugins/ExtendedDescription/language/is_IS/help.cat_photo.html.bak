@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Þetta merki gerir þér kleift að setja inn eina mynd af hvaða stærð sem þú vilt.</p>
+
+<b>Valmöguleikar:</b>
+<ul>
+  <li><code>id</code> auðkenni myndarinnar</li>
+  <li><code>album</code> (valfrjálst) auðkenni yfiralbúms</li>
+  <li><code>size</code> (valfrjálst) stærð myndarinnar, frá <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (valfrjálst) ef stillt á <code>false</code> merkið skilar aðeins slóð myndarinnar, án HTML</li>
+  <li><code>link</code> (valfrjálst) ef stillt á <code>true</code> myndinni er pakkað inn í hlekk á myndasíðuna</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Sami hlutur og hér að ofan, nema að myndin er valin af handahófi úr öllu myndasafninu eða úr <code>album</code>.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Þetta merki setur albúm inn í lýsinguna, þar sem <code>xx</code> er auðkenni albúms.</p>

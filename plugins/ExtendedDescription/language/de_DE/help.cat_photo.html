@@ -1,0 +1,29 @@
+<h4>[photo id=xx]</h4>
+<p>Dieser Tag erlaubt das Einfügen eines Bildes mit beliebiger Größe mittels.</p>
+
+<b>Optionen:</b>
+<ul>
+  <li><code>id</code> ID des Bildes</li>
+  <li><code>album</code> (optional) ID des übergeordneten Albums</li>
+  <li><code>size</code> (optional) Größe des Bildes, Auswahl <i>(SQ, TH, XXS, XS, S, M, L, XL, XXL)</i></li>
+  <li><code>html</code> (optional) bei <code>false</code> liefert der Tag nur nur die URL des Bildes zurück ohne HTML</li>
+  <li><code>link</code> (optional) bei <code>true</code> wird das Bild mit einem Link zur Bildseite versehen</li>
+</ul>
+
+<pre>
+[photo id=46]
+
+[photo id=46 album=22 size=M html=true link=true]
+</pre>
+
+<h4>[random album=xx]</h4>
+<p>Genau wie oben, Ausnahme das Bild wird per Zufall aus dem <code>album</code> geholt.</p>
+
+<pre>
+[random]
+
+[random album=123 size=M html=yes link=yes]
+</pre>
+
+<h4>[cat=xx]</h4>
+<p>Dieser Tag erlaubt das Einfügen eines Albums in der Beschreibung, <code>xx</code> ist die Album ID.</p>

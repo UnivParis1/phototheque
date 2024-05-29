@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Þetta merki gerir þér kleift að setja alls staðar inn innskráningartengil með sjálfvirkri vísun á núverandi síðu.</p>
+
+<b>Valmöguleikar:</b>
+<ul>
+  <li><code>html</code> (valfrjálst) ef stillt á <code>false</code> merkið skilar aðeins innskráningarslóðinni, án HTML</li>
+  <li><code>text</code> (valfrjálst) tenglamerki, getur innihaldið <code>[lang]</code> merki</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Birta aðeins textablokk ef núverandi notandi er innskráður eða ekki.</p>
+
+<pre>
+[logged=true] Velkominn aftur [/logged]
+[logged=false] Vinsamlegast skráðu þig inn [/logged]
+</pre>

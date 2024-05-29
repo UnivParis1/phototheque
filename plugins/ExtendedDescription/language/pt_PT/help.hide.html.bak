@@ -1,0 +1,20 @@
+<h4>Omitir um álbum</h4>
+<p>Usar etiqueta <code>&lt;!--hidden--&gt;</code> no nome do album:</p>
+<ul>
+  <li>Não será exibido no album pai</li>
+  <li>Permanece visível no menú do album</li>
+</ul>
+
+<h4>Omitir um album no menu</h4>
+<p>Usar etiqueta <code>&lt;!--mb-hidden--&gt;</code> no nome do album:</p>
+<ul>
+  <li>Não será exibido no menu do album</li>
+  <li>Permanece visível no album pai</li>
+</ul>
+
+<h4>Omitir uma foto</h4>
+<p>Usar etiqueta <code>&lt;!--hidden--&gt;</code> no nome da foto:</p>
+<ul>
+  <li>Não será exibida na página de miniaturas</li>
+  <li>Permanece visível no interior do album</li>
+</ul>

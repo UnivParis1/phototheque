@@ -1,0 +1,1 @@
+Omogoča skrbniku, da izbere, kateri vrstni red naj bodo vidni uporabnikom. Doda tudi naključni vrstni red. 

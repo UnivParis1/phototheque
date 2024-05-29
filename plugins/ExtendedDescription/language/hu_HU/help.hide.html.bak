@@ -1,0 +1,20 @@
+<h4>Kategória elrejtése</h4>
+<p><code>&lt;!--hidden--&gt;</code> tag használata a kategória nevében:</p>
+<ul>
+  <li>nem fog megjelenni a szülő kategóriában</li>
+  <li>továbbra is megjelenik a Kategóriák menüben</li>
+</ul>
+
+<h4>Kategória elrejtése a menüben</h4>
+<p><code>&lt;!--mb-hidden--&gt;</code> tag használata a kategória nevében:</p>
+<ul>
+  <li>nem fog megjelenni a Kategóriák menüben</li>
+  <li>továbbra is megjelenik a szülő kategóriában</li>
+</ul>
+
+<h4>Kép elrejtése</h4>
+<p><code>&lt;!--hidden--&gt;</code> tag használata a kép nevében:</p>
+<ul>
+  <li>nem fog megjelenni a bélyegkép oldalon</li>
+  <li>továbbra is megjelenik a kategóriában</li>
+</ul>

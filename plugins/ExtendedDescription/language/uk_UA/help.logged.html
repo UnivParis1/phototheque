@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Цей теґ дозволяє вставляти всюди посилання для входу з автоматичним перенаправленням на поточний вік.</p>
+
+<b>Опції:</b>
+<ul>
+  <li><code>html</code> - (опціонально) якщо встановити <code>false</code> теґ повертає тільки логін URL, без HTML</li>
+  <li><code>text</code> - (опціонально) посилання, що може містити ознаки мови <code>[lang]</code> </li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connectez-vous[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Показувати блок тексту тільки якщо поточний користувач зареєструвався чи ні.</p>
+
+<pre>
+[logged=true] Welcome back [/logged]
+[logged=false] Please log in [/logged]
+</pre>

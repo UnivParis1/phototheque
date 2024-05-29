@@ -1,0 +1,4 @@
+File automatically created from SVN or Git repository.
+
+URL: https://github.com/Piwigo/ExtendedDescription 
+Revision: 430e518fe7e5ca21d60a49c76da0b67b0a70c1c5 (Sat Nov 25 19:14:12 2023 +0100)

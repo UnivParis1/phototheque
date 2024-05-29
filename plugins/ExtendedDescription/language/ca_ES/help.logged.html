@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Aquesta etiqueta permet inserir a qualsevol lloc un enllaç d'inici de sessió amb redirecció automàtica a la pàgina actual.</p>
+
+<b>Opcions:</b>
+<ul>
+  <li><code>html</code> (opcional) si es defineix com a <code>false</code>, l'etiqueta només retorna l'URL d'inici de sessió, sense HTML</li>
+  <li><code>text</code> (opcional) etiqueta de l'enllaç, pot contenir etiquetes <code>[lang]</code></li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=fr]connecteu-vos[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Mostra un bloc de text només si l'usuari actual ha iniciat sessió, o si no l'ha iniciada.</p>
+
+<pre>
+[logged=true] Ben tornats! [/logged]
+[logged=false] Inicieu sessió, si us plau [/logged]
+</pre>

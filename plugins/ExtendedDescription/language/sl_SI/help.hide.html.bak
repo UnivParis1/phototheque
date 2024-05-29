@@ -1,0 +1,20 @@
+<h4>Skrij album</h4>
+<p>Uporabite oznako <code>&lt;!--hidden--&gt;</code> v imenu albuma:</p>
+<ul>
+  <li>ne bo prikazan v nadrejenem albumu</li>
+  <li>ostane viden v meniju albuma</li>
+</ul>
+
+<h4>Skrij album v meniju</h4>
+<p>Uporabite oznako <code>&lt;!--mb-hidden--&gt;</code> v imenu albuma:</p>
+<ul>
+  <li>ne bo prikazano v meniju albuma</li>
+  <li>ostane viden v nadrejenem albumu</li>
+</ul>
+
+<h4>Skrij sliko</h4>
+<p>Uporabite oznako <code>&lt;!--hidden--&gt;</code> v imenu slike:</p>
+<ul>
+  <li>ne bo prikazana na strani s sličicami</li>
+  <li>ostane vidna v albumu</li>
+</ul>

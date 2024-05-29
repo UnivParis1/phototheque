@@ -1,0 +1,33 @@
+<p>Flerspråklig beskrivelse er plassert mellom <code>[lang=xx]</code> og <code>[/lang]</code> tagger, hvor xx er språk koden (for eksempel nb, nn, en, fr, ...).</p>
+
+<pre>
+[lang=en]Default description[/lang]
+[lang=fr]Description en français[/lang]
+[lang=de]Deutsche Beschreibung[/lang]
+</pre>
+
+<h4>Spesial språk <i>default</i></h4>
+<p>Standard beskrivelse vil bli bruktom beskrivelsen ikke er tilgjengelig på den tilkoblede brukers valgte språk.<br>
+Om <code>[lang=default]</code> ikke eksisterer, alt utenom <code>[lang]</code> tagger vil bli satt som standard beskrivelse.</p>
+
+<pre>
+[lang=default]Default description[/lang]
+[lang=fr]Description en français[/lang]
+
+// OR
+
+Default description
+[lang=fr]Description en français[/lang]
+</pre>
+
+<h4>Spesial språk <i>all</i></h4>
+<p>Alt inne i <code>[lang=all]</code> vil bli inkludert i beskrivelsen, uansett hvilket tilknyttet språ brukeren har.<br>
+Dette er hovedsaklig nyttig for å inkludere HTML/JavaScript kode inne i en beskrivelse.</p>
+
+<pre>
+[lang=all]&lt;p&gt;[/lang]
+  [lang=default]Default description[/lang]
+  [lang=fr]Description en français[/lang]
+  [lang=de]Deutsche Beschreibung[/lang]
+[lang=all]&lt;/p&gt;[/lang]
+</pre>

@@ -1,0 +1,22 @@
+<h4>[login-link]</h4>
+<p>Ezzel a taggel login linket helyezhetsz el mindenhol, automatikus átirányítással az adott oldalra.</p>
+
+<b>Lehetőségek:</b>
+<ul>
+  <li><code>html</code> (opcionális) amennyiben az értéke <code>false</code> a tag csak egy URL-t ad vissza HTML körítés nélkül.</li>
+  <li><code>text</code> (opcionális) a link neve megadható, tartalmazhat<code>[lang]</code> tageket is</li>
+</ul>
+
+<pre>
+[login-link]
+
+[login-link html=true text="log in[lang=hu]bejelentkezés[/lang]"]
+</pre>
+
+<h4>[logged]</h4>
+<p>Csak egy szövegblokkot mutat azzal, hogy adott felhasználó be van-e jelentkezve, vagy nem.</p>
+
+<pre>
+[logged=true] Üdv újra [/logged]
+[logged=false] Kérlek jelentkezz be [/logged]
+</pre>

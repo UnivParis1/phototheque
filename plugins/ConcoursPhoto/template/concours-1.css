@@ -1,0 +1,26 @@
+
+
+
+
+
+.counter {
+  color: #333;
+  text-align: center;
+}
+
+.counter h1 {
+  font-weight: normal;
+}
+
+.counter li {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+}
+
+.counter li span {
+  display: block;
+  font-size: 4.5rem;
+}
