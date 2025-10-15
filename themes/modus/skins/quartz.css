@@ -565,6 +565,10 @@ form.properties a{
   color:black!important;
 }
 
+.categoryActions .pwg-button{
+  color:#848588;
+}
+
 @media screen and (max-width: 640px){
   #copyright a{
     color:#8d8b8b;
@@ -572,7 +576,7 @@ form.properties a{
   #derivativeSwitchLink .pwg-icon pwg-icon-sizes{
     color:#eaeae9;
   }
-  #albumActionsSwitcher + .categoryActions .pwg-button-text,#imageToolBar .actionButtons .pwg-button-text, #imageToolBar .actionButtons .pwg-button-text, .actionButtons A .pwg-icon,  .actionButtons A .pwg-icon:hover {
+  #albumActionsSwitcher + .categoryActions .pwg-button-text, #imageToolBar .actionButtons .pwg-button-text {
     color:#eaeae9;
     box-shadow:none;
   }
@@ -580,9 +584,7 @@ form.properties a{
     border-radius:5px;
     box-shadow:0px 0px transparent;
   }
-  .categoryActions a .pwg-icon{
-    color:#6BA1FF;
-  }
+  
   #theTagsPage A .pwg-icon, #theTagsPage A:hover .pwg-icon{
     color:#6BA1FF;
   }
@@ -709,28 +711,56 @@ form.properties a{
   color: white;
 }
 
+.ratings-option:nth-child(odd),
+.ratios-option:nth-child(odd),
+.preset_posted_date .date_posted-option:nth-child(odd) label,
+.preset_posted_date .date_posted-option:nth-child(odd) i,
+.custom_posted_date .date_posted-option:nth-child(odd) .year_input label,
+.custom_posted_date .date_posted-option:nth-child(odd) .year_input i,
+.custom_posted_date .date_posted-option:nth-child(even) .month_input label,
+.custom_posted_date .date_posted-option:nth-child(even) .month_input i,
+.custom_posted_date .days_container .date_posted-option:nth-child(odd) label,
+.custom_posted_date .days_container .date_posted-option:nth-child(odd) i,
+.preset_created_date .date_created-option:nth-child(odd) label,
+.preset_created_date .date_created-option:nth-child(odd) i,
+.custom_created_date .date_created-option:nth-child(odd) .year_input label,
+.custom_created_date .date_created-option:nth-child(odd) .year_input i,
+.custom_created_date .date_created-option:nth-child(even) .month_input label,
+.custom_created_date .date_created-option:nth-child(even) .month_input i,
+.custom_created_date .days_container .date_created-option:nth-child(odd) label,
+.custom_created_date .days_container .date_created-option:nth-child(odd) i,
 .filetypes-option:nth-child(odd),
-.added_by-option:nth-child(odd),
-.date_posted-option:nth-child(odd) label {
+.added_by-option:nth-child(odd){
   background: #393A3D;
 }
 
 .filetypes-option label .checked-icon,
 .added_by-option label .checked-icon,
-.date_posted-option label .checked-icon{
+.date_posted-option label .checked-icon,
+.date_created-option label .checked-icon{
   color: #fff;
 }
 
 .filetypes-option label .ext-badge,
 .added_by-option label .added_by-badge,
-.date_posted-option label .date_posted-badge {
+.date_posted-badge,
+.date_created-badge,
+.ratios-option label .ratio-badge,
+.ratings-option label .ratings-badge{
   background-color: #C1C7D9;
-    color: black;
+  color: black;
 }
 
-.filetypes-option input:checked + label,
 .added_by-option input:checked + label,
-.date_posted-option input:checked + label{
+.filetypes-option input:checked + label,
+.date_posted-option .selected label, 
+.date_posted-option .selected .accordion-toggle,
+.date_created-option .selected label,
+.date_created-option .selected .accordion-toggle,
+.preset_posted_date .date_posted-option input:checked + label,
+.preset_created_date .date_created-option input:checked + label,
+.ratios-option input:checked + label,
+.ratings-option input:checked + label{
   background: #27498C;
   color:white;
 }
@@ -807,12 +837,11 @@ form.properties a{
   color: #eaeae9;
 }
 
-
 .filter-tag-form .selectize-input,
 .filter-author-form .selectize-input,
 .filter-added_by-form .selectize-input {
   background-color: #616364;
-    color: #eaeae9;
+  color: #eaeae9;
 }
 
 .filter-tag-form .selectize-input input,
@@ -874,4 +903,47 @@ form.properties a{
 
 .arrow-fill {
   fill: #2B313D !important;
+}
+
+.date_posted-option .accordion-toggle:hover,
+.date_created-option .accordion-toggle:hover {
+  color: #c7d3e1;
+}
+
+.mcs-container div .slider_input p,
+.slider-info,
+.no_filtered_photos{
+  color:#c7d3e1;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-slider-range.ui-widget-header.ui-corner-all{
+  border: 1px solid #6BA1FF;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default{
+  background-color:#6BA1FF;
+}
+
+.ui-slider .ui-slider-range{
+  background: #6BA1FF;
+}
+
+.mcs-container input[type="number"],
+.mcs-container input[type="number"]:focus{
+  background-color: #2F3032 !important;
+  color: #c7d3e1 !important;
+  border-radius: 0px !important;
+}
+
+#downloadSwitchLink,
+#derivativeSwitchLink,
+#sortOrderLink,
+.gallery-icon-search-folder,
+.uc-icon-star-filled,
+.uc-icon-star{
+  color:#848588!important;
 }

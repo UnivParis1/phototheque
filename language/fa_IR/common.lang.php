@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: پارسی [IR]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=419
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -37,7 +37,6 @@ $lang['%d new users'] = "%d کاربر تازه";
 $lang['About'] = "درباره";
 $lang['All tags'] = 'همه ی برچسب ها';
 $lang['Any tag'] = "هر برچسبی";
-$lang['At least one listed rule must be satisfied.'] = 'دست کم یکی از معیارهای بیان شده باید هم خوانی داشته باشد.';
 $lang['Author'] = "نویسنده";
 $lang['Albums'] = 'آلبوم‌ها';
 $lang['Album'] = "آلبوم";
@@ -53,7 +52,6 @@ $lang['Creation date'] = "تاریخ ایجاد";
 $lang['Current password is wrong'] = '!!رمز وارد شده اشتباه است.';
 $lang['Dimensions'] = "ابعاد";
 $lang['Display'] = "نمایش";
-$lang['Each listed rule must be satisfied.'] = 'همه ی معیارهای بیان شده باید کامل شوند.';
 $lang['Email address'] = "آدرس های ایمیل";
 $lang['Enter your personnal informations'] = "داده های خصوصی خود را وارد نمایید";
 $lang['Error sending email'] = 'خطا در فرستادن ایمیل :(';
@@ -86,7 +84,6 @@ $lang['Registration'] = "نام نویسی";
 $lang['Related tags'] = "برچسب های مربوط";
 $lang['Reset'] = 'بازنشانی';
 $lang['Retrieve password'] = 'بازیابی رمز عبور';
-$lang['Search rules'] = "قوانین جستجو";
 $lang['Search tags'] = "جستجوی برچسب ها";
 $lang['Search'] = "جستجو";
 $lang['display available tags'] = "نمایش برچسب های موجود";
@@ -108,7 +105,6 @@ $lang['add this photo to your favorites'] = "افزودن این عکس به ع�
 $lang['Administration'] = "مدیریت";
 $lang['all'] = "همه";
 $lang['ascending'] = "بالا رونده";
-$lang['author(s) : %s'] = "نویسنده(ها) : %s";
 $lang['Expand all albums'] = "بازکردن تمام آلبوم ها";
 $lang['posted after %s (%s)'] = 'فرستاده شده بعد از %s (%s)';
 $lang['posted before %s (%s)'] = 'فرستاده شده قبل از %s (%s)';
@@ -236,7 +232,6 @@ $lang['Search for all terms'] = 'جستجوی همه ی واژه ها';
 $lang['Empty query. No criteria has been entered.'] = 'شما هیچ معیاری برای جستجو تعیین نکرده اید.';
 $lang['Search results'] = "نتایج جستجو";
 $lang['Search in sub-albums'] = "جستجو در زیرآلبوم ها";
-$lang['searched words : %s'] = 'واژه های جستجو شده: %s';
 $lang['Contact'] = "تماس";
 $lang['set as album representative'] = 'تنظیم بعنوان عکس بندانگشتی آلبوم';
 $lang['Show number of comments'] = "نمایش تعداد دیدگاه ها";
@@ -425,3 +420,38 @@ $lang['Start-Date'] = 'تاریخ شروع';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'نام آلبوم, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'نام آلبوم, 100 &rarr; 10 &rarr; 5 &rarr; 1';
 $lang['Password: ********** (no copy by email)'] = 'گذرواژه: ********** )نباید محتوی ایمیل شما باشد(';
+$lang['Search in :'] = 'جستجو در:';
+$lang['Search in this set'] = 'جستجو در این ست';
+$lang['Tags found'] = 'تگ یافت شده';
+$lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'تگ هایی که در این قسمت مشاهده میکنید با جستجو شما همخوانی داشته برای شروع یکی را انتخاب کنید.';
+$lang['The PDF you requested is too large to display on this page.'] = 'فایل PDF که انتخاب کرده اید برای نمایش بسیار حجیم است';
+$lang['Unknown time period'] = 'دوره زمانی ناشناخته!';
+$lang['You can try to edit your filters and perform a new search.'] = 'شما میتوانید فیلترها را ویرایش کنید تا جستجوی جدیدی انجام دهید.';
+$lang['last 12 months'] = 'یک سال اخیر';
+$lang['last 24 hours'] = '24 ساعت اخیر';
+$lang['last 3 months'] = '3 ماهه اخیر';
+$lang['last 30 days'] = '30 روز اخیر';
+$lang['last 6 months'] = '6 ماه اخیر';
+$lang['last 7 days'] = '7 روز اخیر';
+$lang['last year'] = 'سال اخیر';
+$lang['rating score %s'] = 'امتیاز %s';
+$lang['year %d'] = 'سال %d';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'فقط %d آلبوم اول نمایش داده شدند از %d آلبوم';
+$lang['Pages'] = 'صفحه';
+$lang['No results are available.'] = 'نتیجه ای نداشت!';
+$lang['Filters'] = 'فیلترها';
+$lang['Fill in the filters to start a search'] = 'فیلتر ها را انتخاب کنید تا جستجو آغاز شود';
+$lang['File type'] = 'فرمت فایل';
+$lang['Empty filters'] = 'حذف فیلتر';
+$lang['Custom dates'] = 'انتخاب تاریخ';
+$lang['Click here to display it'] = 'اینجا کلیک کن تا ببینی';
+$lang['Clear'] = 'پاک کن';
+$lang['Cancel'] = 'لغو';
+$lang['Choose filters'] = 'انتخاب فیلتر';
+$lang['Albums found'] = 'آلبوم یافت شده';
+$lang['Albums listed here match your search by word. Click on one to browse by album.'] = 'آلبوم هایی که مشاهده میکنید با عبارتی که جستجو کردید همخوانی داشته است. هر کدام را مایل هستید انتخاب کنید.';
+$lang['Album title'] = 'عنوان آلبوم';
+$lang['Album description'] = 'توضیحات آلبوم';
+$lang['Album already selected'] = 'آلبوم انتخاب شده';
+$lang['Added by'] = 'افزوده شده توسط';
+$lang['%d visits'] = '%d بازدید';

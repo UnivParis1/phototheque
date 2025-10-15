@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Brasil [BR]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=431
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -445,3 +445,14 @@ $lang['Search in this set'] = 'Pesquisar neste conjunto';
 $lang['Tags found'] = 'Etiquetas encontradas';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'As etiquetass listadas aqui correspondem à sua pesquisa por palavra. Clique em um para navegar por etiqueta.';
 $lang['Unknown time period'] = 'Período de tempo desconhecido';
+$lang['Album already selected'] = 'Álbum já selecionado';
+$lang['Click here to display it'] = 'Clique aqui para exibi-lo';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Somente os primeiros %d álbuns são exibidos, de %d.';
+$lang['Pages'] = 'Páginas';
+$lang['The PDF you requested is too large to display on this page.'] = 'O PDF solicitado é muito grande para ser exibido nesta página.';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Não há datas de criação disponíveis para as fotos atualmente filtradas';
+$lang['last 12 months'] = 'Últimos 12 meses';
+$lang['There are no tags available for the photos currently filtered'] = 'Não há tags disponíveis para as fotos atualmente filtradas';
+$lang['There are no authors available for the photos currently filtered'] = 'Não há autores disponíveis para as fotos atualmente filtradas';
+$lang['Custom dates'] = 'Datas personalizadas';
+$lang['Set your password below.'] = 'Defina sua senha abaixo.';

@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Deutsch [DE]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=416
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -303,7 +303,6 @@ $lang['Cookies are blocked or not supported by your browser. You must enable coo
 $lang['Edit a comment'] = 'Einen Kommentar bearbeiten';
 $lang['(!) This comment requires validation'] = '(!) Dieser Kommentar erfordert Überprüfung.';
 $lang['Welcome'] = 'Willkommen';
-$lang['Welcome to your Piwigo photo gallery!'] = 'Willkommen!';
 $lang['... or browse your empty gallery'] = '...oder durchstöbern Sie Ihre leere Galerie.';
 $lang['... or please deactivate this message, I will find my way by myself'] = '...oder diese Meldung übergehen. Ich finde mich selbst zurecht.';
 $lang['Hello %s, your Piwigo photo gallery is empty!'] = 'Hallo %s, Ihre Piwigo-Fotogalerie ist leer!';
@@ -444,3 +443,15 @@ $lang['File type'] = 'Dateityp';
 $lang['Fill in the filters to start a search'] = 'Füllen Sie die Filter aus, um eine Suche zu starten';
 $lang['Filters'] = 'Filter';
 $lang['No results are available.'] = 'Es sind keine Ergebnisse vorhanden.';
+$lang['Pages'] = 'Seiten';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Es werden nur die ersten %d Alben angezeigt, von %d.';
+$lang['The PDF you requested is too large to display on this page.'] = 'Die von Ihnen angeforderte PDF-Datei ist zu groß, um sie auf dieser Seite anzuzeigen.';
+$lang['Album already selected'] = 'Album bereits ausgewählt';
+$lang['Click here to display it'] = 'Klicken Sie hier, um es anzuzeigen';
+$lang['Custom dates'] = 'Benutzerdefinierte Daten';
+$lang['last 12 months'] = 'Letzte 12 Monate';
+$lang['There are no authors available for the photos currently filtered'] = 'Derzeit sind keine Autoren für die gefilterten Fotos verfügbar';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Es sind keine Erstellungsdaten für die derzeit gefilterten Fotos verfügbar';
+$lang['There are no tags available for the photos currently filtered'] = 'Es sind keine Tags für die derzeit gefilterten Fotos verfügbar';
+$lang['Welcome to your Piwigo photo gallery!'] = 'Willkommen in Ihrer Piwigo-Fotogalerie!';
+$lang['Set your password below.'] = 'Legen Sie Ihr Passwort unten fest.';

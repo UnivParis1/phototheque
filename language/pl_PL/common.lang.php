@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Polski [PL]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=430
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -466,3 +466,14 @@ $lang['Search in this set'] = 'Szukaj w tym zestawie';
 $lang['Tags found'] = 'Znalezione tagi';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Wyświetlone tagi spełniają kryteria słów Twojego wyszukiwania. Kliknij w wybrany tag, aby przeglądać wg niego.';
 $lang['Unknown time period'] = 'Nieznany przedział czasu.';
+$lang['Album already selected'] = 'Album już został wybrany';
+$lang['Click here to display it'] = 'Kliknij tutaj, aby wyświetlić';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Wyświetlane jest tylko pierwsze %d albumów z %d.';
+$lang['Pages'] = 'Strony';
+$lang['The PDF you requested is too large to display on this page.'] = 'Plik PDF, o który prosiłeś, jest zbyt duży, aby wyświetlić go na tej stronie.';
+$lang['Custom dates'] = 'Niestandardowe daty';
+$lang['last 12 months'] = 'Ostatnie 12 miesięcy';
+$lang['There are no authors available for the photos currently filtered'] = 'Brak dostępnych autorów dla aktualnie filtrowanych zdjęć';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Brak dostępnych dat utworzenia dla aktualnie filtrowanych zdjęć';
+$lang['There are no tags available for the photos currently filtered'] = 'Brak dostępnych tagów dla aktualnie filtrowanych zdjęć';
+$lang['Set your password below.'] = 'Ustaw poniżej swoje hasło.';

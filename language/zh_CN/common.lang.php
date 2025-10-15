@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: 简体中文 [CN]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=438
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -101,7 +101,7 @@ $lang['User comments'] = '用户评论';
 $lang['Username'] = '用户名';
 $lang['Visits'] = '访问量';
 $lang['Webmaster'] = '站长';
-$lang['Week %d'] = '星期%d';
+$lang['Week %d'] = '第%d周';
 $lang['About Piwigo'] = '关于 Piwigo';
 $lang['You are not authorized to access the requested page'] = '您无权访问此页';
 $lang['add this photo to your favorites'] = '将图片添加到收藏';
@@ -417,16 +417,16 @@ $lang['Related albums'] = '相关相册';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = '相册名， 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = '相册名， 100 &rarr; 10 &rarr; 5 &rarr; 1';
 $lang['Start-Date'] = '起始日期';
-$lang['Validate'] = '验证';
+$lang['Validate'] = '确定';
 $lang['You can try to edit your filters and perform a new search.'] = '您可以尝试编辑过滤器并执行新的搜索。';
 $lang['last 24 hours'] = '最近24小时';
-$lang['last 3 months'] = '最近3小时';
+$lang['last 3 months'] = '最近3个月';
 $lang['last 30 days'] = '最近30天';
 $lang['last 6 months'] = '最近6个月';
 $lang['last 7 days'] = '最近7天';
 $lang['last year'] = '去年';
 $lang['rating score %s'] = '评分 %s';
-$lang['year %d'] = '年 %d';
+$lang['year %d'] = '%d年';
 $lang['Added by'] = '添加者';
 $lang['Album description'] = '专辑说明';
 $lang['Album title'] = '专辑标题';
@@ -446,3 +446,15 @@ $lang['Search in this set'] = '在此集合中搜索';
 $lang['Tags found'] = '找到标签';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = '此处列出的标签与您的搜索匹配。单击其中一个可按标记浏览。';
 $lang['Unknown time period'] = '未知时间段';
+$lang['%d visits'] = '%d访问量';
+$lang['Click here to display it'] = '点击此处显示';
+$lang['Album already selected'] = '相册已选定';
+$lang['Only the first %d albums are displayed, out of %d.'] = '仅显示前%d个相册（共%d个）。';
+$lang['The PDF you requested is too large to display on this page.'] = '您请求的PDF文件太大，无法在此页面上显示。';
+$lang['Pages'] = '页面';
+$lang['last 12 months'] = '最近12个月';
+$lang['Custom dates'] = '自定义日期';
+$lang['There are no authors available for the photos currently filtered'] = '当前筛选的照片没有可用的作者信息';
+$lang['There are no creation dates available for the photos currently filtered'] = '当前筛选的照片没有可用的创建日期';
+$lang['There are no tags available for the photos currently filtered'] = '当前筛选的照片没有可用的标签';
+$lang['Set your password below.'] = '请在下方的输入框中设置密码。';

@@ -1,7 +1,7 @@
 body{  
   background-color:#2e4756;
   color:#93c2d6;
- }
+}
 
 #theHeader div.banner, #theHeader div.banner:hover{
   color:black;
@@ -629,7 +629,7 @@ form.properties a{
   #derivativeSwitchLink .pwg-icon pwg-icon-sizes{
     color:black;
   }
-  #albumActionsSwitcher + .categoryActions .pwg-button-text,#imageToolBar .actionButtons .pwg-button-text, #imageToolBar .actionButtons .pwg-button-text, .actionButtons A .pwg-icon,  .actionButtons A .pwg-icon:hover {
+  #albumActionsSwitcher + .categoryActions .pwg-button-text, #imageToolBar .actionButtons .pwg-button-text, .actionButtons A .pwg-icon,  .actionButtons A .pwg-icon:hover {
     color:#0391aa !important;
     background-color:#16262e;
   }
@@ -760,29 +760,65 @@ form.properties a{
   border-radius: 0px !important;
 }
 
+.ratings-option:nth-child(odd),
+.ratios-option:nth-child(odd),
+.preset_posted_date .date_posted-option:nth-child(odd) label,
+.preset_posted_date .date_posted-option:nth-child(odd) i,
+.custom_posted_date .date_posted-option:nth-child(odd) .year_input label,
+.custom_posted_date .date_posted-option:nth-child(odd) .year_input i,
+.custom_posted_date .date_posted-option:nth-child(even) .month_input label,
+.custom_posted_date .date_posted-option:nth-child(even) .month_input i,
+.custom_posted_date .days_container .date_posted-option:nth-child(odd) label,
+.custom_posted_date .days_container .date_posted-option:nth-child(odd) i,
+.preset_created_date .date_created-option:nth-child(odd) label,
+.preset_created_date .date_created-option:nth-child(odd) i,
+.custom_created_date .date_created-option:nth-child(odd) .year_input label,
+.custom_created_date .date_created-option:nth-child(odd) .year_input i,
+.custom_created_date .date_created-option:nth-child(even) .month_input label,
+.custom_created_date .date_created-option:nth-child(even) .month_input i,
+.custom_created_date .days_container .date_created-option:nth-child(odd) label,
+.custom_created_date .days_container .date_created-option:nth-child(odd) i,
 .filetypes-option:nth-child(odd),
-.added_by-option:nth-child(odd),
-.date_posted-option:nth-child(odd) label {
+.added_by-option:nth-child(odd){
   background: #2e4756;
 }
 
+.ratings-option label .checked-icon,
+.ratios-option input:checked + label .checked-icon,
 .filetypes-option label .checked-icon,
 .added_by-option label .checked-icon,
-.date_posted-option label .checked-icon{
+.date_posted-option label .checked-icon,
+.date_created-option label .checked-icon,
+.ratios-option label .checked-icon{
   color: #2e4756;
 }
 
+.ratings-option label .ratings-badge,
+.ratios-option label .ratio-badge,
 .filetypes-option label .ext-badge,
 .added_by-option label .added_by-badge,
-.date_posted-option label .date_posted-badge {
+.date_posted-option label .date_posted-badge,
+.date_created-option label .date_created-badge  {
   background-color: #16262e;
   color: #0391aa;
 }
 
-.filetypes-option input:checked + label,
 .added_by-option input:checked + label,
-.date_posted-option input:checked + label{
+.filetypes-option input:checked + label,
+.date_posted-option .selected label, 
+.date_posted-option .selected .accordion-toggle,
+.date_created-option .selected label,
+.date_created-option .selected .accordion-toggle,
+.preset_posted_date .date_posted-option input:checked + label,
+.preset_created_date .date_created-option input:checked + label,
+.ratios-option input:checked + label,
+.ratings-option input:checked + label{
   background: #326471;
+}
+
+.date_posted-option .accordion-toggle:hover,
+.date_created-option .accordion-toggle:hover{
+  color:#0391aa;
 }
 
 .head-button-2 {
@@ -934,4 +970,48 @@ form.properties a{
 
 .arrow-fill {
   fill: #16262e !important;
+}
+
+.mcs-container div .slider_input p,
+.slider-info{
+  color:#93c2d6;
+}
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-slider-range.ui-widget-header.ui-corner-all{
+  border: 1px solid #326471;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default{
+  background-color:#326471;
+}
+
+.ui-slider .ui-slider-range{
+  background: #326471;
+}
+
+.no_filtered_photos{
+  color:#16262e;
+}
+
+.mcs-container input[type="number"],
+.mcs-container input[type="number"]:focus{
+  background-color: #93c2d6 !important;
+  color: #16262e !important;
+  border-radius: 0px !important;
+}
+
+.no_filtered_photos{
+  color:#326471;
+}
+
+
+#downloadSwitchLink,
+#derivativeSwitchLink,
+#sortOrderLink,
+.uc-icon-star-filled,
+.uc-icon-star{
+  color:#93c2d6!important;
 }

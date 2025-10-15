@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Wolof [SN]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=737
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -39,4 +39,4 @@ $lang['month'][6] = 'Baraxlou';
 $lang['month'][7] = 'Kôr';
 $lang['month'][8] = 'Kori';
 $lang['month'][9] = 'Digui Tabaski';
-?>
+$lang['All'] = 'toute 2';

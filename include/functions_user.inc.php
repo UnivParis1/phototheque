@@ -215,7 +215,7 @@ SELECT id
     if ($notify_admin and 'none' != $conf['email_admin_on_new_user'])
     {
       include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
-      $admin_url = get_absolute_root_url().'admin.php?page=user_list&username='.$login;
+      $admin_url = get_absolute_root_url().'admin.php?page=user_list&user_id='.$user_id;
 
       $keyargs_content = array(
         get_l10n_args('User: %s', stripslashes($login) ),
@@ -242,6 +242,7 @@ SELECT id
     {
       include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
 
+      $length = rand(10, 15);
       $keyargs_content = array(
         get_l10n_args('Hello %s,', stripslashes($login)),
         get_l10n_args('Thank you for registering at %s!', $conf['gallery_title']),
@@ -250,7 +251,7 @@ SELECT id
         get_l10n_args('', ''),
         get_l10n_args('Link: %s', get_absolute_root_url()),
         get_l10n_args('Username: %s', stripslashes($login)),
-        get_l10n_args('Password: %s', stripslashes($password)),
+        get_l10n_args('Password: %s', str_repeat("*", $length)),
         get_l10n_args('Email: %s', $mail_address),
         get_l10n_args('', ''),
         get_l10n_args('If you think you\'ve received this email in error, please contact us at %s', get_webmaster_mail_address()),
@@ -327,7 +328,7 @@ function build_user($user_id, $use_cache=true)
  */
 function getuserdata($user_id, $use_cache=false)
 {
-  global $conf;
+  global $conf, $logger;
 
   // retrieve basic user data
   $query = '
@@ -407,10 +408,70 @@ SELECT
 
   if ($use_cache)
   {
+    $generate_user_cache = false;
+    $cache_generation_token_name = 'generate_user_cache-u'.$userdata['id'];
+    $exec_code = substr(sha1(random_bytes(1000)), 0, 4);
+    $logger_msg_prefix = '['.__FUNCTION__.'][exec_code='.$exec_code.'][user_id='.$userdata['id'].'] ';
+
     if (!isset($userdata['need_update'])
         or !is_bool($userdata['need_update'])
         or $userdata['need_update'] == true)
     {
+      $logger->info($logger_msg_prefix.'needs user_cache to be rebuilt');
+
+      $exec_id = pwg_unique_exec_begins($cache_generation_token_name);
+      if (false === $exec_id)
+      {
+        $logger->info($logger_msg_prefix.'starts to wait for another request to build user_cache');
+        $user_cache_waiting_start_time = get_moment();
+        for ($k = 0; $k < 20; $k++)
+        {
+          sleep(1);
+
+          $query = '
+SELECT
+   COUNT(*)
+  FROM '.USER_CACHE_TABLE.'
+  WHERE user_id='.$userdata['id'].'
+;';
+          list($nb_cache_lines) = pwg_db_fetch_row(pwg_query($query));
+
+          $logger_msg = $logger_msg_prefix.'user_cache generation waiting k='.$k.' ';
+          $waiting_time = get_elapsed_time($user_cache_waiting_start_time, get_moment());
+
+          if ($nb_cache_lines > 0)
+          {
+            $logger->info($logger_msg.'user_cache rebuilt, after waiting '.$waiting_time);
+            return getuserdata($user_id, false);
+          }
+          elseif (!pwg_unique_exec_is_running($cache_generation_token_name))
+          {
+            $logger->info($logger_msg.'user_cache rebuilt but has been reset since, give it another try, after waiting '.$waiting_time);
+            return getuserdata($user_id, true);
+          }
+          else
+          {
+            $logger->info($logger_msg.'user_cache not ready yet, after waiting '.$waiting_time);
+          }
+        }
+
+        $logger->info($logger_msg_prefix.'user_cache generation waiting has timed out after '.get_elapsed_time($user_cache_waiting_start_time, get_moment()));
+        set_status_header(503, 'Service Unavailable');
+        @header('Retry-After: 900');
+        header('Content-Type: text/html; charset='.get_pwg_charset());
+        echo l10n('Rebuilding user cache takes long. Please, come back later.');
+        echo str_repeat( ' ', 512); //IE6 doesn't error output if below a size
+        exit();
+      }
+      else
+      {
+        $generate_user_cache = true;
+      }
+    }
+
+    if ($generate_user_cache)
+    {
+      $user_cache_generation_start_time = get_moment();
       $userdata['cache_update_time'] = time();
 
       // Set need update are done
@@ -510,6 +571,9 @@ INSERT IGNORE INTO '.USER_CACHE_TABLE.'
   (empty($userdata['last_photo_date']) ? 'NULL': '\''.$userdata['last_photo_date'].'\'').
   ',\''.$userdata['image_access_type'].'\',\''.$userdata['image_access_list'].'\')';
       pwg_query($query);
+
+      pwg_unique_exec_ends($cache_generation_token_name);
+      $logger->info($logger_msg_prefix.'user_cache generated, executed in '.get_elapsed_time($user_cache_generation_start_time, get_moment()));
     }
   }
 
@@ -724,6 +788,8 @@ SELECT *
       unset($cache['default_user']['user_id']);
       unset($cache['default_user']['status']);
       unset($cache['default_user']['registration_date']);
+      unset($cache['default_user']['last_visit']);
+      unset($cache['default_user']['last_visit_from_history']);
     }
     else
     {
@@ -1734,6 +1800,53 @@ function deactivate_password_reset_key($user_id)
 }
 
 /**
+ * Generate reset password link
+ *
+ * @since 15
+ * @param int $user_id
+ * @param boolean $first_login
+ * @return array time_validation and password link 
+ */
+function generate_password_link($user_id, $first_login=false)
+{
+  global $conf;
+
+  $activation_key = generate_key(20);
+
+  $duration = $first_login
+  ? $conf['password_activation_duration'] 
+  : $conf['password_reset_duration'];
+  list($expire) = pwg_db_fetch_row(pwg_query('SELECT ADDDATE(NOW(), INTERVAL '. $duration .' SECOND)'));
+
+  single_update(
+    USER_INFOS_TABLE,
+    array(
+      'activation_key' => pwg_password_hash($activation_key),
+      'activation_key_expire' => $expire,
+      ),
+    array('user_id' => $user_id)
+    );
+
+    set_make_full_url();
+
+    $password_link = get_root_url().'password.php?key='.$activation_key;
+
+    unset_make_full_url();
+
+    $time_validation = time_since(
+      strtotime('now -'.$duration.' second'),
+      'second',
+      null,
+      false
+    );
+
+    return array(
+      'time_validation' => $time_validation,
+      'password_link' => $password_link,
+    );
+}
+
+/**
  * Gets the last visit (datetime) of a user, based on history table
  *
  * @since 2.9
@@ -1869,5 +1982,27 @@ function userprefs_get_param($param, $default_value=null)
   }
 
   return $default_value;
+}
+
+/**
+ * See if this is the first time the user has logged on
+ *
+ * @since 15
+ * @param int $user_id
+ * @return bool true if first connexion else false 
+ */
+function has_already_logged_in($user_id)
+{
+  $query = '
+SELECT COUNT(*)
+  FROM '.ACTIVITY_TABLE.'
+  WHERE action = \'login\' and performed_by = '.$user_id.'';
+
+  list($logged_in) = pwg_db_fetch_row(pwg_query($query));
+  if ($logged_in > 0)
+  {
+    return false;
+  }
+  return true;
 }
 ?>

@@ -18,8 +18,10 @@ A:hover {
 	color: {$skin['A:hover'].color};
 }
 
-A .pwg-icon {
+A .pwg-icon,
+.pwg-icon {
 	opacity: 0.9;
+  font-size:17px!important;
 }
 A:hover .pwg-icon {
 	opacity: 1;
@@ -378,10 +380,49 @@ A.wiki { cursor:help; }
 	padding: 0 0.5em 0 0;
 }
 
+.properties .fields,
+.plugins.fields {
+  width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.properties div.property,
+.plugins.fields > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	align-items: center;
+}
+
+.plugins.fields > div {
+	margin-left: 5px;
+}
+
+.properties div.property.radio {
+	margin: 5px 0;
+}
+
+.properties div.property :first-child,
+.plugins.fields > div > :first-child {
+  text-align: right;
+	font-weight: bold;
+}
+
+.properties div.property :last-child,
+.plugins.fields > div > :last-child {
+	width: fit-content;
+}
+
 .properties P {
 	text-align: center;
 	margin-top: 2em;
 	margin-bottom: 2em;
+}
+
+.bottomButtons {
+	margin-top: 50px !important;
 }
 
 
@@ -589,4 +630,32 @@ ul.token-input-list{
   color:#777;
   font-weight:600;
   text-decoration: none;
+}
+
+{if !empty($skin.searchResultItem)}
+.search-result-item {
+  background-color: {$skin.searchResultItem.backgroundColor};
+  color: {$skin.searchResultItem.color};
+}
+{/if}
+
+{if !empty($skin.formAlbumSelector.backgroundColor)}
+.linkedAlbumPopInContainer {
+  background-color: {$skin.formAlbumSelector.backgroundColor};
+}
+{/if}
+
+{if !empty($current.formats)}
+#downloadSwitchLink::after,
+{/if}
+#derivativeSwitchLink::after,
+#sortOrderLink::after{
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
 }

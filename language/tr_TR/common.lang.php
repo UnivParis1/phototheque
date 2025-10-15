@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Türkçe [TR]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=436
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -444,3 +444,14 @@ $lang['Album title'] = 'Albüm ismi';
 $lang['Album description'] = 'Albüm açıklaması';
 $lang['Added by'] = 'Ekleyen';
 $lang['%d visits'] = '%d ziyaret';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Albümlerin %d/%d kadarı görüntülendi.';
+$lang['The PDF you requested is too large to display on this page.'] = 'İstenen PDF bu sayfada görüntülemek için çok büyük';
+$lang['Pages'] = 'Sayfa';
+$lang['Click here to display it'] = 'Görüntülemek için buraya tıkla';
+$lang['Album already selected'] = 'Albüm zaten seçildi';
+$lang['Custom dates'] = 'Özel tarihler';
+$lang['last 12 months'] = 'Son 12 ay';
+$lang['There are no authors available for the photos currently filtered'] = 'Şu anda filtrelenen fotoğraflar için yazar bulunamadı';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Şu anda filtrelenen fotoğraflar için herhangi bir oluşturma tarihi mevcut değil';
+$lang['There are no tags available for the photos currently filtered'] = 'Şu anda filtrelenen fotoğraflar için kullanılabilir etiket yok';
+$lang['Set your password below.'] = 'Şifrenizi oluşturun.';

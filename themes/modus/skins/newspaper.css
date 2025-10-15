@@ -187,7 +187,10 @@ fieldset legend{
   color: #fff;
 }
 
-.titrePage A,
+.titrePage A{
+  color:white;
+}
+
 #calendarViewSwitchLink,
 .browsePath,
 #profile,
@@ -330,15 +333,19 @@ td .nbEntries{
   text-decoration:underline;
 }
 
+.categoryActions .pwg-button{
+  color:#363636;
+}
+
 @media screen and (max-width: 640px){
   #derivativeSwitchLink .pwg-icon pwg-icon-sizes{
     color:white;
   }
-  #albumActionsSwitcher + .categoryActions .pwg-button-text,#imageToolBar .actionButtons .pwg-button-text
-   #imageToolBar .actionButtons .pwg-button-text,
+  #albumActionsSwitcher + .categoryActions .pwg-button-text,
+  #imageToolBar .actionButtons .pwg-button-text,
    .actionButtons A .pwg-icon,
    .actionButtons A .pwg-icon:hover {
-    color:white ;
+    color:white;
   }
   .categoryActions a .pwg-icon{
     color:white ;
@@ -348,4 +355,16 @@ td .nbEntries{
   #theTagsPage A:hover .pwg-icon{
     color:black ;
   }
+}
+
+.gallery-icon-search-folder:before {
+  font-size: 19px;
+}
+
+#downloadSwitchLink,
+#derivativeSwitchLink,
+#sortOrderLink,
+.uc-icon-star-filled,
+.uc-icon-star{
+  color:black!important;
 }

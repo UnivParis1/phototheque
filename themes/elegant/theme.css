@@ -290,3 +290,9 @@ TD.nbEntries {
 
 #the_page .content .stuffs 		{ margin: 0!important}
 .categoryActions .theme_menuf 	{ display: none;}
+
+/* search page */
+.search-result-item {
+  background-color: #333333;
+  color: #bbbbbb;
+}

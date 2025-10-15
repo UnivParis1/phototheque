@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: English [GB]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=716
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -301,7 +301,7 @@ $lang['Album'] = 'Album';
 $lang['Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100'] = 'Album name, 1 &rarr; 5 &rarr; 10 &rarr; 100';
 $lang['Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1'] = 'Album name, 100 &rarr; 10 &rarr; 5 &rarr; 1';
 $lang['Album name, A &rarr; Z'] = 'Album name, A &rarr; Z';
-$lang['Album name, Z &rarr; A'] = 'Album name, A &rarr; Z';
+$lang['Album name, Z &rarr; A'] = 'Album name, Z &rarr; Z';
 $lang['Album results for'] = 'Album results for';
 $lang['Album: %s'] = 'Album: %s';
 $lang['%d photos per page'] = '%d photos per page';

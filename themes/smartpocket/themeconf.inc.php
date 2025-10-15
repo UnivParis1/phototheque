@@ -1,7 +1,7 @@
 <?php
 /*
 Theme Name: Smart Pocket
-Version: 14.4.0
+Version: 15.6.0
 Description: Mobile theme.
 Theme URI: http://piwigo.org/ext/extension_view.php?eid=599
 Author: P@t

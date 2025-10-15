@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Nederlands [NL]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=429
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -463,3 +463,14 @@ $lang['last 6 months'] = 'Laatste 6 maanden';
 $lang['last 7 days'] = 'laatste 7 dagen';
 $lang['last year'] = 'Afgelopen jaar';
 $lang['year %d'] = 'jaar%d';
+$lang['Album already selected'] = 'Album al geselecteerd';
+$lang['Click here to display it'] = 'Klik hier om het weer te geven';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Alleen de eerste %d albums worden weergegeven, van de %d.';
+$lang['Pages'] = 'Pagina\'s';
+$lang['The PDF you requested is too large to display on this page.'] = 'De door u opgevraagde PDF is te groot om op deze pagina weer te geven.';
+$lang['last 12 months'] = 'Laatste 12 maanden';
+$lang['Custom dates'] = 'Aangepaste data';
+$lang['There are no authors available for the photos currently filtered'] = 'Er zijn momenteel geen auteurs beschikbaar voor de gefilterde foto\'s';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Er zijn momenteel geen aanmaakdata beschikbaar voor de gefilterde foto\'s';
+$lang['There are no tags available for the photos currently filtered'] = 'Er zijn momenteel geen tags beschikbaar voor de gefilterde foto\'s';
+$lang['Set your password below.'] = 'Maak je wachtwoord hieronder';

@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Svenska [SE]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=451
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -444,3 +444,14 @@ $lang['Search in this set'] = 'Sök i denna uppsättning';
 $lang['Tags found'] = 'Taggar hittade';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Taggar som listas här matchar din sökning efter ord. Klicka på en för att bläddra efter taggar.';
 $lang['Unknown time period'] = 'Okänd tidsperiod';
+$lang['Album already selected'] = 'Album redan valt';
+$lang['Click here to display it'] = 'Klicka här för att visa det';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Bara de första %d albumen visas, av %d.';
+$lang['Pages'] = 'Sidor';
+$lang['The PDF you requested is too large to display on this page.'] = 'PDFen du begärde är för stor för att visas på denna sida.';
+$lang['Custom dates'] = 'Egna datum';
+$lang['last 12 months'] = 'Senaste 12 månaderna';
+$lang['There are no authors available for the photos currently filtered'] = 'Det finns inga författare tillgängliga för de foton som för närvarande filtreras';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Det finns inga datum för skapande för de foton som för närvarande filtreras';
+$lang['There are no tags available for the photos currently filtered'] = 'Det finns inga taggar tillgängliga för de foton som för närvarande filtreras';
+$lang['Set your password below.'] = 'Ställ in ditt lösenord nedan.';

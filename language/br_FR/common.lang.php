@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Brezhoneg [FR]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=698
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -454,3 +454,4 @@ $lang['Added by'] = 'Ouzhpennet gant';
 $lang['No results are available.'] = 'N\'eus disoc\'h ebet da gaout.';
 $lang['Validate'] = 'Kadarnaat';
 $lang['Search in :'] = 'Klask e-barzh:';
+$lang['Pages'] = 'Pajennoù';

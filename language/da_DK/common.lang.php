@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Dansk [DK]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=415
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -446,3 +446,14 @@ $lang['Search in this set'] = 'Søg i dette sæt';
 $lang['Tags found'] = 'Tags fundet';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Tags opremset her svarer til din søgning efter ord. Klik på et for at gennemse via tag.';
 $lang['Unknown time period'] = 'Ukendt tidsinterval';
+$lang['Album already selected'] = 'Album allerede valgt';
+$lang['Click here to display it'] = 'Klik her for at vise det';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Kun de første %d albummer vises, ud af %d.';
+$lang['Pages'] = 'Sider';
+$lang['The PDF you requested is too large to display on this page.'] = 'PDF-filen som du bad om er for stor til at vise på denne side.';
+$lang['Custom dates'] = 'Skræddersyede datoer';
+$lang['last 12 months'] = 'Seneste 12 måneder';
+$lang['There are no authors available for the photos currently filtered'] = 'Der er ingen tilgængelige forfattere for de pt. filtrerede fotografier';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Der er ingen tilgængelige oprettelsesdatoer for de pt. filtrerede fotografier';
+$lang['There are no tags available for the photos currently filtered'] = 'Der er ingen tilgængelige tags for de pt. filtrerede fotografier';
+$lang['Set your password below.'] = 'Opsæt din adgangskode nedenfor.';

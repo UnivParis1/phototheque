@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Français [QC]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=420
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -67,7 +67,7 @@ $lang['Go through the gallery as a visitor'] = 'Parcourir la galerie en tant que
 $lang['Help'] = 'Aide';
 $lang['Identification'] = 'Identification';
 $lang['Photos only RSS feed'] = 'Flux RSS des images uniquement';
-$lang['Keyword'] = 'Mot-clef';
+$lang['Keyword'] = 'Mot-clé';
 $lang['Links'] = 'Liens';
 $lang['N/A'] = 'non disponible';
 $lang['New on %s'] = 'Nouveau le %s';
@@ -149,7 +149,7 @@ $lang['delete this photo from your favorites'] = 'supprimer cette image de vos f
 $lang['Delete'] = 'Supprimer';
 $lang['descending'] = 'décroissant';
 $lang['Download'] = 'Télécharger';
-$lang['Download this file'] = 'télécharger ce fichier';
+$lang['Download this file'] = 'Télécharger ce fichier';
 $lang['edit'] = 'éditer';
 $lang['wrong date'] = 'date erronée';
 $lang['excluded'] = 'exclus';
@@ -328,7 +328,7 @@ $lang['To reset your password, visit the following address:'] = 'Pour renouveler
 $lang['If this was a mistake, just ignore this email and nothing will happen.'] = 'S\'il s\'agit d\'une erreur, ignorez ce message et la demande ne sera pas prise en compte.';
 $lang['Password Reset'] = 'Renouvellement de votre mot de passe';
 $lang['Check your email for the confirmation link'] = 'Vérifiez vos courriels pour trouver le lien de confirmation';
-$lang['Invalid key'] = 'Clef invalide';
+$lang['Invalid key'] = 'Clé invalide';
 $lang['The passwords do not match'] = 'Les mots de passe ne correspondent pas';
 $lang['Your password has been reset'] = 'Votre mot de passe a été réinitialisé';
 $lang['Return to home page'] = 'Retourner sur la page d\'accueil';
@@ -411,9 +411,10 @@ $lang['No results for'] = 'Aucun résultat pour';
 $lang['Photo description'] = 'Description de la photo';
 $lang['Photo title'] = 'Titre de la photo';
 $lang['generate random password'] = 'générer un mot de passe aléatoire';
-$lang['Your authentication key is no longer valid.'] = 'Voter clef d\'identification n\'est plus valide';
+$lang['Your authentication key is no longer valid.'] = 'Voter clé d\'identification n\'est plus valide';
 $lang['Invalid username or password!'] = 'Nom d\'utilisateur ou mot de passe invalide !';
-$lang['Password: ********** (no copy by email)'] = 'Mot de passe : ********** (pas de copie par email)';
+$lang['Password: ********** (no copy by email)'] = 'Mot de passe : ********** (pas de copie par courriel)';
 $lang['Pre-established filters are proposed, but you can add or remove them using the "Choose filters" button.'] = 'Des filtres préétablis vous sont proposés, mais vous pouvez aussi en ajouter ou en retirer grâce au bouton "Choisir les filtres".';
 $lang['Tags found'] = 'Mots-clés trouvés';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Les mots-clés ci-dessous correspondent à votre recherche par mot. Cliquez sur l\'un d\'eux pour basculer en navigation par mots-clés.';
+$lang['There are no tags available for the photos currently filtered'] = 'Aucun mot-clé n\'est disponible pour les photos actuellement filtrées';

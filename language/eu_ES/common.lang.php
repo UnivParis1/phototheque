@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Euskara [ES]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=725
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -451,3 +451,14 @@ $lang['Search in this set'] = 'Multzo honetan bilatu';
 $lang['Tags found'] = 'Aurkitutako etiketak';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'Zerrendako etiketak bilaketarako erabili duzun hitzarekin bat datoz. Egin klik etiketaren batean etiketagatik bilatzeko.';
 $lang['Unknown time period'] = 'Denbora-arte ezezaguna';
+$lang['Album already selected'] = 'Albuma dagoeneko aukeratutako dago';
+$lang['Click here to display it'] = 'Egin klik hemen erakusteko';
+$lang['Custom dates'] = 'Data pertsonalizatuak';
+$lang['Only the first %d albums are displayed, out of %d.'] = '%d (e)tik, lehenengo %d albumak baino ez dira erakutsiko';
+$lang['Pages'] = 'Orriak';
+$lang['The PDF you requested is too large to display on this page.'] = 'Eskatuko PDFa handiegia da orrian erakusteko';
+$lang['last 12 months'] = 'Azkenengo 12 hilabeteak';
+$lang['Set your password below.'] = 'Ezarri pasahitza behealdean';
+$lang['There are no authors available for the photos currently filtered'] = 'Ez dago egilerik eskuragarri iragazitako argazkientarako';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Ez dago sortze-datarik eskuragarri iragazitako argazkietarako';
+$lang['There are no tags available for the photos currently filtered'] = 'Ez dago etiketarik eskuragarri iragazitako argazkietarako';

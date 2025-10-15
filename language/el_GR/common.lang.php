@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Ελληνικά [GR]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=508
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -445,3 +445,14 @@ $lang['Filters'] = 'Φίλτρα';
 $lang['No results are available.'] = 'Δεν υπάρχουν διαθέσιμα αποτελέσματα.';
 $lang['Albums listed here match your search by word. Click on one to browse by album.'] = 'Τα λευκώματα που παρατίθενται εδώ αντιστοιχούν στην αναζήτησή σας κατά λέξη. Κάντε κλικ σε ένα για περιήγηση ανά λεύκωμα.';
 $lang['month']['5'] = 'Μάϊος';
+$lang['last 12 months'] = 'Τους τελευταίους 12 μήνες';
+$lang['The PDF you requested is too large to display on this page.'] = 'Το PDF που ζητήσατε είναι πολύ μεγάλο για να απεικονιστεί σε αυτή τη σελίδα';
+$lang['Pages'] = 'Σελίδες';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Απεικονίζονται μόνο τα %d από %d άλμπουμ';
+$lang['Custom dates'] = 'Προσαρμοσμένες ημερομηνίες';
+$lang['Click here to display it'] = 'Κάντε κλίκ εδώ για να το δείτε';
+$lang['Album already selected'] = 'Το άλμπουμ έχει επιλεχθεί ήδη';
+$lang['There are no authors available for the photos currently filtered'] = 'Δεν υπάρχουν πρόσωπα που έχουν αναρτήσει τις φωτογραφίες με το φίλτρο που έχει επιλεγεί';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Δεν υπάρχουν ημερομηνίες δημιουργίας με το φίλτρο των φωτογραφιών που έχει επιλεγεί';
+$lang['There are no tags available for the photos currently filtered'] = 'Δεν υπάρχουν ετικέτες με το φίλτρο των φωτογραφιών που έχει επιλεγεί';
+$lang['Set your password below.'] = 'Αλλάξτε τον κωδικό σας παρακάτω';

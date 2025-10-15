@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Česky [CZ]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=414
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -447,3 +447,14 @@ $lang['File type'] = 'Typ souboru';
 $lang['Fill in the filters to start a search'] = 'Vyplňte filtry pro zahájení vyhledávání';
 $lang['Filters'] = 'Filtry';
 $lang['No results are available.'] = 'Nejsou k dispozici žádné výsledky.';
+$lang['Album already selected'] = 'Album již zvoleno';
+$lang['Click here to display it'] = 'Klikněte zde pro zobrazení';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Zobrazuje se pouze prvních %d alb z %d.';
+$lang['Pages'] = 'Stránky';
+$lang['The PDF you requested is too large to display on this page.'] = 'Požadované PDF je pro zobrazení na této stránce příliš velké.';
+$lang['last 12 months'] = 'Posledních 12 měsíců';
+$lang['Custom dates'] = 'Vlastní data';
+$lang['There are no authors available for the photos currently filtered'] = 'Pro aktuálně filtrované fotografie nejsou k dispozici žádní autoři';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Pro aktuálně filtrované fotografie nejsou k dispozici žádná data vytvoření';
+$lang['There are no tags available for the photos currently filtered'] = 'Pro aktuálně filtrované fotografie nejsou k dispozici žádné štítky';
+$lang['Set your password below.'] = 'Zadejte heslo níže.';

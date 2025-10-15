@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Italiano [IT]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=424
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -297,7 +297,7 @@ $lang['Sort by'] = 'Ordina per';
 $lang['Sort order'] = 'Ordinamento';
 $lang['Successfully registered, you will soon receive an email with your connection settings. Welcome!'] = 'Registrazione riuscita, riceverai presto una email con le tue impostazioni di connessione.. Benvenuto!';
 $lang['Specials'] = 'Speciale';
-$lang['SQL queries in'] = 'Queries SQL in';
+$lang['SQL queries in'] = 'Query SQL in';
 $lang['stop the slideshow'] = 'fermare le diapositive';
 $lang['Submit'] = 'Confermare';
 $lang['Tag results for'] = 'Risultato dei tag per';
@@ -443,3 +443,14 @@ $lang['Search in this set'] = 'Cerca in questo set';
 $lang['Tags found'] = 'Tag trovati';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'I tag elencati qui corrispondono alla tua ricerca per parola. Clicca su di una per navigare per tag.';
 $lang['Unknown time period'] = 'Periodo temporale sconosciuto.';
+$lang['Album already selected'] = 'Album già selezionato';
+$lang['Click here to display it'] = 'Clicca qui per mostrarlo';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Solo i primi %d album su %d vengono mostrati';
+$lang['Pages'] = 'Pagine';
+$lang['The PDF you requested is too large to display on this page.'] = 'Il PDF che hai richiesto è troppo largo per essere mostrato in questa pagina';
+$lang['Custom dates'] = 'Date personalizzate';
+$lang['last 12 months'] = 'Ultimi 12 mesi';
+$lang['There are no authors available for the photos currently filtered'] = 'Non ci sono autori disponibili per le fotografie al momento filtrate';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Non vi sono date di creazione disponibili per le fotografie al momento filtrate';
+$lang['There are no tags available for the photos currently filtered'] = 'Non ci sono etichette disponibili per le fotografie al momento filtrate';
+$lang['Set your password below.'] = 'Imposta la tua password qui sotto.';

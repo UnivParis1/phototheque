@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: Português [PT]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=432
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -448,3 +448,13 @@ $lang['Search in this set'] = 'Procurar neste conjunto';
 $lang['Tags found'] = 'Etiquetas encontradas';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = 'As etiquetas aqui listadas correspondem à sua pesquisa por palavra. Clique numa para navegar por etiqueta.';
 $lang['Unknown time period'] = 'Período de tempo desconhecido';
+$lang['Custom dates'] = 'Datas personalizadas';
+$lang['Only the first %d albums are displayed, out of %d.'] = 'Apenas os primeiros %d álbuns são apresentados, de %d.';
+$lang['The PDF you requested is too large to display on this page.'] = 'O PDF que foi pedido é demasiado grande para ser mostrado nesta página.';
+$lang['Click here to display it'] = 'Clica aqui para o mostrar';
+$lang['Album already selected'] = 'Álbum já selecionado';
+$lang['Pages'] = 'Páginas';
+$lang['last 12 months'] = 'Últimos 12 meses';
+$lang['There are no authors available for the photos currently filtered'] = 'Não há autores disponíveis para as fotos filtradas';
+$lang['There are no creation dates available for the photos currently filtered'] = 'Não há datas de criação disponíveis para as fotos filtradas';
+$lang['There are no tags available for the photos currently filtered'] = 'Não há tags disponíveis para as fotos filtradas';

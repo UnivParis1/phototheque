@@ -7,7 +7,7 @@
 // +-----------------------------------------------------------------------+
 /*
 Language Name: 中文 (繁體) [TW]
-Version: 14.4.0
+Version: 15.6.0
 Language URI: http://piwigo.org/ext/extension_view.php?eid=524
 Author: Piwigo team
 Author URI: http://piwigo.org
@@ -445,3 +445,14 @@ $lang['Search in this set'] = '在此集合中搜尋';
 $lang['Tags found'] = '找到的標籤';
 $lang['Tags listed here match your search by word. Click on one to browse by tag.'] = '此處列出所有符合關鍵字的標籤。點選即可依標籤瀏覽。';
 $lang['Unknown time period'] = '未知的時間範圍';
+$lang['Album already selected'] = '相簿已選取';
+$lang['Click here to display it'] = '點擊此處顯示';
+$lang['Only the first %d albums are displayed, out of %d.'] = '只會顯示最前面的 %d 本相簿（總共有 %d 本）';
+$lang['Pages'] = '頁';
+$lang['The PDF you requested is too large to display on this page.'] = '因為您所要求的 PDF 檔太大，所以無法在此頁面中顯示。';
+$lang['Custom dates'] = '個人化日期';
+$lang['last 12 months'] = '最近 12 個月';
+$lang['There are no authors available for the photos currently filtered'] = '符合目前篩選條件的照片並無作者資訊';
+$lang['There are no creation dates available for the photos currently filtered'] = '符合目前篩選條件的照片並無建立日期資訊';
+$lang['There are no tags available for the photos currently filtered'] = '符合目前篩選條件的照片並無任何標籤';
+$lang['Set your password below.'] = '請在下方設定您的密碼。';
